@@ -54,7 +54,7 @@ export default function Filterbox() {
       <GenreFilterButton selectedGenre={selectedGenre} onClick={toggleDropdown} />
 
       {isOpen && (
-        <div className="absolute mt-4 grid grid-cols-2 gap-4 p-4 bg-gray-500 rounded-lg shadow-lg z-10 min-w-[320px]">
+        <div className="absolute mt-4 grid grid-cols-2 gap-4 p-4 bg-gray-500 rounded-lg  drop-shadow-black z-10 min-w-[320px]">
           <div>
             
           </div>
