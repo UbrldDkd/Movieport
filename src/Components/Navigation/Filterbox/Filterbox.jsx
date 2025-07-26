@@ -3,7 +3,7 @@ import SelectButton from './SelectButton'
 
 export default function Filterbox() {
   // temporay array for genres
-  const genres = ['Action', 'Drama', 'Comedy', 'Horror', 'Sci-Fi', 'Romance', 'Thriller', 'Fantasy'];
+  const genres = ['Action', 'Drama', 'Comedy', 'Horror', 'Sci-Fi', 'Romance', 'Thriller', 'Fantasy', 'Adventure', 'Documentary', 'Animation', 'Mystery', 'Crime', 'Western'];
   
   const [selectedGenre, setSelectedGenre] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -42,9 +42,10 @@ export default function Filterbox() {
     <GenreFilterButton selectedGenre={selectedGenre} onClick={toggleDropdown} />
 
     {isOpen && (
-      <div className="absolute top-full bg-zinc-900 rounded-md drop-shadow-black z-10 grid grid-cols-3 grid-rows-3 gap-2 p-2 w-auto">
-        {/* The empty <div> you have is unused, you might want to remove it or add content */}
-
+      <div className="absolute top-full bg-zinc-900 rounded-md drop-shadow-black  px-2 py-1.5 z-10 grid grid-cols-3 grid-rows-3 gap-2  w-auto">
+        
+        {/*later needs to be opened via hovering and positioned better */}
+      
         {genres.map((genre) => (
           <SelectButton
             key={genre}
