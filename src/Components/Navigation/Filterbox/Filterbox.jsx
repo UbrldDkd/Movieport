@@ -42,7 +42,7 @@ export default function Filterbox() {
     <GenreFilterButton selectedGenre={selectedGenre} onClick={toggleDropdown} />
 
     {isOpen && (
-      <div className="absolute top-full bg-zinc-900 rounded-md drop-shadow-black  px-2 py-1.5 z-10 grid grid-cols-3 grid-rows-3 gap-2  w-auto">
+      <div className="absolute top-full bg-zinc-900 rounded-md drop-shadow-black px-2 py-1.5 z-10 grid grid-cols-3 grid-rows-3 gap-2  w-auto">
         
         {/*later needs to be opened via hovering and positioned better */}
       

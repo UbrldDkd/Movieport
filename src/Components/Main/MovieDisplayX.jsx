@@ -1,4 +1,6 @@
-export default function HorMovieDisplay({ movies,  }) {
+import Keys from '../Keys'
+
+export default function MovieDisplayX({ movies,  }) {
     
 
     return (
@@ -6,7 +8,6 @@ export default function HorMovieDisplay({ movies,  }) {
         <div className="overflow-hidden w-full">
 
       <div
-        ref={containerRef}
         className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth"
         style={{ scrollSnapType: 'x mandatory' }}
       >
