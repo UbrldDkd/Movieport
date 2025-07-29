@@ -15,6 +15,8 @@ export const sampleMovies = [
     video: false,
     vote_average: 7.7,
     vote_count: 4289,
+    duration: 87,
+    release_year: 2022
   },
   {
     adult: false,
@@ -32,6 +34,8 @@ export const sampleMovies = [
     video: false,
     vote_average: 8.7,
     vote_count: 21000,
+    duration: 142,
+    release_year: 1994
   },
   {
     adult: false,
@@ -49,6 +53,8 @@ export const sampleMovies = [
     video: false,
     vote_average: 8.1,
     vote_count: 19346,
+    duration: 136,
+    release_year: 1999
   },
   {
     adult: false,
@@ -66,6 +72,8 @@ export const sampleMovies = [
     video: false,
     vote_average: 8.5,
     vote_count: 25670,
+    duration: 152,
+    release_year: 2008
   },
   {
     adult: false,
@@ -83,12 +91,14 @@ export const sampleMovies = [
     video: false,
     vote_average: 7.7,
     vote_count: 11920,
+    duration: 161,
+    release_year: 2002
   },
   {
     adult: false,
     backdrop_path: "/6cT3Yd3LzZ6uzxhB8MPvD1TxjS6.jpg",
     genre_ids: [35, 18, 10749],
-    id: 13,
+    id: 13445,
     original_language: "en",
     original_title: "Forrest Gump",
     overview:
@@ -100,4 +110,64 @@ export const sampleMovies = [
     video: false,
     vote_average: 8.4,
     vote_count: 21960,
-  },]
+    duration: 142,
+    release_year: 1994
+  },
+  {
+    adult: false,
+    backdrop_path: "/o1nTo4fo5rV8mIEGoJr0LNmTXbW.jpg",
+    genre_ids: [35, 18, 10749],
+    id: 13232,
+    original_language: "en",
+    original_title: "The Pursuit of Happyness",
+    overview:
+      "A struggling salesman takes custody of his son as he's poised to begin a life-changing professional endeavor.",
+    popularity: 80.45,
+    poster_path: "/bP7u19opmHXYeTCUwGjlLldmUMc.jpg",
+    release_date: "2006-12-15",
+    title: "The Pursuit of Happyness",
+    video: false,
+    vote_average: 8.0,
+    vote_count: 10000,
+    duration: 117,
+    release_year: 2006
+  },
+  {
+    adult: false,
+    backdrop_path: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg",
+    genre_ids: [18],
+    id: 550,
+    original_language: "en",
+    original_title: "Fight Club",
+    overview:
+      "An insomniac office worker and a soap maker form an underground club that evolves into something much more.",
+    popularity: 95.5,
+    poster_path: "/a26cQPRhJPX6GbWfQbvZdrrp9j9.jpg",
+    release_date: "1999-10-15",
+    title: "Fight Club",
+    video: false,
+    vote_average: 8.8,
+    vote_count: 24000,
+    duration: 139,
+    release_year: 1999
+  },
+  {
+    adult: false,
+    backdrop_path: "/vL5LR6WdxWPjLPfrJ1mxxOeo26E.jpg",
+    genre_ids: [12, 14, 28],
+    id: 671,
+    original_language: "en",
+    original_title: "Harry Potter and the Philosopher's Stone",
+    overview:
+      "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family, and the dark forces that threaten the magical world.",
+    popularity: 900,
+    poster_path: "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
+    release_date: "2001-11-16",
+    title: "Harry Potter and the Philosopher's Stone",
+    video: false,
+    vote_average: 7.9,
+    vote_count: 21000,
+    duration: 152,
+    release_year: 2001
+  }
+];

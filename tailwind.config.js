@@ -1,8 +1,10 @@
 // tailwind.config.js
-module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+export default {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require('tailwind-scrollbar-hide'), // <-- Add this line
+  ],
 };

@@ -27,7 +27,7 @@ return (
       <div 
       key={movie.id} 
       style={{maxWidth:'100%'}}
-      className="inline-flex items-start gap-2 p-2 hover:text-zinc-400">
+      className="inline-flex items-start gap-2 p-2 hover:text-zinc-300">
 
         <img
           src={`https://image.tmdb.org/t/p/w200${movie[keys.poster]}`}
@@ -39,15 +39,15 @@ return (
           className="flex flex-col mt-2 gap-1"
           style={{ width: '24ch', minWidth: '24ch'}}>
 
-           <p className="font-semibold leading-snug text-sm truncate">
+           <p className="font-semibold text-zinc-300 leading-snug text-sm truncate">
              {movie.original_title}
            </p>
 
-           <p className="text-gray-400 text-sm">
+           <p className="text-zinc-400 text-sm">
              {movie[keys.media] === 'tv' ? 'TV Show' : 'Movie'}
            </p>
 
-           <p className="text-sm mt-auto text-right">
+           <p className="text-sm text-zinc-300 mt-auto text-right">
              {movie[keys.rating]}/10
            </p>
 
