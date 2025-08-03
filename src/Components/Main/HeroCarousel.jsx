@@ -18,6 +18,7 @@ export default function HeroCarousel({ movies }) {
   // increments index by 1 every 5 seconds and loops
   useEffect(() => {
     const interval = setInterval(() => {
+      if (movies.length > 0) return;
       setCurrentIndex((prev) => (prev + 1) % movies.length);
     }, 5000);
     return () => clearInterval(interval);
