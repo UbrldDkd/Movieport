@@ -1,6 +1,7 @@
 export const Keys = {
     poster: 'poster_path',
-    title: 'original_title',   
+    title: 'original_title',  
+    titleTv: 'original_name', 
     rating: 'vote_average',
     media: 'media_type',
     id: 'id',

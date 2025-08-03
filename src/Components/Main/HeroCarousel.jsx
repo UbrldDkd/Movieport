@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
 import PaginationPanel from './Pagination/PaginationPanel';
 import { Keys } from '../Keys.js'
 import { GenreMap } from '../GenreMap.js'
 
-export default function HeroCarousel({ movies }) {
-
-  const containerRef = useRef(null);
-
+export default function HeroCarousel({movies}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const baseUrl = "https://image.tmdb.org/t/p/original";
-
-
-
-
+  
   // increments index by 1 every 5 seconds and loops
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,6 +16,7 @@ export default function HeroCarousel({ movies }) {
     }, 5000);
     return () => clearInterval(interval);
   }, [movies.length]);
+  
 
   return (
     <div className="w-full h-[85vh] overflow-hidden relative z-0">
@@ -34,7 +28,8 @@ export default function HeroCarousel({ movies }) {
        <div className="absolute top-0 bottom-0 left-0 w-1/5 bg-gradient-to-r from-zinc-950 via-transparent to-transparent z-20 pointer-events-none -mt-1" />
   
        <div className="absolute top-0 bottom-0 right-0 w-1/5 bg-gradient-to-l from-zinc-950 via-transparent to-transparent z-20 pointer-events-none -mt-1" />
-  
+      
+     {}
       <div
         className="flex transition-transform duration-1000 ease-in-out h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -81,7 +76,7 @@ export default function HeroCarousel({ movies }) {
               </div>
               <p className="text-sm mb-2 text-zinc-200 line-clamp-3 z-[30]">{movie[Keys.overview]}</p>
 
-              <button className="mt-4 bg-zinc-900 hover:bg-red-950 text-zinc-50 font-semibold py-2 px-4 rounded">
+              <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl duration-300">
                 Watch Now
               </button>
 
@@ -91,7 +86,7 @@ export default function HeroCarousel({ movies }) {
           </div>
 
         ))}
-
+      
       </div>
            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
               <PaginationPanel
@@ -100,6 +95,7 @@ export default function HeroCarousel({ movies }) {
                onPageChange={setCurrentIndex}
                />
           </div>
+          
     </div>
     
   );

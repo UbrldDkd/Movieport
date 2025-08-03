@@ -1,25 +1,39 @@
 import { Keys } from '../../Keys.js';
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ content, type}) {
   return (
-    <div className="flex-shrink-0 w-[166px] text-white">
+    <div className="flex-shrink-0 w-[166px] text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
 
       <img
-        src={`https://image.tmdb.org/t/p/w200${movie[Keys.poster]}`}
-        alt={movie[Keys.title]}
+        src={`https://image.tmdb.org/t/p/original/${content[Keys.details.poster]}`}
+        alt={content[Keys.details.title]}
         className="object-cover rounded max-w-[170px] h-auto"
       />
 
-      <h3 className="mt-2 font-extralight truncate text-sm">
-        {movie[Keys.title]}
-      </h3>
+      <h3 className="mt-2 font-base truncate text-sm">
+        {content[Keys.details.media] === 'movie' ? content[Keys.details.title] : content[Keys.details.titleTv]}
+        {type === 'tv' && console.log(content)}
+      </h3> 
 
       <div className="mt-1 text-sm space-y-1">
-        <p className="text-gray-400">
-          {movie[Keys.media] === 'tv' ? 'TV Show' : 'Movie'}
-        </p>
-        <p className="text-zinc-400">{movie[Keys.releaseYear]}</p>
-        <p className="text-zinc-300 text-right pr-1">{movie[Keys.rating]}/10</p>
+        
+        <div className="flex gap-4 text-gray-500 hover:text-zinc 600">
+          
+          <p>
+            {content[Keys.details.releaseYear]}
+          </p>
+
+{/* 
+          <p>
+          {content[Keys.details.runtime]}m
+          </p> */}
+
+        </div>
+        
+          <p className="text-zinc-400 hover:text-zinc-500 transition-colors duration-300">
+          {content[Keys.details.media] === 'tv' ? 'TV Show' : 'Movie'}
+          </p>
+        <p className="text-zinc-300 text-right pr-1">{content[Keys.details.rating]}/10</p>
       </div>
     </div>
   );
