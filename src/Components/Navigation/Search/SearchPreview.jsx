@@ -1,9 +1,11 @@
 import React from 'react';
+import { Keys } from '../../Keys.js';
+import { Link } from 'react-router-dom';
 
-export default function SearchPreview({ movies, value }) {
+export default function SearchPreview({ movies, value, onSelect, isLoading, error }) {
   const filteredMovies = movies
     .filter((movie) =>
-      movie.original_title.toLowerCase().includes(value.toLowerCase())
+      movie[Keys.details.title]?.toLowerCase().includes(value.toLowerCase())
     )
     .slice(0, 6);
 
@@ -11,27 +13,44 @@ export default function SearchPreview({ movies, value }) {
 
   if (!hasResults) return null;
 
-  const keys = {
-  poster: 'poster_path',
-  title: 'original_title',
-  rating: 'vote_average',
-  media: 'media_type',
-  id: 'id',
 
-};
+  if (isLoading) {
+  return (
+    <div className="w-full h-[85vh] flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-red-500 border-solid" />
+    </div>
+  );
+}
+
+if (error) {
+  return (
+    <div className="w-full h-[85vh] flex items-center justify-center text-red-500 font-semibold text-lg">
+      Something went wrong: {error.message || 'Unknown error'}
+    </div>
+  );
+}
+
+  
 
 return (
   <div className="bg-zinc-900 rounded-md shadow-lg inline-block p-2">
 
     {filteredMovies.map((movie) => (
-      <div 
-      key={movie.id} 
+
+        <Link 
+        key={movie[Keys.details.id]} 
+        to={`/ViewPanel/${movie[Keys.details.id]}`} 
+        className='block'
+        onClick={onSelect}
+        >
+
+      <div  
       style={{maxWidth:'100%'}}
       className="inline-flex items-start gap-2 p-2 hover:text-zinc-300">
 
         <img
-          src={`https://image.tmdb.org/t/p/w200${movie[keys.poster]}`}
-          alt={movie[keys.title]}
+          src={`https://image.tmdb.org/t/p/w200${movie[Keys.details.poster]}`}
+          alt={movie[Keys.details.title] || movie[Keys.details.titleTv]}
           className="w-12 h-16 object-cover rounded flex-shrink-0"
         />
 
@@ -40,24 +59,25 @@ return (
           style={{ width: '24ch', minWidth: '24ch'}}>
 
            <p className="font-semibold text-zinc-300 leading-snug text-sm truncate">
-             {movie.original_title}
+             {movie[Keys.details.title] || movie[Keys.details.titleTv]}
            </p>
 
            <p className="text-zinc-400 text-sm">
-             {movie[keys.media] === 'tv' ? 'TV Show' : 'Movie'}
+             {movie[Keys.details.media] === 'tv' ? 'TV Show' : 'Movie'}
            </p>
 
            <p className="text-sm text-zinc-300 mt-auto text-right">
-             {movie[keys.rating]}/10
+             {movie[Keys.details.rating]}/10
            </p>
 
          </div>
 
 
       </div>
+      </Link>
     ))}
 
-    {/* Optional: full-width CTA button */}
+
     <div className="mt-2 text-center my-2">
       <button className="text-zinc-300 hover:text-zinc-100 text-sm">
         See more like this
