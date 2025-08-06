@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PaginationPanel from './Pagination/PaginationPanel';
 import { Keys } from '../Keys.js'
 import { GenreMap } from '../GenreMap.js'
+import { Link } from 'react-router-dom';
 
-export default function HeroCarousel({movies}) {
+export default function HeroCarousel({movies, isLoading, error}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const baseUrl = "https://image.tmdb.org/t/p/original";
@@ -16,6 +17,24 @@ export default function HeroCarousel({movies}) {
     }, 5000);
     return () => clearInterval(interval);
   }, [movies.length]);
+
+
+      if (isLoading) {
+  return (
+    <div className="w-full h-[85vh] flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-red-500 border-solid" />
+    </div>
+  );
+}
+
+if (error) {
+  return (
+    <div className="w-full h-[85vh] flex items-center justify-center text-red-500 font-semibold text-lg">
+      Something went wrong: {error.message || 'Unknown error'}
+    </div>
+  );
+}
+
   
 
   return (
@@ -29,16 +48,16 @@ export default function HeroCarousel({movies}) {
   
        <div className="absolute top-0 bottom-0 right-0 w-1/5 bg-gradient-to-l from-zinc-950 via-transparent to-transparent z-20 pointer-events-none -mt-1" />
       
-     {}
+     
       <div
         className="flex transition-transform duration-1000 ease-in-out h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {movies.map((movie) => (
           <div
-            key={movie[Keys.id]}
+            key={movie[Keys.details.id]}
             className="w-full flex-shrink-0 h-full bg-cover bg-center relative z-[30]"
-            style={{ backgroundImage: movie[Keys.backDrop] ? `url(${baseUrl}${movie[Keys.backDrop]})` : 'none' }}
+            style={{ backgroundImage: movie[Keys.details.backDrop] ? `url(${baseUrl}${movie[Keys.details.backDrop]})` : 'none' }}
 
           >
 
@@ -46,9 +65,9 @@ export default function HeroCarousel({movies}) {
             <div className="absolute bottom-0 left-0 pl-20 right-0 h-[40%] bg-gradient-to-t from-zinc-950/100 via-zinc-950/80 to-transparent z-10 ">
 
               
-              <h2 className="text-3xl font-bold text-zinc-200 mb-4"
+              <h2 className="text-3xl cursor-pointer font-bold text-zinc-200 mb-4"
               style={{textShadow: '0 1px 2px rgba(20, 20, 23, 0.4)'}}>
-                {movie[Keys.title] || movie.title}
+                {movie[Keys.details.title] || movie.details.title}
               </h2>
 
               <div className="flex text-xs space-x-8 font-semibold text-droptext-xs text-zinc-50 mb-5"
@@ -60,25 +79,27 @@ export default function HeroCarousel({movies}) {
                         `
                      }}>
 
-              <p>
-                Duration: <span className="ml-2">{movie[Keys.runtime]} min</span>
+              {/* <p>
+                Duration: <span className="ml-2">{movie[Keys.details.runtime]} min</span>
+              </p> */}
+
+              <p className='cursor-pointer'>
+                TMDB: <span className="ml-2">{movie[Keys.details.rating]}</span>
               </p>
 
-              <p>
-                TMDB: <span className="ml-2">{movie[Keys.rating]}</span>
-              </p>
-
-              <p>
-                Genre: <span className="ml-2">{movie[Keys.genres]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
+              <p className='cursor-pointer'>
+                Genre: <span className="ml-2">{movie[Keys.details.genres]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
               </p>
 
 
               </div>
-              <p className="text-sm mb-2 text-zinc-200 line-clamp-3 z-[30]">{movie[Keys.overview]}</p>
-
-              <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl duration-300">
+              <p className="text-sm mb-2 text-zinc-200 line-clamp-3 max-w-3xl z-[30] cursor-pointer">{movie[Keys.details.overview]}</p>
+             
+              <Link to={`/ViewPanel/${movie[Keys.details.id]}`} className="inline-block">
+              <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl cursor-pointer duration-300 ">
                 Watch Now
               </button>
+              </Link>
 
             </div>
 
