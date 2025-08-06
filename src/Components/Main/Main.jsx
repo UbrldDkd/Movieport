@@ -11,15 +11,13 @@ export default function Main() {
   popular: [],
   nowPlaying: [],
   topRated: [],
-  all: [],
-  new : []
+  discover: [],
   });
   const [tvShows, setTvShows] = useState({
   popular:[]
   })
-  
-  const API_KEY= 'REDACTED_API_KEY'
 
+  
   useEffect(() => {
   async function fetchData() {
     setIsLoading(true);
