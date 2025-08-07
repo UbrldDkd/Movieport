@@ -141,7 +141,7 @@ export default function Filterbox() {
             <button
             onClick={() => setMatchType('or')}
             disabled={selectedGenres.length === 0}
-            className={`px-2 py-1 font-medium text-sm rounded disabled:bg-zinc-700 disabled:text-zinc-800 ${
+            className={`px-2 py-1 font-medium text-sm rounded disabled:cursor-default disabled:bg-zinc-700 disabled:text-zinc-800 ${
             matchType === 'or' ? 'bg-zinc-600 text-red-950' : 'bg-zinc-700 text-zinc-800 cursor-pointer'
             }`}
             >
@@ -151,7 +151,7 @@ export default function Filterbox() {
             <button
             onClick={() => setMatchType('and')}
             disabled={selectedGenres.length === 0}
-            className={`px-2 py-1 font-medium text-sm rounded disabled:bg-zinc-700 disabled:text-zinc-800 ${
+            className={`px-2 py-1 font-medium text-sm rounded disabled:cursor-default disabled:bg-zinc-700 disabled:text-zinc-800 ${
             matchType === 'and' ? 'bg-zinc-600 text-red-950' : 'bg-zinc-700 text-zinc-800 cursor-pointer'
             }`}
             >

@@ -95,7 +95,7 @@ if (error) {
               </div>
               <p className="text-sm mb-2 text-zinc-200 line-clamp-3 max-w-3xl z-[30] cursor-pointer">{movie[Keys.details.overview]}</p>
              
-              <Link to={`/ViewPanel/${movie[Keys.details.id]}`} className="inline-block">
+              <Link to={`/Watch/${movie[Keys.details.media]}/${movie[Keys.details.imdb_id]}`} className="inline-block">
               <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl cursor-pointer duration-300 ">
                 Watch Now
               </button>

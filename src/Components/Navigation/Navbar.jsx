@@ -69,11 +69,11 @@ export default function Navbar() {
           {/* Left: logo and nav links */}
           <div className="flex items-center  space-x-6">
 
-            <Link to="/">
+            <Link to="/home">
                 <Logo />
              </Link>
 
-            <Link to="/">
+            <Link to="/home">
                 <NavButton label="Home" />
              </Link>
 
