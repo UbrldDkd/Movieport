@@ -1,8 +1,8 @@
 export const Keys = {
   details: {
     poster: 'poster_path',
-    title: 'original_title',  
-    titleTv: 'original_name', 
+    title: 'title',  
+    titleTv: 'name', 
     rating: 'vote_average',
     media: 'media_type',
     id: 'id',
@@ -12,7 +12,10 @@ export const Keys = {
     releaseDateTv: 'first_air_date',
     overview: 'overview',
     releaseYear: 'release_year',
-    runtime: 'duration'},
+    runtime: 'runtime'},
+    imdb_id: 'imdb_id',
+    origin: 'production_companies.origin_country',
+    
 
   topics: {
     movies:{

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navigation/Navbar.jsx';
 import Home from './Pages/Home.jsx';
 import DisplayByMedia from './Pages/DisplayByMedia.jsx';
-import ViewPanel from './Pages/ViewPanel.jsx'; 
+import Watch from './Pages/Watch.jsx'; 
 import About from './Pages/About.jsx'      
 
 export default function App() {
@@ -13,10 +13,10 @@ export default function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/movie" element={<DisplayByMedia />} />
         <Route path="/tv" element={<DisplayByMedia />} />
-        <Route path="/movie/:id" element={<ViewPanel />} /> 
+        <Route path="/watch/:mediaType/:movieId" element={<Watch />} /> 
         <Route path="/about" element={<About />}  ></Route>
 
       </Routes>

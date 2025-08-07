@@ -79,11 +79,10 @@ useEffect(() => {
         filter(item => item[Keys.details.poster] && item[Keys.details.title] || item[Keys.details.titleTv] && item[Keys.details.id]).//checks if poster, title and id are present
         slice(0, ContentPerPage);//limits the content to the first 72 items
         
-
-        //add select by year in filterbox and make this default for all searches
+        //add select by year in filterbox and make this default for all searches!!!!!
         const sortedResults = allContent.sort((a, b) => {
-        const dateA = new Date(a.release_date || a.first_air_date);
-        const dateB = new Date(b.release_date || b.first_air_date);
+        const dateA = new Date(a[Keys.details.releaseDate] || a[Keys.details.releaseDateTv]);
+        const dateB = new Date(b[Keys.details.releaseDate]  || b[Keys.details.releaseDateTv]);
         return dateB - dateA; // Descending (newest first)
         });
 
