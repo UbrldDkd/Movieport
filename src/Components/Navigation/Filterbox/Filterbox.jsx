@@ -130,7 +130,7 @@ export default function Filterbox() {
                 Match
               </span>
               <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-zinc-900 text-zinc-300 text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200">
-                <p>Choose how genres are matched:</p> 
+                <p className='text-zinc-200 font-semibold'>Choose how genres are matched:</p> 
                 <p>"<span className='font-semibold text-red-900'>Any</span>" means results can contain any of your selected genres;</p> 
                 <p>"<span className='font-semibold text-red-900'>And</span>" means results must contain all your selected genres.</p>
               </div>
@@ -164,8 +164,8 @@ export default function Filterbox() {
         {/* Link to the filtered page with selected genres, media type and matchType */}
          <Link 
           to={selectedGenres.length > 0 
-          ? `/${mediaType}?genres=${selectedGenres.join(',')}&matchType=${matchType}`
-          : `/${mediaType}?matchType=${matchType}`}
+          ? `/${mediaType}?genres=${selectedGenres.join(',')}&match=${matchType}`
+          : `/${mediaType}?match=${matchType}`}
           className='col-span-3'
           >
 
