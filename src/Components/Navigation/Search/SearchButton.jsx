@@ -7,7 +7,6 @@
   return (  
   <button
     type="submit"
-    className="bg-white text-red-900 rounded-3xl p-2 hover:text-zinc-300 hover:bg-zinc-900 transition-colors duration-300 flex items-center justify-center"
     aria-label="Search"
   >
     <svg
