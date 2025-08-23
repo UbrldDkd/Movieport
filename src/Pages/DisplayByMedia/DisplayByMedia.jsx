@@ -1,120 +1,82 @@
 import { useState, useEffect } from 'react';
-import { Keys } from '../Components/Keys';
-import MovieDisplayBlock from '../Components/Main/MovieDisplays/MovieDisplayBlock.jsx';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { useMemo } from 'react'
-import { GenreMap } from '../Components/GenreMap.js'
+import MovieDisplayBlock from '../../Components/Main/MovieDisplays/MovieDisplayBlock.jsx';
+import { useLocation, useSearchParams, useParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { GenreMap } from '../../Components/GenreMap.js';
+import { useFetchContent } from './CustomHooks/UseFetchContent.jsx'
+import { useFetchSearch } from './CustomHooks/UseFetchSearch.jsx'
+import useFetchSimilar from '../Watch/CustomHooks/useFetchSimilar.jsx'
 
 export default function DisplayByMedia() {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [searchParams] = useSearchParams();
- 
-  const genreIds = useMemo(() => {
-  return searchParams.get('genres')?.split(',').map(Number) || [];
-  }, [searchParams]);//gets the genre ids and memo checks if it has changed
-
-  const matchType = searchParams.get('match') || 'and';//gets the match type from the URL, defaults to 'and' if not present
-
+  const [value, setValue] = useState()
   const location = useLocation();
-  const mediaType = location.pathname.split('/')[1];// gets the media type from the URL path
+  const { by, simId } = useParams();
 
+  
   const ContentPerPage= 72 ;//number of items to display per page, can be changed later
   
-//Handles URL changes, updates the fetch requests and prepares data for display
+
 useEffect(() => {
-
-      const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        
-
-        // Validate mediaType
-        const validMediaTypes = ['movie', 'tv'];
-
-        if (!validMediaTypes.includes(mediaType)) {
-        setError({ message: `Invalid media type: ${mediaType}` });
-        setContent([]);
-        setIsLoading(false);
-        return;
-        }
-        
-        // Calculate the pages to fetch based on the current page
-        const startPage = (currentPage - 1) * 4 + 1;
-        const fetchPromises = [];
-        
-        // Fetch 4 pages of content starting from the calculated startPage
-        for (let i = 0; i < 4; i++) {
-        const queryType = matchType === 'or' ? '&with_any_genres=' : '&with_genres=';// Determine the query type based on matchType
-      
-        const genreQuery = (genreIds && genreIds.length > 0)// If genreIds are provided, append them to the query
-        ? `${queryType}${genreIds.join(',')}`
-        : '';
-
-        const url = `${Keys.Url}discover/${mediaType}?api_key=${Keys.API_KEY}&page=${startPage + i}${genreQuery}`;
   
-        fetchPromises.push(fetch(url));
-        }
+  setValue(by? by : []);
+  }, [by]);
 
-        const responses = await Promise.all(fetchPromises)
-        
-        // Error handling for fetch responses
-        for (const res of responses) {
-            if (!res.ok) {
-                throw new Error('Content could not be loaded');
-            }
-        }
-        
-        // Parse all responses and store in resData
-        const resData = await Promise.all(responses.map(res => res.json()));
-        const allContent = resData.
+  const genreIds = useMemo(() => {
+    return searchParams.get('genres')?.split(',').map(Number) || [];
+  }, [searchParams]);//gets the genre ids and memo checks if it has changed
+  
+  const matchType = searchParams.get('match') || 'and';//gets the match type from the URL, defaults to 'and' if not present
 
-        flatMap(data => data.results).//combines all 4 pages(20movies each) into one single array
-        filter((item, index, fullArr) => index === fullArr.//gets the first occurence of each item by id and removes duplicates
-        findIndex((t) => t.id === item.id)).
-        filter(item => item[Keys.details.poster] && item[Keys.details.title] || item[Keys.details.titleTv] && item[Keys.details.id]).//checks if poster, title and id are present
-        slice(0, ContentPerPage);//limits the content to the first 72 items
-        
-        //add select by year in filterbox and make this default for all searches!!!!!
-        const sortedResults = allContent.sort((a, b) => {
-        const dateA = new Date(a[Keys.details.releaseDate] || a[Keys.details.releaseDateTv]);
-        const dateB = new Date(b[Keys.details.releaseDate]  || b[Keys.details.releaseDateTv]);
-        return dateB - dateA; // Descending (newest first)
-        });
+  const mediaType = location.pathname.split('/')[1] || 'movie';// gets the media type from the URL path
 
+  const isSearchPage = location.pathname.includes('/search');
 
-        console.log(sortedResults);
-        setContent(sortedResults);
-        
-        // calculate total movies devided by pages of ContentPerPage
-        if (currentPage === 1) {
-            const totalResults = resData[0].total_results;
-            const totalUserPages = Math.ceil(totalResults / ContentPerPage);
-            setTotalPages(totalUserPages);
+  const isDiscoverPage = location.pathname.includes('discover') && !!simId ;
+  
+  //Handles URL changes, updates the fetch requests and prepares corresponding data for display
+  const { content:searchContent , isLoading:searchIsLoading, error:searchError, totalPages:searchTotalPages } = useFetchSearch({
+    value,
+    currentPage,
+    ContentPerPage
+  })
 
-        }
+  const { content:defContent, isLoading:defIsLoading, error:defError, totalPages:defTotalPages } = useFetchContent({
+    mediaType,
+    genreIds, 
+    matchType, 
+    currentPage, 
+    ContentPerPage
+  })
+  
+  const { content:simContent, isLoading:simIsLoading, error:simError, totalPages:simTotalPages } = useFetchSimilar({
+    simId,
+    mediaType
+  })
+  const content = isDiscoverPage 
+  ? simContent 
+  : isSearchPage 
+    ? searchContent 
+    : defContent;
 
-      } catch (err) {
-        setError(err.message);
-        setContent(null); 
+const isLoading = isDiscoverPage 
+  ? simIsLoading 
+  : isSearchPage 
+    ? searchIsLoading 
+    : defIsLoading;
 
-      } finally {
-        setIsLoading(false);
+const error = isDiscoverPage 
+  ? simError 
+  : isSearchPage 
+    ? searchError 
+    : defError;
 
-      }
-    };
-
-    
-
-    
-
-  fetchMovies();
-    
-  }, [currentPage, mediaType, genreIds, matchType]);
+const totalPages = isDiscoverPage 
+  ? simTotalPages 
+  : isSearchPage 
+    ? searchTotalPages 
+    : defTotalPages;
   
   // Reset currentPage when mediaType changes
   useEffect(() => {
@@ -149,14 +111,14 @@ useEffect(() => {
     <div className="bg-zinc-950 min-h-screen pt-5 px-7 pb-8 relative">
 
         <div className='flex space-x-1'>
-          <h3 className='text-sm text-zinc-400 font-light '>Search results based on:</h3>
-           
             {genreIds.length > 0 && (
+              
+              <div className="flex items-center">
 
-                <div className="flex items-center">
-
+                  <h3 className='text-sm text-zinc-400 font-light '>Search results based on:</h3>
+                   
                   <p className="mr-2 text-sm text-red-800 font-base"> Genres:</p> 
-
+                   
                     {genreIds.map((id) => {
                        console.log(id);
                       return (
@@ -196,7 +158,7 @@ useEffect(() => {
                    'disabled:bg-gradient-to-r disabled:from-zinc-500 disabled:to-zinc-950 disabled:text-zinc-400 disabled:cursor-default'}>
         Previous
         </button>
-        <div className='flex items-center justify-center py-3 px-2 text-zinc-300 font-light rounded bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950'>
+        <div className='flex items-center justify-center py-3 px-2 text-zinc-300 font-light rounded bg-gradient-to-r from-zinc-950/10 via-zinc-900 to-zinc-950/10'>
         <p className='cursor-pointer font-light'>Page {currentPage}/{totalPages}</p>
         </div>
 

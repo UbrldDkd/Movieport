@@ -1,4 +1,4 @@
- export default function SearchButton() {
+ export default function SearchButton({onClick}) {
   
   
 
@@ -8,6 +8,8 @@
   <button
     type="submit"
     aria-label="Search"
+    onClick={onClick}
+    className='cursor-pointer'
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

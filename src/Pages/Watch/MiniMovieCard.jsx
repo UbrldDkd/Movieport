@@ -1,15 +1,15 @@
-import { Keys } from '../../Keys.js';
+import { Keys } from '../../Components/Keys.js';
 
-export default function MovieCard({ content }) {
+export default function MiniMovieCard({ content }) {
 
   const { API1 } = Keys;
-  const { details, Url } = API1
+  const { details } = API1
 
   return (
-    <div className="w-[170px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
+    <div className="w-[160px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
       
       {/* Poster container with fixed aspect ratio and size */}
-      <div className="w-[170px] h-[255px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
+      <div className="w-[170px] h-[250px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
         <img
           src={`https://image.tmdb.org/t/p/original/${content[details.poster]}`}
           alt={content[details.title] || content[details.titleTv]}
@@ -38,7 +38,7 @@ export default function MovieCard({ content }) {
           {content[details.media] === 'tv' ? 'TV Show' : 'Movie'}
         </p>
         <p className="text-zinc-300 select-none cursor-pointer text-right pr-1">
-          {Number(content[details.rating])}/10
+          {Number(content[details.rating].toFixed(1))}/10
         </p>
       </div>
     </div>
