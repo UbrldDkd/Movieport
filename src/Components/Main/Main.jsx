@@ -1,8 +1,10 @@
 import HeroCarousel from './HeroCarousel.jsx';
 import MovieDisplayX from './MovieDisplays/MovieDisplayX.jsx';
 import MovieDisplayBlock from './MovieDisplays/MovieDisplayBlock.jsx';
-import { useState, useEffect } from 'react'
+import Footer from '../Footer/Footer.jsx';
+import { useState, useEffect } from 'react';
 import { Keys } from '../Keys.js';
+
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +27,8 @@ export default function Main() {
     setError(null);
 
     try {
-      const { Url, API_KEY, topics } = Keys;
+      const { API1 } = Keys;
+      const { Url , API_KEY , topics } = API1;
 
       const [popularMovieRes, nowPlayingMovieRes, topRatedMovieRes, popularTvShowsRes, discoverMoviesRes] = await Promise.all([
         fetch(`${Url}${topics.movies.popular}${API_KEY}`),
@@ -115,6 +118,8 @@ export default function Main() {
         <MovieDisplayBlock fullContent={movies.topRated} toDisplay={16}/>
 
       </div>
+
+      <Footer />
     
     </div>
   );

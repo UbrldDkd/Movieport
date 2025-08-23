@@ -3,6 +3,10 @@ import { Keys } from '../../Keys.js'
 import { Link } from 'react-router-dom'
 
 export default function MovieDisplayX({ fullContent }) {
+
+  const { API1 } = Keys;
+  const { details } = API1
+
   return (
     <div className="w-full overflow-hidden">
       <div
@@ -11,10 +15,10 @@ export default function MovieDisplayX({ fullContent }) {
         {fullContent.map((item) => (
 
           <Link 
-          key={item[Keys.details.id]} 
-          to={`/watch/${item[Keys.details.title]?'movie':'tv'}/${item[Keys.details.id]}`}>
+          key={item[details.id]} 
+          to={`/watch/${item[details.title]?'movie':'tv'}/${item[details.id]}`}>
 
-          <div key={item[Keys.details.id]} className="snap-start flex-shrink-0 w-[166px]">
+          <div key={item[details.id]} className="snap-start flex-shrink-0 w-[166px]">
             <MovieCard content={item} />
           </div>
 

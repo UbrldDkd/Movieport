@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 export default function HeroCarousel({movies, isLoading, error}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const { API1 } = Keys;
+  const { details } = API1
   const baseUrl = "https://image.tmdb.org/t/p/original";
   
   // increments index by 1 every 5 seconds and loops
@@ -55,9 +57,9 @@ if (error) {
       >
         {movies.map((movie) => (
           <div
-            key={movie[Keys.details.id]}
+            key={movie[Keys.API1.details.id]}
             className="w-full flex-shrink-0 h-full bg-cover bg-center relative z-[30]"
-            style={{ backgroundImage: movie[Keys.details.backDrop] ? `url(${baseUrl}${movie[Keys.details.backDrop]})` : 'none' }}
+            style={{ backgroundImage: movie[details.backDrop] ? `url(${baseUrl}${movie[details.backDrop]})` : 'none' }}
 
           >
 
@@ -67,7 +69,7 @@ if (error) {
               
               <h2 className="text-3xl cursor-pointer font-bold text-zinc-200 mb-4"
               style={{textShadow: '0 1px 2px rgba(20, 20, 23, 0.4)'}}>
-                {movie[Keys.details.title] || movie.details.title}
+                {movie[details.title] || movie[details.title]}
               </h2>
 
               <div className="flex text-xs space-x-8 font-semibold text-droptext-xs text-zinc-50 mb-5"
@@ -84,18 +86,18 @@ if (error) {
               </p> */}
 
               <p className='cursor-pointer'>
-                TMDB: <span className="ml-2">{movie[Keys.details.rating]}</span>
+                TMDB: <span className="ml-2">{movie[details.rating]}</span>
               </p>
 
               <p className='cursor-pointer'>
-                Genre: <span className="ml-2">{movie[Keys.details.genres]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
+                Genre: <span className="ml-2">{movie[details.genres]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
               </p>
 
 
               </div>
-              <p className="text-sm mb-2 text-zinc-200 line-clamp-3 max-w-3xl z-[30] cursor-pointer">{movie[Keys.details.overview]}</p>
+              <p className="text-sm mb-2 text-zinc-200 line-clamp-3 max-w-3xl z-[30] cursor-pointer">{movie[details.overview]}</p>
              
-              <Link to={`/Watch/${movie[Keys.details.media]}/${movie[Keys.details.imdb_id]}`} className="inline-block">
+              <Link to={`/Watch/${movie[details.title] ? 'movie' : 'tv'}/${movie[details.id]}`} className="inline-block">
               <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl cursor-pointer duration-300 ">
                 Watch Now
               </button>
