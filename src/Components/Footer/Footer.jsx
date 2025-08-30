@@ -23,7 +23,7 @@ export default function Footer() {
 
         {isOpen && (
           <div className="py-6 mt-3">
-            <p>© 2025 YourSiteName. All rights reserved.</p>
+            <p>© 2025 . All rights reserved.</p>
             <div className="flex justify-center space-x-4 font-semibold mt-2">
               <Link to="/about" className="hover:text-white">About</Link>
               <Link to="/contact" className="hover:text-white">Contact</Link>
