@@ -7,7 +7,6 @@ import { MdBookmarkAdd, MdBookmarkAdded, MdBookmarkRemove } from "react-icons/md
 
 
 import { Keys } from '../../Components/Keys.js';
-import { useFetchEpisode } from './CustomHooks/useFetchEpisode.jsx'
 import { useFetchContent } from './CustomHooks/useFetchContent.jsx';
 import Description from './Description.jsx';
 import SimContent from './SimContent.jsx';
