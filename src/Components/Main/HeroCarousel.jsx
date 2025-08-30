@@ -10,6 +10,10 @@ export default function HeroCarousel({movies, isLoading, error}) {
   const { API1 } = Keys;
   const { details } = API1
   const baseUrl = "https://image.tmdb.org/t/p/original";
+
+  if(movies) {
+    console.log('movies',movies)
+  }
   
   // increments index by 1 every 5 seconds and loops
   useEffect(() => {
@@ -90,7 +94,7 @@ if (error) {
               </p>
 
               <p className='cursor-pointer'>
-                Genre: <span className="ml-2">{movie[details.genres]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
+                Genre: <span className="ml-2">{movie[details.genre]?.map(id => GenreMap[id]).join(' , ') || 'Unknown'}</span>
               </p>
 
 

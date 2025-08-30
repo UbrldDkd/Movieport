@@ -1,190 +1,293 @@
-import { useState, useEffect } from 'react';
-import MovieDisplayBlock from '../../Components/Main/MovieDisplays/MovieDisplayBlock.jsx';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useSearchParams, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GenreMap } from '../../Components/GenreMap.js';
-import { useFetchContent } from './CustomHooks/UseFetchContent.jsx'
-import { useFetchSearch } from './CustomHooks/UseFetchSearch.jsx'
-import useFetchSimilar from '../Watch/CustomHooks/useFetchSimilar.jsx'
+import { useFetchContent } from './CustomHooks/useFetchContent.jsx';
+import { useFetchSearch } from './CustomHooks/useFetchSearch.jsx';
+import { useFetchSimilar } from './CustomHooks/useFetchSimilar.jsx';
+import { DeadEndFilters } from './DeadEndFilters.jsx';
+import MovieDisplayBlock from '../../Components/Main/MovieDisplays/MovieDisplayBlock.jsx';
 
 export default function DisplayByMedia() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams] = useSearchParams();
-  const [value, setValue] = useState()
+  const [value, setValue] = useState();
   const location = useLocation();
-  const { by, simId } = useParams();
+  const { mediaType, by, id } = useParams();
 
-  
-  const ContentPerPage= 72 ;//number of items to display per page, can be changed later
-  
+  const contentPerPage = 72;
 
-useEffect(() => {
-  
-  setValue(by? by : []);
+  // Set initial filter value
+  useEffect(() => {
+    setValue(by ? by : []);
   }, [by]);
+
+  // Parse query parameters
+  const selectedYears = useMemo(() => {
+    return searchParams.get('years')?.split(',').map(Number) || [];
+  }, [searchParams]);
+
+  const selectedCountries = useMemo(() => {
+    return searchParams.get('countries')?.split(',') || [];
+  }, [searchParams]);
 
   const genreIds = useMemo(() => {
     return searchParams.get('genres')?.split(',').map(Number) || [];
-  }, [searchParams]);//gets the genre ids and memo checks if it has changed
-  
-  const matchType = searchParams.get('match') || 'and';//gets the match type from the URL, defaults to 'and' if not present
+  }, [searchParams]);
 
-  const mediaType = location.pathname.split('/')[1] || 'movie';// gets the media type from the URL path
+  const matchType = searchParams.get('match') || 'any';
 
+  // Page type flags
   const isSearchPage = location.pathname.includes('/search');
+  const isDiscoverPage = location.pathname.includes('discover') && !!id;
 
-  const isDiscoverPage = location.pathname.includes('discover') && !!simId ;
-  
-  //Handles URL changes, updates the fetch requests and prepares corresponding data for display
-  const { content:searchContent , isLoading:searchIsLoading, error:searchError, totalPages:searchTotalPages } = useFetchSearch({
+  // Fetch search, default, and similar content
+  const {
+    content: searchContent,
+    isLoading: searchIsLoading,
+    error: searchError,
+    totalPages: searchTotalPages,
+  } = useFetchSearch({
     value,
     currentPage,
-    ContentPerPage
-  })
+    contentPerPage,
+  });
 
-  const { content:defContent, isLoading:defIsLoading, error:defError, totalPages:defTotalPages } = useFetchContent({
+  const {
+    content: defContent,
+    isLoading: defIsLoading,
+    error: defError,
+    totalPages: defTotalPages,
+  } = useFetchContent({
     mediaType,
-    genreIds, 
-    matchType, 
-    currentPage, 
-    ContentPerPage
-  })
-  
-  const { content:simContent, isLoading:simIsLoading, error:simError, totalPages:simTotalPages } = useFetchSimilar({
-    simId,
-    mediaType
-  })
-  const content = isDiscoverPage 
-  ? simContent 
-  : isSearchPage 
-    ? searchContent 
+    genreIds,
+    matchType,
+    currentPage,
+    contentPerPage,
+    selectedYears,
+    selectedCountries,
+  });
+
+  const {
+    content: simContent,
+    isLoading: simIsLoading,
+    error: simError,
+    totalPages: simTotalPages,
+  } = useFetchSimilar({
+    id,
+    mediaType,
+    currentPage,
+    contentPerPage,
+  });
+
+  // Determine active content, loading state, error, and total pages
+  const content = isDiscoverPage
+    ? simContent
+    : isSearchPage
+    ? searchContent
     : defContent;
 
-const isLoading = isDiscoverPage 
-  ? simIsLoading 
-  : isSearchPage 
-    ? searchIsLoading 
+  const isLoading = isDiscoverPage
+    ? simIsLoading
+    : isSearchPage
+    ? searchIsLoading
     : defIsLoading;
 
-const error = isDiscoverPage 
-  ? simError 
-  : isSearchPage 
-    ? searchError 
+  const error = isDiscoverPage
+    ? simError
+    : isSearchPage
+    ? searchError
     : defError;
 
-const totalPages = isDiscoverPage 
-  ? simTotalPages 
-  : isSearchPage 
-    ? searchTotalPages 
+  const totalPages = isDiscoverPage
+    ? simTotalPages
+    : isSearchPage
+    ? searchTotalPages
     : defTotalPages;
-  
-  // Reset currentPage when mediaType changes
+
+  // Reset page when mediaType changes
   useEffect(() => {
     setCurrentPage(1);
-  },[mediaType]);
+  }, [mediaType]);
 
-  // Function to handle page changes
+  // Debug log
+  if (content) console.log('content', content);
+
+  // Pagination handler
   function handlePageChange(newPage) {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   }
-   
-   if (isLoading) {
+
+  // Error state
+  if (error) {
     return (
-    <div className="w-full h-[85vh] flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-red-500 border-solid" />
-    </div>
+      <div className="w-full h-[85vh] flex items-center justify-center text-red-500 font-semibold text-lg">
+        Something went wrong: {error.message || 'Unknown error'}
+      </div>
     );
-   }
+  }
 
-   if (error) {
-    return (
-    <div className="w-full h-[85vh] flex items-center justify-center text-red-500 font-semibold text-lg">
-      Something went wrong: {error.message || 'Unknown error'}
-    </div>
-     );
-    }
-
-  if(!isLoading && !error) return(
-
+  return (
     <div className="bg-zinc-950 min-h-screen pt-5 px-7 pb-8 relative">
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          // Loading state
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full h-[85vh] flex items-center justify-center"
+          >
+            <img src="/assets/lightHouseSm.gif" alt="Loading..." className="w-100 h-100" />
+          </motion.div>
+        ) : content.length === 0 ? (
+          // No content
+          <motion.div
+            key="no-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col items-center justify-center min-h-screen text-center text-zinc-400 px-4"
+          >
+            <DeadEndFilters
+              genreIds={genreIds}
+              selectedYears={selectedYears}
+              selectedCountries={selectedCountries}
+              value={value}
+            />
+          </motion.div>
+        ) : (
+          // Display content
+          <motion.div
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Filter summary */}
+            <div className="flex space-x-1">
+              {(genreIds.length > 0 || selectedYears.length > 0 || selectedCountries.length > 0) && (
+                <div className="flex items-center flex-wrap gap-2">
+                  <h3 className="text- text-gray-400 font-light">Search results based on:</h3>
+                  <div className="h-10 w-0.5 bg-gradient-to-b from-zinc-950 via-red-950 to-zinc-950" />
 
-        <div className='flex space-x-1'>
-            {genreIds.length > 0 && (
-              
-              <div className="flex items-center">
+                  {/* Genres */}
+                  {genreIds.length > 0 && (
+                    <p className="mr-1 text-sm text-zinc-400 font-base">
+                      {genreIds.length === 1 ? 'Genre: ' : 'Genres: '}
+                      {genreIds.map((id) => (
+                        <span
+                          key={id}
+                          className={`text-sm font-light cursor-default mr-2 ${
+                            GenreMap[id] === 'Horror' ? 'text-red-800' : 'text-zinc-300'
+                          }`}
+                        >
+                          {GenreMap[id]}
+                        </span>
+                      ))}
+                    </p>
+                  )}
 
-                  <h3 className='text-sm text-zinc-400 font-light '>Search results based on:</h3>
-                   
-                  <p className="mr-2 text-sm text-red-800 font-base"> Genres:</p> 
-                   
-                    {genreIds.map((id) => {
-                       console.log(id);
-                      return (
+                  {/* Years */}
+                  {selectedYears.length > 0 && (
+                    <p className="mr-2 text-sm text-zinc-400 font-base">
+                      {selectedYears.length === 1 ? 'Release Year: ' : 'Release Years: '}
+                      {selectedYears.map((y) => (
+                        <span key={y} className="text-sm font-light cursor-default mr-2 text-zinc-300">
+                          {y}
+                        </span>
+                      ))}
+                    </p>
+                  )}
 
-                     <span key={id} className={` text-sm font-light cursor-default mr-2
-                      ${GenreMap[id] === 'Horror' ? 'text-red-800' : 'text-zinc-300'}`}>
-                      {GenreMap[id]}
-                     </span>
-                      );
-                    
-                    })}
-                 </div>
-            )}
+                  {/* Countries */}
+                  {selectedCountries.length > 0 && (
+                    <p className="mr-2 text-sm text-zinc-400 font-base">
+                      {selectedCountries.length === 1 ? 'Country: ' : 'Countries: '}
+                      {selectedCountries.map((c) => (
+                        <span key={c} className="text-sm font-light cursor-default text-zinc-300 mr-2">
+                          {c}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
 
-          
-        </div>
-       
-        <MovieDisplayBlock fullContent={content} toDisplay={ContentPerPage} />
-        <div className='flex justify-center items-center gap-0 mt-5 relative'>
-        
-        <div className={`py-[3px] px-[3px] rounded-l-3xl pointer-events-none hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-950 hover:text-zinc-200 inline-block ${currentPage === 1 ? 'bg-gradient-to-r from-zinc-800 to-zinc-950':'bg-gradient-to-r  from-red-950 to-zinc-950' }`}>
-        <button 
-        onClick={() => handlePageChange(1)} 
-        disabled={currentPage === 1}
-        className={'w-[60px] px-2 py-1 text-sm font-normal pointer-events-auto bg-gradient-to-r from-zinc-400 to-zinc-950 text-red-950 hover:bg-gadient-to-r hover:from-red-950 hover:to-zinc-950 hover:text-zinc-400 disabled:bg-zinc-500 disabled:text-zinc-400 disabled:bg-gradient-to-r disabled:from-zinc-600 disabled:to-zinc-950 disabled:cursor-default z-0 relative cursor-pointer  rounded-l-3xl'}
-        >
-        First
-        </button>
-        </div>
+            {/* Movie/TV Display Block */}
+            <MovieDisplayBlock fullContent={content} toDisplay={contentPerPage} />
 
-        <button 
-        onClick={() => handlePageChange(currentPage - 1)} 
-        disabled={currentPage === 1}
-        className={'px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-l-3xl ' +
-                   'bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-300 ' +
-                   'hover:bg-gradient-to-r hover:from-zinc-400 hover:to-zinc-950 hover:text-red-900 ' +
-                   'disabled:bg-gradient-to-r disabled:from-zinc-500 disabled:to-zinc-950 disabled:text-zinc-400 disabled:cursor-default'}>
-        Previous
-        </button>
-        <div className='flex items-center justify-center py-3 px-2 text-zinc-300 font-light rounded bg-gradient-to-r from-zinc-950/10 via-zinc-900 to-zinc-950/10'>
-        <p className='cursor-pointer font-light'>Page {currentPage}/{totalPages}</p>
-        </div>
+            {/* Pagination */}
+            <div className="flex justify-center items-center gap-0 mt-5 relative">
+              {/* First */}
+              <div
+                className={`py-[3px] px-[3px] rounded-l-3xl pointer-events-none ${
+                  currentPage === 1
+                    ? 'bg-gradient-to-r from-zinc-800 to-zinc-950'
+                    : 'bg-gradient-to-r from-red-950 to-zinc-950'
+                }`}
+              >
+                <button
+                  onClick={() => handlePageChange(1)}
+                  disabled={currentPage === 1}
+                  className="w-[60px] px-2 py-1 text-sm font-normal pointer-events-auto bg-gradient-to-r from-zinc-400 to-zinc-950 text-red-950 disabled:cursor-default rounded-l-3xl"
+                >
+                  First
+                </button>
+              </div>
 
-        <button 
-        onClick={() => handlePageChange(currentPage + 1)} 
-        disabled={currentPage === totalPages}
-        className={'px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-r-3xl ' +
-                   'bg-gradient-to-l from-red-950 to-zinc-950 text-zinc-300 ' +
-                   'hover:bg-gradient-to-l hover:from-zinc-400 hover:to-zinc-950 hover:text-red-900 ' +
-                   'disabled:bg-gradient-to-l disabled:from-zinc-500 disabled:to-zinc-950 disabled:text-zinc-400 disabled:cursor-default '}
-        >Next</button>
+              {/* Previous */}
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-l-3xl bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-300 disabled:cursor-default"
+              >
+                Previous
+              </button>
 
-        <div className={`py-[3px] px-[3px] rounded-r-3xl pointer-events-none hover:bg-gradient-to-l hover:from-zinc-800 hover:to-zinc-950 hover:text-zinc-200 inline-block ${currentPage === 1 ? 'bg-gradient-to-l from-zinc-800 to-zinc-950':'bg-gradient-to-l  from-red-950 to-zinc-950' }`}>
-        <button 
-        onClick={() => handlePageChange(totalPages)} 
-        disabled={currentPage === totalPages}
-        className={'w-[60px] cursor-pointer px-2 py-1 text-sm font-normal pointer-events-auto bg-gradient-to-l from-zinc-400 to-zinc-950 text-red-950 hover:bg-gadient-to-l hover:from-red-950 hover:to-zinc-950 hover:text-zinc-400 disabled:bg-zinc-500 disabled:text-zinc-400 disabled:bg-gradient-to-l disabled:from-zinc-600 disabled:to-zinc-950 z-0 relative rounded-r-3xl'}
-        >Last</button>
+              {/* Current Page */}
+              <div className="flex items-center justify-center py-3 px-2 text-zinc-300 font-light rounded bg-gradient-to-r from-zinc-950/10 via-zinc-900 to-zinc-950/10">
+                <p className="cursor-pointer font-light">
+                  Page {currentPage}/{totalPages}
+                </p>
+              </div>
 
-        </div>
+              {/* Next */}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-r-3xl bg-gradient-to-l from-red-950 to-zinc-950 text-zinc-300 disabled:cursor-default"
+              >
+                Next
+              </button>
 
-        </div>
+              {/* Last */}
+              <div
+                className={`py-[3px] px-[3px] rounded-r-3xl pointer-events-none ${
+                  currentPage === 1
+                    ? 'bg-gradient-to-l from-zinc-800 to-zinc-950'
+                    : 'bg-gradient-to-l from-red-950 to-zinc-950'
+                }`}
+              >
+                <button
+                  onClick={() => handlePageChange(totalPages)}
+                  disabled={currentPage === totalPages}
+                  className="w-[60px] px-2 py-1 text-sm font-normal pointer-events-auto bg-gradient-to-l from-zinc-400 to-zinc-950 text-red-950 disabled:cursor-default rounded-r-3xl"
+                >
+                  Last
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-
-
-
-
-  )
+  );
 }

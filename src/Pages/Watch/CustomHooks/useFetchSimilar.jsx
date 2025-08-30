@@ -1,7 +1,7 @@
-import { Keys } from '../../../Components/Keys.js'
+import { Keys } from '../../../Components/Keys.js';
 import { useState, useEffect } from 'react';
 
-export default function useFetchSimilar({ id, mediaType }) {
+export function useFetchSimilar({ id, mediaType }) {
   const [content, setContent] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -9,29 +9,38 @@ export default function useFetchSimilar({ id, mediaType }) {
   const { API1 } = Keys;
   const { Url, API_KEY } = API1;
 
-
-
-
   useEffect(() => {
-    if (!id || !mediaType) return;
+    // Fetch similar movies or TV shows
+    const fetchSimilar = async () => {
+      try {
+        if (!id || !mediaType) return;
 
-    setIsLoading(true);
-    fetch(`${Url}${mediaType}/${id}/similar?api_key=${API_KEY}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        setContent(data.results || []);
+        setIsLoading(true);
+
+        const simRes = await fetch(
+          `${Url}${mediaType}/${id}/similar?api_key=${API_KEY}&with_original_language=en`
+        );
+
+        if (!simRes.ok) throw new Error(`HTTP error! Status: ${simRes.status}`);
+
+        const simData = await simRes.json();
+
+        // Update state with fetched data
+        setContent(simData.results || []);
         setError(null);
-      })
-      .catch((err) => {
+
+      } catch (err) {
         console.error('Error fetching similar data:', err);
         setError(err.message);
-      })
-      .finally(() => setIsLoading(false));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSimilar();
+
   }, [id, mediaType, Url, API_KEY]);
 
+  // Return data, error status, and loading state
   return { content, error, isLoading };
 }
-

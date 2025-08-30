@@ -3,7 +3,6 @@ export const Keys = {
   //used as main general API
   API1: {
 
-    //details for API1
     details: {
     poster: 'poster_path',
     title: 'title',  
@@ -11,7 +10,8 @@ export const Keys = {
     rating: 'vote_average',
     media: 'media_type',
     id: 'id',
-    genres: 'genre_ids',
+    genre: 'genre_ids',
+    genreNames: 'genres',
     backDrop: 'backdrop_path',
     releaseDate: 'release_date',
     releaseDateTv: 'first_air_date',
@@ -19,6 +19,16 @@ export const Keys = {
     releaseYear: 'release_year',
     runtime: 'runtime',
     imdb_id: 'imdb_id',
+    country: 'production_countries',
+    ogLanguage: 'original_language',
+    tagline: 'tagline',
+    productionComp: 'production_companies',
+    popularity: 'popularity',
+    seasons: 'seasons',
+    seasonAmount: 'number_of_seasons',
+    episodeAmount: 'number_of_episodes',
+    episodeRuntime: 'episode_run_time'
+
     },
   
   //topics for API1
@@ -49,22 +59,18 @@ export const Keys = {
     
     details: {
     title: 'Title',  
-    titleTv: 'name', 
     rated: 'Rated',
     runtime: 'Runtime',
     director: 'Director',
     writer: 'Writer',
-    plot: 'Plot',
+    overview: 'Plot',
     country: 'Country',
-    awards: 'Awards',
-    episode: 'Episode',
-    season: 'Season',
     media: 'Type',
-    imdbRating: 'imdbRating',
-    metacriticRating: 'Metascore',
     genre: 'Genre',
     release: 'Year',
-    ratings: 'Ratings'
+    ratings: 'Ratings',
+    cast: 'Actors',
+    poster: 'Poster'
     },
     
     //URL and API key

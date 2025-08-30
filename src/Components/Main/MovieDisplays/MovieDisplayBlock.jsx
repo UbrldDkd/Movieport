@@ -16,11 +16,10 @@ export default function MovieDisplayBlock({ fullContent, toDisplay }) {
       <div className="flex flex-wrap gap-4">
 
         {fullContent && Array.isArray(fullContent) ? (
-  fullContent.slice(0, toDisplay).map((item) => (
+          fullContent.slice(0, toDisplay).map((item) => (
 
           <div key={item[details.id]} className='w-[166px]'>
             
-            {/* ${item[Keys.details.id] later add this */}
 
             <Link 
               to={`/watch/${item[details.title]? 'movie': 'tv'}/${item[details.id]}`} 
