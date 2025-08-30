@@ -10,10 +10,10 @@ export function useFetchContent({
   selectedYears,
   selectedCountries
 }) {
-  const [content, setContent] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [totalPages, setTotalPages] = useState(1);
+const [content, setContent] = useState([]);
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState(null);
+const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchContent = async () => {
