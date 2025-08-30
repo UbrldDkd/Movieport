@@ -1,79 +1,77 @@
-import { useEffect, useState } from 'react'
-import { Keys } from '../../../Components/Keys.js'
+import { useEffect, useState } from 'react';
+import { Keys } from '../../../Components/Keys.js';
 
-export function useFetchSearch({ value, currentPage, ContentPerPage }) {
-    const [ isLoading, setIsLoading ] = useState();
-    const [ error, setError ] = useState();
-    const [ totalPages, setTotalPages ] = useState();
-    const [ content, setContent ] = useState([]);
+export function useFetchSearch({ value, currentPage, contentPerPage }) {
+  const [content, setContent] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [totalPages, setTotalPages] = useState(0);
 
-    useEffect(() => {
-        const fetchSearch = async () => {
-            
-            try{
-                const { API1 } = Keys;
-                const { details, Url, API_KEY } = API1
-                
-                
-                setIsLoading(true);
-                
-                const startPage = (currentPage - 1) * 4 + 1;
-                const fetchPromises = [];
-                
-                //for each page get movies and tv-shows(40-40 each)
-            for(let i= 0; i < 2; i++ ){
-            const searchTerm = encodeURIComponent(value);
-            console.log(value)
-           
+  useEffect(() => {
+    if (!value) return;
 
-            fetchPromises.push(fetch(`${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`))
-            fetchPromises.push(fetch(`${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`))
-          
-            }
-           
-            const searchRes = await Promise.all(fetchPromises)
-            
-            for (const res of searchRes ) {
-            if(!res.ok) throw new Error('Search results could not be loaded')
-            }
+    const fetchSearch = async () => {
+      try {
+        const { API1 } = Keys;
+        const { details, Url, API_KEY } = API1;
 
-            const searchData = await Promise.all(searchRes.map((res) => res.json()))
-           
-            //combine all data and filter out duplicates
-           const allContent = searchData
+        setIsLoading(true);
+        setError(null);
+
+        const startPage = (currentPage - 1) * 2 + 1; // fetch 2 pages (TV + Movie)
+        const fetchPromises = [];
+
+        const searchTerm = encodeURIComponent(value);
+
+        for (let i = 0; i < 2; i++) {
+          fetchPromises.push(
+            fetch(`${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`)
+          );
+          fetchPromises.push(
+            fetch(`${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`)
+          );
+        }
+
+        const responses = await Promise.all(fetchPromises);
+
+        for (const res of responses) {
+          if (!res.ok) throw new Error('Search results could not be loaded');
+        }
+
+        const resultsData = await Promise.all(responses.map(res => res.json()));
+
+        // Flatten, remove duplicates, filter invalid entries, and sort by popularity
+        const allContent = resultsData
           .flatMap(data => data.results)
-          .filter((item, index, fullArr) => index === fullArr.findIndex(t => t.id === item.id))
+          .filter((item, index, arr) => index === arr.findIndex(t => t.id === item.id))
           .filter(item =>
             (item[details.poster] && item[details.title]) || (item[details.titleTv] && item[details.id])
           )
-          .slice(0, ContentPerPage);
+          .sort((a, b) => b[details.popularity] - a[details.popularity])
+          .slice(0, contentPerPage)
+          .filter(item => {
+            const title = item[details.title] || item[details.titleTv];
+            return title && title.toLowerCase().startsWith(value.toLowerCase());
+          });
 
-            const sortedResults = allContent.sort((a, b) => {
-          const dateA = new Date(a[details.releaseDate] || a[details.releaseDateTv]);
-          const dateB = new Date(b[details.releaseDate] || b[details.releaseDateTv]);
-          return dateB - dateA;
-        })
-        
-        setContent(sortedResults)
+        setContent(allContent);
 
-        if (currentPage === 1) {
-          const totalResults = searchData[0].total_results;
-          const totalUserPages = Math.ceil(totalResults / ContentPerPage);
+        // Calculate total pages based on TMDb results
+        if (currentPage === 1 && resultsData[0]?.total_results) {
+          const totalUserPages = Math.ceil(resultsData[0].total_results / contentPerPage);
           setTotalPages(totalUserPages);
         }
+      } catch (err) {
+        console.error('Error fetching search results:', err);
+        setError(err);
+        setContent([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        }
-        catch(err) {
-            setError(err)
-            setContent([])
-        }
-        finally {
-            setIsLoading(false)
-        }
-    }
-    fetchSearch()
-    },[ value, currentPage, ContentPerPage])
+    fetchSearch();
+  }, [value, currentPage, contentPerPage]);
 
-    return { content, isLoading, error, totalPages }
-    
+  return { content, isLoading, error, totalPages };
 }

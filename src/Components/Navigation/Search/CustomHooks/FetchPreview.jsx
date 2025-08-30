@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Keys } from '../../../Keys.js'
+import { Keys } from '../../../Keys.js';
 
 export default function useSearchContent(value) {
   const [previewContent, setPreviewContent] = useState([]);
@@ -22,14 +22,12 @@ export default function useSearchContent(value) {
 
       try {
         const [movieRes, tvRes] = await Promise.all([
-          fetch(
-            `${Url}search/movie?api_key=${API_KEY}&query=${encodeURIComponent(value)}`,
-            { signal: controller.signal }
-          ),
-          fetch(
-            `${Url}search/tv?api_key=${API_KEY}&query=${encodeURIComponent(value)}`,
-            { signal: controller.signal }
-          )
+          fetch(`${Url}search/movie?api_key=${API_KEY}&query=${encodeURIComponent(value)}`, {
+            signal: controller.signal,
+          }),
+          fetch(`${Url}search/tv?api_key=${API_KEY}&query=${encodeURIComponent(value)}`, {
+            signal: controller.signal,
+          }),
         ]);
 
         if (!movieRes.ok || !tvRes.ok) throw new Error('Failed to fetch search results');
@@ -37,16 +35,13 @@ export default function useSearchContent(value) {
         const [movieData, tvData] = await Promise.all([movieRes.json(), tvRes.json()]);
 
         const merged = [...movieData.results, ...tvData.results]
-          .filter(item => item.poster_path && (item.title || item.name))
           .filter((item, index, arr) => arr.findIndex(t => t.id === item.id) === index)
-          .sort((a ,b) => b[details.popularity] - a[details.popularity])
+          .sort((a, b) => b[details.popularity] - a[details.popularity])
+          .filter(item => item.poster_path && (item.title || item.name))
           .filter(item => {
-            const title = item[details.title || item[details.titleTv]]
-
-            return title && title.toLowerCase().startsWith(value.toLowerCase())
-            
-          })
-        
+            const title = item[details.title] || item[details.titleTv];
+            return title && title.toLowerCase().startsWith(value.toLowerCase());
+          });
 
         setPreviewContent(merged);
       } catch (err) {

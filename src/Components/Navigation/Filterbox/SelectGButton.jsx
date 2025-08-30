@@ -1,4 +1,4 @@
-export default function SelectButton({item, id, selectedItems, onSelect}) {
+export default function SelectGButton({item, id, selectedItems, onSelect}) {
 
     return (
       <button

@@ -1,4 +1,5 @@
 import { Keys } from '../../Keys.js';
+import { GenreMap } from '../../GenreMap.js'
 
 export default function MovieCard({ content }) {
 
@@ -35,10 +36,10 @@ export default function MovieCard({ content }) {
         </div>
 
         <p className="text-zinc-400 select-none cursor-pointer hover:text-zinc-500 transition-colors duration-300">
-          {content[details.media] === 'tv' ? 'TV Show' : 'Movie'}
+          {content[details.title] ? 'Movie' : 'TV Show' }
         </p>
         <p className="text-zinc-300 select-none cursor-pointer text-right pr-1">
-          {Number(content[details.rating])}/10
+          {Number(content?.[details.rating].toFixed(1))}/10
         </p>
       </div>
     </div>

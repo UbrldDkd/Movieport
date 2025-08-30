@@ -6,6 +6,7 @@ import DisplayByMedia from './Pages/DisplayByMedia/DisplayByMedia.jsx';
 import Watch from './Pages/Watch/Watch.jsx'; 
 import About from './Pages/About.jsx'  
 import Contact from './Pages/Contact.jsx'  
+import Privacy from './Pages/Privacy.jsx'
 import ScrollToTop from './Components/ScollToTop.jsx';
 
 
@@ -19,13 +20,13 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movie" element={<DisplayByMedia />} />
-        <Route path="/tv" element={<DisplayByMedia />} />
-        <Route path="/watch/:mediaType/:Id" element={<Watch />} /> 
+        <Route path="/:mediaType" element={<DisplayByMedia />} />
+        <Route path="/watch/:mediaType/:id" element={<Watch />} /> 
         <Route path="/about" element={<About />}  />
         <Route path="/contact" element={<Contact />} />
         <Route path="/search/:by" element={<DisplayByMedia />} />
-        <Route path="/:mediaType/discover/:simId" element={<DisplayByMedia />} />
+        <Route path="/discover/:mediaType/:id" element={<DisplayByMedia />} />
+        <Route path="/privacy" element={<Privacy />} />
       
       </Routes>
 

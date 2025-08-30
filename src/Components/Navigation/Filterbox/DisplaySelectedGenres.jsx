@@ -1,10 +1,10 @@
 import { GenreMap } from '../../GenreMap.js';
 
-export default function DisplaySelectedGenres({ selectedGenres }) {
+export default function DisplaySelected({ selectedGenres }) {
   if (selectedGenres.length === 0) {
     return <p className="col-span-3 pt-3 text-sm text-gray-600">Selected Genres: None</p>;
   }
-
+  console.log(selectedGenres)
   return (
     <div className="col-span-3 pt-3 text-sm text-gray-600 flex flex-wrap gap-1">
       <span className="mr-1 text-zinc-400 font-semibold">Selected Genres:</span>
