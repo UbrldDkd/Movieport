@@ -58,7 +58,7 @@ export default function MovieCard({ content }) {
   return (
     <div 
       ref={cardRef}
-      className="w-[120px] md:w-[170px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300 relative"
+      className="w-[110px] md:w-[170px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsHovered(true)}
@@ -66,7 +66,7 @@ export default function MovieCard({ content }) {
     >
       
       {/* Poster container with fixed aspect ratio and size */}
-      <div className="w-[120px] h-[180px] md:w-[170px] md:h-[255px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
+      <div className="w-[110px] h-[165px] md:w-[170px] md:h-[255px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
         <img
           src={`https://image.tmdb.org/t/p/original/${content[details.poster]}`}
           alt={content[details.title] || content[details.titleTv]}
@@ -102,7 +102,7 @@ export default function MovieCard({ content }) {
       {/* Hover Details Container */}
       {showHoverCard && (
         <div 
-          className={`absolute top-0 z-50 w-[140px] md:w-[174px] h-[200px] md:h-[255px] bg-zinc-900 border border-zinc-700 rounded p-2 md:p-3 shadow-lg flex flex-col overflow-hidden animate-fadeIn ${
+          className={`absolute top-0 z-50 w-[130px] md:w-[174px] h-[185px] md:h-[255px] bg-zinc-900 border border-zinc-700 rounded p-2 md:p-3 shadow-lg flex flex-col overflow-hidden animate-fadeIn ${
             showRight ? 'left-full' : 'right-full'
           }`}
           style={{ 

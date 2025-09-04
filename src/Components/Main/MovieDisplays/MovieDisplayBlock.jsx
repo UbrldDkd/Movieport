@@ -18,7 +18,7 @@ export default function MovieDisplayBlock({ fullContent, toDisplay }) {
         {fullContent && Array.isArray(fullContent) ? (
           fullContent.slice(0, toDisplay).map((item) => (
 
-          <div key={item[details.id]} className='w-[120px] md:w-[166px]'>
+          <div key={item[details.id]} className='w-[110px] md:w-[166px]'>
             
 
             <Link 
