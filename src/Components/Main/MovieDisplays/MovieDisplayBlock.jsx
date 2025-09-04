@@ -11,14 +11,14 @@ export default function MovieDisplayBlock({ fullContent, toDisplay }) {
 
   return (
 
-    <div className="w-full py-10">
+    <div className="w-full py-4 md:py-10">
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2 md:gap-4 justify-center md:justify-start">
 
         {fullContent && Array.isArray(fullContent) ? (
           fullContent.slice(0, toDisplay).map((item) => (
 
-          <div key={item[details.id]} className='w-[166px]'>
+          <div key={item[details.id]} className='w-[120px] md:w-[166px]'>
             
 
             <Link 
