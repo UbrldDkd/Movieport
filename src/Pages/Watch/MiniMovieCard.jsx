@@ -6,10 +6,10 @@ export default function MiniMovieCard({ content }) {
   const { details } = API1;
 
   return (
-    <div className="w-[160px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
+    <div className="w-[100px] sm:w-[160px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
 
       {/* Poster container with fixed aspect ratio and size */}
-      <div className="w-[170px] h-[250px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
+      <div className="w-[100px] h-[150px] sm:w-[170px] sm:h-[250px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
         <img
           src={`https://image.tmdb.org/t/p/original/${content[details.poster] || content.poster}` }
           alt={content[details.title] || content[details.titleTv]}
@@ -21,14 +21,14 @@ export default function MiniMovieCard({ content }) {
 
       {/* Title */}
       <h3 
-        className="mt-2 font-base truncate select-none cursor-pointer text-sm" 
+        className="mt-2 font-base truncate select-none cursor-pointer text-xs sm:text-sm" 
         title={content[details.title] || content[details.titleTv]}
       >
         {content[details.title] || content[details.titleTv]}
       </h3>
 
       {/* Additional info */}
-      <div className="mt-1 text-sm space-y-1">
+      <div className="mt-1 text-xs sm:text-sm space-y-1">
 
         {/* Release year */}
         <div className="flex gap-4 text-gray-500 hover:text-zinc-600">

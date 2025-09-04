@@ -26,6 +26,7 @@ export default function Watch() {
   const [watched, setWatched] = useState();//temporary
   const [watchListed, setWatchListed] = useState();//temporary
   const [trailerOpen, setTrailerOpen] = useState(false);
+  const [episodeOpen, setEpisodeOpen] = useState(false);
   const [lightsOff, setLightsOff] = useState(false);
 
   // URL params
@@ -52,6 +53,29 @@ export default function Watch() {
   useEffect(() => {
     setSelectedSeason(mediaType === 'tv' ? 1 : null);
   }, [mediaType , id]);
+
+  // Set episode open state when episode and season are present
+  useEffect(() => {
+    if (episodeNumber && seasonNumber) {
+      setEpisodeOpen(true);
+      setTrailerOpen(false); // Close trailer when episode is selected
+    }
+  }, [episodeNumber, seasonNumber]);
+
+  // Toggle functions with mutual exclusion
+  const toggleTrailer = () => {
+    if (!trailerOpen) {
+      setEpisodeOpen(false);
+    }
+    setTrailerOpen(!trailerOpen);
+  };
+
+  const toggleEpisode = () => {
+    if (!episodeOpen) {
+      setTrailerOpen(false);
+    }
+    setEpisodeOpen(!episodeOpen);
+  };
 
   return (
     <div className="relative w-full min-h-screen">
@@ -97,8 +121,14 @@ export default function Watch() {
           <div className="relative z-10 bg-black w-full max-w-screen mx-auto rounded-md shadow-lg">
             <div className="aspect-video w-full">
 
-              {episodeNumber && seasonNumber && !isLoading && id &&
-                <EpisodeDisplay seasonNumber={seasonNumber} episodeNumber={episodeNumber} id={id} trailerOpen={trailerOpen} />
+              {episodeNumber && seasonNumber && !isLoading && id && episodeOpen &&
+                <EpisodeDisplay 
+                  seasonNumber={seasonNumber} 
+                  episodeNumber={episodeNumber} 
+                  id={id} 
+                  trailerOpen={trailerOpen}
+                  onClose={() => setEpisodeOpen(false)}
+                />
               }
 
               {content?.tmdb && (
@@ -125,7 +155,7 @@ export default function Watch() {
               </button>
 
               <button
-                onClick={() => setTrailerOpen(!trailerOpen)}
+                onClick={toggleTrailer}
                 className={`cursor-pointer py-1 md:py-1.5 text-xs md:text-sm px-2 md:px-3 font-normal transition-colors duration-80 ${trailerOpen ? 'bg-red-950 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-red-900 active:text-zinc-200' : 'bg-zinc-900 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-400 active:text-red-900'}`}
               >
                 Trailer

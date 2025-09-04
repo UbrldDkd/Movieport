@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFetchEpisode } from "./CustomHooks/useFetchEpisode";
 
-export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, trailerOpen }) {
-  const [visible, setVisible] = useState(true);
+export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, trailerOpen, onClose }) {
   const [openDesc, setOpenDesc] = useState(true);
 
 
@@ -12,18 +11,12 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
     episodeNumber
   });
 
-  // Reset visibility and description when episode changes
+  // Reset description when episode changes
   useEffect(() => {
-    setVisible(true);
     setOpenDesc(true);
   }, [episode]);
 
-  // Hide episode display when id or trailer changes
-  useEffect(() => {
-    setVisible(false);
-  }, [id, trailerOpen]);
-
-  if (!episode || !visible) return null;
+  if (!episode) return null;
 
   const {
     still_path,
@@ -41,12 +34,12 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
     : "https://via.placeholder.com/780x440?text=No+Image";
 
   return (
-  <div className="relative w-full bg-zinc-900 text-zinc-300 font-normal rounded-lg overflow-hidden shadow-lg mb-6">
+  <div className="relative w-full bg-zinc-900 text-zinc-300 font-normal rounded-lg overflow-hidden shadow-lg mb-4 sm:mb-6">
 
     {/* Close Button */}
     <button
-      onClick={() => setVisible(false)}
-      className="absolute top-3 right-3 text-zinc-400 hover:text-white text-xl font-bold"
+      onClick={onClose}
+      className="absolute top-2 right-2 sm:top-3 sm:right-3 text-zinc-400 hover:text-white text-lg sm:text-xl font-bold z-10"
     >
       ✕
     </button>
@@ -73,7 +66,7 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
         <img
           src={imageUrl}
           alt={name}
-          className="w-full object-cover"
+          className="w-full h-48 sm:h-auto object-cover"
         />
 
         {/* Show Description Button below image */}
@@ -84,7 +77,7 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
         >
           <button
             onClick={() => setOpenDesc(true)}
-            className="w-36 text-zinc-400 font-light py-1 cursor-pointer rounded-lg transition-colors duration-200"
+            className="w-32 sm:w-36 text-zinc-400 font-light py-1 cursor-pointer rounded-lg transition-colors duration-200 text-sm sm:text-base"
           >
             Show Description
           </button>
@@ -92,13 +85,13 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
 
         {/* Episode Content */}
         {openDesc && (
-          <div className="px-4 pb-4 transition-opacity duration-300">
+          <div className="px-3 pb-3 sm:px-4 sm:pb-4 transition-opacity duration-300">
 
             {/* Episode Title and Runtime */}
-            <h2 className="text-xl font-semibold mb-2 flex items-center gap-2">
-              S{season_number}E{episode_number}: {name}
+            <h2 className="text-lg sm:text-xl font-semibold mb-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span>S{season_number}E{episode_number}: {name}</span>
               {runtime && (
-                <span className="flex items-center text-base font-light">
+                <span className="flex items-center text-sm sm:text-base font-light">
                   <span className="w-1 h-1 bg-red-900 rounded-full inline-block mr-1"></span>
                   {runtime}m
                 </span>
@@ -106,23 +99,23 @@ export default function EpisodeDisplay({ seasonNumber, episodeNumber, id, traile
             </h2>
 
             {/* Air Date */}
-            <p className="text-sm text-zinc-400 mb-2">
+            <p className="text-xs sm:text-sm text-zinc-400 mb-2">
               Air Date: {air_date || "Unknown"}
             </p>
 
             {/* Overview */}
-            <p className="text-base mb-4">
+            <p className="text-sm sm:text-base mb-3 sm:mb-4">
               {overview || "No overview available."}
             </p>
 
             {/* Rating and Hide Description Button */}
-            <div className="flex justify-between items-center">
-              <p className="text-amber-300 font-light">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+              <p className="text-amber-300 font-light text-sm sm:text-base">
                 {vote_average && vote_average.toFixed(1) + "/10"}
               </p>
               <button
                 onClick={() => setOpenDesc(false)}
-                className="text-red-900 text-base active:text-red-800 cursor-pointer"
+                className="text-red-900 text-sm sm:text-base active:text-red-800 cursor-pointer"
               >
                 Hide Description
               </button>
