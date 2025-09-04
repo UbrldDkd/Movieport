@@ -1,0 +1,27 @@
+[33m70c6266[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m testing mobile sizing
+[33m9275454[m Add files via upload
+[33m27d1391[m Fix CustomHooks folder casing for Linux build
+[33me9e2d89[m Temp rename CustomHooks folder to fix casing
+[33mc956928[m .
+[33m96e44fe[m Fix CustomHooks folder casing
+[33mf0e991c[m Temp rename to fix case
+[33mdac91ea[m .
+[33m098a600[m Ensure Netlify redirects
+[33m74cdd28[m ,
+[33m8f1f995[m .
+[33m8ccf2cc[m getting ready to deploy
+[33m2460041[m polished a lot of components and fetch logic
+[33m827babb[m adding loading animations, mockups for accounts later and refining what is already there, also refining search engine and movie reccomendations, future updates will include better error handling and also refined behavior from the UI and also fallbacks for movie metadata
+[33mabb9959[m almost everything polishe, only thing left is accounts, error handling and applying dynamic styling.
+[33ma310d71[m working through new features
+[33mf1d4549[m refined filterBox that works, and implementing other features
+[33m990e9dd[m improved all of the features and adding more
+[33ma63c069[m working out routing
+[33md8021ae[m working out new features and fixing bugs
+[33m5f48c80[m Base components for the home page done
+[33m60dbb99[m Refined Hero carousel and other elements too
+[33m10f056e[m Add all untracked filed
+[33m687e2ed[m Add new files
+[33m8d3a09f[m search engine and filterPreview added
+[33m96c5d5b[m More organised nav structure
+[33m653d64a[m  Just starting and experimenting
