@@ -62,8 +62,7 @@ export default function Navbar() {
               {/* Dropdown search preview */}
               {value && (
                 <div 
-                  className="absolute top-full right-0 md:left-0 mt-1 rounded shadow-lg z-40 w-full md:w-auto"
-                  style={{ maxWidth: '100%' }}
+                  className="absolute top-full -right-13 md:left-0 mt-1 rounded shadow-lg z-40"
                 >
                   <SearchPreview 
                     content={previewContent} 

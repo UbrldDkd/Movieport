@@ -8,10 +8,19 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
   const { API1 } = Keys;
   const { details } = API1;
 
-  const ITEMS_TO_SHOW = 6;
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Memoize the items to display (limit to first 6)
-  const items = useMemo(() => (Array.isArray(content) ? content.slice(0, ITEMS_TO_SHOW) : []), [content]);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const ITEMS_TO_SHOW = isMobile ? 4 : 6;
+
+  // Memoize the items to display
+  const items = useMemo(() => (Array.isArray(content) ? content.slice(0, ITEMS_TO_SHOW) : []), [content, ITEMS_TO_SHOW]);
   const hasResults = items.length > 0;
 
   // Track loaded images to decide when to show the "View more" button
@@ -62,7 +71,7 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
   return (
     <div
       ref={ref}
-      className="bg-zinc-900 rounded-md mt-3 shadow-lg inline-block p-2 animate-fade-in-up w-[280px] md:w-[320px] relative"
+      className="bg-zinc-900 rounded-md mt-3 shadow-lg inline-block p-2 animate-fade-in-up w-[calc(100vw-2rem)] max-w-[280px] md:w-[320px] relative"
     >
       
 
@@ -86,18 +95,18 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
               className="block"
               onClick={() => setIsOpen(false)}
             >
-              <div className="inline-flex gap-2 p-2 w-full">
+              <div className="inline-flex gap-2 p-1.5 md:p-2 w-full hover:bg-zinc-800 rounded transition-colors duration-200">
                 {posterPath ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${posterPath}`}
                     alt={title}
-                    className="w-16 h-24 object-cover rounded flex-shrink-0"
+                    className="w-12 h-18 md:w-16 md:h-24 object-cover rounded flex-shrink-0"
                     onLoad={onImgDone}
                     onError={onImgDone}
                   />
                 ) : (
                   <div
-                    className="w-16 h-24 bg-zinc-700 rounded flex-shrink-0"
+                    className="w-12 h-18 md:w-16 md:h-24 bg-zinc-700 rounded flex-shrink-0"
                     role="img"
                     aria-label="No poster"
                     onLoad={onImgDone}
@@ -105,12 +114,14 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
                   />
                 )}
 
-                <div className="flex flex-col gap-2 w-[24ch]">
-                  <p className="font-semibold text-zinc-300 leading-snug text-sm truncate">{title}</p>
-                  <p className="text-zinc-400 text-sm">{isMovie ? 'Movie' : 'Tv-show'}</p>
-                  <p className="text-sm text-zinc-300 mt-auto text-right">
-                    {typeof rating === 'number' ? rating.toFixed(1) : '—'}/10
-                  </p>
+                <div className="flex flex-col gap-1 md:gap-2 flex-1 min-w-0">
+                  <p className="font-semibold text-zinc-300 leading-snug text-xs md:text-sm truncate">{title}</p>
+                  <div className="flex justify-between items-center">
+                    <p className="text-zinc-400 text-xs md:text-sm">{isMovie ? 'Movie' : 'TV Show'}</p>
+                    <p className="text-xs md:text-sm text-zinc-300">
+                      {typeof rating === 'number' ? rating.toFixed(1) : '—'}/10
+                    </p>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -122,9 +133,9 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
           <div className="mt-2 text-center my-2 w-full">
             <button
               onClick={handleExpand}
-              className="text-zinc-300 hover:text-zinc-100 text-sm cursor-pointer"
+              className="text-zinc-300 hover:text-zinc-100 text-xs md:text-sm cursor-pointer bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded transition-colors duration-200"
             >
-              See more like this
+              See more results
             </button>
           </div>
         )}
@@ -132,7 +143,7 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
 
       {/* Empty state */}
       {!isLoading && !hasResults && (
-        <div className="w-full h-[120px] flex items-center justify-center text-zinc-400 text-sm">
+        <div className="w-full h-[80px] md:h-[120px] flex items-center justify-center text-zinc-400 text-xs md:text-sm">
           No results yet.
         </div>
       )}
