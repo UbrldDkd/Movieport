@@ -135,7 +135,10 @@ export default function MobileFilterbox() {
 
   return (
     <div className='col-span-3'>
-      <button ref={buttonRef} onClick={toggleDropdown} className='bg-red-950 text-zinc-200 px-4 cursor-pointer py-2 rounded hover:text-zinc-400'>
+      <button ref={buttonRef} onClick={toggleDropdown} className='bg-red-950 select-none cursor-pointer text-zinc-200 px-3 md:px-4 py-1.5 md:py-2 text-sm md:text-base rounded md:ml-2 hover:text-zinc-400 transition-colors duration-300 flex items-center gap-1.5 md:gap-2'>
+        <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clipRule="evenodd"/>
+        </svg>
         Filters
       </button>
 
@@ -240,18 +243,26 @@ export default function MobileFilterbox() {
             <div className="flex space-x-1">
               <button
                 onClick={() => setMediaType('movie')}
-                className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 ${
-                  mediaType === 'movie' ? 'bg-zinc-700 text-white' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
+                className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1 ${
+                  mediaType === 'movie' ? 'bg-red-950 text-white border border-red-800' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
                 }`}
               >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V3zm4 0h8v14H6V3z"/>
+                  <path d="M2 8h4v4H2V8zm12 0h4v4h-4V8z"/>
+                </svg>
                 Movies
               </button>
               <button
                 onClick={() => setMediaType('tv')}
-                className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 ${
-                  mediaType === 'tv' ? 'bg-zinc-700 text-white' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
+                className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1 ${
+                  mediaType === 'tv' ? 'bg-red-950 text-white border border-red-800' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
                 }`}
               >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4V5h12v10z" clipRule="evenodd"/>
+                  <path d="M9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+                </svg>
                 TV Shows
               </button>
             </div>
