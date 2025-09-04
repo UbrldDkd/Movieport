@@ -62,7 +62,7 @@ export default function SearchPreview({ content, isLoading, error, value, isOpen
   return (
     <div
       ref={ref}
-      className="bg-zinc-900 rounded-md mt-3 shadow-lg inline-block p-2 animate-fade-in-up w-[320px] relative"
+      className="bg-zinc-900 rounded-md mt-3 shadow-lg inline-block p-2 animate-fade-in-up w-[280px] md:w-[320px] relative"
     >
       
 

@@ -10,7 +10,7 @@ export default function MovieDisplayX({ fullContent }) {
   return (
     <div className="w-full overflow-hidden">
       <div
-        className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-4"
+        className="flex space-x-2 md:space-x-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 md:px-4"
       >
         {fullContent.map((item) => (
 
@@ -18,7 +18,7 @@ export default function MovieDisplayX({ fullContent }) {
           key={item[details.id]} 
           to={`/watch/${item[details.title]?'movie':'tv'}/${item[details.id]}`}>
 
-          <div key={item[details.id]} className="snap-start flex-shrink-0 w-[166px]">
+          <div key={item[details.id]} className="snap-start flex-shrink-0 w-[120px] md:w-[166px]">
             <MovieCard content={item} />
           </div>
 

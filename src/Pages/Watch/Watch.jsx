@@ -64,7 +64,7 @@ export default function Watch() {
       <div className="relative z-5 flex flex-col text-zinc-400">
 
         {/* Top section: background */}
-        <div className="relative w-full pt-4 md:p-5 sm:p-3 lg:px-10">
+        <div className="relative w-full pt-4 px-2 sm:px-3 md:p-5 lg:px-10">
 
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${backdropUrl})` }} />
@@ -111,14 +111,14 @@ export default function Watch() {
         </div>
 
         {/* Controls */}
-        <div className="px-10 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent">
+        <div className="px-2 md:px-10 pt-2 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent">
 
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2 md:gap-0">
 
             {/* Left side buttons */}
-            <div className="flex space-x-1">
+            <div className="flex space-x-1 w-full md:w-auto justify-center md:justify-start">
               <button
-                className={`cursor-pointer py-1.5 text-sm px-3 font-normal transition-colors duration-80 rounded-l-3xl ${lightsOff ? 'bg-red-950 text-zinc-400 hover:bg-zinc-600 hover:text-red-950' : 'hover:bg-zinc-600 hover:text-red-950 bg-zinc-900'}`}
+                className={`cursor-pointer py-1 md:py-1.5 text-xs md:text-sm px-2 md:px-3 font-normal transition-colors duration-80 rounded-l-3xl ${lightsOff ? 'bg-red-950 text-zinc-400 hover:bg-zinc-600 hover:text-red-950' : 'hover:bg-zinc-600 hover:text-red-950 bg-zinc-900'}`}
                 onClick={() => setLightsOff(!lightsOff)}
               >
                 Toggle Light
@@ -126,24 +126,24 @@ export default function Watch() {
 
               <button
                 onClick={() => setTrailerOpen(!trailerOpen)}
-                className={`cursor-pointer py-1.5 text-sm px-3 font-normal transition-colors duration-80 ${trailerOpen ? 'bg-red-950 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-red-900 active:text-zinc-200' : 'bg-zinc-900 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-400 active:text-red-900'}`}
+                className={`cursor-pointer py-1 md:py-1.5 text-xs md:text-sm px-2 md:px-3 font-normal transition-colors duration-80 ${trailerOpen ? 'bg-red-950 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-red-900 active:text-zinc-200' : 'bg-zinc-900 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-400 active:text-red-900'}`}
               >
                 Trailer
               </button>
 
-              <button className="cursor-pointer py-1.5 px-3 text-sm font-normal transition-colors duration-150 rounded-r-3xl bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-400 active:text-red-900">
+              <button className="cursor-pointer py-1 md:py-1.5 px-2 md:px-3 text-xs md:text-sm font-normal transition-colors duration-150 rounded-r-3xl bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-400 active:text-red-900">
                 Comment
               </button>
             </div>
 
             {/* Right side buttons */}
-            <div className="flex space-x-1 items-center">
+            <div className="flex space-x-1 items-center w-full md:w-auto justify-center md:justify-end">
 
             {/* Heart */}
             <div className="relative group">
               <button
                 onClick={() => setHeart(!heart)}
-                className="cursor-pointer rounded-l-2xl py-1.5 px-3 text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
+                className="cursor-pointer rounded-l-2xl py-1 md:py-1.5 px-2 md:px-3 text-lg md:text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
               >
                 {heart ? <GoHeartFill /> : <GoHeart />}
               </button>
@@ -156,7 +156,7 @@ export default function Watch() {
             <div className="relative group">
               <button
                 onClick={() => setBookMarked(!bookmarked)}
-                className="cursor-pointer py-1.5 px-3 text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
+                className="cursor-pointer py-1 md:py-1.5 px-2 md:px-3 text-lg md:text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
               >
                 {bookmarked ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
               </button>
@@ -169,7 +169,7 @@ export default function Watch() {
             <div className="relative group">
               <button
                 onClick={() => setWatchListed(!watchListed)}
-                className="cursor-pointer py-1.5 px-3 text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
+                className="cursor-pointer py-1 md:py-1.5 px-2 md:px-3 text-lg md:text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
               >
                 {watchListed ? <TbClockCheck /> : <TbClockPlus /> }
               </button>
@@ -182,7 +182,7 @@ export default function Watch() {
             <div className="relative group">
               <button
                 onClick={() => setWatched(!watched)}
-                className="cursor-pointer rounded-r-2xl py-1.5 px-3 text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
+                className="cursor-pointer rounded-r-2xl py-1 md:py-1.5 px-2 md:px-3 text-lg md:text-xl transition-colors duration-150 bg-zinc-900 text-zinc-400 hover:bg-zinc-600 hover:text-red-950 active:bg-zinc-500 active:text-red-900 flex items-center justify-center"
               >
                 {watched ? <PiEye /> : <PiEyeClosed />}
               </button>
@@ -198,14 +198,14 @@ export default function Watch() {
           <div className="w-full h-px bg-zinc-700" />
 
           {/* Server selection buttons */}
-          <div className="w-full flex justify-center space-x-6 my-10">
-            <button onClick={() => setSelectedServer(1)} className={`px-8 py-6 rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 1 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
+          <div className="w-full flex justify-center space-x-2 md:space-x-6 my-6 md:my-10">
+            <button onClick={() => setSelectedServer(1)} className={`px-4 py-3 md:px-8 md:py-6 text-sm md:text-base rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 1 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
               Server 1
             </button>
-            <button onClick={() => setSelectedServer(2)} className={`px-8 py-6 rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 2 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
+            <button onClick={() => setSelectedServer(2)} className={`px-4 py-3 md:px-8 md:py-6 text-sm md:text-base rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 2 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
               Server 2
             </button>
-            <button onClick={() => setSelectedServer(3)} className={`px-8 py-6 rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 3 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
+            <button onClick={() => setSelectedServer(3)} className={`px-4 py-3 md:px-8 md:py-6 text-sm md:text-base rounded-md cursor-pointer transition-colors duration-200 ${selectedServer === 3 ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-900 active:bg-zinc-200 active:text-red-800' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-600 hover:text-zinc-200 active:bg-zinc-500 active:text-zinc-100'}`}>
               Server 3
             </button>
           </div>
@@ -221,15 +221,50 @@ export default function Watch() {
 
           <div className="w-full h-px bg-zinc-700 my-4" />
 
-          {/* Description and similar content */}
-          <div className="w-full flex space-x-3 sm:flex-col md:flex-row bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent z-3 px-0">
-            <div className="md:flex-[0.6] flex-col md:pr-10">
-              <Description content={content} isLoading={isLoading} seasonContent={seasonContent} selectedSeason={selectedSeason} />
-              <div className="h-50" />
-              <Comments />
+          {/* Mobile: Poster at top, then description, comments, similar content */}
+          {/* Desktop: Side by side layout */}
+          <div className="w-full bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent z-3 px-0">
+            {/* Mobile layout */}
+            <div className="block md:hidden">
+              {/* Poster section for mobile */}
+              <div className="flex justify-center mb-6">
+                {content?.tmdb && (
+                  <div className="w-[200px] h-[300px] rounded-xl bg-zinc-900">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${content.tmdb.poster_path}`}
+                      alt={content?.tmdb?.[details.title] || content?.tmdb?.[details.titleTv]}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </div>
+                )}
+              </div>
+              
+              {/* Description for mobile */}
+              <div className="px-4 mb-6">
+                <Description content={content} isLoading={isLoading} seasonContent={seasonContent} selectedSeason={selectedSeason} />
+              </div>
+              
+              {/* Comments for mobile */}
+              <div className="px-4 mb-6">
+                <Comments />
+              </div>
+              
+              {/* Similar content for mobile */}
+              <div className="px-4">
+                <SimContent id={id} mediaType={mediaType} />
+              </div>
             </div>
-            <div className="md:flex-[0.4] flex-auto mt-6 md:mt-0">
-              <SimContent id={id} mediaType={mediaType} />
+            
+            {/* Desktop layout */}
+            <div className="hidden md:flex md:space-x-3">
+              <div className="md:flex-[0.6] flex-col md:pr-10">
+                <Description content={content} isLoading={isLoading} seasonContent={seasonContent} selectedSeason={selectedSeason} />
+                <div className="h-50" />
+                <Comments />
+              </div>
+              <div className="md:flex-[0.4] flex-auto mt-6 md:mt-0">
+                <SimContent id={id} mediaType={mediaType} />
+              </div>
             </div>
           </div>
 

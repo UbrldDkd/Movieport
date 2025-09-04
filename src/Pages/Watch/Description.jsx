@@ -100,10 +100,10 @@ export default function Description({ content, isLoading, seasonContent, selecte
   }, [displayPosterUrl]);
 
   return (
-    <div className="flex space-x-8 py-4">
+    <div className="flex flex-col md:flex-row md:space-x-8 py-4">
 
-      {/* Poster section */}
-      <div>
+      {/* Poster section - hidden on mobile */}
+      <div className="hidden md:block">
         <div className="w-[250px] h-[370px] rounded-xl flex items-center justify-center relative bg-zinc-900">
 
           {/* Loading GIF */}
