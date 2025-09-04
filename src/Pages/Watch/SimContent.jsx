@@ -26,7 +26,7 @@ export default function SimContent({ id, mediaType }) {
       {/* Section header */}
       <h2 className='text-3xl font-light pb-4'>You also might like</h2>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2 sm:gap-4">
 
         {/* "View more" button */}
         <div className="flex w-full pb-3 justify-end pr-6">
@@ -43,7 +43,7 @@ export default function SimContent({ id, mediaType }) {
         {/* Display similar content cards */}
         {content && Array.isArray(content) ? (
           content.slice(0, 9).map((item) => (
-            <div key={item[details.id]} className='w-[160px]'>
+            <div key={item[details.id]} className='w-[100px] sm:w-[160px]'>
 
               {/* Mini movie card link */}
               <Link 

@@ -73,13 +73,13 @@ export default function Comments() {
   };
 
   return (
-    <div className="w-full mx-auto py-4 px-3 rounded-sm space-y-4">
+    <div className="w-full mx-auto py-2 px-2 rounded-sm space-y-2">
 
       {/* New Comment Input */}
-      <div className="flex flex-col space-y-2 mb-4">
+      <div className="flex flex-col space-y-2 mb-2">
 
         <textarea
-          className="p-2 rounded-md bg-gradient-to-b min-h-20 from-red-950 to-zinc-950 bg-opacity-50 backdrop-blur-md text-zinc-400 w-full resize-none focus:outline-none placeholder:text-zinc-500 transition-all"
+          className="p-2 rounded-md bg-gradient-to-b min-h-16 from-red-950 to-zinc-950 bg-opacity-50 backdrop-blur-md text-zinc-400 w-full resize-none focus:outline-none placeholder:text-zinc-500 transition-all"
           rows={1}
           placeholder="Write a comment..."
           value={newComment}
@@ -113,7 +113,7 @@ export default function Comments() {
           {/* Publish button */}
           <button
             onClick={addComment}
-            className="px-4 py-1 rounded-2xl font-semibold transition-colors
+            className="px-3 py-1 rounded-2xl font-semibold transition-colors
                        bg-red-950 text-zinc-400
                        hover:bg-zinc-400 hover:text-red-950
                        active:bg-zinc-300 active:text-red-800"
@@ -124,11 +124,11 @@ export default function Comments() {
       </div>
 
       {/* Comments List */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         {comments.map(comment => (
           <div
             key={comment.id}
-            className="flex space-x-3 items-start bg-gradient-to-l p-3 rounded-md"
+            className="flex space-x-2 items-start bg-gradient-to-l p-2 rounded-md"
           >
             {/* Avatar */}
             <img
