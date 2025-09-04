@@ -20,7 +20,7 @@ const { movies, tvShows, error, isLoading } = useFetchMainContent();
 
       <HeroCarousel movies={movies.popular} isLoading={isLoading} error={error}/>
 
-      <div className="flex items-center px-4 md:px-15 mt-8 md:mt-25 mb-6 md:mb-10 space-x-2 md:space-x-4">
+      <div className="flex items-center px-3 md:px-15 mt-8 md:mt-25 mb-6 md:mb-10 space-x-2 md:space-x-4">
 
         
         <h2 className="cursor-pointer text-zinc-200 text-xl md:text-3xl font-light flex-shrink-0">
@@ -39,7 +39,7 @@ const { movies, tvShows, error, isLoading } = useFetchMainContent();
   
       </div>
 
-      <div className="w-full mx-auto px-4 md:px-7 items-center">
+      <div className="w-full mx-auto px-3 md:px-7 items-center">
         {toShow=== 'Movies'?
         <MovieDisplayX fullContent={movies.popular} toDisplay={16} />:
         <MovieDisplayX fullContent={tvShows.popular} toDisplay={16} />

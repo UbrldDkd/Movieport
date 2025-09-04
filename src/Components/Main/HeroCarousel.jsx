@@ -44,7 +44,7 @@ if (error) {
   
 
   return (
-    <div className="w-full h-[50vh] md:h-[85vh] overflow-hidden relative z-0">
+    <div className="w-full h-[400px] md:h-[85vh] overflow-hidden relative z-0">
  
        <div className="absolute inset-0 bg-zinc-950/40 z-0 pointer-events-none" />
   
