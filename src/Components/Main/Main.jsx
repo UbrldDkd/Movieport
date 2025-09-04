@@ -57,6 +57,12 @@ const { movies, tvShows, error, isLoading } = useFetchMainContent();
 
         <MovieDisplayBlock fullContent={movies.topRated} toDisplay={16}/>
 
+        <h2 className="text-zinc-200 text-xl md:text-3xl mt-4 md:mt-6 font-light flex-shrink-0 cursor-pointer">
+          Coming Soon
+        </h2>
+
+        <MovieDisplayBlock fullContent={movies.upcoming} toDisplay={16} showFullDate={true}/>
+
       </div>
 
       <Footer />
