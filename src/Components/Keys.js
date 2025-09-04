@@ -33,6 +33,7 @@ export const Keys = {
         popular: `movie/popular?api_key=`,
         nowPlaying: `movie/now_playing?api_key=`,
         topRated: `movie/top_rated?api_key=`,
+        upcoming: `discover/movie?api_key=`,
         discover: `discover/movie?api_key=`,
       },
       tv: {

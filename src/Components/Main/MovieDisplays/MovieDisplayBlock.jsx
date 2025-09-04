@@ -3,7 +3,7 @@ import { Keys } from '../../Keys.js';
 import { Link } from 'react-router-dom';
 
 //display content as a block
-export default function MovieDisplayBlock({ fullContent, toDisplay }) {
+export default function MovieDisplayBlock({ fullContent, toDisplay, showFullDate = false }) {
   
   const { API1 } = Keys;
   const { details } = API1
@@ -25,7 +25,7 @@ export default function MovieDisplayBlock({ fullContent, toDisplay }) {
               to={`/watch/${item[details.title]? 'movie': 'tv'}/${item[details.id]}`} 
               className='block'
             >
-              <MovieCard content={item} />
+              <MovieCard content={item} showFullDate={showFullDate} />
             </Link>
 
           </div>

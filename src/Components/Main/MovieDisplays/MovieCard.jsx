@@ -2,7 +2,7 @@ import { Keys } from '../../Keys.js';
 import { GenreMap } from '../../GenreMap.js';
 import { useState, useRef, useEffect } from 'react';
 
-export default function MovieCard({ content }) {
+export default function MovieCard({ content, showFullDate = false }) {
   const [isHovered, setIsHovered] = useState(false);
   const [showHoverCard, setShowHoverCard] = useState(false);
   const [showRight, setShowRight] = useState(true);
@@ -85,9 +85,22 @@ export default function MovieCard({ content }) {
       <div className="mt-1 text-xs md:text-sm space-y-1">
         <div className="flex gap-4 text-gray-500 hover:text-zinc-600">
           <p>
-            {content[details.releaseDate]
-              ? content[details.releaseDate].slice(0, 4)
-              : content[details.releaseDateTv]?.slice(0, 4)}
+            {showFullDate 
+              ? (content[details.releaseDate] 
+                  ? new Date(content[details.releaseDate]).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric', 
+                      year: 'numeric'
+                    })
+                  : content[details.releaseDateTv] && new Date(content[details.releaseDateTv]).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric'
+                    }))
+              : (content[details.releaseDate]
+                  ? content[details.releaseDate].slice(0, 4)
+                  : content[details.releaseDateTv]?.slice(0, 4))
+            }
           </p>
         </div>
 
