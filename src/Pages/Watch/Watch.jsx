@@ -258,15 +258,25 @@ export default function Watch() {
             <div className="block md:hidden">
               {/* Poster section for mobile */}
               <div className="flex justify-center mb-6">
-                {content?.tmdb && (
-                  <div className="w-[200px] h-[300px] rounded-xl bg-zinc-900">
+                <div className="w-[200px] h-[300px] rounded-xl bg-zinc-900">
+                  {isLoading ? (
+                    <div className="w-full h-full flex items-center justify-center rounded-xl bg-zinc-800">
+                      <img src="/assets/lightHouse.gif" alt="Loading..." className="w-36 h-36" />
+                    </div>
+                  ) : content?.tmdb ? (
                     <img
+                      key={`poster-${content.tmdb[details.id]}`}
                       src={`https://image.tmdb.org/t/p/original${content.tmdb.poster_path}`}
                       alt={content?.tmdb?.[details.title] || content?.tmdb?.[details.titleTv]}
                       className="w-full h-full object-cover rounded-xl"
+                      loading="eager"
                     />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center rounded-xl bg-zinc-800 text-zinc-400">
+                      No Image
+                    </div>
+                  )}
+                </div>
               </div>
               
               {/* Description for mobile */}

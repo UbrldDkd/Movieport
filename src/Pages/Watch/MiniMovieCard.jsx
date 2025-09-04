@@ -1,6 +1,9 @@
 import { Keys } from '../../Components/Keys.js';
+import { useState } from 'react';
 
 export default function MiniMovieCard({ content }) {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
 
   const { API1 } = Keys;
   const { details } = API1;
@@ -9,14 +12,30 @@ export default function MiniMovieCard({ content }) {
     <div className="w-[100px] sm:w-[160px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300">
 
       {/* Poster container with fixed aspect ratio and size */}
-      <div className="w-[100px] h-[150px] sm:w-[170px] sm:h-[250px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer">
-        <img
-          src={`https://image.tmdb.org/t/p/original/${content[details.poster] || content.poster}` }
-          alt={content[details.title] || content[details.titleTv]}
-          className="object-cover w-full h-full"
-          loading="lazy" // lazy-load for performance
-          decoding="async"
-        />
+      <div className="w-[100px] h-[150px] sm:w-[170px] sm:h-[250px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer relative">
+        {imageLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-800 rounded">
+            <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-red-500 border-solid"></div>
+          </div>
+        )}
+        {imageError ? (
+          <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-zinc-500 text-xs">
+            No Image
+          </div>
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/original/${content[details.poster] || content.poster}`}
+            alt={content[details.title] || content[details.titleTv]}
+            className="object-cover w-full h-full"
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setImageLoading(false)}
+            onError={() => {
+              setImageLoading(false);
+              setImageError(true);
+            }}
+          />
+        )}
       </div>
 
       {/* Title */}
