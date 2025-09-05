@@ -68,7 +68,7 @@ if (error) {
           >
 
             {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 pl-4 md:pl-20 right-0 h-[60%] md:h-[40%] bg-gradient-to-t from-zinc-950/100 via-zinc-950/80 to-transparent z-10 ">
+            <div className="absolute bottom-0 left-0 pl-4 md:pl-20 right-0 h-[45%] md:h-[40%] bg-gradient-to-t from-zinc-950/100 via-zinc-950/80 to-transparent z-10 ">
 
               
               <h2 className="text-xl md:text-3xl cursor-pointer font-bold text-zinc-200 mb-2 md:mb-4"
