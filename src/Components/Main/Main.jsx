@@ -20,42 +20,48 @@ const { movies, tvShows, error, isLoading } = useFetchMainContent();
 
       <HeroCarousel movies={movies.popular} isLoading={isLoading} error={error}/>
 
-      <div className="flex items-center mx-15 mt-25 mb-10 space-x-4">
+      <div className="flex items-center px-3 md:px-15 mt-8 md:mt-25 mb-6 md:mb-10 space-x-2 md:space-x-4">
 
         
-        <h2 className="cursor-pointer text-zinc-200 text-3xl font-light flex-shrink-0">
+        <h2 className="cursor-pointer text-zinc-200 text-xl md:text-3xl font-light flex-shrink-0">
           Whats your Poison?
         </h2>
 
-     <button onClick={()=> setToShow('Movies')} className="cursor-pointer bg-zinc-800 hover:bg-zinc-300 hover:text-red-950 text-zinc-300 text-base font-normal transition-colors duration-300 px-3 py-2 rounded-l-4xl active:bg-zinc-400 active:text-red-900">
+     <button onClick={()=> setToShow('Movies')} className="cursor-pointer bg-zinc-800 hover:bg-zinc-300 hover:text-red-950 text-zinc-300 text-sm md:text-base font-normal transition-colors duration-300 px-2 py-1 md:px-3 md:py-2 rounded-l-4xl active:bg-zinc-400 active:text-red-900">
           Movies
      </button>
 
 
 
-      <button onClick={()=> setToShow('TV-Shows')} className=" cursor-pointer bg-red-950 hover:bg-zinc-700 text-zinc-300 hover:text-zinc-950 px-4 py-2  text-base rounded-e-4xl transition-colors duration-300 active:bg-zinc-500 active:text-zinc-900">
+      <button onClick={()=> setToShow('TV-Shows')} className="cursor-pointer bg-red-950 hover:bg-zinc-700 text-zinc-300 hover:text-zinc-950 px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-e-4xl transition-colors duration-300 active:bg-zinc-500 active:text-zinc-900">
             TV-shows
       </button>
   
       </div>
 
-      <div className="w-full mx-auto px-7 items-center">
+      <div className="w-full mx-auto px-3 md:px-7 items-center">
         {toShow=== 'Movies'?
         <MovieDisplayX fullContent={movies.popular} toDisplay={16} />:
         <MovieDisplayX fullContent={tvShows.popular} toDisplay={16} />
         }
 
-        <h2 className="text-zinc-200 text-3xl mt-7 font-light flex-shrink-0 cursor-pointer">
+        <h2 className="text-zinc-200 text-xl md:text-3xl mt-4 md:mt-7 font-light flex-shrink-0 cursor-pointer">
           Now Playing
         </h2>
         
         <MovieDisplayBlock fullContent={movies.nowPlaying} toDisplay={16}/>
 
-        <h2 className="text-zinc-200 text-3xl font-light flex-shrink-0 cursor-pointer">
+        <h2 className="text-zinc-200 text-xl md:text-3xl mt-4 md:mt-6 font-light flex-shrink-0 cursor-pointer">
           Top Rated
         </h2>
 
         <MovieDisplayBlock fullContent={movies.topRated} toDisplay={16}/>
+
+        <h2 className="text-zinc-200 text-xl md:text-3xl mt-4 md:mt-6 font-light flex-shrink-0 cursor-pointer">
+          Coming Soon
+        </h2>
+
+        <MovieDisplayBlock fullContent={movies.upcoming} toDisplay={16} showFullDate={true}/>
 
       </div>
 

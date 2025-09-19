@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Filterbox from './Filterbox/Filterbox.jsx';
+import MobileFilterbox from './Filterbox/MobileFilterbox.jsx';
 import SeachInput from './Search/SearchInput.jsx';
 import Logo from './Logo.jsx';
 import NavButton from './NavButton.jsx';
@@ -11,6 +12,7 @@ import FetchPreview from './Search/CustomHooks/FetchPreview.jsx';
 export default function Navbar() {
   const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Fetch search preview results
   const { previewContent, isLoading, error } = FetchPreview(value);
@@ -25,7 +27,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Left side: logo and navigation */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2 md:space-x-6">
             <Link to="/" className="focus:outline-none">
               <Logo />
             </Link>
@@ -47,9 +49,9 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right side: search input */}
-          <div className="flex items-center space-x-4">
-            <div className="relative">
+          {/* Right side: search input and mobile menu */}
+          <div className="flex items-center space-x-3">
+            <div className="relative flex-shrink md:w-auto">
               <SeachInput 
                 value={value} 
                 onChange={onChange} 
@@ -60,8 +62,7 @@ export default function Navbar() {
               {/* Dropdown search preview */}
               {value && (
                 <div 
-                  className="absolute top-full left-0 mt-1 rounded shadow-lg z-40"
-                  style={{ width: 'fit-content', maxWidth: '100%' }}
+                  className="absolute top-full -right-13 md:left-0 mt-1 rounded shadow-lg z-40"
                 >
                   <SearchPreview 
                     content={previewContent} 
@@ -74,8 +75,39 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+            
+            {/* Mobile arrow icon */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-md hover:bg-red-900 transition-colors flex-shrink-0 relative z-50"
+            >
+              <svg className="w-6 h-6 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ transform: mobileMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
 
+        </div>
+        
+        {/* Mobile menu dropdown */}
+        <div className={`md:hidden w-full overflow-hidden transition-all duration-200 ${
+          mobileMenuOpen ? 'opacity-100 max-h-20 mt-4 border-t border-zinc-900 pt-4' : 'opacity-0 max-h-0 pointer-events-none'
+        }`}>
+          <div className="flex justify-center items-center gap-2 px-2">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+              <NavButton label="Home" />
+            </Link>
+            
+            <MobileFilterbox />
+            
+            <Link to="/movie" onClick={() => setMobileMenuOpen(false)}>
+              <NavButton label="Movies" />
+            </Link>
+            
+            <Link to="/tv" onClick={() => setMobileMenuOpen(false)}>
+              <NavButton label="TV Shows" />
+            </Link>
+          </div>
         </div>
       </nav>
     </div>

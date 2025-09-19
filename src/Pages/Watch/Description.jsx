@@ -1,9 +1,11 @@
 import { Keys } from '../../Components/Keys';
 import { GenreMap } from '../../Components/GenreMap';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Description({ content, isLoading, seasonContent, selectedSeason }) {
   const [loaded, setLoaded] = useState(false);
+  const [crewExpanded, setCrewExpanded] = useState(false);
 
   const { API1, API2 } = Keys;
   const { details: details1 } = API1;
@@ -13,6 +15,25 @@ export default function Description({ content, isLoading, seasonContent, selecte
 
   // Determine media type
   const mediaType = tmdb?.[details1.title] ? 'movie' : 'tv';
+
+  // Helper function to get genre ID from genre name
+  const getGenreIdFromName = (genreName) => {
+    // First try exact match
+    const exactMatch = Object.entries(GenreMap).find(([id, name]) => name === genreName);
+    if (exactMatch) return exactMatch[0];
+    
+    // If no exact match, try to find partial matches for compound genres like "Action & Adventure"
+    const words = genreName.split(/\s*&\s*|\s*,\s*|\s+/); // Split on &, comma, or spaces
+    
+    for (const word of words) {
+      const partialMatch = Object.entries(GenreMap).find(([id, name]) => 
+        name.toLowerCase() === word.toLowerCase().trim()
+      );
+      if (partialMatch) return partialMatch[0];
+    }
+    
+    return null;
+  };
 
   // Genres
   const genres =
@@ -45,6 +66,30 @@ export default function Description({ content, isLoading, seasonContent, selecte
     : omdb?.[details2.cast] && omdb[details2.cast] !== "N/A"
       ? [...new Set(omdb[details2.cast].split(",").map(c => c.trim()))]
       : [];
+
+  // Cast with roles (from TMDB only, since OMDB doesn't have roles)
+  const castWithRoles = tmdb?.credits?.cast 
+    ? tmdb.credits.cast.filter(c => c.character && c.character.trim() !== '').slice(0, 10)
+    : [];
+
+    if(tmdb?.credits) {
+      console.log('cast', tmdb.credits);
+    }
+
+  // Crew organized by departments
+  const crewByDepartment = tmdb?.credits?.crew
+    ? tmdb.credits.crew.reduce((acc, crewMember) => {
+        const dept = crewMember.known_for_department || 'Other';
+        if (!acc[dept]) {
+          acc[dept] = [];
+        }
+        acc[dept].push({
+          name: crewMember.name,
+          job: crewMember.job
+        });
+        return acc;
+      }, {})
+    : {};
 
   // Countries
   const countries =
@@ -100,10 +145,10 @@ export default function Description({ content, isLoading, seasonContent, selecte
   }, [displayPosterUrl]);
 
   return (
-    <div className="flex space-x-8 py-4">
+    <div className="flex flex-col md:flex-row md:space-x-8 py-4">
 
-      {/* Poster section */}
-      <div>
+      {/* Poster section - hidden on mobile */}
+      <div className="hidden md:block">
         <div className="w-[250px] h-[370px] rounded-xl flex items-center justify-center relative bg-zinc-900">
 
           {/* Loading GIF */}
@@ -202,7 +247,19 @@ export default function Description({ content, isLoading, seasonContent, selecte
                   <span className="text-sm font-semibold text-zinc-300 w-28">
                     {countries.length > 1 ? 'Countries' : 'Country'}:
                   </span>
-                  <span className="text-sm text-zinc-400 flex-1">{countries.join(', ')}</span>
+                  <div className="text-sm text-zinc-400 flex-1">
+                    {countries.map((country, index) => (
+                      <span key={index}>
+                        <Link
+                          to={`/${mediaType}?countries=${country}&match=any`}
+                          className="text-zinc-400 hover:text-zinc-200 hover:underline transition-colors duration-200 cursor-pointer"
+                        >
+                          {country}
+                        </Link>
+                        {index < countries.length - 1 && ', '}
+                      </span>
+                    ))}
+                  </div>
                 </>
               )}
             </div>
@@ -221,7 +278,26 @@ export default function Description({ content, isLoading, seasonContent, selecte
                   <span className="text-sm font-semibold text-zinc-300 w-28">
                     {genres.length > 1 ? 'Genres' : 'Genre'}:
                   </span>
-                  <span className="text-sm text-zinc-400 flex-1">{genres.join(', ')}</span>
+                  <div className="text-sm text-zinc-400 flex-1">
+                    {genres.map((genre, index) => {
+                      const genreId = getGenreIdFromName(genre);
+                      return (
+                        <span key={index}>
+                          {genreId ? (
+                            <Link
+                              to={`/${mediaType}?genres=${genreId}&match=any`}
+                              className="text-zinc-400 hover:text-zinc-200 hover:underline transition-colors duration-200 cursor-pointer"
+                            >
+                              {genre}
+                            </Link>
+                          ) : (
+                            <span>{genre}</span>
+                          )}
+                          {index < genres.length - 1 && ', '}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </>
               )}
             </div>
@@ -238,7 +314,14 @@ export default function Description({ content, isLoading, seasonContent, selecte
               ) : (
                 <>
                   <span className="text-sm font-semibold text-zinc-300 w-28">Release:</span>
-                  <span className="text-sm text-zinc-400 flex-1">{release}</span>
+                  <div className="text-sm text-zinc-400 flex-1">
+                    <Link
+                      to={`/${mediaType}?years=${release}&match=any`}
+                      className="text-zinc-400 hover:text-zinc-200 hover:underline transition-colors duration-200 cursor-pointer"
+                    >
+                      {release}
+                    </Link>
+                  </div>
                 </>
               )}
             </div>
@@ -289,7 +372,67 @@ export default function Description({ content, isLoading, seasonContent, selecte
               ) : (
                 <>
                   <span className="text-sm font-semibold text-zinc-300 w-28">Cast:</span>
-                  <span className="text-sm text-zinc-400 flex-1">{cast.slice(0,10).join(', ')}</span>
+                  <div className="flex-1">
+                    {castWithRoles.length > 0 ? (
+                      <div className="space-y-1">
+                        {castWithRoles.map((actor, index) => (
+                          <div key={index} className="text-sm text-zinc-400">
+                            <span className="text-zinc-300">{actor.name}</span> as <span className="text-zinc-500">{actor.character}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-sm text-zinc-400">{cast.slice(0,10).join(', ')}</span>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Crew Section */}
+          {Object.keys(crewByDepartment).length > 0 && (
+            <div className="flex space-x-4">
+              {isLoading ? (
+                <>
+                  <div className="h-4 w-28 bg-zinc-700 rounded animate-pulseSlow"></div>
+                  <div className="h-4 w-5/6 bg-zinc-700 rounded animate-pulseSlow"></div>
+                </>
+              ) : (
+                <>
+                  <span className="text-sm font-semibold text-zinc-300 w-28">Crew:</span>
+                  <div className="flex-1">
+                    <button
+                      onClick={() => setCrewExpanded(!crewExpanded)}
+                      className="text-sm text-zinc-400 hover:text-zinc-300 transition-colors duration-200 flex items-center space-x-1"
+                    >
+                      <span>{crewExpanded ? 'Hide crew' : `Show crew (${Object.keys(crewByDepartment).length} departments)`}</span>
+                      <span className={`transform transition-transform duration-200 ${crewExpanded ? 'rotate-180' : ''}`}>
+                        ↓
+                      </span>
+                    </button>
+                    
+                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      crewExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                      <div className="mt-3 space-y-4">
+                        {Object.entries(crewByDepartment).map(([department, crew]) => (
+                          <div key={department} className="space-y-1">
+                            <h4 className="text-sm font-semibold text-zinc-300 border-b border-zinc-700 pb-1">
+                              {department} ({crew.length})
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-1 pl-2">
+                              {crew.map((member, index) => (
+                                <div key={index} className="text-xs text-zinc-400">
+                                  <span className="text-zinc-300">{member.name}</span> - <span className="text-zinc-500">{member.job}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </>
               )}
             </div>

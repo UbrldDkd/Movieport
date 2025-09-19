@@ -44,7 +44,7 @@ if (error) {
   
 
   return (
-    <div className="w-full h-[85vh] overflow-hidden relative z-0">
+    <div className="w-full h-[400px] md:h-[85vh] overflow-hidden relative z-0">
  
        <div className="absolute inset-0 bg-zinc-950/40 z-0 pointer-events-none" />
   
@@ -68,15 +68,15 @@ if (error) {
           >
 
             {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 pl-20 right-0 h-[40%] bg-gradient-to-t from-zinc-950/100 via-zinc-950/80 to-transparent z-10 ">
+            <div className="absolute bottom-0 left-0 pl-4 md:pl-20 right-0 h-[45%] md:h-[40%] bg-gradient-to-t from-zinc-950/100 via-zinc-950/80 to-transparent z-10 ">
 
               
-              <h2 className="text-3xl cursor-pointer font-bold text-zinc-200 mb-4"
+              <h2 className="text-xl md:text-3xl cursor-pointer font-bold text-zinc-200 mb-2 md:mb-4"
               style={{textShadow: '0 1px 2px rgba(20, 20, 23, 0.4)'}}>
                 {movie[details.title] || movie[details.title]}
               </h2>
 
-              <div className="flex text-xs space-x-8 font-semibold text-droptext-xs text-zinc-50 mb-5"
+              <div className="flex text-xs space-x-3 md:space-x-8 font-semibold text-droptext-xs text-zinc-50 mb-2 md:mb-5"
               style={{ textShadow: `
                        0 0 5px rgba(24, 24, 27, 0.8),
                        0 0 10px rgba(24, 24, 27, 0.6),
@@ -99,10 +99,10 @@ if (error) {
 
 
               </div>
-              <p className="text-sm mb-2 text-zinc-200 line-clamp-3 max-w-3xl z-[30] cursor-pointer">{movie[details.overview]}</p>
+              <p className="text-xs md:text-sm mb-2 text-zinc-200 line-clamp-2 md:line-clamp-3 max-w-xl md:max-w-3xl z-[30] cursor-pointer pr-4">{movie[details.overview]}</p>
              
               <Link to={`/Watch/${movie[details.title] ? 'movie' : 'tv'}/${movie[details.id]}`} className="inline-block">
-              <button className="mt-4 bg-transparent hover:bg-red-950 text-zinc-300 font-base outline-2 outline-zinc-400 transform-colors  py-2 px-4 rounded-3xl cursor-pointer duration-300 ">
+              <button className="mt-2 md:mt-4 bg-transparent hover:bg-red-950 text-zinc-300 text-sm md:text-base font-base outline-2 outline-zinc-400 transform-colors py-1 px-3 md:py-2 md:px-4 rounded-3xl cursor-pointer duration-300">
                 Watch Now
               </button>
               </Link>
@@ -115,7 +115,7 @@ if (error) {
         ))}
       
       </div>
-           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
+           <div className="absolute bottom-3 md:bottom-6 mt-1 left-1/2 transform -translate-x-1/2 z-20">
               <PaginationPanel
                totalPages={movies.length}
                currentPage={currentIndex}

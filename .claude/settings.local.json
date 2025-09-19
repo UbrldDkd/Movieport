@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/C:\\devProj\\Movieport/**)",
+      "Read(/C:\\devProj\\Movieport\\src/**)",
+      "Read(/C:\\devProj\\Movieport\\src\\Pages\\DisplayByMedia/**)",
+      "Read(/C:\\devProj\\Movieport/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

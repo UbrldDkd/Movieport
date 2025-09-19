@@ -20,7 +20,7 @@ export default function SearchInput({ value, onChange, setIsOpen, setValue }) {
   };
 
   return (
-    <div className="flex space-x-3 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-white px-4 py-1.5 transition-colors duration-300">
+    <div className="flex space-x-2 md:space-x-3 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-white px-3 md:px-4 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:w-64">
       <SearchButton onClick={onSubmit} />
 
       <div className="w-px h-8 bg-zinc-400" />
@@ -31,8 +31,8 @@ export default function SearchInput({ value, onChange, setIsOpen, setValue }) {
         onChange={onChange}
         onKeyDown={handleKeyDown}
         onFocus={() => setIsOpen(true)}
-        placeholder="Type something..."
-        className="flex-1 bg-transparent focus:outline-none text-white placeholder-zinc-400"
+        placeholder="Search..."
+        className="flex-1 bg-transparent focus:outline-none text-white placeholder-zinc-400 text-sm md:text-base"
       />
     </div>
   );

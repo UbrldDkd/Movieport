@@ -5,7 +5,7 @@ export default function PaginationPanel({ totalPages, currentPage, onPageChange 
   const pagesToDisplay = Math.min(totalPages, 10);
 
   return (
-    <div className="flex justify-center space-x-2 mt-4 w-24 mx-auto">
+    <div className="flex justify-center space-x-1 sm:space-x-2 mt-3 sm:mt-4 w-20 sm:w-24 mx-auto">
 
       {Array.from({ length: pagesToDisplay }, (_, i) => (
 

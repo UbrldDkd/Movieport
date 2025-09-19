@@ -1,12 +1,19 @@
-# React + Vite
+# Movie Browser App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite app for browsing movies and TV shows. Users can discover content, filter by year, genre, and country, and see recommendations on movie pages. TV shows display episode info and stills. Styled with Tailwind and powered by TMDb & OMDb APIs.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Discover movies and TV shows
+- Filter by year, genre, and country
+- Recommendations on movie pages
+- Episode info and stills for TV shows
+- Responsive design with Tailwind CSS
 
-## Expanding the ESLint configuration
+## Run Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+npm install
+npm start

@@ -10,7 +10,7 @@ export default function TvContentDisplay({ seasonContent, id, episodeNumber }) {
   const seasonNumber = seasonContent?.season_number;
 
   return (
-    <div className="grid grid-cols-6 gap-3 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-6 gap-3 w-full">
 
       {/* Map through episodes */}
       {seasonContent.episodes.map((ep) => (
@@ -19,7 +19,8 @@ export default function TvContentDisplay({ seasonContent, id, episodeNumber }) {
           key={ep.episode_number}
           title={ep.name}
           className={`
-            px-4 py-2 
+            px-3 py-2 md:px-4 md:py-2
+            text-sm md:text-base
             rounded-3xl 
             cursor-pointer
             transition-colors duration-200

@@ -8,7 +8,7 @@ const contentCache = {
 };
 
 export function useFetchMainContent() {
-  const [movies, setMovies] = useState({ popular: [], nowPlaying: [], topRated: [], discover: [] });
+  const [movies, setMovies] = useState({ popular: [], nowPlaying: [], topRated: [], upcoming: [], discover: [] });
   const [tvShows, setTvShows] = useState({ popular: [] });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -30,21 +30,28 @@ export function useFetchMainContent() {
         const { Url, API_KEY, topics } = API1;
 
         // Fetch all categories in parallel
+        const currentYear = new Date().getFullYear();
+        const nextYear = currentYear + 1;
+        
         const [
           popularMovieRes,
           nowPlayingMovieRes,
           topRatedMovieRes,
+          upcomingCurrentYearRes,
+          upcomingNextYearRes,
           popularTvShowsRes,
           discoverMoviesRes
         ] = await Promise.all([
           fetch(`${Url}${topics.movies.popular}${API_KEY}`),
           fetch(`${Url}${topics.movies.nowPlaying}${API_KEY}`),
           fetch(`${Url}${topics.movies.topRated}${API_KEY}`),
+          fetch(`${Url}${topics.movies.upcoming}${API_KEY}&primary_release_year=${currentYear}&sort_by=popularity.desc`),
+          fetch(`${Url}${topics.movies.upcoming}${API_KEY}&primary_release_year=${nextYear}&sort_by=popularity.desc`),
           fetch(`${Url}${topics.tv.popular}${API_KEY}`),
           fetch(`${Url}${topics.movies.discover}${API_KEY}`),
         ]);
 
-        const responses = [popularMovieRes, nowPlayingMovieRes, topRatedMovieRes, popularTvShowsRes, discoverMoviesRes];
+        const responses = [popularMovieRes, nowPlayingMovieRes, topRatedMovieRes, upcomingCurrentYearRes, upcomingNextYearRes, popularTvShowsRes, discoverMoviesRes];
         if (responses.some(res => !res.ok)) {
           throw new Error('Failed to load one or more movie categories');
         }
@@ -53,14 +60,29 @@ export function useFetchMainContent() {
           popularMovieData,
           nowPlayingMovieData,
           topRatedMovieData,
+          upcomingCurrentYearData,
+          upcomingNextYearData,
           popularTvShowsData,
           discoverMoviesData
         ] = await Promise.all(responses.map(res => res.json()));
+
+        // Combine and filter upcoming movies to only show future releases
+        const currentDate = new Date().toISOString().split('T')[0];
+        const allUpcomingMovies = [
+          ...upcomingCurrentYearData.results,
+          ...upcomingNextYearData.results
+        ];
+        
+        const filteredUpcoming = allUpcomingMovies
+          .filter(movie => movie.release_date && movie.release_date > currentDate)
+          .sort((a, b) => b.popularity - a.popularity)
+          .slice(0, 20); // Limit to top 20 most popular upcoming movies
 
         const moviesData = {
           popular: popularMovieData.results,
           nowPlaying: nowPlayingMovieData.results,
           topRated: topRatedMovieData.results,
+          upcoming: filteredUpcoming,
           discover: discoverMoviesData.results,
         };
         const tvData = { popular: popularTvShowsData.results };

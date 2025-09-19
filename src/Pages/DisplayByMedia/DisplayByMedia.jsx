@@ -130,7 +130,7 @@ export default function DisplayByMedia() {
   }
 
   return (
-    <div className="bg-zinc-950 min-h-screen pt-5 px-7 pb-8 relative">
+    <div className="bg-zinc-950 min-h-screen pt-5 px-3 md:px-7 pb-8 relative">
       <AnimatePresence mode="wait">
         {isLoading ? (
           // Loading state
