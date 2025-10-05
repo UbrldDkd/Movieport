@@ -45,7 +45,7 @@ export const Keys = {
     },
 
     Url: `https://api.themoviedb.org/3/`,
-    API_KEY: import.meta.env.VITE_TMDB_API_KEY,
+    API_KEY: "9b9e45ca6c5942221d22ecc70fa062fc",
   },
 
   // used for single movie pages
@@ -67,7 +67,7 @@ export const Keys = {
     },
 
     Url: `https://www.omdbapi.com/?i=`,
-       API_KEY: import.meta.env.VITE_OMDB_API_KEY,
+       API_KEY: "f15afe71",
 
   },
 };
