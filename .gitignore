@@ -1,0 +1,83 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+output.css
+frontend/src/output.css
+public/build/
+
+# Dependency directories
+jspm_packages/
+bower_components/
+.cache/
+.next/
+.nuxt/
+.out/
+.svelte-kit/
+.parcel-cache/
+.turbo/
+node_modules/.vite
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.AppleDouble
+.Spotlight-V100
+
+# IDE / Editor files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.prettierrc
+
+# Environment files
+*.env
+*.local
+*.secret
+
+# Backend / Python
+backend/venv/
+**/__pycache__/
+*.pyc
+*.pyo
+backend/*.local
+*.sqlite3
+backend/Movieport/db.sqlite3
+backend/Movieport/*.sqlite3
+__pytest_cache__/
+.mypy_cache/
+coverage/
+*.egg-info/
+
+# Frontend / Vite / Tailwind
+frontend/src/output.css
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
