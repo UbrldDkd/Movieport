@@ -38,6 +38,8 @@ export default function ContentPage() {
     selectedSeason,
   });
 
+  console.log('content', content);
+
   const posterUrl =
     content?.tmdb &&
     (selectedSeason && content.tmdb.seasons?.[selectedSeason]?.[details.poster]
@@ -47,7 +49,9 @@ export default function ContentPage() {
         : null);
 
   const still =
-    seasonContent?.episodes?.[episodeNumber]?.[details.episodeFields.stillPath];
+    seasonContent?.episodes?.[episodeNumber - 1]?.[
+      details.episodeFields.stillPath
+    ];
   const backdrop = content?.tmdb?.[details.backdrop];
 
   const backdropUrl = still
@@ -93,9 +97,9 @@ export default function ContentPage() {
           <div className='absolute top-60 left-0 right-0 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
 
           {/* Poster Column - Sticky on desktop */}
-          <div className='hidden md:block shrink-0 z-10'>
+          <div className='hidden md:block shrink-0 z-10 sticky top-18 self-start'>
             {/* Sticky wrapper - this is the key fix */}
-            <div className='sticky top-10'>
+            <div>
               <ContentPagePoster
                 displayPosterUrl={posterUrl}
                 title={

@@ -28,6 +28,7 @@ export const Keys = {
       Budget: 'budget',
       Revenue: 'revenue',
       SpokenLanguages: 'spoken_languages',
+      movieCollection: 'belongs_to_collection',
 
       // TV-specific fields
       tvTitle: 'name',

@@ -18,7 +18,7 @@ export default function ListCardPosters({ items, linkUrl }) {
       >
         {items.length > 0
           ? items.map((item, i) => {
-              const posterUrl = `https://image.tmdb.org/t/p/w342/${item[poster]}`;
+              const posterUrl = `https://image.tmdb.org/t/p/w200/${item[poster]}`;
               const isLast = i === items.length - 1; // farthest right poster
 
               return (

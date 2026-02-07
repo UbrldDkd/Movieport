@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Keys } from '../../../utils/Keys';
 
 export default function SeasonDropdown({
   seasonCount,
@@ -24,23 +23,23 @@ export default function SeasonDropdown({
   }, []);
 
   return (
-    <div ref={dropdownRef} className='relative inline-block mb-4'>
+    <div ref={dropdownRef} className='relative block w-full mb-4'>
       {/* Trigger button */}
       <button
         onClick={() => setOpen(!open)}
         className='
-          px-3 py-2 
-          rounded-md 
+          px-3 py-1.5
+          rounded-md
           border-none
           outline-none
-          bg-zinc-900 
-          text-zinc-200 
-          border border-zinc-700 
+          bg-zinc-900/90
+          text-zinc-300/90 tracking-wider
+          border border-zinc-700
           flex items-center justify-between
-          w-40
+          w-full
           transition-colors duration-200
-          hover:bg-zinc-800
-          focus:outline-none focus:ring-2 focus:ring-red-900
+          hover:bg-zinc-800/90
+          focus:outline-none  focus:bg-zinc-800/90
         '
       >
         Season {selectedSeason}
@@ -50,14 +49,13 @@ export default function SeasonDropdown({
       {/* Dropdown menu */}
       <div
         className={`
-          absolute left-0 mt-2 w-40 
-          rounded-md bg-zinc-900 shadow-lg border border-zinc-700
-          transition-all duration-200 ease-out
+          absolute left-0 mt-2 w-full
+          rounded-md bg-zinc-900 shadow-lg border border-zinc-700 scrollbar-hide transition-all duration-200 ease-out
           z-10
           ${open ? 'opacity-100 visible' : 'opacity-0 invisible'}
         `}
       >
-        <ul className='max-h-60 overflow-y-auto'>
+        <ul className='max-h-60 overflow-y-auto scrollbar-hide'>
           {[...Array(seasonCount)].map((_, i) => {
             const seasonNumber = i + 1;
             const isSelected = seasonNumber === selectedSeason;
@@ -74,10 +72,10 @@ export default function SeasonDropdown({
                   setOpen(false);
                 }}
                 className={`
-                  px-3 py-2 cursor-pointer transition-colors duration-200
+                  px-3 py-1.5 cursor-pointer transition-colors duration-120
                   ${
                     isSelected
-                      ? 'bg-zinc-800 text-zinc-300 cursor-default'
+                      ? 'bg-zinc-800 text-zinc-300 cursor-pointer'
                       : 'hover:bg-zinc-700 text-zinc-200'
                   }
                 `}

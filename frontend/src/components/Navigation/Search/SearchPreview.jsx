@@ -1,5 +1,5 @@
 import { Keys } from '../../../utils/Keys.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 
 export default function SearchPreview({
@@ -7,7 +7,7 @@ export default function SearchPreview({
   isLoading,
   error,
   value,
-  isOpen,
+  setValue,
   setIsOpen,
 }) {
   const ref = useRef(null);
@@ -25,6 +25,13 @@ export default function SearchPreview({
   const handleExpand = () => {
     navigate(`/search/${encodeURIComponent(value)}`);
     setIsOpen('searchPreview', false);
+    setValue('');
+  };
+
+  const handleItemClick = (id, isMovie) => {
+    navigate(`/watch/${isMovie ? 'movie' : 'tv'}/${id}`);
+    setIsOpen('searchPreview', false);
+    setValue('');
   };
 
   const handleImgLoad = () => setLoadedCount((c) => c + 1);
@@ -39,29 +46,12 @@ export default function SearchPreview({
   // Reset loaded count when search changes
   useEffect(() => setLoadedCount(0), [value, isLoading, content]);
 
-  // Auto open/close
-  useEffect(
-    () => setIsOpen('searchPreview', value.trim() !== ''),
-    [value, setIsOpen]
-  );
-
-  // Click outside to close
-  useEffect(() => {
-    const onClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target))
-        setIsOpen('searchPreview', false);
-    };
-    if (isOpen) document.addEventListener('mousedown', onClickOutside);
-    return () => document.removeEventListener('mousedown', onClickOutside);
-  }, [isOpen, setIsOpen]);
-
   if (error)
     return (
       <div className='w-full h-[85vh] flex items-center justify-center text-red-500 font-semibold text-lg'>
         Something went wrong: {error.message || 'Unknown error'}
       </div>
     );
-  if (!isOpen) return null;
 
   return (
     <div
@@ -80,11 +70,11 @@ export default function SearchPreview({
           const rating = item?.[details.rating];
 
           return (
-            <Link
+            <button
               key={id ?? `placeholder-${idx}`}
-              to={id ? `/watch/${isMovie ? 'movie' : 'tv'}/${id}` : '#'}
-              className='block'
-              onClick={() => setIsOpen('searchPreview', false)}
+              type='button'
+              onMouseDown={() => handleItemClick(id, isMovie)}
+              className='block w-full text-left cursor-pointer'
             >
               <div className='inline-flex gap-2 p-1.5 md:p-2 w-full hover:bg-zinc-800 rounded transition-colors duration-200'>
                 {poster ? (
@@ -118,7 +108,7 @@ export default function SearchPreview({
                   </div>
                 </div>
               </div>
-            </Link>
+            </button>
           );
         })}
 

@@ -104,11 +104,11 @@ export default function AddToListsModal({ item, onClose }) {
               <button
                 key={lst.id}
                 disabled={exists}
-                className={`w-full flex justify-between items-center px-3 py-2 rounded-lg transition-colors ${
+                className={`w-full flex justify-between  items-center px-3 py-2 rounded-lg transition-colors ${
                   selected
                     ? 'bg-red-950 text-zinc-100'
                     : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200'
-                } ${exists ? 'opacity-50 cursor-not-allowed' : ''}`}
+                } ${exists ? 'opacity-50 hover:cursor-default' : 'hover:cursor-pointer'}`}
                 onClick={() => {
                   if (exists) return;
                   if (selected)
@@ -151,7 +151,7 @@ export default function AddToListsModal({ item, onClose }) {
         {/* Add button */}
         <div className='flex justify-end mt-2'>
           <button
-            className='px-3 py-1.5 bg-red-950 rounded text-zinc-100'
+            className='px-3 py-1.5 bg-red-950 rounded hover:cursor-pointer text-zinc-100'
             onClick={handleAdd}
             disabled={selectedLists.length === 0}
           >

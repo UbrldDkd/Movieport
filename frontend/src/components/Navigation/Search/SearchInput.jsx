@@ -1,12 +1,19 @@
 import SearchButton from './SearchButton';
 import { useNavigate } from 'react-router-dom';
 
-export default function SearchInput({ value, onChange, setIsOpen, setValue }) {
+export default function SearchInput({
+  value,
+  onChange,
+  setIsOpen,
+  setValue,
+  isFocused,
+  setIsFocused,
+}) {
   const navigate = useNavigate();
   const encodedValue = encodeURIComponent(value.trim());
 
   function onSubmit() {
-    if (!encodedValue) return; // prevent empty searches
+    if (!encodedValue) return;
     navigate(`/search/${encodedValue}`);
     setIsOpen('searchPreview', false);
     setValue('');
@@ -14,7 +21,7 @@ export default function SearchInput({ value, onChange, setIsOpen, setValue }) {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // prevent form submission or default behavior
+      e.preventDefault();
       onSubmit();
     }
   };
@@ -31,7 +38,8 @@ export default function SearchInput({ value, onChange, setIsOpen, setValue }) {
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        onFocus={() => setIsOpen('searchPreview', true)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         placeholder='Search...'
         className='flex-1 bg-transparent focus:outline-none text-zinc-200 hover:cursor-pointer placeholder-zinc-400 text-sm md:text-base'
       />

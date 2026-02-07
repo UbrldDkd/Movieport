@@ -11,7 +11,7 @@ export default function ProfileContentSection({ header, items }) {
         <span>{header}</span>
         {header !== 'FAVOURITES' && (
           <Link
-            to='likes/'
+            to='likes/films/'
             className='text-xs font-semibold tracking-widest text-zinc-400 hover:text-zinc-200'
           >
             VIEW ALL

@@ -23,7 +23,7 @@ export default function ContentCard({ item, view }) {
     release_date:
       item?.[details.movieReleaseDate] || item?.[details.tvReleaseDate],
     poster_path: item?.[details.poster],
-    media_type: mediaType,
+    media_type: item?.media_type || mediaType,
   };
 
   const current = user?.contentRelations?.find(

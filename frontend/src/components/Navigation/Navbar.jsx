@@ -20,12 +20,11 @@ import AuthModal from './authModal/AuthModal.jsx';
 import NavProfileDropdown from './authModal/NavProfileDropdown.jsx';
 
 export default function Navbar() {
-  // State for search input
   const [value, setValue] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const match = useMatch('/watch/:mediaType/:id');
 
-  // State for toggleable UI elements
   const [isOpen, setIsOpen] = useState({
     mobileMenu: false,
     searchPreview: false,
@@ -55,7 +54,9 @@ export default function Navbar() {
         className={`${
           match ? 'fixed top-0 left-0 w-full z-50' : 'relative'
         } h-16 px-4  transition-colors ${
-          match ? 'bg-transparent' : 'bg-red-950 shadow-md'
+          match
+            ? 'bg-gradient-to-b from-zinc-950 via-zinc-950/60 to-transparent'
+            : 'bg-red-950 shadow-md'
         }`}
       >
         <div className='max-w-7xl mx-auto flex items-center justify-between h-full'>
@@ -85,16 +86,18 @@ export default function Navbar() {
                 onChange={onChange}
                 setValue={setValue}
                 setIsOpen={handleOpen}
+                isFocused={isSearchFocused}
+                setIsFocused={setIsSearchFocused}
               />
 
-              {value && isOpen.searchPreview && (
+              {value && isSearchFocused && (
                 <div className='absolute transition-opacity duration-120 top-full left-0 mt-1 z-40'>
                   <SearchPreview
                     content={previewContent}
                     isLoading={isLoading}
                     error={error}
                     value={value}
-                    isOpen={isOpen.searchPreview}
+                    setValue={setValue}
                     setIsOpen={handleOpen}
                   />
                 </div>

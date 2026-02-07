@@ -13,7 +13,7 @@ export default function ContentCardListView({ item, onRemove }) {
     release_date:
       item?.[details.movieReleaseDate] || item?.[details.tvReleaseDate],
     poster_path: item?.[details.poster],
-    media_type: mediaType,
+    media_type: item?.media_type || mediaType,
   };
 
   return (
@@ -23,14 +23,19 @@ export default function ContentCardListView({ item, onRemove }) {
       </div>
 
       <div className='flex-1 flex flex-col justify-center'>
-        <div className='flex items-baseline gap-3'>
-          <span className='text-xl tracking-wider text-zinc-200 font-semibold'>
-            {filteredItem?.title}
-          </span>
+        <div className='flex flex-col'>
+          <div className='flex items-baseline gap-3'>
+            <span className='text-xl tracking-wider text-zinc-200 font-semibold'>
+              {filteredItem?.title}
+            </span>
 
-          <span className='text-lg text-zinc-400'>
-            {filteredItem?.release_date.slice(0, 4)}
-          </span>
+            <span className='text-lg text-zinc-400'>
+              {filteredItem?.release_date.slice(0, 4)}
+            </span>
+          </div>
+          <div className='text-xs text-zinc-400 font-semibold tracking-wide'>
+            {filteredItem?.media_type === 'movie' ? 'Film' : 'Tv'}
+          </div>
         </div>
       </div>
 

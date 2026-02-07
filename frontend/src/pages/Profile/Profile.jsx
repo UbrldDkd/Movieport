@@ -14,7 +14,7 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { username } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user, isLoading, error } = useContext(AuthContext);
   const fetchedUser = useGetUserByUsername(username);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Profile() {
           lists: user.lists || [],
           contentRelations: user.contentRelations || [],
           likedListIds: user.likedListIds || [],
-          is_owner: true,
+          isOwner: true,
         });
       } else {
         try {
@@ -37,7 +37,7 @@ export default function Profile() {
             lists: fetchedUser.lists || [],
             contentRelations: fetchedUser.content_relations || [],
             likedListIds: fetchedUser.liked_list_ids || [],
-            is_owner: false,
+            isOwner: false,
           });
         } catch (error) {
           console.error('Failed to fetch user:', error);

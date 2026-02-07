@@ -4,23 +4,23 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import ListCard from './ListCard';
 
-export default function ProfileLists({ lists, username, is_owner }) {
+export default function ProfileLists({ lists, username, isOwner }) {
   // routing
   const navigate = useNavigate();
   const createListURL = `/${username}/list/create/`;
-  const filteredLists = is_owner ? lists : lists.filter((l) => l.public);
+  const filteredLists = isOwner ? lists : lists.filter((l) => l.public);
 
   // guards
   if (!username && !lists) return null;
 
   return (
     <div
-      className={`grid grid-cols-1 ${is_owner && 'md:grid-cols-[3fr_1fr]'} gap-2.5`}
+      className={`grid grid-cols-1 ${isOwner && 'md:grid-cols-[3fr_1fr]'} gap-2.5`}
     >
       {/* Lists */}
       <div className='bg-zinc-900/90 border border-zinc-800/90 rounded-sm p-3 w-full text-zinc-200'>
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
-          {is_owner ? 'YOUR LISTS' : 'LISTS'}
+          {isOwner ? 'YOUR LISTS' : 'LISTS'}
         </h2>
 
         <div className='flex flex-col'>
@@ -29,7 +29,7 @@ export default function ProfileLists({ lists, username, is_owner }) {
               <ListCard
                 list={list}
                 username={username}
-                posterAmount={is_owner ? 6 : 10}
+                posterAmount={isOwner ? 6 : 10}
               />
 
               {idx !== filteredLists.length - 1 && (
@@ -41,7 +41,7 @@ export default function ProfileLists({ lists, username, is_owner }) {
       </div>
 
       {/* Actions */}
-      {is_owner && (
+      {isOwner && (
         <div className='bg-zinc-900/90 border  border-zinc-800/90 rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
           <button
             onClick={() => navigate(createListURL)}

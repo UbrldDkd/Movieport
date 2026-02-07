@@ -4,6 +4,8 @@ from ContentRelations.serializers import ContentRelationsSerializer
 
 class ListsSerializer(serializers.ModelSerializer):
     item_count = serializers.SerializerMethodField()
+    film_count = serializers.SerializerMethodField()
+    tv_count = serializers.SerializerMethodField()
     items = ContentRelationsSerializer(many=True, read_only=True)
     is_owner = serializers.SerializerMethodField()
     watched_percentage = serializers.SerializerMethodField()
@@ -14,12 +16,18 @@ class ListsSerializer(serializers.ModelSerializer):
         model = Lists
         fields = [
             'id', 'title', 'description', 'public', 'created_at', 'updated_at',
-            'item_count', 'title_slug', 'items', 'watched_percentage', 'liked_by', 
-            'likes_count', 'is_owner'
+            'item_count', 'film_count', 'tv_count', 'title_slug', 'items', 
+            'watched_percentage', 'liked_by', 'likes_count', 'is_owner'
         ]
 
     def get_item_count(self, obj):
         return obj.items.count()
+
+    def get_film_count(self, obj):
+        return obj.items.filter(media_type='movie').count()
+    
+    def get_tv_count(self, obj):
+        return obj.items.filter(media_type='tv').count()
 
     def get_is_owner(self, obj):
         request = self.context.get("request")
@@ -28,8 +36,7 @@ class ListsSerializer(serializers.ModelSerializer):
         return False
     
     def get_watched_percentage(self, obj):
-        items_qs = obj.items.all()
-        total = items_qs.count()
+        total = obj.items.count()
         if total == 0:
             return 0
         watched = obj.items.filter(watched=True).count()

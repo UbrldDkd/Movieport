@@ -5,7 +5,6 @@ export default function DetailsTab({ details, isLoading }) {
     primaryLanguage,
     spokenLanguages,
     alternativeTitles,
-    releaseDates,
   } = details;
 
   const renderSkeleton = () => (
@@ -24,26 +23,12 @@ export default function DetailsTab({ details, isLoading }) {
 
   if (isLoading) return renderSkeleton();
 
-  const formatReleaseDate = (dateStr) => {
-    if (!dateStr) return '';
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-  };
-
   const groupedAlternativeTitles = alternativeTitles.reduce((acc, title) => {
     const country = title.country || 'Unknown';
     if (!acc[country]) {
       acc[country] = [];
     }
     acc[country].push(title);
-    return acc;
-  }, {});
-
-  const groupedReleaseDates = releaseDates.reduce((acc, date) => {
-    if (!acc[date.country]) {
-      acc[date.country] = [];
-    }
-    acc[date.country].push(date);
     return acc;
   }, {});
 
@@ -70,37 +55,6 @@ export default function DetailsTab({ details, isLoading }) {
                 ))}
               </div>
             ))}
-          </div>
-        </div>
-      )}
-
-      {Object.keys(groupedReleaseDates).length > 0 && (
-        <div>
-          <h3 className='text-zinc-200 font-semibold tracking-wider uppercase text-xs mb-3'>
-            Release Dates
-          </h3>
-          <div className='space-y-1'>
-            {Object.entries(groupedReleaseDates).slice(0, 8).map(([country, dates]) => {
-              const sortedDates = dates.sort((a, b) => new Date(a.date) - new Date(b.date));
-              return (
-                <div
-                  key={country}
-                  className='flex items-center justify-between py-1.5 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors group'
-                >
-                  <div className='flex items-center gap-3'>
-                    <span className='text-zinc-500 text-xs font-medium bg-zinc-900/50 px-1.5 py-0.5 rounded'>
-                      {country}
-                    </span>
-                    <span className='text-zinc-400 text-sm'>
-                      {sortedDates.map(d => d.certification || 'Unrated').join(', ')}
-                    </span>
-                  </div>
-                  <span className='text-zinc-400 text-xs'>
-                    {formatReleaseDate(sortedDates[0].date)}
-                  </span>
-                </div>
-              );
-            })}
           </div>
         </div>
       )}

@@ -25,13 +25,24 @@ export default function ContentPageMain({
       tmdb?.[details1.movieReleaseDate] || tmdb?.[details1.tvReleaseDate],
   };
 
-  const directors =
-    tmdb?.credits?.crew
-      ?.filter((c) => c.known_for_department === 'Directing')
-      .map((c) => c.name) ||
-    (omdb?.[details2.director] && omdb[details2.director] !== 'N/A'
-      ? omdb[details2.director].split(',').map((d) => d.trim())
-      : []);
+  const isMovie = tmdb?.[details1.movieTitle];
+
+  const directorOrCreator = isMovie
+    ? // Movies: get directors
+      (tmdb?.credits?.crew || tmdb?.aggregate_credits?.crew || [])
+        .filter((c) => c.job === 'Director')
+        .map((c) => c.name)
+    : // TV: get creators from created_by field first
+      tmdb?.created_by?.map((c) => c.name) ||
+      // Fallback to crew with Creator job
+      (tmdb?.credits?.crew || [])
+        .filter((c) => c.job === 'Creator')
+        .map((c) => c.name) ||
+      // Fallback to aggregate_credits
+      (tmdb?.aggregate_credits?.crew || [])
+        .filter((c) => c.jobs?.some((j) => j.job === 'Creator'))
+        .map((c) => c.name) ||
+      [];
 
   const release =
     mediaType === 'movie'
@@ -41,12 +52,10 @@ export default function ContentPageMain({
           : null)
       : tmdb?.[details1.tvReleaseDate]?.split('-')[0] || null;
 
-  const genres = tmdb?.[details1.genreNames]?.map((g) => g.name) || [];
-
   return (
     <div className='w-full'>
       {/* Header */}
-      <div className='mb-4'>
+      <div className='mb-5'>
         {isLoading ? (
           <div className='w-full max-w-md h-10 bg-zinc-800/50 rounded-sm animate-pulse' />
         ) : (
@@ -61,44 +70,26 @@ export default function ContentPageMain({
               </a>
             )}
 
-            {directors.length > 0 && (
-              <span className='text-sm md:text-base text-zinc-400'>
-                Directed by{' '}
-                <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
-                  {directors.join(', ')}
-                </a>
-              </span>
-            )}
+            <span className='text-sm md:text-base text-zinc-400'>
+              Directed by{' '}
+              <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+                {directorOrCreator}
+              </a>
+            </span>
           </div>
         )}
       </div>
 
-      {/* Genres */}
-      {genres.length > 0 && (
-        <div className='mb-6'>
-          <div className='flex flex-wrap gap-2'>
-            {genres.map((genre) => (
-              <span
-                key={genre}
-                className='text-sm text-zinc-400 px-3 py-1 bg-zinc-800/50 hover:bg-zinc-800 rounded-sm cursor-pointer hover:text-zinc-300 transition-colors'
-              >
-                {genre}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Content Layout */}
       <div className='flex flex-col md:flex-row md:space-x-10 space-y-6 md:space-y-0'>
         {/* Main */}
-        <div className='w-full md:flex-[7.5]'>
+        <div className='w-full mt- md:flex-[7.5]'>
           {tmdb?.[details1.tagline] && (
             <>
               {isLoading ? (
                 <div className='h-4 w-3/4 bg-zinc-800/30 rounded-sm animate-pulse' />
               ) : (
-                <p className='text-sm text-zinc-400 italic mb-4'>
+                <p className='text-sm text-zinc-400 italic mb-2'>
                   {tmdb[details1.tagline].toUpperCase()}
                 </p>
               )}
