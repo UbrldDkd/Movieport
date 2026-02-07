@@ -1,80 +1,115 @@
+// Standard library
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
+// Third-party imports
+import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { PiFilmReelFill } from 'react-icons/pi';
+import { GiShipWreck } from 'react-icons/gi';
+
+// Context and hooks
 import { AuthContext } from '../../api/account/auth/AuthContext.js';
 import { useGetUserByUsername } from '../../api/account/Profile/useGetUserByUsername.js';
 
+// Components
 import ProfileCard from './ProfileCard';
 import ProfileNavBar from './ProfileNavBar';
 import ProfileMain from './ProfileMain/ProfileMain.jsx';
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.07, ease: 'easeOut' },
+  },
+};
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.25, ease: 'easeOut' },
+  },
+};
+
 export default function Profile() {
-  const [userToDisplay, setUserToDisplay] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [userToDisplay, setUserToDisplay] = useState(undefined);
+  const [displayIsLoading, setdisplayIsLoading] = useState(true);
 
   const { username } = useParams();
-  const { user, isLoading, error } = useContext(AuthContext);
-  const fetchedUser = useGetUserByUsername(username);
+  const { user } = useContext(AuthContext);
+  const {
+    data: fetchedUser,
+    loading: fetchedUserIsLoading,
+    error: fetchedUserError,
+  } = useGetUserByUsername(username);
+
+  // Determine overall loading state - wait for both auth and fetch to complete
+  const isLoading = fetchedUserIsLoading || displayIsLoading;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!username) return;
-      setIsLoading(true);
+    // Don't process until we have the necessary data
+    if (!username || fetchedUserIsLoading) return;
 
-      if (user && user.username.toLowerCase() === username.toLowerCase()) {
-        setUserToDisplay({
-          ...user,
-          lists: user.lists || [],
-          contentRelations: user.contentRelations || [],
-          likedListIds: user.likedListIds || [],
-          isOwner: true,
-        });
-      } else {
-        try {
-          setUserToDisplay({
-            ...fetchedUser,
-            lists: fetchedUser.lists || [],
-            contentRelations: fetchedUser.content_relations || [],
-            likedListIds: fetchedUser.liked_list_ids || [],
-            isOwner: false,
-          });
-        } catch (error) {
-          console.error('Failed to fetch user:', error);
-        }
-      }
-      setIsLoading(false);
-    };
-    fetchUserData();
-  }, [user, username, fetchedUser]);
+    // Check if viewing own profile
+    const isOwner =
+      user && user.username.toLowerCase() === username.toLowerCase();
 
-  if (isLoading || !userToDisplay) {
+    if (isOwner) {
+      // Use authenticated user data
+      setUserToDisplay({
+        ...user,
+        lists: user.lists || [],
+        contentRelations: user.contentRelations || [],
+        likedListIds: user.likedListIds || [],
+        isOwner: true,
+      });
+    } else if (fetchedUser) {
+      // Use fetched user data
+      setUserToDisplay({
+        ...fetchedUser,
+        lists: fetchedUser.lists || [],
+        contentRelations: fetchedUser.content_relations || [],
+        likedListIds: fetchedUser.liked_list_ids || [],
+        isOwner: false,
+      });
+    } else {
+      setUserToDisplay(null);
+    }
+
+    setdisplayIsLoading(false);
+  }, [user, username, fetchedUser, fetchedUserIsLoading]);
+
+  // Loading state with spinning film reel
+  if (isLoading) {
     return (
-      <div className='min-h-screen bg-zinc-950 text-zinc-200 flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12'>
-        <div className='text-zinc-400'>
-          {isLoading ? 'Loading...' : 'User not found'}
-        </div>
+      <div className='w-full h-[85vh] flex items-center justify-center'>
+        <div className='animate-spin rounded-full h-12 w-12 border-t-4 border-red-900 border-solid' />
       </div>
     );
   }
 
-  // Motion variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.07, ease: 'easeOut' },
-    },
-  };
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.25, ease: 'easeOut' },
-    },
-  };
+  // User not found state
+  if (fetchedUserError) {
+    return (
+      <div className='min-h-screen bg-zinc-950 text-zinc-200 flex flex-col items-center justify-center gap-4'>
+        <GiShipWreck className='size-30' />
+        <div className='text-zinc-400 font-semibold tracking-wider'>
+          User could not be found
+        </div>
+        <button
+          onClick={() => navigate('/')}
+          className='text-sm hover:cursor-pointer font-semibold tracking-wider bg-zinc-900 px-2 py-0.5 text-zinc-300/90 hover:text-zinc-200 transition-colors duration-120 rounded-sm'
+        >
+          Go back
+        </button>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -89,15 +124,14 @@ export default function Profile() {
         </motion.div>
 
         <motion.div variants={sectionVariants}>
-          <ProfileNavBar user={userToDisplay} />
+          <ProfileNavBar username={userToDisplay?.username} />
         </motion.div>
 
         <motion.div variants={sectionVariants}>
-          <div className='flex flex-col md:flex-row gap-6'>
+          <div className='flex flex-col '>
             <div className='flex flex-col flex-1 min-w-0 gap-4'>
               <ProfileMain user={userToDisplay} />
             </div>
-            {/* Right column can be added here */}
           </div>
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { FaGithub } from 'react-icons/fa';
 
 export default function Footer() {
   const [isOpen, setIsOpen] = useState(true);
@@ -20,9 +21,15 @@ export default function Footer() {
         </button>
 
         {isOpen && (
-          <div className='py-6 mt-3'>
-            <p>© 2025 . All rights reserved.</p>
-            <div className='flex justify-center space-x-4 font-semibold mt-2'>
+          <div className='py-6 mt-3 flex flex-col items-center space-y-4'>
+            {/* Short About */}
+            <p className='max-w-md text-zinc-300'>
+              MoviePort is your personal film & Tv-show tracker. Organize your
+              watchlist, likes, and lists all in one place.
+            </p>
+
+            {/* Navigation links */}
+            <div className='flex flex-wrap justify-center gap-4 font-semibold'>
               <Link to='/about' className='hover:text-white'>
                 About
               </Link>
@@ -32,9 +39,30 @@ export default function Footer() {
               <Link to='/privacy' className='hover:text-white'>
                 Privacy
               </Link>
+              <Link to='/cookies' className='hover:text-white'>
+                Cookies
+              </Link>
+              <Link to='/terms' className='hover:text-white'>
+                Terms
+              </Link>
             </div>
-            <p className='mt-3 text-xs text-zinc-600'>
-              Movie data provided by OMDb API & TMDb
+
+            {/* GitHub link */}
+            <div className='flex gap-4 mt-2 text-zinc-400'>
+              <Link
+                to='https://github.com/UbrldDkd'
+                className='hover:text-zinc-300 text-xl'
+              >
+                <FaGithub />
+              </Link>
+            </div>
+
+            {/* Legal / Credits */}
+            <p className='mt-2 text-xs text-zinc-600'>
+              © 2025 Movieport. All rights reserved.
+            </p>
+            <p className='text-xs text-zinc-600'>
+              Movie data provided by TMDb. OMDb used as backup.
             </p>
           </div>
         )}

@@ -36,7 +36,7 @@ export default function CrewTab({ crew, isLoading }) {
                   {member.name}
                 </span>
                 <span className='text-zinc-600 text-xs font-medium'>—</span>
-                <span className='text-zinc-400 text-sm truncate flex-1'>
+                <span className='text-zinc-400 text-sm truncate max-w-[120px] md:max-w-[150px] flex-1'>
                   {member.job}
                 </span>
               </div>

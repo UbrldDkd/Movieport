@@ -72,9 +72,24 @@ export default function ContentPageMain({
 
             <span className='text-sm md:text-base text-zinc-400'>
               Directed by{' '}
-              <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
-                {directorOrCreator}
-              </a>
+              {Array.isArray(directorOrCreator) ? (
+                directorOrCreator.map((name, i, arr) => (
+                  <span key={i}>
+                    <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+                      {name}
+                    </a>
+                    {i < arr.length - 2
+                      ? ', '
+                      : i === arr.length - 2
+                        ? ' and '
+                        : ''}
+                  </span>
+                ))
+              ) : (
+                <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+                  {directorOrCreator}
+                </a>
+              )}
             </span>
           </div>
         )}

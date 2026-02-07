@@ -1,9 +1,10 @@
+// Third-party imports
 import { useState, useEffect } from 'react';
-import { Keys } from '../../../utils/Keys';
+import axios from 'axios';
 
 export function useGetUserByUsername(username) {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,28 +12,29 @@ export function useGetUserByUsername(username) {
 
     const getUser = async () => {
       try {
-        setIsLoading(true);
+        setLoading(true);
         setError(null);
 
-        const res = await fetch(
-          `http://127.0.0.1:8000/accounts/get_user/${username}/`
+        const res = await axios.get(
+          `http://127.0.0.1:8000/accounts/get_user/${username}/`,
+          {
+            withCredentials: true,
+          }
         );
-        if (!res.ok) throw new Error('User not found');
 
-        const data = await res.json();
-
-        setUser({
-          ...data,
-        });
+        console.log('user data', res.data);
+        setData(res.data);
       } catch (err) {
+        console.error('Failed to fetch user:', err);
         setError(err);
+        setData(null);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     getUser();
   }, [username]);
 
-  return { user, isLoading, error };
+  return { data, isLoading, error };
 }

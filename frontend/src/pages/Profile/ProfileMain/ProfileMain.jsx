@@ -39,6 +39,7 @@ export default function ProfileMain({ user }) {
         {recentlyLiked && (
           <ProfileContentSection
             header='RECENTLY LIKED'
+            url={`likes/films/`}
             items={recentlyLiked}
           />
         )}

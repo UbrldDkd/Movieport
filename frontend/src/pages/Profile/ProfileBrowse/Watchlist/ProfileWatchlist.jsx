@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ContentCard from '../ContentCard/ContentCard';
 
-export default function ProfileWatchlist({ items, username, is_owner }) {
+export default function ProfileWatchlist({ items, username, isOwner }) {
   const ITEMS_PER_PAGE = 36;
   const [currentPage, setCurrentPage] = useState(1);
   const view = 'lg'; // card size
@@ -17,7 +17,7 @@ export default function ProfileWatchlist({ items, username, is_owner }) {
   return (
     <div
       className={`grid gap-2.5 ${
-        is_owner ? 'md:grid-cols-[2fr_1fr] sm:grid-cols-1' : 'grid-cols-[1fr]'
+        isOwner ? 'md:grid-cols-[2fr_1fr] sm:grid-cols-1' : 'grid-cols-[1fr]'
       }`}
     >
       {/* Main watchlist */}
@@ -25,13 +25,13 @@ export default function ProfileWatchlist({ items, username, is_owner }) {
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
           {items.length > 0 ? (
             <p>
-              {`${is_owner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
+              {`${isOwner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
                 items.length
               } ${items.length > 1 ? 'FILMS' : 'FILM'}`}
             </p>
           ) : (
             <p>
-              {`${is_owner ? 'YOUR' : username.toUpperCase() + "'S"} WATCHLIST IS EMPTY`}
+              {`${isOwner ? 'YOUR' : username.toUpperCase() + "'S"} WATCHLIST IS EMPTY`}
             </p>
           )}
         </h2>
@@ -95,7 +95,7 @@ export default function ProfileWatchlist({ items, username, is_owner }) {
       </div>
 
       {/* Actions column for owner */}
-      {is_owner && (
+      {isOwner && (
         <div className='bg-zinc-900/90 border border-zinc-800/90 rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
           <button className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'>
             Make Watchlist Private/Public

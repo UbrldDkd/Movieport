@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ContentCard from '../ProfileBrowse/ContentCard/ContentCard';
 
-export default function ProfileContentSection({ header, items }) {
+export default function ProfileContentSection({ header, url, items }) {
   if (!items || !items.length) return null;
 
   return (
@@ -11,7 +11,7 @@ export default function ProfileContentSection({ header, items }) {
         <span>{header}</span>
         {header !== 'FAVOURITES' && (
           <Link
-            to='likes/films/'
+            to={url}
             className='text-xs font-semibold tracking-widest text-zinc-400 hover:text-zinc-200'
           >
             VIEW ALL

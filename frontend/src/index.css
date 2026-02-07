@@ -1,19 +1,26 @@
 @import 'tailwindcss';
 
-/* Ensure entire page has dark background */
-html,
-body {
+/* Ensure entire page has dark background and stable scrollbar */
+html {
   background-color: #18181b; /* Tailwind zinc-950 */
   margin: 0;
-  min-height: 100vh;
   padding: 0;
+  min-height: 100%;
+  overflow-y: scroll; /* main scrollbar, always reserved */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #18181b;
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100vh; /* full height, scroll handled by html */
 }
 
-/* Hide scrollbars */
+/* Hide scrollbars for specific scrollable elements */
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -23,11 +30,11 @@ body {
   display: none; /* Chrome, Safari, Opera */
 }
 
-/* Fade-in animation */
+/* Optimized fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -36,5 +43,6 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.35s ease-out forwards;
+  will-change: opacity, transform; /* smoother performance */
 }

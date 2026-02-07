@@ -22,16 +22,18 @@ export default function ContentPageDetails({ content, isLoading }) {
   const cast = (credits.cast || [])
     .flatMap((c) => {
       if (isAggregateCredits) {
-        return (c.roles || []).map(role => ({
+        return (c.roles || []).map((role) => ({
           name: c.name,
           character: role.character || '',
         }));
       } else {
         if (c.character?.trim()) {
-          return [{
-            name: c.name,
-            character: c.character,
-          }];
+          return [
+            {
+              name: c.name,
+              character: c.character,
+            },
+          ];
         }
         return [];
       }
@@ -42,7 +44,7 @@ export default function ContentPageDetails({ content, isLoading }) {
     const dept = member.department || 'Other';
     if (!acc[dept]) acc[dept] = [];
     if (isAggregateCredits) {
-      (member.jobs || []).forEach(jobInfo => {
+      (member.jobs || []).forEach((jobInfo) => {
         acc[dept].push({
           name: member.name,
           job: jobInfo.job,
@@ -121,7 +123,7 @@ export default function ContentPageDetails({ content, isLoading }) {
           ))}
         </div>
 
-        <div className='p-2 min-h-[200px]'>
+        <div className='p-2 '>
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeTab}

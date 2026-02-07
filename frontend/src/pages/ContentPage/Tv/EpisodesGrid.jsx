@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function TvContentDisplay({ seasonContent, id, episodeNumber }) {
+export default function EpisodesGrid({ seasonContent, id, episodeNumber }) {
   if (!seasonContent || !seasonContent.episodes?.length) {
     return <div className='text-zinc-400'>No episodes available.</div>;
   }
@@ -8,7 +8,7 @@ export default function TvContentDisplay({ seasonContent, id, episodeNumber }) {
   const seasonNumber = seasonContent?.season_number;
 
   return (
-    <div className='w-full'>
+    <div className='shrink-0 max-h-53 scrollbar-hide overflow-y-scroll'>
       <div className='grid justify-center items-center gap-2 grid-cols-3'>
         {' '}
         {seasonContent.episodes.map((ep) => (

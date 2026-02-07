@@ -10,7 +10,6 @@ export default function ContentCardActions({
   setMenuOpen,
 }) {
   const toggleField = useToggleContentRelation();
-  console.log(current);
   return (
     <div
       className={`absolute top-[0.5px] left-1/2 transform -translate-x-1/2

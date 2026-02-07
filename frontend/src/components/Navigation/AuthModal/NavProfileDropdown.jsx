@@ -21,7 +21,7 @@ export default function NavProfileDropdown() {
   // Dropdown links array
   const dropdownLinks = [
     { label: 'Profile', to: `/${user.username}/` },
-    { label: 'Films', to: `/${user.username}/films/` },
+    { label: 'Watched', to: `/${user.username}/watched/` },
     { label: 'Watchlist', to: `/${user.username}/watchlist` },
     { label: 'Likes', to: `/${user.username}/likes/films/` },
     { label: 'Lists', to: `/${user.username}/lists/` },

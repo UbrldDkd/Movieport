@@ -8,7 +8,7 @@ import SimilarContentSection from './ContentSections/SimilarContentSection.jsx';
 import RelatedContentSection from './ContentSections/RelatedContentSection.jsx';
 import ContentPageMain from './ContentPageMain/ContentPageMain.jsx';
 import ContentPagePoster from './PosterAndBackdrop/ContentPagePoster.jsx';
-import TvContentDisplay from './Tv/TvContentDisplay.jsx';
+import EpisodesGrid from './Tv/EpisodesGrid.jsx';
 import SeasonDropdown from './Tv/SeasonDropDown.jsx';
 import ContentPageBackdrop from './PosterAndBackdrop/ContentPageBackdrop.jsx';
 import ContentPagePopularReviewsSection from './ContentSections/ContentPagePopularReviewsSection.jsx';
@@ -97,7 +97,7 @@ export default function ContentPage() {
           <div className='absolute top-60 left-0 right-0 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
 
           {/* Poster Column - Sticky on desktop */}
-          <div className='hidden md:block shrink-0 z-10 sticky top-18 self-start'>
+          <div className='hidden md:block shrink-0 z-10 sticky top-16 self-start'>
             {/* Sticky wrapper - this is the key fix */}
             <div>
               <ContentPagePoster
@@ -119,7 +119,7 @@ export default function ContentPage() {
                     selectedSeason={selectedSeason}
                     setSelectedSeason={setSelectedSeason}
                   />
-                  <TvContentDisplay
+                  <EpisodesGrid
                     seasonContent={seasonContent}
                     id={content?.tmdb?.[details.id]}
                     episodeNumber={Number(episodeNumber)}

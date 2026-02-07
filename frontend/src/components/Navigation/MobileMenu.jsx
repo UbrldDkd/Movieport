@@ -32,7 +32,7 @@ export default function ProfileDropdown({ isOpen, setIsOpen }) {
           </Link>
 
           <Link
-            to='/films'
+            to='/watched'
             className='px-4 py-2 hover:bg-zinc-800'
             onClick={handleLinkClick}
           >

@@ -74,7 +74,7 @@ export default function ProfileActivity() {
               key={i}
               className='relative w-4 h-4 inline-block overflow-hidden'
             >
-              <IoIosStar className='absolute w-4 h-4 text-red-900 left-0 top-0 w-1/2' />
+              <IoIosStar className='absolute w-4 h-4 text-red-900 left-0 top-0 ' />
               <IoIosStar className='w-4 h-4 text-zinc-600' />
             </span>
           );
@@ -86,7 +86,7 @@ export default function ProfileActivity() {
   // Group items by date+id
   const grouped = [];
   const map = {};
-  c;
+
   activities.forEach((a) => {
     if (a.type === 'item') {
       const key = `${a.date}_${a.tmdb_id}`;

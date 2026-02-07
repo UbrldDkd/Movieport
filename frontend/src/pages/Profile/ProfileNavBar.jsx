@@ -1,17 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export default function ProfileNavBar({ user }) {
+export default function ProfileNavBar({ username }) {
   const { pathname } = useLocation();
 
   const navLinks = [
-    { label: 'Profile', to: `/${user?.username}/` },
-    { label: 'Films', to: `/${user?.username}/films/` },
-    { label: 'Activity', to: `/${user?.username}/activity/` },
-    { label: 'Reviews', to: `/${user?.username}/reviews/` },
-    { label: 'Lists', to: `/${user?.username}/lists/` },
-    { label: 'Watchlist', to: `/${user?.username}/watchlist/` },
-    { label: 'Likes', to: `/${user?.username}/likes/films/` },
-    { label: 'Network', to: `/${user?.username}/following/` },
+    { label: 'Profile', to: `/${username}/` },
+    { label: 'Watched', to: `/${username}/watched/` },
+    { label: 'Activity', to: `/${username}/activity/` },
+    { label: 'Reviews', to: `/${username}/reviews/` },
+    { label: 'Lists', to: `/${username}/lists/` },
+    { label: 'Watchlist', to: `/${username}/watchlist/` },
+    { label: 'Likes', to: `/${username}/likes/films/` },
+    { label: 'Network', to: `/${username}/following/` },
   ];
 
   return (

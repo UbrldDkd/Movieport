@@ -1,6 +1,7 @@
 import { IoTrashSharp } from 'react-icons/io5';
-import { Keys } from '../../../../utils/Keys';
 import ContentCard from './ContentCard';
+import MediaIcon from './MediaIcon';
+import { Keys } from '../../../../utils/Keys';
 
 export default function ContentCardListView({ item, onRemove }) {
   const { details } = Keys.API1;
@@ -18,7 +19,7 @@ export default function ContentCardListView({ item, onRemove }) {
 
   return (
     <div className='flex items-start gap-3 bg-zinc-800/10 border border-zinc-700 rounded-xs p-2'>
-      <div className=''>
+      <div>
         <ContentCard item={item} view={'sm'} />
       </div>
 
@@ -28,13 +29,13 @@ export default function ContentCardListView({ item, onRemove }) {
             <span className='text-xl tracking-wider text-zinc-200 font-semibold'>
               {filteredItem?.title}
             </span>
-
             <span className='text-lg text-zinc-400'>
               {filteredItem?.release_date.slice(0, 4)}
             </span>
           </div>
+
           <div className='text-xs text-zinc-400 font-semibold tracking-wide'>
-            {filteredItem?.media_type === 'movie' ? 'Film' : 'Tv'}
+            <MediaIcon mediaType={filteredItem?.media_type} />
           </div>
         </div>
       </div>

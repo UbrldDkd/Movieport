@@ -53,7 +53,7 @@ export default function ContentCard({ item, view }) {
             transition={{ duration: 0.2 }}
             className='absolute -top-10 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
           >
-            <div className='bg-zinc-900/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-sm px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
+            <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
               {filteredItem.title} ({filteredItem.release_date?.slice(0, 4)})
             </div>
             <div className='w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-zinc-800' />
@@ -66,7 +66,7 @@ export default function ContentCard({ item, view }) {
           title={filteredItem.title}
           posterPath={filteredItem.poster_path}
           view={view}
-          onLoad={() => setLoaded(true)} // 👈 notify card when ready
+          onLoad={() => setLoaded(true)}
         />
       </Link>
 
