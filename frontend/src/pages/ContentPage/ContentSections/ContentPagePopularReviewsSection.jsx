@@ -1,30 +1,58 @@
-import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { IoIosStar } from 'react-icons/io';
+import { VscHeartFilled } from 'react-icons/vsc';
 import { GiCaptainHatProfile } from 'react-icons/gi';
 
 export default function ContentPagePopularReviewsSection({
   reviews = [],
   isLoading,
 }) {
+  const maxStars = 5;
+  const iconSize = 18;
+  const gap = 0.25;
+
   const reviewStars = (rating) => {
     const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
+    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
     const stars = [];
 
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<AiFillStar key={i} className='w-4 h-4 text-red-900' />);
-    }
-
-    if (hasHalfStar) {
       stars.push(
-        <AiFillStar
-          key='half'
-          className='w-4 h-4 text-red-900'
-          style={{ opacity: 0.5 }}
+        <IoIosStar
+          key={`full-${i}`}
+          size={iconSize}
+          className='text-zinc-500'
         />
       );
     }
 
+    if (halfStar === 1) {
+      stars.push(
+        <div
+          key='half'
+          className='relative'
+          style={{ width: iconSize, height: iconSize }}
+        >
+          <IoIosStar
+            size={iconSize}
+            className='text-transparent absolute top-0 left-0'
+          />
+          <div
+            className='absolute top-0 left-0 overflow-hidden'
+            style={{ width: iconSize / 2 }}
+          >
+            <IoIosStar size={iconSize} className='text-zinc-500' />
+          </div>
+        </div>
+      );
+    }
+
     return stars;
+  };
+
+  const formatLikeCount = (count) => {
+    if (!count) return '0';
+    if (count < 1000) return count.toString();
+    return (count / 1000).toFixed(1) + 'K';
   };
 
   if (isLoading) {
@@ -54,33 +82,30 @@ export default function ContentPagePopularReviewsSection({
   const staticReviews = [
     {
       id: 1,
-      Reviewer: 'film_critic_42',
-      reviewText:
-        'Absolutely stunning visuals and a masterful narrative. The performances are nothing short of extraordinary.',
+      user: 'film_critic_42',
+      created_at: '2 days ago',
       rating: 5,
-      userRating: 5,
-      likes: '4.2K',
-      date: '2 days ago',
+      review:
+        'Absolutely stunning visuals and a masterful narrative. The performances are nothing short of extraordinary.',
+      like_count: 4200,
     },
     {
       id: 2,
-      Reviewer: 'movie_lover_88',
-      reviewText:
-        'A solid entry in the genre, though it could have benefited from tighter pacing. Still worth watching.',
+      user: 'movie_lover_88',
+      created_at: '1 week ago',
       rating: 3.5,
-      userRating: 4,
-      likes: '2.1K',
-      date: '1 week ago',
+      review:
+        'A solid entry in the genre, though it could have benefited from tighter pacing. Still worth watching.',
+      like_count: 2100,
     },
     {
       id: 3,
-      Reviewer: 'cinema_enthusiast',
-      reviewText:
-        "While beautiful to look at, the story felt familiar. Great performances couldn't save the mediocre script.",
+      user: 'cinema_enthusiast',
+      created_at: '2 weeks ago',
       rating: 3,
-      userRating: 3,
-      likes: '1.5K',
-      date: '2 weeks ago',
+      review:
+        "While beautiful to look at, the story felt familiar. Great performances couldn't save the mediocre script.",
+      like_count: 1500,
     },
   ];
 
@@ -88,9 +113,9 @@ export default function ContentPagePopularReviewsSection({
 
   return (
     <div className='mt-8'>
-      <h2 className='text-lg font-semibold text-zinc-200 mb-4'>
-        Popular Reviews
-      </h2>
+      <h2 className='text-lg font-semibold text-zinc-200'>Popular Reviews</h2>
+
+      <div className='h-0.25 bg-zinc-600 mt-2 mb-3' />
       <div className='space-y-4'>
         {displayReviews.slice(0, 3).map((review) => (
           <div
@@ -99,36 +124,40 @@ export default function ContentPagePopularReviewsSection({
           >
             <div className='flex items-start justify-between mb-2'>
               <div className='flex items-center gap-2'>
-                <div className='w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
+                <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
                   <GiCaptainHatProfile className='text-sm' />
                 </div>
                 <div>
                   <div className='text-sm font-semibold text-zinc-300'>
-                    {review.Reviewer || `User ${review.id}`}
+                    {review.user || `User ${review.id}`}
                   </div>
-                  <div className='text-xs text-zinc-500'>{review.date}</div>
+                  <div className='text-xs text-zinc-500'>
+                    {review.created_at}
+                  </div>
                 </div>
               </div>
-              <div className='flex items-center gap-0.5'>
+              <div className='flex items-center' style={{ gap: `${gap}px` }}>
                 {reviewStars(review.rating)}
               </div>
             </div>
-            <p className='text-sm text-zinc-400 leading-relaxed mb-3'>
-              {review.reviewText || review.reviews || 'Great movie!'}
+            <p className='text-base tracking-wide text-zinc-300/90 leading-relaxed mb-3'>
+              {review.review || review.reviews || 'Great movie!'}
             </p>
             <div className='flex items-center justify-between'>
               <button className='flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-400 transition-colors'>
-                <AiOutlineHeart className='text-sm' />
-                <span>{review.likes}</span>
+                <VscHeartFilled className='text-sm' />
+                <span>
+                  {formatLikeCount(review.likes || review.like_count)}
+                </span>
               </button>
               <span className='text-xs text-zinc-600 hover:text-zinc-500 cursor-pointer transition-colors'>
-                More reviews by {review.Reviewer?.split('_')[0] || 'this user'}
+                More reviews by {review.user || 'this user'}
               </span>
             </div>
           </div>
         ))}
       </div>
-      <button className='mt-4 text-sm text-zinc-400 hover:text-zinc-300 font-medium transition-colors'>
+      <button className='mt-4 text-sm text-zinc-400 cursor-pointer hover:text-zinc-300 font-medium transition-colors'>
         View all {reviews.length || '24'} reviews
       </button>
     </div>

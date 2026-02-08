@@ -51,7 +51,7 @@ export default function ContentCard({ item, view }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className='absolute -top-10 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
+            className='absolute -top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
           >
             <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
               {filteredItem.title} ({filteredItem.release_date?.slice(0, 4)})

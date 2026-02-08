@@ -52,12 +52,12 @@ export default function NavProfileDropdown() {
             transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
           `}
         >
-          <div className='flex flex-col py-1 text-sm tracking-wider text-zinc-200'>
+          <div className='flex flex-col py-1 text-sm tracking-wider text-zinc-300'>
             {dropdownLinks.map((link, idx) => (
               <Link
                 key={idx}
                 to={link.to}
-                className='px-4 py-2 hover:bg-zinc-800 transition-colors duration-100'
+                className='px-4 py-2 hover:bg-zinc-800 transition-colors font-semibold tracking-wider text-sm duration-100'
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}

@@ -21,13 +21,13 @@ export default function RelatedContent({
 
   return (
     <section className='w-full pb-5'>
-      <div className='flex items-center justify-between mb-1'>
+      <div className='flex items-center justify-between'>
         <h3 className='text-base font-semibold tracking-wider text-zinc-300'>
           Related {mediaType === 'movie' ? 'films' : 'tv-shows'}
         </h3>
       </div>
 
-      <div className='h-[1.5px] bg-zinc-700 mb-3' />
+      <div className='h-0.25 bg-zinc-700 mb-3 mt-2' />
 
       <div className=' justify-center'>
         <div className='flex gap-2.5'>

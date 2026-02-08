@@ -19,6 +19,8 @@ export default function ContentPageDetails({ content, isLoading }) {
 
   const isAggregateCredits = !!tmdb?.aggregate_credits;
 
+  // TODO: add pagination for cast
+
   const cast = (credits.cast || [])
     .flatMap((c) => {
       if (isAggregateCredits) {
@@ -38,7 +40,7 @@ export default function ContentPageDetails({ content, isLoading }) {
         return [];
       }
     })
-    .slice(0, 15);
+    .slice(0, 90);
 
   const crew = (credits.crew || []).reduce((acc, member) => {
     const dept = member.department || 'Other';
@@ -93,7 +95,10 @@ export default function ContentPageDetails({ content, isLoading }) {
   // Genres data
   const genres = tmdb?.[details.genres]?.map((g) => g.name) || [];
 
-  const tabs = ['cast', 'crew', 'details', 'genres', 'releases'];
+  const tabs =
+    mediaType === 'movie'
+      ? ['cast', 'crew', 'details', 'genres', 'releases']
+      : ['cast', 'crew', 'details', 'genres'];
 
   const tabVariants = {
     initial: { opacity: 0, y: 10 },
@@ -109,7 +114,7 @@ export default function ContentPageDetails({ content, isLoading }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 px-3 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 relative ${
+              className={`flex-1 px-2 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 relative ${
                 activeTab === tab
                   ? 'text-zinc-200'
                   : 'text-zinc-500 hover:cursor-pointer hover:text-zinc-400 hover:bg-zinc-900/20'

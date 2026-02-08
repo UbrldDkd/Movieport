@@ -21,6 +21,7 @@ import ProfileActivity from './Activity/ProfileActivity.jsx';
 const navLinks = [
   { label: 'Watched', to: 'watched' },
   { label: 'Activity', to: 'activity' },
+  { label: 'Reviews', to: 'reviews' },
   { label: 'Lists', to: 'lists' },
   { label: 'Watchlist', to: 'watchlist' },
   { label: 'Likes', to: 'likes/films' },
@@ -139,7 +140,7 @@ export default function ProfileBrowse() {
         <div className='mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-60'>
           {/* Navbar */}
           <nav className='flex items-center justify-center rounded-l-sm rounded-r-3xl bg-zinc-900/90 py-0.5 mt-2 relative overflow-x-auto'>
-            <div className='flex justify-center gap-2 sm:gap-4 flex-1 px-2'>
+            <div className='flex justify-center md:gap-1 sm:gap-0 flex-1 px-2'>
               {navLinks.map((item) => (
                 <button
                   key={item.to}

@@ -7,7 +7,7 @@ export default function ListCardPosters({ items, linkUrl }) {
   if (!items) return null;
   const { title, poster } = Keys.API1.details;
 
-  const placeholdersCount = 5;
+  const placeholdersCount = 3;
   const placeholderShades = ['bg-zinc-900', 'bg-zinc-800', 'bg-zinc-700'];
 
   return (

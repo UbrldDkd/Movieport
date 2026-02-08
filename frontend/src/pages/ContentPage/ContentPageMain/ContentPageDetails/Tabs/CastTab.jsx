@@ -1,4 +1,4 @@
-// tabs/CastTab.jsx
+import { Link } from 'react-router-dom';
 export default function CastTab({ cast, isLoading }) {
   if (isLoading) {
     return (
@@ -19,19 +19,19 @@ export default function CastTab({ cast, isLoading }) {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full flex flex-col gap-0.5'>
       {cast.map((actor, index) => (
         <div
           key={index}
-          className='flex items-center gap-2 py-1.5 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors group'
+          className='flex items-center gap-2  rounded-sm transition-colors group'
         >
-          <span className='text-zinc-200 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
+          <Link className='text-zinc-300/90  hover:bg-zinc-900 transition-colors duration-50  rounded-sm py-1 px-2 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
             {actor.name}
-          </span>
+          </Link>
           <span className='text-zinc-600 hover:cursor-default text-xs font-medium shrink-0'>
             as
           </span>
-          <span className='text-zinc-400 text-sm truncate flex-1 max-w-[calc(100%-150px)] md:max-w-[calc(100%-190px)]'>
+          <span className='text-zinc-400/80 font-medium text-sm truncate flex-1 max-w-[calc(100%-150px)] md:max-w-[calc(100%-190px)]'>
             {actor.character}
           </span>
         </div>

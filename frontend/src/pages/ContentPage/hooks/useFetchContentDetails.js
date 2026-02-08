@@ -25,7 +25,7 @@ export function useFetchContentDetails({
         setError(null);
         setTrailerOpen(false);
 
-// Fetch base TMDb data with aggregate_credits for TV
+        // Fetch base TMDb data with aggregate_credits for TV
         const tmdbRes = await fetch(
           `${Url1}${mediaType}/${id}?api_key=${API_KEY1}&language=en-US&append_to_response=alternative_titles,release_dates${mediaType === 'tv' ? ',aggregate_credits' : ''}`
         );
@@ -43,23 +43,28 @@ export function useFetchContentDetails({
         if (!tmdbContentType || !tmdbContentType.includes('application/json')) {
           throw new Error('Invalid response format from TMDB');
         }
-const tmdbData = await tmdbRes.json();
+        const tmdbData = await tmdbRes.json();
 
         // Fetch credits for movies (for TV, aggregate_credits is already in tmdbData)
-        const creditsData = mediaType === 'movie'
-          ? (await (async () => {
-              const creditsRes = await fetch(
-                `${Url1}${mediaType}/${id}/credits?api_key=${API_KEY1}&language=en-US`
-              );
-              if (creditsRes.ok) {
-                const creditsContentType = creditsRes.headers.get('content-type');
-                if (creditsContentType && creditsContentType.includes('application/json')) {
-                  return await creditsRes.json();
+        const creditsData =
+          mediaType === 'movie'
+            ? await (async () => {
+                const creditsRes = await fetch(
+                  `${Url1}${mediaType}/${id}/credits?api_key=${API_KEY1}&language=en-US`
+                );
+                if (creditsRes.ok) {
+                  const creditsContentType =
+                    creditsRes.headers.get('content-type');
+                  if (
+                    creditsContentType &&
+                    creditsContentType.includes('application/json')
+                  ) {
+                    return await creditsRes.json();
+                  }
                 }
-              }
-              return { cast: [], crew: [] };
-            })())
-          : (tmdbData.aggregate_credits || { cast: [], crew: [] });
+                return { cast: [], crew: [] };
+              })()
+            : tmdbData.aggregate_credits || { cast: [], crew: [] };
 
         const fullTmdb = {
           ...tmdbData,

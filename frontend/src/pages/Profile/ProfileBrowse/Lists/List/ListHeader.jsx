@@ -75,7 +75,7 @@ export default function ListHeader({ list, username, view, setView }) {
 
       {/* Description */}
       {list.description && (
-        <p className='text-sm text-zinc-400 tracking-wide leading-snug break-words whitespace-pre-wrap mb-6'>
+        <p className='text-sm  text-zinc-400 tracking-wide leading-snug break-words whitespace-pre-wrap mb-6'>
           {list.description}
         </p>
       )}

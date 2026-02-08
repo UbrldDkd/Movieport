@@ -98,7 +98,6 @@ export default function ContentPage() {
 
           {/* Poster Column - Sticky on desktop */}
           <div className='hidden md:block shrink-0 z-10 sticky top-16 self-start'>
-            {/* Sticky wrapper - this is the key fix */}
             <div>
               <ContentPagePoster
                 displayPosterUrl={posterUrl}

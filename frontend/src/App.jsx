@@ -23,11 +23,11 @@ export default function App() {
         <Route path='/' element={<Home />} />
         <Route path='/explore/:mediaType' element={<DisplayByMedia />} />
         <Route path='/watch/:mediaType/:id' element={<ContentPage />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
         <Route path='/search/:by' element={<DisplayByMedia />} />
         <Route path='/discover/:mediaType/:id' element={<DisplayByMedia />} />
         <Route path='/privacy' element={<Privacy />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/:username/' element={<Profile />} />
         <Route path='/:username/:tab/' element={<ProfileBrowse />} />
         <Route path='/:username/:tab/:subtab/' element={<ProfileBrowse />} />

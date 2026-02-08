@@ -112,7 +112,7 @@ export default function ProfileCard({ user }) {
           {isOwner && (
             <>
               <button
-                className='absolute -bottom-2 -left-4.5 p-1.5 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
+                className='absolute -bottom-2 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
                 onMouseEnter={() => setTooltip(true)}
                 onMouseLeave={() => setTooltip(false)}
               >
@@ -120,11 +120,12 @@ export default function ProfileCard({ user }) {
               </button>
 
               <div
-                className={`absolute bottom-4.5 -left-10 bg-zinc-800 text-zinc-200 text-xs px-2 py-1 rounded shadow-md transition-opacity duration-200 ${
+                className={`absolute bottom-6.5 -left-11.25 bg-zinc-700 font-semibold tracking-wider backdrop-blur-3xl  text-zinc-300 text-xs px-2 py-1 rounded shadow-md transition-opacity duration-200 ${
                   tooltip ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
               >
                 Edit Profile
+                <div className='absolute top-full left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-zinc-700 -translate-x-1/2' />
               </div>
             </>
           )}

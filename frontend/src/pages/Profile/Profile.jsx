@@ -4,7 +4,6 @@ import { useState, useEffect, useContext } from 'react';
 // Third-party imports
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PiFilmReelFill } from 'react-icons/pi';
 import { GiShipWreck } from 'react-icons/gi';
 
 // Context and hooks

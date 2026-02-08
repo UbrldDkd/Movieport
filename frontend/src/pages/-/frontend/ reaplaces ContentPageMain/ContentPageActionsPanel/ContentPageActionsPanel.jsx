@@ -53,7 +53,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
                 {current.liked ? <GoHeartFill /> : <GoHeart />}
               </button>
               <div className='absolute left-1/2 -translate-x-1/2 -top-10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50'>
-                <div className='bg-zinc-900 text-zinc-300 text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
+                <div className='bg-zinc-900 text-zinc-300 text-xs px-3 py-1.1 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
                   {current.liked ? 'Unlike' : 'Like'}
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
 
           <ContentPageActionsRating initialRating={current?.rating || 0} />
 
-          <button className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2.5 md:py-3 px-3 text-xs md:13 text-zinc-300/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Show your activity
           </button>
 

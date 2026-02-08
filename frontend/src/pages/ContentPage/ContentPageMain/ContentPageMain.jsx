@@ -1,4 +1,4 @@
-// ContentPageMain.jsx
+import { Link } from 'react-router-dom';
 import ContentPageDetails from './ContentPageDetails/ContentPageDetails.jsx';
 import ContentPageActionsPanel from './ContentPageActionsPanel/ContentPageActionsPanel.jsx';
 import { Keys } from '../../../utils/Keys.js';
@@ -55,42 +55,43 @@ export default function ContentPageMain({
   return (
     <div className='w-full'>
       {/* Header */}
-      <div className='mb-5'>
+      <div className='mb-8'>
         {isLoading ? (
           <div className='w-full max-w-md h-10 bg-zinc-800/50 rounded-sm animate-pulse' />
         ) : (
-          <div className='flex items-baseline gap-x-3 flex-wrap'>
-            <h1 className='text-2xl md:text-4xl font-semibold text-zinc-200'>
+          <div className='flex items-baseline font-medium gap-x-3 flex-wrap'>
+            <h1 className='text-3xl md:text-4xl font-medium text-zinc-200'>
               {tmdb?.[details1.movieTitle] || tmdb?.[details1.tvTitle]}
             </h1>
 
             {release && (
-              <a className='text-sm md:text-base text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+              <Link className='text-sm md:text-[20px] text-zinc-300/90  underline underline-offset-4 hover:cursor-pointer'>
                 {release}
-              </a>
+              </Link>
             )}
-
-            <span className='text-sm md:text-base text-zinc-400'>
-              Directed by{' '}
-              {Array.isArray(directorOrCreator) ? (
-                directorOrCreator.map((name, i, arr) => (
-                  <span key={i}>
-                    <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
-                      {name}
-                    </a>
-                    {i < arr.length - 2
-                      ? ', '
-                      : i === arr.length - 2
-                        ? ' and '
-                        : ''}
-                  </span>
-                ))
-              ) : (
-                <a className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
-                  {directorOrCreator}
-                </a>
-              )}
-            </span>
+            {directorOrCreator && (
+              <span className='text-sm md:text-base text-zinc-400'>
+                {isMovie ? 'Directed' : 'Created'} by{' '}
+                {Array.isArray(directorOrCreator) ? (
+                  directorOrCreator.map((name, i, arr) => (
+                    <span key={i}>
+                      <Link className='text-zinc-300/90 underline underline-offset-4 hover:cursor-pointer'>
+                        {name}
+                      </Link>
+                      {i < arr.length - 2
+                        ? ', '
+                        : i === arr.length - 2
+                          ? ' and '
+                          : ''}
+                    </span>
+                  ))
+                ) : (
+                  <Link className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+                    {directorOrCreator}
+                  </Link>
+                )}
+              </span>
+            )}
           </div>
         )}
       </div>
@@ -98,13 +99,13 @@ export default function ContentPageMain({
       {/* Content Layout */}
       <div className='flex flex-col md:flex-row md:space-x-10 space-y-6 md:space-y-0'>
         {/* Main */}
-        <div className='w-full mt- md:flex-[7.5]'>
+        <div className='w-full  md:flex-[7.5]'>
           {tmdb?.[details1.tagline] && (
             <>
               {isLoading ? (
                 <div className='h-4 w-3/4 bg-zinc-800/30 rounded-sm animate-pulse' />
               ) : (
-                <p className='text-sm text-zinc-400 italic mb-2'>
+                <p className='text-sm text-zinc-400/90 italic mb-2'>
                   {tmdb[details1.tagline].toUpperCase()}
                 </p>
               )}
@@ -132,7 +133,11 @@ export default function ContentPageMain({
 
         {/* Actions */}
         <div className='w-full md:flex-[2.5]'>
-          <ContentPageActionsPanel item={item} current={current} />
+          <ContentPageActionsPanel
+            item={item}
+            current={current}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>
