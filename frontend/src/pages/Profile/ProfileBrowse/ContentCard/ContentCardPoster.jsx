@@ -6,6 +6,7 @@ export default function ContentCardPoster({ title, posterPath, view }) {
   // Size is owned here
   const sizeConfig = {
     sm: { width: 'w-[70px]', tmdb: 'w500' },
+    similarSection: { width: 'w-[109px]', tmdb: 'w500' },
     md: { width: 'w-[120px]', tmdb: 'w500' },
     lg: { width: 'w-[150px]', tmdb: 'w500' }, // avoid `original` at small sizes
   };

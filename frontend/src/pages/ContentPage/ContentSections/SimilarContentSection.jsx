@@ -17,9 +17,9 @@ export default function SimilarContentSection({ id, mediaType, releaseDate }) {
   if (!Array.isArray(content) || content.length === 0) return null;
 
   return (
-    <section className='w-full pb-5'>
+    <section className='w-full pb-5 '>
       {/* Header */}
-      <div className='flex items-center justify-between mb-1'>
+      <div className='flex items-baseline justify-between '>
         <h3 className='text-base font-semibold tracking-wider text-zinc-300'>
           Similar {mediaType === 'movie' ? 'films' : 'tv-shows'}
         </h3>
@@ -32,16 +32,16 @@ export default function SimilarContentSection({ id, mediaType, releaseDate }) {
         </button>
       </div>
 
-      <div className='h-[1.5px] bg-zinc-700 mb-3' />
+      <div className='h-[1.5px] border-b-1 border-zinc-700 mb-3 mt-2' />
 
       {/* Cards */}
       <div className=' justify-center'>
-        <div className='flex gap-2.5'>
-          {content.slice(0, 5).map((item) => (
+        <div className='flex gap-2'>
+          {content.slice(0, 6).map((item) => (
             <ContentCard
               key={item?.tmdb_id ?? item?.id}
               item={item}
-              view='md'
+              view='similarSection'
             />
           ))}
         </div>

@@ -115,7 +115,7 @@ export default function ContentPagePopularReviewsSection({
     <div className='mt-8'>
       <h2 className='text-lg font-semibold text-zinc-200'>Popular Reviews</h2>
 
-      <div className='h-0.25 bg-zinc-600 mt-2 mb-3' />
+      <div className='border-b border-zinc-700 mt-2 mb-3' />
       <div className='space-y-4'>
         {displayReviews.slice(0, 3).map((review) => (
           <div

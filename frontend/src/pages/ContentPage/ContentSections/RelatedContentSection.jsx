@@ -27,7 +27,7 @@ export default function RelatedContent({
         </h3>
       </div>
 
-      <div className='h-0.25 bg-zinc-700 mb-3 mt-2' />
+      <div className='border-b  border-zinc-700 mb-3 mt-2' />
 
       <div className=' justify-center'>
         <div className='flex gap-2.5'>
