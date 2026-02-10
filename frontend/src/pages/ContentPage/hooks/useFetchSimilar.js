@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Keys } from '../../../utils/Keys.js';
+import { Keys } from '../../../utils/constants/Keys.js';
 
 export function useFetchSimilar({ id, mediaType }) {
   const [content, setContent] = useState([]);

@@ -5,7 +5,7 @@ import { ensureCsrf } from './auth/ensureCsrf';
 export function useLogoutUser() {
   const { setUser } = useContext(AuthContext);
 
-  const logoutUser = async () => {
+const logoutUser = async () => {
     try {
       const csrfToken = await ensureCsrf();
       const response = await fetch(
@@ -21,15 +21,16 @@ export function useLogoutUser() {
       );
 
       if (!response.ok) {
-        throw new Error(data?.message || 'Failed to logout');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData?.message || 'Failed to logout');
       }
 
       const data = await response.json();
-      // clear the user in context
-      console.log('success');
-      setUser([]);
+      setUser(null);
+      return { success: true, message: data?.message || 'Logged out successfully' };
     } catch (err) {
       console.error('Logout error:', err);
+      return { success: false, message: err.message };
     }
   };
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IoIosStar } from 'react-icons/io';
-import { timeAgo } from '../../../../utils/timeAgo';
+import { timeAgo } from '../../../../utils/helpers/timeAgo';
 
 export default function ProfileActivity() {
   const username = 'Machvi';

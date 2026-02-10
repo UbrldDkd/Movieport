@@ -28,11 +28,14 @@ export default function useLoginUser() {
 
       const data = await res.json();
 
+      console.log('logged in user data', data);
       // Set user context
       setUser({
         id: data.id,
         username: data.username,
-        email: data.email,
+        contentRelations: data.content_relations || [],
+        lists: data.lists || [],
+        likedListIds: data.liked_list_ids || [],
       });
 
       return data;

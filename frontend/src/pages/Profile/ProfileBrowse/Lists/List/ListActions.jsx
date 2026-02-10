@@ -37,8 +37,8 @@ export default function ListActions({ username, list }) {
     await toggleLike(listId);
   };
 
-  return (
-    <div className="bg-zinc-900/90 border border-zinc-800 rounded-sm p-2 flex flex-col gap-2">
+return (
+    <div className="bg-zinc-900/90 border border-zinc-800 rounded-sm p-2 flex flex-col gap-2 opacity-0 animate-fadeIn">
       {/* Likes / Share */}
       {is_owner ? (
         <div className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest text-zinc-300/90 rounded">

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ContentPageDetails from './ContentPageDetails/ContentPageDetails.jsx';
 import ContentPageActionsPanel from './ContentPageActionsPanel/ContentPageActionsPanel.jsx';
-import { Keys } from '../../../utils/Keys.js';
+import { Keys } from '../../../utils/constants/Keys.js';
 
 export default function ContentPageMain({
   content,

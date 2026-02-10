@@ -6,6 +6,7 @@ import { useGetListsByIds } from '../../../../api/lists/useGetListsByIds';
 import ProfileLikesFilms from './ProfileLikesFilms';
 import ProfileLikesLists from './ProfileLikesLists';
 import ProfileLikesTvShows from './ProfileLikesTvShows';
+import { tabVariants } from '../../../../utils/animations/motionVariants';
 
 export default function ProfileLikes({
   items,
@@ -32,13 +33,6 @@ export default function ProfileLikes({
 
   const films = items?.filter((i) => i.media_type === 'movie');
   const tvShows = items?.filter((i) => i.media_type === 'tv');
-
-  // Animation variants for smooth load
-  const tabVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-  };
 
   return (
     <div className='bg-zinc-900/90 border border-zinc-800 rounded-sm p-2 sm:p-3 text-zinc-400'>

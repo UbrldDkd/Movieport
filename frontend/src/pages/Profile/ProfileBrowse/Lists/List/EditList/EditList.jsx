@@ -2,22 +2,20 @@
 import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
-// API / hooks
+// API hooks
 import { useGetList } from '../../../../../../api/lists/useGetList';
 import { useListHandlers } from './handlers/useListHandlers';
 
 // Components
 import EditListHeader from './EditListHeader';
 import EditListActions from './EditListActions';
-import EditListItems from './EditListItems';
+import EditListItemsDisplay from './EditListItemsDisplay';
 
 export default function EditList() {
-  // routing
   const location = useLocation();
   const { username, title_slug } = useParams();
 
-  // data
-  const { list } = useGetList(username, title_slug);
+  const { list: originalList } = useGetList(username, title_slug);
 
   // working list state (edit or create)
   const [newList, setNewList] = useState({
@@ -34,6 +32,7 @@ export default function EditList() {
 
   // ui state
   const [view, setView] = useState('list');
+  // edit or create state
   const [mode, setMode] = useState(null);
 
   // detect mode from url
@@ -52,16 +51,11 @@ export default function EditList() {
 
   // initialize state from fetched list
   useEffect(() => {
-    if (!list) return;
+    if (!originalList) return;
 
-    setNewList({ ...list });
-    setDraft({ id: list.id });
-  }, [list]);
-
-  // debug
-  useEffect(() => {
-    console.log({ mode, newList });
-  }, [mode, newList]);
+    setNewList({ ...originalList });
+    setDraft({ id: originalList.id });
+  }, [originalList]);
 
   // handlers
   const {
@@ -71,7 +65,7 @@ export default function EditList() {
     handleSubmitEdit,
     handleClear,
   } = useListHandlers({
-    list,
+    originalList,
     newList,
     draft,
     itemsToAdd,
@@ -110,7 +104,7 @@ export default function EditList() {
 
           <EditListActions
             username={username}
-            list={list}
+            list={originalList}
             draft={draft}
             view={view}
             mode={mode}
@@ -121,8 +115,8 @@ export default function EditList() {
             setView={setView}
           />
 
-          <EditListItems
-            newList={newList}
+          <EditListItemsDisplay
+            items={newList?.items}
             view={view}
             handleRemoveItem={handleRemoveItem}
           />

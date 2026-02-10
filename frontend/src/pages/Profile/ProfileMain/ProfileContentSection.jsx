@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import ContentCard from '../ProfileBrowse/ContentCard/ContentCard';
+import ContentCard from '../../../components/ContentDisplays/ContentCard/ContentCard';
 
 export default function ProfileContentSection({ header, url, items }) {
   if (!items || !items.length) return null;
 
-  // TODO: fix onload not working for ContentCard in this component
   return (
     <section className='space-y-2 my-2'>
       {/* Section header */}
@@ -20,8 +19,8 @@ export default function ProfileContentSection({ header, url, items }) {
         )}
       </div>
       {/* Line */}
-      <div className='h-px mb-3 bg-zinc-400 w-full' />
-      <div className='grid grid-cols-4 gap-2.5 justify-center'>
+      <div className=' mb-3 border-b border-zinc-400 w-full' />
+      <div className='grid grid-cols-4 gap-2 items-center justify-center'>
         {items.map((item) => (
           <ContentCard key={item.tmdb_id} item={item} view='lg' />
         ))}

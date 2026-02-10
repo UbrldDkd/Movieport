@@ -1,6 +1,7 @@
-import ListCard from '../../ProfileBrowse/Lists/ListCard';
+import ListCard from '../../../../components/List/ListCard';
 
 export default function ProfileLikesLists({ lists }) {
+  console.log(lists);
   if (!lists || lists.length === 0) {
     return (
       <div className='text-center text-zinc-400 py-8'>No liked lists yet</div>

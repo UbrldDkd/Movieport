@@ -1,11 +1,10 @@
 // Standard library
 import { useState } from 'react';
-
-// Third-party
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaPenFancy } from 'react-icons/fa';
 import { GiCaptainHatProfile } from 'react-icons/gi';
+import { fadeInUpVariants } from '../../utils/animations/motionVariants.js';
 
 export default function ProfileCard({ user }) {
   const [tooltip, setTooltip] = useState(false);
@@ -33,8 +32,9 @@ export default function ProfileCard({ user }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
+      variants={fadeInUpVariants}
+      initial='hidden'
+      animate='visible'
       transition={{ duration: 0.35, ease: 'easeOut' }}
       className='px-3 py-2.5 my-2 border border-zinc-800/10 rounded-r-full flex flex-col-reverse md:flex-row items-center justify-between gap-6 bg-zinc-900/70'
     >

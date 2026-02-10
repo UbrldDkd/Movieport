@@ -31,8 +31,8 @@ export default function WatchedPercentage({ watchedCount, totalCount }) {
     return () => cancelAnimationFrame(requestRef.current);
   }, [percentage, animatedPercent]);
 
-  return (
-    <div className='bg-zinc-800/80 border border-zinc-700 rounded-sm p-2.5 pointer-events-none'>
+return (
+    <div className='bg-zinc-800/80 border border-zinc-700 rounded-sm p-2.5 pointer-events-none opacity-0 animate-fadeIn'>
       <div className='text-xs text-zinc-400 '>YOU HAVE WATCHED</div>
       <div className='text-2xl font-semibold'>{animatedPercent}%</div>
 

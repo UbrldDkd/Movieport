@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Keys } from '../../utils/Keys';
+import { Keys } from '../../utils/constants/Keys';
 import { ensureCsrf } from '../account/auth/ensureCsrf';
 
 export function useGetListsByIds(likedListIds) {

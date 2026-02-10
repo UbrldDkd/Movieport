@@ -7,6 +7,7 @@ export default function ProfileMain({ user }) {
   if (!user) return null;
 
   const favourites = user?.contentRelations?.filter((cr) => cr.favourited);
+
   const recentlyLiked = user?.contentRelations
     ?.filter((cr) => cr.liked)
     .slice(0, 4);
@@ -30,7 +31,7 @@ export default function ProfileMain({ user }) {
   ).length;
 
   return (
-    <div className='flex flex-col md:grid md:grid-cols-[4fr_2fr] gap-6 mt-2'>
+    <div className='flex flex-col min-h-110 md:grid md:grid-cols-[4fr_2fr] gap-6 mt-2'>
       {/* Left column */}
       <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/70 rounded-sm px-3'>
         {favourites && (

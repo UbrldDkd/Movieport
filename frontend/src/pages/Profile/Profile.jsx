@@ -16,22 +16,10 @@ import ProfileNavBar from './ProfileNavBar';
 import ProfileMain from './ProfileMain/ProfileMain.jsx';
 
 // Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.07, ease: 'easeOut' },
-  },
-};
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.25, ease: 'easeOut' },
-  },
-};
+import {
+  containerVariantsStagger,
+  sectionVariants,
+} from '../../utils/animations/motionVariants.js';
 
 export default function Profile() {
   const [userToDisplay, setUserToDisplay] = useState(undefined);
@@ -83,6 +71,8 @@ export default function Profile() {
     setdisplayIsLoading(false);
   }, [user, username, fetchedUser, fetchedUserIsLoading]);
 
+  console.log('utd', userToDisplay);
+
   // Loading state with spinning film reel
   if (isLoading) {
     return (
@@ -115,7 +105,7 @@ export default function Profile() {
       className='min-h-screen bg-zinc-950 text-zinc-200'
       initial='hidden'
       animate='visible'
-      variants={containerVariants}
+      variants={containerVariantsStagger}
     >
       <div className='mx-auto w-full max-w-[1120px] px-4 sm:px-6 md:px-8 lg:px-12 pb-8 flex flex-col'>
         <motion.div variants={sectionVariants}>

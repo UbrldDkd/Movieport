@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 
 // Components
-import ListCard from './ListCard';
+import ListCard from '../../../../components/List/ListCard';
 
 export default function ProfileLists({ lists, username, isOwner }) {
   // routing

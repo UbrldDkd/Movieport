@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PiMagnifyingGlassFill } from 'react-icons/pi';
-import { Keys } from '../../../../../../utils/Keys';
+import { Keys } from '../../../../../../utils/constants/Keys';
 
 export default function EditListActionsDropdown({
   searchVal,
@@ -72,24 +72,37 @@ export default function EditListActionsDropdown({
           hasResults ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {previewContent?.map((tmdb, idx) => (
-          <button
-            key={tmdb[details.id]}
-            onMouseDown={() => addItemAndReset(tmdb)}
-            className={`w-full text-left text-sm font-semibold px-2 py-1 transition-colors duration-100 ${
-              idx === selectedIndex
-                ? 'bg-zinc-700 text-white'
-                : 'text-zinc-200 hover:bg-zinc-800'
-            }`}
-          >
-            <span>{tmdb[details.movieTitle] || tmdb[details.tvTitle]}</span>
-            <span className='text-zinc-400'>
-              {' '}
-              {tmdb[details.movieReleaseDate]?.slice(0, 4) ||
-                tmdb[details.tvReleaseDate]?.slice(0, 4)}
-            </span>
-          </button>
-        ))}
+        {previewContent?.map((tmdb, idx) => {
+          const mediaType = tmdb[details.movieTitle] ? 'movie' : 'tv';
+          // Define a clean item object
+          const item = {
+            title: tmdb[details.movieTitle] || tmdb[details.tvTitle] || '',
+            release_date:
+              tmdb[details.movieReleaseDate]?.slice(0, 10) || // keep full date if needed
+              tmdb[details.tvReleaseDate]?.slice(0, 10) ||
+              '',
+            media_type: mediaType || 'movie', // fallback to 'movie'
+            tmdb_id: tmdb[details.id],
+            poster_path: tmdb[details.poster],
+          };
+
+          return (
+            <button
+              key={item.tmdb_id}
+              onMouseDown={() => addItemAndReset(item)}
+              className={`w-full text-left text-sm font-semibold px-2 py-1 transition-colors duration-100 ${
+                idx === selectedIndex
+                  ? 'bg-zinc-700 text-white'
+                  : 'text-zinc-200 hover:bg-zinc-800'
+              }`}
+            >
+              <span>{item.title}</span>
+              <span className='text-zinc-400'>
+                {item.release_date ? item.release_date.slice(0, 4) : ''}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

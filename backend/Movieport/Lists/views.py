@@ -107,7 +107,7 @@ class ListsViewSet(viewsets.ViewSet):
 
             for item in items_data:
                 tmdb_id = item.get("tmdb_id")
-                relation, _ = ContentRelations.objects.get_or_create(
+                content_relation, _ = ContentRelations.objects.get_or_create(
                     user=request.user,
                     tmdb_id=tmdb_id,
                     defaults={
@@ -117,7 +117,7 @@ class ListsViewSet(viewsets.ViewSet):
                         'media_type': item.get('media_type', 'movie'),
                     }
                 )
-                new_list.items.add(relation)
+                new_list.items.add(content_relation)
 
         response_serializer = ListsSerializer(new_list, context={"request": request})
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
@@ -218,13 +218,56 @@ class ListsViewSet(viewsets.ViewSet):
                         'poster_path': item.get('poster_path', ''),
                         'release_date': item.get('release_date'),
                         'media_type': item.get('media_type', 'movie'),
-                    }
+}
                 )
                 content_item.lists.add(lst)
                 added_items.append(content_item)
 
         serializer = ContentRelationsSerializer(added_items, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=["post"], permission_classes=[IsAuthenticated])
+    def remove_items(self, request):
+        """Remove items from list by tmdb_id."""
+        list_id = request.data.get("list")
+        tmdb_id = request.data.get("tmdb_ids")
+
+        if not list_id or not tmdb_id:
+            return Response(
+                {"error": "list and tmdb_id required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if isinstance(tmdb_id, int):
+            tmdb_ids = [tmdb_id]
+        elif isinstance(tmdb_id, list):
+            tmdb_ids = tmdb_id
+        else:
+            return Response(
+                {"error": "tmdb_id must be int or array"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            lst = Lists.objects.get(id=list_id, user=request.user)
+        except Lists.DoesNotExist:
+            return Response(
+                {"error": "List not found or not owned by user"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        relations = ContentRelations.objects.filter(
+            user=request.user,
+            tmdb_id__in=tmdb_ids
+        )
+
+        count = relations.count()
+        lst.items.remove(*relations)
+
+        return Response(
+            {"message": f"Removed {count} item(s)"},
+            status=status.HTTP_200_OK
+        )
 
     @action(
         detail=False,

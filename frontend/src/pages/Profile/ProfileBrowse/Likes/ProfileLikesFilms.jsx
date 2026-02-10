@@ -1,7 +1,7 @@
 // ProfileLikesFilms.jsx
 
 import { useEffect, useState } from 'react';
-import ContentCard from '../../ProfileBrowse/ContentCard/ContentCard';
+import ContentCard from '../../../../components/ContentDisplays/ContentCard/ContentCard';
 
 export default function ProfileLikesFilms({ items, username, isOwner }) {
   const ITEMS_PER_PAGE = 36;

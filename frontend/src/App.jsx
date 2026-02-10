@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navigation/Navbar.jsx';
-import Home from './pages/Home.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
+import Home from './pages/Home/Home.jsx';
 import About from './pages/About.jsx';
 import Privacy from './pages/Privacy.jsx';
 import DisplayByMedia from './pages/DisplayByMedia/DisplayByMedia.jsx';
 import ContentPage from './pages/ContentPage/ContentPage.jsx';
 import Contact from './pages/Contact.jsx';
-import ScrollToTop from './utils/ScollToTop.jsx';
+import ScrollToTop from './utils/hooks/ScrollToTop.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 import ProfileBrowse from './pages/Profile/ProfileBrowse/ProfileBrowse.jsx';
 import List from './pages/Profile/ProfileBrowse/Lists/List/List.jsx';

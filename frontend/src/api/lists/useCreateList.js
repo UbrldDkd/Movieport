@@ -1,4 +1,3 @@
-// useCreateList.js
 import { useContext } from 'react';
 import { AuthContext } from '../account/auth/AuthContext'; // updated import
 import { ensureCsrf } from '../account/auth/ensureCsrf';
@@ -9,10 +8,17 @@ export const useCreateList = () => {
   const createList = async (newList) => {
     if (!newList?.title) return null;
 
-    const tempId = `temp-${Date.now()}`;
-    const optimisticList = { ...newList, id: tempId, items: [], item_count: 0 };
+    console.log('list to create', newList);
 
-    // Optimistic UI update in user context
+    const tempId = `temp-${Date.now()}`;
+    const optimisticList = {
+      ...newList,
+      id: tempId,
+      items: newList.items || [],
+      item_count: newList.items?.length || 0,
+    };
+
+    // Optimistic UI update: add temporary list immediately
     setUser((prev) => ({
       ...prev,
       lists: [optimisticList, ...(prev.lists || [])],
@@ -20,6 +26,7 @@ export const useCreateList = () => {
 
     try {
       const csrfToken = await ensureCsrf();
+
       const res = await fetch('http://127.0.0.1:8000/lists/create_list/', {
         method: 'POST',
         credentials: 'include',
@@ -33,11 +40,13 @@ export const useCreateList = () => {
       if (!res.ok) throw new Error('Failed to create list');
       const data = await res.json();
 
-      // Replace temp list with server response
+      // Replace temp list with server response, keeping items
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((l) =>
-          l.id === tempId ? { ...data, items: [], item_count: 0 } : l
+          l.id === tempId
+            ? { ...data, items: data.items || newList.items || [] }
+            : l
         ),
       }));
 

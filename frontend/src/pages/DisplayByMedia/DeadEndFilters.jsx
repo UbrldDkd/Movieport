@@ -1,6 +1,6 @@
 // DeadEndFilters.jsx
 import React from 'react';
-import { GenreMap } from '../../utils/GenreMap.js';
+import { GenreMap } from '../../utils/constants/GenreMap.js';
 
 export const DeadEndFilters = ({
   genreIds,

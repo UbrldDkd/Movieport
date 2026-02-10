@@ -1,7 +1,7 @@
 // ProfileLikesTvShows.jsx
 
 import { useState, useEffect } from 'react';
-import ContentCard from '../../ProfileBrowse/ContentCard/ContentCard';
+import ContentCard from '../../../../components/ContentDisplays/ContentCard/ContentCard';
 
 export default function ProfileLikesTvShows({ items, username, isOwner }) {
   const ITEMS_PER_PAGE = 36;

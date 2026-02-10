@@ -1,6 +1,6 @@
 // ProfileMainWatchlist.jsx
 import { Link } from 'react-router-dom';
-import ListCardPosters from '../ProfileBrowse/Lists/ListCardPosters';
+import ListCardPosters from '../../../components/List/ListCardPosters';
 
 export default function ProfileMainWatchlist({ watchlist }) {
   if (!watchlist?.length) return null;

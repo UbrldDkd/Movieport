@@ -1,19 +1,27 @@
-// ContentPage.jsx
+// React
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Keys } from '../../utils/Keys.js';
-import { useFetchContentDetails } from './hooks/useFetchContentDetails.js';
+
+// Context
 import { AuthContext } from '../../API/account/auth/AuthContext.js';
-import SimilarContentSection from './ContentSections/SimilarContentSection.jsx';
-import RelatedContentSection from './ContentSections/RelatedContentSection.jsx';
+
+// Hooks
+import { useFetchContentDetails } from './hooks/useFetchContentDetails.js';
+
+// Components
+import SimilarContentSection from './Sections/SimilarContentSection.jsx';
+import RelatedContentSection from './Sections/RelatedContentSection.jsx';
 import ContentPageMain from './ContentPageMain/ContentPageMain.jsx';
 import ContentPagePoster from './PosterAndBackdrop/ContentPagePoster.jsx';
 import EpisodesGrid from './Tv/EpisodesGrid.jsx';
 import SeasonDropdown from './Tv/SeasonDropDown.jsx';
 import ContentPageBackdrop from './PosterAndBackdrop/ContentPageBackdrop.jsx';
-import ContentPagePopularReviewsSection from './ContentSections/ContentPagePopularReviewsSection.jsx';
-import ContentPageInListsSection from './ContentSections/ContentPageInListsSection.jsx';
+import PopularReviewsSection from './Sections/PopularReviewsSection.jsx';
+import ListsSection from '../../components/Sections/ListsSection.jsx';
 import ContentPagePosterStats from './PosterAndBackdrop/ContentPagePosterStats.jsx';
+
+// Utils
+import { Keys } from '../../utils/constants/Keys.js';
 
 export default function ContentPage() {
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -37,8 +45,6 @@ export default function ContentPage() {
     setTrailerOpen,
     selectedSeason,
   });
-
-  console.log('content', content);
 
   const posterUrl =
     content?.tmdb &&
@@ -136,8 +142,13 @@ export default function ContentPage() {
               isLoading={isLoading}
               mediaType={mediaType}
             />
-            <ContentPagePopularReviewsSection isLoading={isLoading} />
-            <ContentPageInListsSection isLoading={isLoading} />
+            <PopularReviewsSection isLoading={isLoading} />
+
+            {/* TODO: add actual lists which feature the item later */}
+            <ListsSection
+              header={'Popular featuring lists'}
+              isLoading={isLoading}
+            />
 
             <RelatedContentSection
               collectionData={content?.tmdb?.[details.movieCollection]}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Keys } from '../../utils/Keys';
+import { Keys } from '../../utils/constants/Keys';
 
 export function useGetContentRelationsByUsername(username) {
   const [contentRelations, setContentRelations] = useState([]);
@@ -41,7 +41,7 @@ export function useGetContentRelationsByUsername(username) {
       }
     };
 
-getContentRelations();
+    getContentRelations();
   }, [username, API_KEY]);
 
   return contentRelations;

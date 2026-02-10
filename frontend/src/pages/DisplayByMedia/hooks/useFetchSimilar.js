@@ -1,4 +1,4 @@
-import { Keys } from '../../../utils/Keys.js';
+import { Keys } from '../../../utils/constants/Keys.js';
 import { useState, useEffect } from 'react';
 
 export function useFetchSimilar({

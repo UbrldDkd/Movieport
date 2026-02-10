@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CountriesMap } from '../../../../../utils/CountriesMap';
+import { CountriesMap } from '../../../../../utils/constants/CountriesMap';
 
 export default function ReleasesTab({ releaseDates = [], isLoading }) {
   const [hoveredCountry, setHoveredCountry] = useState(null);

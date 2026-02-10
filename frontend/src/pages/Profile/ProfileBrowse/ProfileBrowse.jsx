@@ -12,7 +12,7 @@ import { AuthContext } from '../../../api/account/auth/AuthContext.js';
 import { useGetUserByUsername } from '../../../api/account/Profile/useGetUserByUsername.js';
 
 // Components
-import ProfileWatched from './Films/ProfileWatched.jsx';
+import ProfileWatched from './Watched/ProfileWatched.jsx';
 import ProfileLists from './Lists/ProfileLists.jsx';
 import ProfileWatchlist from './Watchlist/ProfileWatchlist.jsx';
 import ProfileLikes from './Likes/ProfileLikes.jsx';
@@ -28,21 +28,13 @@ const navLinks = [
   { label: 'Network', to: 'following' },
 ];
 
-// Animation variants
-const tabVariants = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -10 },
-};
-
-const pageVariants = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
-};
+import {
+  tabVariants,
+  pageVariants,
+} from '../../../utils/animations/motionVariants.js';
 
 export default function ProfileBrowse() {
-  const [userToDisplay, setUserToDisplay] = useState(undefined); // <-- undefined now
+  const [userToDisplay, setUserToDisplay] = useState(null);
   const [displayIsLoading, setDisplayIsLoading] = useState(true);
 
   const { username, tab, subtab } = useParams();
@@ -97,7 +89,7 @@ export default function ProfileBrowse() {
 
   // Combined loading state
   const isLoading =
-    fetchedUserIsLoading || displayIsLoading || userToDisplay === undefined;
+    fetchedUserIsLoading || displayIsLoading || userToDisplay === null;
 
   // Loading state with spinning film reel
   if (isLoading) {
@@ -109,7 +101,7 @@ export default function ProfileBrowse() {
   }
 
   // User not found state
-  if (fetchedUserError || !userToDisplay) {
+  if (fetchedUserError) {
     return (
       <div className='min-h-screen bg-zinc-950 text-zinc-200 flex flex-col items-center justify-center gap-4'>
         <GiShipWreck className='size-30' />
@@ -140,12 +132,12 @@ export default function ProfileBrowse() {
         <div className='mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-60'>
           {/* Navbar */}
           <nav className='flex items-center justify-center rounded-l-sm rounded-r-3xl bg-zinc-900/90 py-0.5 mt-2 relative overflow-x-auto'>
-            <div className='flex justify-center md:gap-1 sm:gap-0 flex-1 px-2'>
+            <div className='flex flex-col md:flex-row w-full md:w-auto divide-y md:divide-y-0  divide-zinc-800/50 px-2'>
               {navLinks.map((item) => (
                 <button
                   key={item.to}
                   onClick={() => handleTabClick(item.to)}
-                  className={`tracking-wider hover:cursor-pointer text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
+                  className={`w-full md:w-auto text-left md:text-center tracking-wider hover:cursor-pointer text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
                     activeTab === item.to
                       ? 'text-zinc-200'
                       : 'text-zinc-400 hover:text-zinc-100'

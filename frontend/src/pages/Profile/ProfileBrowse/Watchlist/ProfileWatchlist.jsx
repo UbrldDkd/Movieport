@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ContentCard from '../ContentCard/ContentCard';
+import ContentCard from '../../../../components/ContentDisplays/ContentCard/ContentCard';
 
 export default function ProfileWatchlist({ items, username, isOwner }) {
   const ITEMS_PER_PAGE = 36;

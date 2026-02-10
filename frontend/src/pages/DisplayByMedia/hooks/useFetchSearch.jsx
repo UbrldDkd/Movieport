@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Keys } from '../../../utils/Keys.js';
+import { Keys } from '../../../utils/constants/Keys.js';
 
 export function useFetchSearch({ value, currentPage, contentPerPage }) {
   const [content, setContent] = useState([]);

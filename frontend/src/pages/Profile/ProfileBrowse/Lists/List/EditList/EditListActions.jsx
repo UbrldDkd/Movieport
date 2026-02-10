@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaList, FaThLarge } from 'react-icons/fa';
 
 import { useDeleteList } from '../../../../../../api/lists/useDeleteList';
-import { useFetchPreview } from '../../../../../../components/Navigation/Search/hooks/useFetchPreview';
-import { Keys } from '../../../../../../utils/Keys';
+import { useFetchPreview } from '../../../../../../components/Navbar/Search/hooks/useFetchPreview';
+import { Keys } from '../../../../../../utils/constants/Keys';
 import EditListActionsDropdown from './EditListActionsDropdown';
 
 export default function EditListActions({
@@ -33,7 +33,7 @@ export default function EditListActions({
   const handleSubmit = async () => {
     setIsLoading((prev) => ({ ...prev, saving: true }));
     if (mode === 'edit') {
-      await handleSubmitEdit();
+      const res = await handleSubmitEdit();
       setIsLoading((prev) => ({ ...prev, saving: false }));
     }
     if (mode === 'create') {

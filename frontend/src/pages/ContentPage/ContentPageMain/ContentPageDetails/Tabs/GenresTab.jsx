@@ -1,6 +1,6 @@
 // tabs/GenresTab.jsx
 import { Link } from 'react-router-dom';
-import { GenreMap } from '../../../../../utils/GenreMap';
+import { GenreMap } from '../../../../../utils/constants/GenreMap';
 
 export default function GenresTab({ genres, mediaType, isLoading }) {
   const getGenreIdFromName = (genreName) => {

@@ -5,6 +5,8 @@ import { useCreateList } from '../../../../../../../api/lists/useCreateList';
 import { AuthContext } from '../../../../../../../api/account/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { Keys } from '../../../../../../../utils/constants/Keys';
+import { cleanItem } from '../../../../../../../utils/helpers/cleanItem';
 
 export function useListHandlers({
   username,
@@ -27,13 +29,15 @@ export function useListHandlers({
 
   const { user } = useContext(AuthContext);
 
+  const { details } = Keys.API1;
+
   // Helper to normalize empty values
   const normalize = (v) =>
     v === '' || v === null || v === undefined ? null : v;
 
   const handleChange = (field, value) => {
-    const next = normalize(value);
-    const original = normalize(list?.[field]);
+    const newValue = normalize(value);
+    const oldValue = normalize(list?.[field]);
 
     // Update the working copy of the list in edit mode, set values for payload in create mode
     setNewList((prev) => ({ ...prev, [field]: value }));
@@ -43,7 +47,7 @@ export function useListHandlers({
       setDraft((prev) => {
         if (!prev) prev = {};
 
-        if (next !== original) {
+        if (newValue !== oldValue) {
           return { ...prev, [field]: value };
         } else {
           const { [field]: _, ...rest } = prev;
@@ -53,8 +57,7 @@ export function useListHandlers({
     }
   };
 
-  const handleRemoveItem = (tmdb) => {
-    const tmdb_id = tmdb.id;
+  const handleRemoveItem = (tmdb_id) => {
     const inOriginal = list.items.some((i) => i.tmdb_id === tmdb_id);
 
     // Remove item from newList (both create and edit mode)
@@ -78,6 +81,7 @@ export function useListHandlers({
 
   const handleAddItem = (item) => {
     const tmdb_id = item.tmdb_id;
+    console.log('item to add', item);
 
     // Skip if item already exists
     if (newList.items.some((i) => i.tmdb_id === tmdb_id)) return;
@@ -87,18 +91,12 @@ export function useListHandlers({
       (cr) => Number(cr.tmdb_id) === Number(tmdb_id)
     );
 
+    const cleanItem = cleanItem(item);
+
     // Build the complete item object with all necessary fields for the backend
     const newItem = existingItem
       ? existingItem // Use existing relation as-is since it has all fields
-      : {
-          tmdb_id,
-          title: item.title || item.movie_title || item.name || '',
-          poster_path: item.poster_path || '',
-          release_date: item.release_date || item.first_air_date || null,
-          media_type:
-            item.media_type ||
-            (item.title || item.movie_title ? 'movie' : 'tv'),
-        };
+      : cleanItem;
 
     // Update the list optimistically
     setNewList((prev) => ({
@@ -106,7 +104,7 @@ export function useListHandlers({
       items: [...prev.items, newItem],
     }));
 
-    // Track the complete item object (not just ID) for backend submission
+    // Track the complete item object for backend submission
     setItemsToAdd((prev) => {
       // Skip if this item is already in itemsToAdd
       if (prev.some((i) => i.tmdb_id === tmdb_id)) return prev;
@@ -129,10 +127,10 @@ export function useListHandlers({
 
       // Update items
       if (itemsToAdd.length > 0) {
-        await addItems({ listId: draft?.id, tmdb_id: itemsToAdd });
+        await addItems({ listId: draft?.id, items: itemsToAdd });
       }
       if (itemsToRemove.length > 0) {
-        await removeItems({ listId: draft?.id, tmdb_id: itemsToRemove });
+        await removeItems({ listId: draft?.id, tmdbIds: itemsToRemove });
       }
 
       // Clear draft tracking
@@ -143,11 +141,7 @@ export function useListHandlers({
 
     if (mode === 'create') {
       // Prepare payload for creation
-      const { items, ...rest } = newList;
-      const payload = {
-        ...rest,
-        items: items?.map((item) => ({ tmdb_id: item.tmdb_id })) || [],
-      };
+      const payload = newList;
       const listCreated = await createList(payload);
       if (listCreated.ok) {
         navigate(`/${username}/lists/`);

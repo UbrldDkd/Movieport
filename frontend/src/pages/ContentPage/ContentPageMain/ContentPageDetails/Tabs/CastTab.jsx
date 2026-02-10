@@ -28,12 +28,16 @@ export default function CastTab({ cast, isLoading }) {
           <Link className='text-zinc-300/90  hover:bg-zinc-900 transition-colors duration-50  rounded-sm py-1 px-2 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
             {actor.name}
           </Link>
-          <span className='text-zinc-600 hover:cursor-default text-xs font-medium shrink-0'>
-            as
-          </span>
-          <span className='text-zinc-400/80 font-medium text-sm truncate flex-1 max-w-[calc(100%-150px)] md:max-w-[calc(100%-190px)]'>
-            {actor.character}
-          </span>
+          {actor.character && (
+            <>
+              <span className='text-zinc-600 hover:cursor-default text-xs font-medium shrink-0'>
+                as
+              </span>
+              <span className='text-zinc-400/80 font-medium text-sm truncate flex-1 max-w-[calc(100%-150px)] md:max-w-[calc(100%-190px)]'>
+                {actor.character}
+              </span>
+            </>
+          )}
         </div>
       ))}
     </div>

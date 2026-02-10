@@ -1,12 +1,13 @@
 // ContentDetails.jsx
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Keys } from '../../../../utils/Keys';
+import { Keys } from '../../../../utils/constants/Keys';
 import CastTab from './tabs/CastTab';
 import CrewTab from './tabs/CrewTab';
 import DetailsTab from './tabs/DetailsTab';
 import GenresTab from './tabs/GenresTab';
 import ReleasesTab from './tabs/ReleasesTab';
+import { tabVariants } from '../../../../utils/animations/motionVariants';
 
 export default function ContentPageDetails({ content, isLoading }) {
   const [activeTab, setActiveTab] = useState('cast');
@@ -18,8 +19,6 @@ export default function ContentPageDetails({ content, isLoading }) {
   const credits = tmdb?.aggregate_credits || tmdb?.credits || {};
 
   const isAggregateCredits = !!tmdb?.aggregate_credits;
-
-  // TODO: add pagination for cast
 
   const cast = (credits.cast || [])
     .flatMap((c) => {
@@ -100,14 +99,8 @@ export default function ContentPageDetails({ content, isLoading }) {
       ? ['cast', 'crew', 'details', 'genres', 'releases']
       : ['cast', 'crew', 'details', 'genres'];
 
-  const tabVariants = {
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-  };
-
   return (
-    <div className='mt-8'>
+    <div className='mt-8 max-w-100'>
       <div className='rounded-sm  border border-zinc-900/50'>
         <div className='flex bg-zinc-900/30 backdrop-blur-sm'>
           {tabs.map((tab) => (

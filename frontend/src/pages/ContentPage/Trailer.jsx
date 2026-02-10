@@ -1,4 +1,4 @@
-import { Keys } from '../../utils/Keys.js';
+import { Keys } from '../../utils/constants/Keys.js';
 import { useEffect, useState } from 'react';
 
 export default function Trailer({ trailerOpen, id, mediaType }) {

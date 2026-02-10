@@ -1,7 +1,14 @@
+// React
 import { useContext } from 'react';
-import axios from 'axios';
+
+// Context
 import { AuthContext } from '../account/auth/AuthContext';
+
+// API hooks
 import { ensureCsrf } from '../account/auth/ensureCsrf';
+
+// Third-party
+import axios from 'axios';
 
 export function useToggleContentRelation() {
   const { user, setUser } = useContext(AuthContext);

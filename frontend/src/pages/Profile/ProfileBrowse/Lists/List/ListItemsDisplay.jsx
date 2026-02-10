@@ -1,6 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import ContentCard from '../../ContentCard/ContentCard';
-import ContentCardListView from '../../ContentCard/ContentCardListView';
+import ContentCard from '../../../../../components/ContentDisplays/ContentCard/ContentCard';
+import ContentCardListView from '../../../../../components/ContentDisplays/ContentCard/ContentCardListView';
+import {
+  itemVariants,
+  containerVariants,
+} from '../../../../../utils/animations/motionVariants';
 
 export default function ListItemsDisplay({ items, view }) {
   if (!items) return null;
@@ -13,23 +17,6 @@ export default function ListItemsDisplay({ items, view }) {
       </div>
     );
   }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-    exit: { opacity: 0 },
-  };
 
   return (
     <AnimatePresence mode='wait'>

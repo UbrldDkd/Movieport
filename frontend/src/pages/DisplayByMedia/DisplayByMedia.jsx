@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useSearchParams, useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { GenreMap } from '../../utils/GenreMap.js';
+import { GenreMap } from '../../utils/constants/GenreMap.js';
 import { useFetchContent } from './hooks/useFetchContent.jsx';
 import { useFetchSearch } from './hooks/useFetchSearch.jsx';
 import { useFetchSimilar } from './hooks/useFetchSimilar.jsx';
 import { DeadEndFilters } from './DeadEndFilters.jsx';
-import MovieDisplayBlock from '../../components/Main/ContentDisplays/ContentDisplayBlock.jsx';
+import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock.jsx';
 
 export default function DisplayByMedia() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -239,7 +239,7 @@ export default function DisplayByMedia() {
             </div>
 
             {/* Movie/TV Display Block */}
-            <MovieDisplayBlock
+            <ContentDisplayBlock
               fullContent={content}
               toDisplay={contentPerPage}
             />
