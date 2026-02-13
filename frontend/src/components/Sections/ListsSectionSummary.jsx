@@ -1,4 +1,3 @@
-// ListsSectionSummary.jsx
 import ListCardCompact from '../List/ListCardCompact';
 import PropTypes from 'prop-types';
 
@@ -67,11 +66,17 @@ export default function ListsSectionSummary({
   ];
 
   return (
-    <div className='mt-8'>
+    <div className='mt-8 justify-center'>
       {header && (
         <h2 className='font-semibold text-zinc-300/90 mb-4'>{header}</h2>
       )}
-      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+
+      <div
+        className='
+          grid grid-cols-1 sm:grid-cols-3 gap-4
+          place-items-center sm:place-items-stretch
+        '
+      >
         {staticLists.map((list) => (
           <ListCardCompact
             key={list.id}

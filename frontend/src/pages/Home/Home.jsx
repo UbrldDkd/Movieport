@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div
-      className={`bg-zinc-950 pt-5 relative overflow-x-hidden overflow-y-auto transition-opacity duration-700 ${
+      className={`bg-zinc-950 pt-3.5 mt-2 relative overflow-x-hidden overflow-y-auto transition-opacity duration-700 ${
         movies && tvShows && !isLoading ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -84,6 +84,8 @@ export default function Home() {
             <ContentDisplayBlock
               content={movies.nowPlaying}
               displayAmount={14}
+              view='sm'
+              includeContentRelations={false}
             />
           </div>
 
@@ -93,7 +95,12 @@ export default function Home() {
               Top Rated
             </h2>
             <div className='h-px bg-zinc-600' />
-            <ContentDisplayBlock content={movies.topRated} displayAmount={14} />
+            <ContentDisplayBlock
+              content={movies.topRated}
+              displayAmount={14}
+              view='lg'
+              includeContentRelations={false}
+            />
           </div>
 
           {/* Coming Soon */}
@@ -102,7 +109,12 @@ export default function Home() {
               Coming Soon
             </h2>
             <div className='h-px bg-zinc-600' />
-            <ContentDisplayBlock content={movies.upcoming} displayAmount={14} />
+            <ContentDisplayBlock
+              content={movies.upcoming}
+              displayAmount={14}
+              view='lg'
+              includeContentRelations={false}
+            />
           </div>
         </div>
       </div>

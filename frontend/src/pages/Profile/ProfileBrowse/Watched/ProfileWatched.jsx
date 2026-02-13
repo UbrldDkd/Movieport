@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { usePosterGridWidth } from '../../../../utils/constants/usePosterGridWidth';
 
 import ContentCardWithContentRelations from '../../../../components/ContentDisplays/ContentCard/ContentCardWithContentRelations';
 import { tabVariants } from '../../../../utils/animations/motionVariants';
@@ -44,7 +45,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
     currentPage * ITEMS_PER_PAGE
   );
 
-  const cardWidth = view === 'lg' ? 150 : 70;
+  const cardWidth = usePosterGridWidth(view);
 
   return (
     <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-200'>

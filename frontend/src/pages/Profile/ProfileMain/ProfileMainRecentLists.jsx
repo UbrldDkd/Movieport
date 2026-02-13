@@ -11,7 +11,9 @@ export default function ProfileMainRecentLists({
   return (
     <div className='flex flex-col gap-2 w-full'>
       <div className='flex justify-between items-center text-xs font-semibold tracking-widest text-zinc-300/90'>
-        <Link to='lists/'>RECENT LISTS</Link>
+        <Link className='-mb-1' to='lists/'>
+          RECENT LISTS
+        </Link>
         <Link to='lists/' className='text-zinc-400'>
           {recentListsCount}
         </Link>

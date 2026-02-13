@@ -27,7 +27,7 @@ export default function ProfileNavBar({ username }) {
               <Link
                 key={link.label}
                 to={link.to}
-                className={`w-full sm:w-auto text-left sm:text-center px-3 py-2 text-sm font-medium transition-colors
+                className={`w-full sm:w-auto text-left tracking-wide sm:text-center px-3 py-2 text-sm font-medium transition-colors
                   ${active ? 'text-zinc-200' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 {link.label}

@@ -13,9 +13,9 @@ export const AuthProvider = ({ children }) => {
           setUser({
             id: data.id,
             username: data.username,
-            contentRelations: data.content_relations || [],
+            content_relations: data.content_relations || [],
             lists: data.lists || [],
-            likedListIds: data.liked_list_ids || [],
+            liked_list_ids: data.liked_list_ids || [],
           });
         } else {
           setUser(null);

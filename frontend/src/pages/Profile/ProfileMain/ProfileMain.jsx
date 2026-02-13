@@ -6,16 +6,6 @@ import ProfileMainRecentLists from './ProfileMainRecentLists';
 export default function ProfileMain({ user }) {
   if (!user) return null;
 
-  const favourites = user?.contentRelations?.filter((cr) => cr.favourited);
-
-  const recentlyLiked = user?.contentRelations
-    ?.filter((cr) => cr.liked)
-    .slice(0, 4);
-
-  const watchlist = user?.contentRelations
-    ?.filter((cr) => cr.watchlisted)
-    .slice(0, 5);
-
   const recentLists = (user?.lists || [])
     .filter(
       (list) =>
@@ -34,21 +24,21 @@ export default function ProfileMain({ user }) {
     <div className='flex flex-col min-h-110 md:grid md:grid-cols-[4fr_2fr] gap-6 mt-2'>
       {/* Left column */}
       <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/70 rounded-sm px-3'>
-        {favourites && (
-          <ProfileContentSection header='FAVOURITES' items={favourites} />
+        {user?.favourites && (
+          <ProfileContentSection header='FAVOURITES' items={user?.favourites} />
         )}
-        {recentlyLiked && (
+        {user?.likes && (
           <ProfileContentSection
             header='RECENTLY LIKED'
             url={`likes/films/`}
-            items={recentlyLiked}
+            items={user?.likes}
           />
         )}
       </div>
 
       {/* Right column */}
       <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/90 rounded-sm py-2.5 px-3'>
-        <ProfileMainWatchlist watchlist={watchlist} />
+        <ProfileMainWatchlist watchlist={user?.watchlist} />
         <ProfileMainRecentLists
           recentLists={recentLists}
           recentListsCount={recentListsCount}

@@ -8,7 +8,9 @@ export default function ProfileMainWatchlist({ watchlist }) {
   return (
     <div className='flex flex-col gap-2 w-full'>
       <div className='flex justify-between items-center text-xs font-semibold tracking-widest text-zinc-300/90'>
-        <Link to='watchlist/'>WATCHLIST</Link>
+        <Link className='-mb-1' to='watchlist/'>
+          WATCHLIST
+        </Link>
         <Link to='watchlist/' className='text-zinc-400'>
           {watchlist.length}
         </Link>

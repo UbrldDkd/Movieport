@@ -65,16 +65,18 @@ export default function Navbar() {
               <Logo />
             </Link>
 
-            <div className='hidden md:flex space-x-4'>
+            <div className='hidden md:flex space-x-2'>
               <Link to='/'>
                 <NavButton label='Home' />
               </Link>
-              <Filterbox />
-              <Link to='/explore/movie'>
-                <NavButton label='Movies' />
+              <Link to='/explore/movie/'>
+                <NavButton label='Films' />
               </Link>
-              <Link to='/explore/tv'>
+              <Link to='/explore/tv/'>
                 <NavButton label='TV Shows' />
+              </Link>
+              <Link to='/lists/'>
+                <NavButton label='Lists' />
               </Link>
             </div>
           </div>
