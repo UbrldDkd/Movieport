@@ -4,7 +4,7 @@ import ContentCardListView from '../../../../../../components/ContentDisplays/Co
 import {
   itemVariants,
   containerVariants,
-} from '../../../../../../utils/animations/motionVariants';
+} from '../../../../../../utils/style/animations/motionVariants';
 
 export default function EditListItems({ items, view, handleRemoveItem }) {
   if (!items?.length) return null;

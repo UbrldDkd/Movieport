@@ -4,7 +4,7 @@ import ContentCardListView from '../../../../../components/ContentDisplays/Conte
 import {
   itemVariants,
   containerVariants,
-} from '../../../../../utils/animations/motionVariants';
+} from '../../../../../utils/style/animations/motionVariants';
 
 export default function ListItemsDisplay({ items, view }) {
   if (!items) return null;

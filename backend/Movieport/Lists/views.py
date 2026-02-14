@@ -21,6 +21,20 @@ User = get_user_model()
 
 class ListsViewSet(viewsets.ViewSet):
 
+    @action(detail=False, methods=["get"], permission_classes=[AllowAny])
+    def get_all_public_lists(self, request):
+        """Get all public lists from all users, ordered by latest."""
+        lists = Lists.objects.filter(public=True).select_related('user').order_by('-created_at')
+        serializer = ListsSerializer(lists, many=True, context={"request": request})
+        data = serializer.data
+
+        # Append username to each list
+        for idx, list_obj in enumerate(lists):
+            data[idx]['username'] = list_obj.user.username
+            data[idx]['likers_count'] = list_obj.likes.count()
+
+        return Response(data, status=status.HTTP_200_OK)
+
     @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
     def lists_all(self, request):
         """Get all lists for the authenticated user."""

@@ -1,5 +1,5 @@
 // Third-party
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Icons
@@ -14,7 +14,7 @@ import ProfileLists from './Lists/ProfileLists.jsx';
 import ProfileWatchlist from './Watchlist/ProfileWatchlist.jsx';
 import ProfileLikes from './Likes/ProfileLikes.jsx';
 import ProfileActivity from './Activity/ProfileActivity.jsx';
-import PageContainer from '../../../components/Common/PageContainer.jsx'; // <- page container
+import PageContainer from '../../../components/WrapperContainers/PageContainer.jsx';
 
 const navLinks = [
   { label: 'Watched', to: 'watched' },
@@ -22,22 +22,25 @@ const navLinks = [
   { label: 'Reviews', to: 'reviews' },
   { label: 'Lists', to: 'lists' },
   { label: 'Watchlist', to: 'watchlist' },
-  { label: 'Likes', to: 'likes/films' },
+  { label: 'Likes', to: 'likes' },
   { label: 'Network', to: 'following' },
 ];
 
-import { tabVariants } from '../../../utils/animations/motionVariants.js';
+import { tabVariants } from '../../../utils/style/animations/motionVariants.js';
 
 export default function ProfileBrowse() {
-  const { username, tab, subtab } = useParams();
+  const { username, subtab } = useParams();
   const navigate = useNavigate();
 
   const { userToDisplay, isLoading, error } = useUserToDisplay(username);
-  console.log('userToDisplay:', userToDisplay);
-  console.log('username:', username);
-  console.log('lists:', userToDisplay?.lists);
 
-  const activeTab = tab || 'films';
+  // Only allow tabs defined in navLinks
+  const location = useLocation();
+  const pathSegments = location.pathname.split('/').filter(Boolean); // removes empty strings
+  const activeTabSegment = pathSegments[1] || ''; // 0 = username, 1 = tab
+  const activeTab =
+    navLinks.find((item) => activeTabSegment.startsWith(item.to))?.to ||
+    navLinks[0].to;
 
   const handleTabClick = (newTab) => {
     if (!userToDisplay) return;
@@ -120,7 +123,6 @@ export default function ProfileBrowse() {
             />
           )}
           {activeTab === 'activity' && <ProfileActivity />}
-
           {activeTab === 'lists' && (
             <ProfileLists
               lists={userToDisplay.lists}

@@ -14,7 +14,7 @@ export default function EpisodesGrid({ seasonContent, id, episodeNumber }) {
           {seasonContent.episodes.map((ep) => (
             <Link
               key={ep.episode_number}
-              to={`/watch/tv/${id}?season=${seasonNumber}&episode=${ep.episode_number}`}
+              to={`/tv/${id}?season=${seasonNumber}&episode=${ep.episode_number}`}
               className={`
                 relative group py-1.5 text-sm md:text-base rounded-sm cursor-pointer
                 transition-colors duration-120

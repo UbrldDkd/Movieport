@@ -16,9 +16,9 @@ import ContentPagePoster from './PosterAndBackdrop/ContentPagePoster.jsx';
 import EpisodesGrid from './Tv/EpisodesGrid.jsx';
 import SeasonDropdown from './Tv/SeasonDropDown.jsx';
 import ContentPageBackdrop from './PosterAndBackdrop/ContentPageBackdrop.jsx';
-import PopularReviewsSection from './Sections/PopularReviewsSection.jsx';
-import ListsSection from '../../components/Sections/ListsSection.jsx';
-import ContentPagePosterStats from './PosterAndBackdrop/ContentPagePosterStats.jsx';
+import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection.jsx';
+import ListsSection from '../../components/Sections/Lists/ListsSection.jsx';
+import PosterStats from '../../components/ContentDisplays/Common/PosterStats/PosterStats.jsx';
 
 // Utils
 import { Keys } from '../../utils/constants/Keys.js';
@@ -114,7 +114,7 @@ export default function ContentPage() {
                 isLoading={isLoading}
               />
 
-              <ContentPagePosterStats isLoading={isLoading} />
+              <PosterStats isLoading={isLoading} />
 
               {mediaType === 'tv' && seasonContent && (
                 <div className='mt-4'>
@@ -142,7 +142,7 @@ export default function ContentPage() {
               isLoading={isLoading}
               mediaType={mediaType}
             />
-            <PopularReviewsSection isLoading={isLoading} />
+            <ReviewsSection header={'Popular reviews'} isLoading={isLoading} />
 
             {/* TODO: add actual lists which feature the item later */}
             <ListsSection

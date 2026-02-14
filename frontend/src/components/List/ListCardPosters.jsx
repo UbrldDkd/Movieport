@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Keys } from '../../utils/constants/Keys';
 
-export default function ListCardPosters({ items, linkUrl }) {
+export default function ListCardPosters({ items, linkUrl, compact = 'sm' }) {
   if (!items) return null;
 
   const { details } = Keys.API1;
@@ -15,8 +15,8 @@ export default function ListCardPosters({ items, linkUrl }) {
     <div className='flex -space-x-6 shrink-0'>
       <Link
         to={linkUrl}
-        className='flex -space-x-6 group border-2 border-transparent
-          hover:border-zinc-200/40 rounded transition-colors duration-200'
+        className={`flex ${!compact === 'sm' ? '-space-x-6' : compact === 'md' ? '-space-x-9' : '-space-x-12'} group border-2 border-transparent
+          hover:border-zinc-200/40 rounded transition-colors duration-200`}
       >
         {items.length > 0
           ? items.map((item, i) => (

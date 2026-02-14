@@ -1,4 +1,4 @@
-const RegisterUser = async (formData, setError, setIsLoading) => {
+const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
   setIsLoading(true);
   setError('');
 
@@ -9,6 +9,7 @@ const RegisterUser = async (formData, setError, setIsLoading) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
+      credentials: 'include',
     });
 
     const data = await res.json();
@@ -18,11 +19,22 @@ const RegisterUser = async (formData, setError, setIsLoading) => {
       throw new Error(errorMessages);
     }
 
+    if (setUser) {
+      setUser({
+        id: data.id,
+        username: data.username,
+        contentRelations: data.content_relations || [],
+        lists: data.lists || [],
+        likedListIds: data.liked_list_ids || []
+      });
+    }
+
     console.log('Registration successful:', data);
     return data;
   } catch (err) {
     setError(err.message);
     console.error('Registration error:', err);
+    return null;
   } finally {
     setIsLoading(false);
   }

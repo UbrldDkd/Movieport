@@ -1,13 +1,14 @@
-import ListCardCompact from '../List/ListCardCompact';
+import ListCardCompact from '../../List/ListCardCompact';
 import PropTypes from 'prop-types';
 
 export default function ListsSectionSummary({
   lists = [],
   posterAmount,
   header,
+  includeItemCount = false,
+  compact = 'md',
+  displayAxis = 'x',
 }) {
-  const displayLists = lists.slice(0, 3);
-
   const staticLists = [
     {
       id: 1,
@@ -65,24 +66,33 @@ export default function ListsSectionSummary({
     },
   ];
 
+  const axisClass =
+    displayAxis === 'y' ? 'flex-col' : 'flex-row flex-nowrap md:flex-wrap';
+
   return (
-    <div className='mt-8 justify-center'>
+    <div>
       {header && (
-        <h2 className='font-semibold text-zinc-300/90 mb-4'>{header}</h2>
+        <h2 className='font-semibold tracking-wide text-zinc-300/90'>
+          {header}
+        </h2>
       )}
+      <div className='border-b border-zinc-600 mb-2 mt-1' />
 
       <div
-        className='
-          grid grid-cols-1 sm:grid-cols-3 gap-4
-          place-items-center sm:place-items-stretch
-        '
+        className={`flex ${axisClass} gap-5 md:gap-11 justify-center  overflow-x-auto md:overflow-visible`}
       >
         {staticLists.map((list) => (
-          <ListCardCompact
+          <div
             key={list.id}
-            list={list}
-            posterAmount={posterAmount}
-          />
+            className='flex-shrink-0 w-fit md:w-auto flex snjustify-center rounded-sm transition-colors duration-100 hover:bg-zinc-800/30'
+          >
+            <ListCardCompact
+              list={list}
+              posterAmount={posterAmount}
+              includeItemCount={includeItemCount}
+              compact={compact}
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -93,4 +103,7 @@ ListsSectionSummary.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.object),
   posterAmount: PropTypes.number,
   header: PropTypes.string,
+  includeItemCount: PropTypes.bool,
+  displayAxis: PropTypes.oneOf(['x', 'y']),
+  compact: PropTypes.oneOf(['lg', 'md']),
 };

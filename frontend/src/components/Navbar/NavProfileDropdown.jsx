@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState, useRef } from 'react';
-import { AuthContext } from '../../../api/account/auth/AuthContext';
+import { AuthContext } from '../../api/account/auth/AuthContext';
 import { GiCaptainHatProfile } from 'react-icons/gi';
-import LogoutButton from './LogoutButton';
+import LogoutButton from '../../api/account/auth/Modal/LogoutButton';
 
 export default function NavProfileDropdown() {
   const { user } = useContext(AuthContext);

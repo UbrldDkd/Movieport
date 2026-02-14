@@ -15,4 +15,8 @@ export const posterSizes = {
     width: 'w-[110px] sm:w-[120px] md:w-[135px] lg:w-[150px]',
     tmdb: 'w500',
   },
+  xl: {
+    width: 'w-[140px] sm:w-[160px] md:w-[180px] lg:w-[220px]',
+    tmdb: 'w780',
+  },
 };

@@ -4,7 +4,7 @@ import { GiShipWreck } from 'react-icons/gi';
 import ProfileCard from './ProfileCard';
 import ProfileNavBar from './ProfileNavBar';
 import ProfileMain from './ProfileMain/ProfileMain.jsx';
-import PageContainer from '../../components/Common/PageContainer.jsx';
+import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
 import { useUserToDisplay } from './hooks/useUserToDisplay.js';
 
 export default function Profile() {

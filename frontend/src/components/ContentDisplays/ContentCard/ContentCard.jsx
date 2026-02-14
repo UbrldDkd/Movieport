@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 // Utils/Helpers
 import { useIsLoggedIn } from '../../../utils/helpers/useIsLoggedIn';
 import { cleanItem } from '../../../utils/helpers/cleanItem';
-import { tooltipVariants } from '../../../utils/animations/motionVariants';
+import { tooltipVariants } from '../../../utils/style/animations/motionVariants';
 
 // Context
 import { AuthContext } from '../../../api/account/auth/AuthContext';
@@ -65,7 +65,7 @@ export default function ContentCard({ item, view }) {
         )}
       </AnimatePresence>
 
-      <Link to={`/watch/${cleanedItem.media_type}/${cleanedItem.tmdb_id}`}>
+      <Link to={`/${cleanedItem.media_type}/${cleanedItem.tmdb_id}`}>
         <ContentCardPoster
           title={cleanedItem.title}
           posterPath={cleanedItem.poster_path}

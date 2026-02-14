@@ -3,10 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SearchInput({
   value,
-  onChange,
   setIsOpen,
   setValue,
-  isFocused,
   setIsFocused,
 }) {
   const navigate = useNavigate();
@@ -25,6 +23,8 @@ export default function SearchInput({
       onSubmit();
     }
   };
+
+  const onChange = (e) => setValue(e.target.value);
 
   return (
     <div className='flex space-x-2 md:space-x-3 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-zinc-300/90 px-3 md:px-4 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:w-64'>

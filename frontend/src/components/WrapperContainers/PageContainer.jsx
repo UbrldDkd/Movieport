@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { containerVariantsStagger } from '../../utils/animations/motionVariants';
+import { containerVariantsStagger } from '../../utils/style/animations/motionVariants';
 
 export default function PageContainer({ children }) {
   return (

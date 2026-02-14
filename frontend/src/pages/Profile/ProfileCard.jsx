@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaPenFancy } from 'react-icons/fa';
 import { GiCaptainHatProfile } from 'react-icons/gi';
-import { fadeInUpVariants } from '../../utils/animations/motionVariants.js';
+import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
 
 export default function ProfileCard({ user }) {
   const [tooltip, setTooltip] = useState(false);

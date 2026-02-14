@@ -8,15 +8,11 @@ import { useFetchMainContent } from './hooks/useFetchMainContent.js';
 import HeroCarousel from './HeroCarousel.jsx';
 import ContentDisplayX from './../../components/ContentDisplays/ContentDisplayX.jsx';
 import ContentDisplayBlock from './../../components/ContentDisplays/ContentDisplayBlock.jsx';
-import ListsSection from '../../components/Sections/ListsSection.jsx';
-import ListsSectionSummary from '../../components/Sections/ListsSectionSummary.jsx';
-import Footer from '../Footer/Footer.jsx';
+import ListsSection from '../../components/Sections/Lists/ListsSection.jsx';
 
 export default function Home() {
   const [toShow, setToShow] = useState('movies');
   const { movies, tvShows, error, isLoading } = useFetchMainContent();
-
-  const activeMovies = toShow === 'movies';
 
   return (
     <div
@@ -40,20 +36,20 @@ export default function Home() {
               </h2>
 
               <button
-                onClick={() => setToShow('movie')}
+                onClick={() => setToShow('films')}
                 className={`px-3 py-1 md:px-4 md:py-1 cursor-pointer text-sm md:text-base font-semibold tracking-wider rounded-l-4xl transition-colors ${
-                  activeMovies
+                  toShow === 'films'
                     ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-300/90 hover:text-red-950'
                     : 'bg-zinc-800/70 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-300'
                 }`}
               >
-                Movies
+                Films
               </button>
 
               <button
                 onClick={() => setToShow('tv')}
                 className={`px-3 py-1 md:px-4 md:py-1 cursor-pointer text-sm md:text-base font-semibold tracking-wider rounded-e-4xl transition-colors ${
-                  !activeMovies
+                  toShow === 'tv'
                     ? 'bg-red-950 text-zinc-300/90 hover:bg-zinc-700 hover:text-zinc-950'
                     : 'bg-red-950/70 text-zinc-400 hover:bg-red-950/90 hover:text-zinc-300'
                 }`}
@@ -61,65 +57,57 @@ export default function Home() {
                 TV Shows
               </button>
             </div>
-            <div className='h-px bg-zinc-600' />
+            <div className='border-b border-zinc-600  mb-3' />
             <ContentDisplayX
-              content={activeMovies ? movies.popular : tvShows.popular}
+              content={toShow === 'films' ? movies.popular : tvShows.popular}
+              view={'lg'}
             />
             <ListsSection
               header={'Popular lists this week'}
               posterAmount={10}
             />
-            <ListsSectionSummary
-              header={'Featured lists'}
-              posterAmount={7}
-            />{' '}
           </div>
 
           {/* Now Playing */}
-          <div className='w-full flex flex-col gap-2'>
-            <h2 className='text-zinc-300 text-base -mb-1 tracking-wide font-semibold'>
+          <div className='w-full flex flex-col '>
+            <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
               Now Playing
             </h2>
-            <div className='h-px bg-zinc-600' />
+            <div className='border-b border-zinc-600 mt-2 mb-3' />
             <ContentDisplayBlock
               content={movies.nowPlaying}
               displayAmount={14}
-              view='sm'
-              includeContentRelations={false}
+              view='lg'
             />
           </div>
 
           {/* Top Rated */}
-          <div className='w-full flex flex-col gap-2'>
-            <h2 className='text-zinc-300 text-base -mb-1 tracking-wide font-semibold'>
+          <div className='w-full flex flex-col'>
+            <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
               Top Rated
             </h2>
-            <div className='h-px bg-zinc-600' />
+            <div className='border-b border-zinc-600 mt-2 mb-3' />
             <ContentDisplayBlock
               content={movies.topRated}
               displayAmount={14}
               view='lg'
-              includeContentRelations={false}
             />
           </div>
 
           {/* Coming Soon */}
-          <div className='w-full flex flex-col gap-2'>
-            <h2 className='text-zinc-300 text-base -mb-1 tracking-wide font-semibold'>
+          <div className='w-full flex flex-col '>
+            <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
               Coming Soon
             </h2>
-            <div className='h-px bg-zinc-600' />
+            <div className='border-b border-zinc-600 mt-2 mb-3' />
             <ContentDisplayBlock
               content={movies.upcoming}
               displayAmount={14}
               view='lg'
-              includeContentRelations={false}
             />
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { useGetListsByIds } from '../../../../api/lists/useGetListsByIds';
 import ProfileLikesFilms from './ProfileLikesFilms';
 import ProfileLikesLists from './ProfileLikesLists';
 import ProfileLikesTvShows from './ProfileLikesTvShows';
-import { tabVariants } from '../../../../utils/animations/motionVariants';
+import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 export default function ProfileLikes({
   items,

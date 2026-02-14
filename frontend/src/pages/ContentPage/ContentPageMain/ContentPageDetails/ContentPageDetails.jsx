@@ -7,7 +7,7 @@ import CrewTab from './tabs/CrewTab';
 import DetailsTab from './tabs/DetailsTab';
 import GenresTab from './tabs/GenresTab';
 import ReleasesTab from './tabs/ReleasesTab';
-import { tabVariants } from '../../../../utils/animations/motionVariants';
+import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 export default function ContentPageDetails({ content, isLoading }) {
   const [activeTab, setActiveTab] = useState('cast');

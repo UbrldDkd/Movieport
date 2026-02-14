@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { usePosterGridWidth } from '../../../../utils/constants/usePosterGridWidth';
+import { usePosterGridWidth } from '../../../../utils/constants/hooks/usePosterGridWidth';
 
 import ContentCardWithContentRelations from '../../../../components/ContentDisplays/ContentCard/ContentCardWithContentRelations';
-import { tabVariants } from '../../../../utils/animations/motionVariants';
+import { tabVariants } from '../../../../utils/style/animations/motionVariants';
+import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
 
 export default function ProfileWatched({ username, items, subtab, isOwner }) {
   const ITEMS_PER_PAGE = 36;
   const [currentPage, setCurrentPage] = useState(1);
-  const [view] = useState('sm'); // 'lg', 'md', 'sm'
+  const [view, setView] = useState('sm');
   const filmsRef = useRef(null);
   const tvRef = useRef(null);
   const [borderStyle, setBorderStyle] = useState({ width: 0, left: 0 });
@@ -45,8 +46,6 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
     currentPage * ITEMS_PER_PAGE
   );
 
-  const cardWidth = usePosterGridWidth(view);
-
   return (
     <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-200'>
       {/* Tabs */}
@@ -65,7 +64,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
           ref={tvRef}
           onClick={() => navigate(`/${username}/watched/tv/`)}
           className={`whitespace-nowrap hover:cursor-pointer ${
-            subtab === 'tv' ? 'text-zinc-200' : 'text-zinc-400'
+            subtab === 'tv' ? 'text-zinc-300/90' : 'text-zinc-400'
           }`}
         >
           TV-SHOWS
@@ -73,7 +72,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
 
         {/* Animated sliding border */}
         <div
-          className='absolute bottom-0 h-px bg-zinc-200 transition-all duration-300'
+          className='absolute bottom-0 h-px bg-zinc-300/90 transition-all duration-300'
           style={{
             width: borderStyle.width,
             transform: `translateX(${borderStyle.left}px)`,
@@ -91,22 +90,14 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
           exit='exit'
           transition={{ duration: 0.25, ease: 'easeOut' }}
         >
-          <div
-            className='grid gap-2.5'
-            style={{
-              gridTemplateColumns: `repeat(auto-fill, ${cardWidth}px)`,
-              justifyContent: 'center',
-            }}
-          >
-            {paginatedItems.map((item, i) => (
-              <div className='flex flex-col'>
-                <ContentCardWithContentRelations
-                  key={item.tmdb_id || `${item.tmdb?.id}-${i}`}
-                  item={item}
-                  view={view}
-                />
-              </div>
-            ))}
+          <div className='flex justify-center'>
+            <ContentDisplayBlock
+              includeContentRelations={true}
+              view={view}
+              displayAmount={ITEMS_PER_PAGE}
+              justify='start' // keeps items aligned left
+              content={items}
+            />
           </div>
 
           {totalPages > 1 && (

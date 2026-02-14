@@ -14,12 +14,9 @@ export default function ContentDisplayBlock({
   const { details } = API1;
 
   return (
-    <div className='w-full flex justify-center'>
+    <div className='w-full  flex justify-center'>
       {/* shrink-to-content container */}
-      <div
-        className={`flex flex-wrap justify-${justify} w-fit`}
-        style={{ gap: '10px' }} // exact 2.5
-      >
+      <div className={`flex flex-wrap gap-2.5 justify-${justify} w-fit`}>
         {content && Array.isArray(content) ? (
           content
             .slice(0, displayAmount)

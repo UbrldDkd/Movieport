@@ -1,4 +1,4 @@
-import { useLogoutUser } from '../../../api/account/useLogoutUser.js';
+import { useLogoutUser } from '../../useLogoutUser';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

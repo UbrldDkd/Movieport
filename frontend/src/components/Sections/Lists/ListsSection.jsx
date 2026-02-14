@@ -1,15 +1,30 @@
-import ListCard from '../../components/List/ListCard';
+import ListCard from '../../List/ListCard';
+import PropTypes from 'react';
 
 export default function ListsSection({
   header,
   lists = [],
   isLoading,
   posterAmount,
+  url,
 }) {
   if (isLoading) {
     return (
-      <div className='mt-8'>
-        <h2 className='text-lg font-semibold text-zinc-200 mb-4'>{header}</h2>
+      <div>
+        <div className='flex justify-between'>
+          <h2 className='text-lg font-semibold cursor-default text-zinc-200 mb-4'>
+            {header}
+          </h2>
+
+          {url && (
+            <Link
+              to={url}
+              className='text-xs font-semibold tracking-widest text-zinc-400 hover:text-zinc-200'
+            >
+              VIEW ALL
+            </Link>
+          )}
+        </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {[...Array(4)].map((_, i) => (
             <div
@@ -57,19 +72,29 @@ export default function ListsSection({
       like_count: '5.2K',
       username: 'film_buffs_unite',
     },
+    {
+      id: 3,
+      title: "Director's Masterpieces",
+      description: 'Essential films from visionary directors.',
+      item_count: 56,
+      film_count: 31,
+      tv_count: 25,
+      like_count: '5.2K',
+      username: 'film_buffs_unite',
+    },
   ];
 
   const displayLists = lists.length > 0 ? lists : staticLists;
 
   return (
-    <div className='mt-8'>
+    <div className=''>
       <h2 className=' font-semibold text-zinc-300/90'>{header}</h2>
-      <div className='mt-2 mb-3 border-b border-zinc-600' />
+      <div className='mt-1 mb-2 border-b border-zinc-600' />
       <div className='flex flex-col gap-4'>
         {displayLists.slice(0, 4).map((list) => (
           <div
             key={list.id}
-            className='bg-zinc-900/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors cursor-pointer group'
+            className='bg-zinc-900/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors  group'
           >
             <ListCard list={list} posterAmount={posterAmount} />
           </div>

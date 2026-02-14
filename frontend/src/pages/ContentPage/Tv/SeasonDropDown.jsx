@@ -2,8 +2,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { fadeVariants } from '../../../utils/animations/motionVariants';
-import ScrollHintArrow from '../../../utils/animations/ScrollHintArrow';
+import { fadeVariants } from '../../../utils/style/animations/motionVariants';
+import ScrollHintArrow from '../../../utils/style/animations/ScrollHintArrow';
 
 export default function SeasonDropdown({
   seasonCount,

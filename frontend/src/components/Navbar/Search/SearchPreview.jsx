@@ -1,21 +1,16 @@
 import { Keys } from '../../../utils/constants/Keys.js';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import { useFetchPreview } from './hooks/useFetchPreview.js';
 
-export default function SearchPreview({
-  content,
-  isLoading,
-  error,
-  value,
-  setValue,
-  setIsOpen,
-}) {
+export default function SearchPreview({ value, setValue, setIsOpen }) {
   const ref = useRef(null);
   const navigate = useNavigate();
   const { details } = Keys.API1;
 
   const [loadedCount, setLoadedCount] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { previewContent: content, isLoading, error } = useFetchPreview(value);
 
   const displayCount = isMobile ? 4 : 6;
   const items = Array.isArray(content) ? content.slice(0, displayCount) : [];
@@ -29,7 +24,7 @@ export default function SearchPreview({
   };
 
   const handleItemClick = (id, isMovie) => {
-    navigate(`/watch/${isMovie ? 'movie' : 'tv'}/${id}`);
+    navigate(`/${isMovie ? 'movie' : 'tv'}/${id}`);
     setIsOpen('searchPreview', false);
     setValue('');
   };
