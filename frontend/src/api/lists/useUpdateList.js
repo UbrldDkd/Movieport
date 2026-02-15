@@ -4,7 +4,7 @@ import { AuthContext } from '../account/auth/AuthContext'; // updated import
 import { ensureCsrf } from '../account/auth/ensureCsrf';
 
 export const useUpdateList = () => {
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const updateList = async (draft) => {
     if (!draft?.id) return null;
@@ -31,12 +31,17 @@ export const useUpdateList = () => {
       if (!res.ok) throw new Error('Failed to update list');
 
       const data = await res.json();
+      console.log('List updated:', data);
 
       // Sync updated list into user context
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((l) => (l.id === data.id ? data : l)),
       }));
+      console.log(
+        'updated list',
+        user?.lists.find((l) => l.id === data.id)
+      );
 
       return data;
     } catch (err) {

@@ -1,4 +1,8 @@
-export default function Pagination({ currentPage, totalPages, setCurrentPage }) {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  setCurrentPage,
+}) {
   if (totalPages <= 1) return null;
 
   return (

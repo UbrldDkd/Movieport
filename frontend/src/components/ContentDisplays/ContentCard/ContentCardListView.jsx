@@ -1,7 +1,12 @@
+// Icons
 import { IoTrashSharp } from 'react-icons/io5';
+
+// Utils helpers
+import { Keys } from '../../../utils/constants/Keys';
+
+// Components
 import ContentCard from './ContentCard';
 import MediaIcon from './MediaIcon';
-import { Keys } from '../../../utils/constants/Keys';
 
 export default function ContentCardListView({ item, onRemove }) {
   const { details } = Keys.API1;
@@ -45,7 +50,7 @@ export default function ContentCardListView({ item, onRemove }) {
           type='button'
           onClick={(e) => {
             e.stopPropagation();
-            onRemove(item.tmdb_id);
+            onRemove(item?.tmdb_id);
           }}
           className='text-zinc-600 hover:cursor-pointer hover:text-zinc-400 transition-colors p-3 self-center'
         >

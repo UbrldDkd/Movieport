@@ -68,12 +68,12 @@ export const useAddItems = () => {
       // Update user context with real backend data
       setUser((prev) => ({
         ...prev,
-        // Update contentRelations with new items
-        contentRelations: [
-          ...prev.contentRelations,
+        // Update content_relations with new items
+        content_relations: [
+          ...prev.content_relations,
           ...addedItems.filter(
             (newItem) =>
-              !prev.contentRelations.some(
+              !prev.content_relations.some(
                 (cr) => cr.tmdb_id === newItem.tmdb_id
               )
           ),

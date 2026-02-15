@@ -1,5 +1,6 @@
 import ListCardCompact from '../../List/ListCardCompact';
 import PropTypes from 'prop-types';
+import SectionHeader from '../Common/SectionHeader';
 
 export default function ListsSectionSummary({
   lists = [],
@@ -67,24 +68,20 @@ export default function ListsSectionSummary({
   ];
 
   const axisClass =
-    displayAxis === 'y' ? 'flex-col' : 'flex-row flex-nowrap md:flex-wrap';
+    displayAxis === 'y'
+      ? 'flex-col items-center'
+      : 'md:flex-row flex-col justify-center flex-nowrap md:flex-wrap';
 
   return (
     <div>
-      {header && (
-        <h2 className='font-semibold tracking-wide text-zinc-300/90'>
-          {header}
-        </h2>
-      )}
-      <div className='border-b border-zinc-600 mb-2 mt-1' />
-
+      <SectionHeader header={header} />
       <div
-        className={`flex ${axisClass} gap-5 md:gap-11 justify-center  overflow-x-auto md:overflow-visible`}
+        className={`flex ${axisClass}  scrollbar-hide gap-5 md:gap-11 justify-center  overflow-x-auto md:overflow-visible`}
       >
         {staticLists.map((list) => (
           <div
             key={list.id}
-            className='flex-shrink-0 w-fit md:w-auto flex snjustify-center rounded-sm transition-colors duration-100 hover:bg-zinc-800/30'
+            className='w-full  md:w-auto flex justify-center rounded-sm transition-colors duration-100 hover:bg-zinc-800/30'
           >
             <ListCardCompact
               list={list}

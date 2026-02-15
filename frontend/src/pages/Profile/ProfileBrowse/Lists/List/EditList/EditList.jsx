@@ -78,15 +78,14 @@ export default function EditList() {
   });
 
   // unsaved changes detection
+  const hasTitle = Boolean(newList?.title?.trim());
+
   const hasChanges =
     mode === 'edit'
       ? Object.keys(draft).filter((key) => key !== 'id').length > 0 ||
         itemsToAdd.length > 0 ||
         itemsToRemove.length > 0
-      : newList?.title.trim() !== '' ||
-        newList?.description.trim() !== '' ||
-        newList?.public !== true ||
-        (newList?.items?.length ?? 0) > 0;
+      : Boolean(newList?.title?.trim());
 
   return (
     <div className='min-h-screen h-full bg-zinc-950 text-zinc-300/90 md:px-20 sm:px-5 lg:px-58'>

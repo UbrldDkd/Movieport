@@ -19,7 +19,11 @@ export default {
       animation: {
         'fade-in-up': 'fade-in-up 0.35s ease-out forwards',
         fadeIn: 'fadeIn 0.3s ease-out forwards',
-        'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
+        'pulse-slow': 'pulseSlow 3s ease-in-out infinite',
+      },
+      colors: {
+        // flat keys — these generate usable Tailwind classes
+        primary: '#1E40AF',
       },
     },
   },

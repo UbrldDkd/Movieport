@@ -1,7 +1,10 @@
-import { useToggleContentRelation } from '../../../api/contentRelations/useToggleContentRelation';
+// Icons
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai';
 import { HiDotsVertical } from 'react-icons/hi';
 import { VscHeart, VscHeartFilled } from 'react-icons/vsc';
+
+// API hooks
+import { useToggleContentRelation } from '../../../api/contentRelations/useToggleContentRelation';
 
 export default function ContentCardActions({
   item,

@@ -27,7 +27,7 @@ export default function Home() {
       />
 
       <div className='w-full flex justify-center mt-10 md:mt-20 px-2 md:px-0'>
-        <div className='w-full max-w-[1140px] bg-zinc-900/60 rounded-sm flex py-3 flex-col gap-6 md:gap-10 px-2 md:px-3 items-center relative'>
+        <div className='w-full max-w-[1140px] bg-zinc-900/90 rounded-sm flex py-3 flex-col gap-6 md:gap-10 px-2 md:px-3 items-center relative'>
           {/* Movies / TV Toggle */}
           <div className='w-full flex flex-col gap-3'>
             <div className='flex flex-wrap items-baseline gap-2 md:gap-3'>
@@ -39,7 +39,7 @@ export default function Home() {
                 onClick={() => setToShow('films')}
                 className={`px-3 py-1 md:px-4 md:py-1 cursor-pointer text-sm md:text-base font-semibold tracking-wider rounded-l-4xl transition-colors ${
                   toShow === 'films'
-                    ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-300/90 hover:text-red-950'
+                    ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300/90 hover:text-red-950'
                     : 'bg-zinc-800/70 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-300'
                 }`}
               >

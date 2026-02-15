@@ -1,8 +1,15 @@
+// React
 import React, { useContext, useState } from 'react';
+
+// Icons
 import { IoIosStar } from 'react-icons/io';
-import { useToggleContentRelation } from '../../../api/contentRelations/useToggleContentRelation';
-import { ListsModalContext } from '../../../api/lists/Modal/Context/ListsModalContext';
 import { IoClose } from 'react-icons/io5';
+
+// API hooks
+import { useToggleContentRelation } from '../../../api/contentRelations/useToggleContentRelation';
+
+// Context
+import { ListsModalContext } from '../../../api/lists/Modal/Context/ListsModalContext';
 
 export default function ContentCardTooltip({ item, current, onClose }) {
   const { openModal } = useContext(ListsModalContext);

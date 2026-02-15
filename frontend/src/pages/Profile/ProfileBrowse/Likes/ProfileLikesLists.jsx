@@ -1,10 +1,14 @@
 import ListCard from '../../../../components/List/ListCard';
 
-export default function ProfileLikesLists({ lists }) {
+export default function ProfileLikesLists({ lists, username, isOwner }) {
   console.log(lists);
   if (!lists || lists.length === 0) {
     return (
-      <div className='text-center text-zinc-400 py-8'>No liked lists yet</div>
+      <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
+        {isOwner
+          ? `You haven't liked any lists yet`
+          : `${username} hasn't liked any lists yet`}
+      </div>
     );
   }
 

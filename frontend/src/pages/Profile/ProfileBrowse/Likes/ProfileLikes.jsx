@@ -1,17 +1,25 @@
+// React
 import { useState, useRef, useEffect } from 'react';
+
+// Third-party
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
+// API hooks
 import { useGetListsByIds } from '../../../../api/lists/useGetListsByIds';
+
+// Utils animations
+import { tabVariants } from '../../../../utils/style/animations/motionVariants';
+
+// Components
 import ProfileLikesFilms from './ProfileLikesFilms';
 import ProfileLikesLists from './ProfileLikesLists';
 import ProfileLikesTvShows from './ProfileLikesTvShows';
-import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 export default function ProfileLikes({
   items,
   username,
-  subtab,
+  subtab = 'films',
   isOwner,
   likedListIds,
 }) {
@@ -31,11 +39,11 @@ export default function ProfileLikes({
     setBorderStyle({ width: el.offsetWidth, left: el.offsetLeft });
   }, [subtab]);
 
-  const films = items?.filter((i) => i.media_type === 'movie');
+  const films = items?.filter((i) => i.media_type === 'film');
   const tvShows = items?.filter((i) => i.media_type === 'tv');
 
   return (
-    <div className='bg-zinc-900/90 border border-zinc-800 rounded-sm p-2 sm:p-3 text-zinc-400'>
+    <div className='bg-zinc-900/90  rounded-sm p-2 sm:p-3 text-zinc-400'>
       {/* Tabs */}
       <div className='relative flex gap-2 sm:gap-4 text-xs font-semibold tracking-widest mb-3'>
         <button
@@ -135,7 +143,13 @@ export default function ProfileLikes({
               </div>
             )}
 
-            {!isLoading && !error && <ProfileLikesLists lists={lists} />}
+            {!isLoading && !error && (
+              <ProfileLikesLists
+                lists={lists}
+                username={username}
+                isOwner={isOwner}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

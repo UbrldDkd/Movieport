@@ -1,5 +1,7 @@
-// ProfileMainRecentLists.jsx
+// Third-party
 import { Link } from 'react-router-dom';
+
+// Components
 import ListCardPosters from '../../../components/List/ListCardPosters';
 
 export default function ProfileMainRecentLists({
@@ -18,7 +20,7 @@ export default function ProfileMainRecentLists({
           {recentListsCount}
         </Link>
       </div>
-      <div className='h-[0.5px] bg-zinc-500' />
+      <div className='border-b border-zinc-600' />
 
       <div className='flex flex-col gap-2.5 w-full'>
         {recentLists.map((list) => (
@@ -26,6 +28,7 @@ export default function ProfileMainRecentLists({
             <ListCardPosters
               items={list.items.slice(0, 5)}
               linkUrl={`list/${list.title_slug}/`}
+              compact='md'
             />
             <Link
               to={`list/${list.title_slug}/`}

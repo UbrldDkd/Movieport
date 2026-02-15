@@ -1,30 +1,35 @@
 import PropTypes from 'prop-types';
 
-export function Tooltip({ label, children, icon }) {
+export function Tooltip({
+  label,
+  children,
+  position = 'bottom-full left-1/2 -translate-x-1/2',
+}) {
   return (
-    <div className='relative inline-flex items-center group'>
+    <span className='relative inline-block group'>
       {children}
 
-      <div
-        className='absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-        px-2 py-1 rounded bg-zinc-800/90 text-zinc-300/90 text-xs font-semibold
-        whitespace-nowrap opacity-0 group-hover:opacity-100
-        transition-opacity pointer-events-none z-10'
+      <span
+        className={`absolute ${position}
+          bg-zinc-700 font-semibold tracking-wider backdrop-blur-3xl
+          text-zinc-300 text-xs px-2 py-1 rounded shadow-md
+          opacity-0 group-hover:opacity-100 transition-opacity duration-200
+          pointer-events-none z-10 whitespace-nowrap`}
       >
-        <div className='flex '>
-          {icon}
-          {label}
-        </div>
-        <div
-          className='absolute top-full left-1/2 -translate-x-1/2
-          border-4 border-transparent border-t-zinc-800/90'
+        {label}
+        <span
+          className='absolute top-full left-1/2 w-0 h-0
+                         border-l-4 border-r-4 border-t-4
+                         border-l-transparent border-r-transparent border-t-zinc-700
+                         -translate-x-1/2'
         />
-      </div>
-    </div>
+      </span>
+    </span>
   );
 }
 
 Tooltip.propTypes = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  position: PropTypes.string,
 };

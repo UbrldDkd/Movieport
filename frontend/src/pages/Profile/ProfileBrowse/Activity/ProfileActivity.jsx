@@ -147,7 +147,7 @@ export default function ProfileActivity() {
         .map((a, i) => (
           <div
             key={i}
-            className='bg-zinc-900/70 rounded-sm px-3 py-2 text-zinc-400/90 text-sm'
+            className='bg-zinc-900/90 rounded-sm px-3 py-2 text-zinc-400/90 text-sm'
           >
             {a.type === 'item' ? renderItem(a.actions) : renderList(a)}
           </div>

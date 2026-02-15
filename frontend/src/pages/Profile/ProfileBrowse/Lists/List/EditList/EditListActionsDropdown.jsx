@@ -13,19 +13,8 @@ export default function EditListActionsDropdown({
 
   const { details } = Keys.API1;
 
-  // Build item object with only the fields needed for the backend
-  const buildItem = (tmdb) => ({
-    tmdb_id: tmdb[details.id],
-    title: tmdb[details.movieTitle] || tmdb[details.tvTitle] || '',
-    poster_path: tmdb[details.poster] || '',
-    release_date:
-      tmdb[details.movieReleaseDate] || tmdb[details.tvReleaseDate] || null,
-    media_type: tmdb[details.movieTitle] ? 'movie' : 'tv',
-  });
-
   const addItemAndReset = (tmdb) => {
-    const item = buildItem(tmdb);
-    handleAddItem(item);
+    handleAddItem(tmdb);
     setSearchVal('');
     setSelectedIndex(-1);
   };
@@ -90,7 +79,7 @@ export default function EditListActionsDropdown({
             <button
               key={item.tmdb_id}
               onMouseDown={() => addItemAndReset(item)}
-              className={`w-full text-left text-sm font-semibold px-2 py-1 transition-colors duration-100 ${
+              className={`w-full text-left text-sm font-semibold  px-2 py-1 transition-colors duration-100 ${
                 idx === selectedIndex
                   ? 'bg-zinc-700 text-white'
                   : 'text-zinc-200 hover:bg-zinc-800'

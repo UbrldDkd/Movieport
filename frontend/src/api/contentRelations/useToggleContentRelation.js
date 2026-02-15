@@ -24,7 +24,7 @@ export function useToggleContentRelation() {
 
     // Optimistic UI
     setUser((prev) => {
-      const relations = prev.contentRelations || [];
+      const relations = prev.content_relations || [];
       const exists = relations.find((r) => r.tmdb_id === item.tmdb_id);
 
       if (exists) {
@@ -62,7 +62,7 @@ export function useToggleContentRelation() {
       // Reconcile with backend
       setUser((prev) => ({
         ...prev,
-        contentRelations: prev.contentRelations.map((cr) =>
+        content_relations: prev.content_relations.map((cr) =>
           cr.tmdb_id === item.tmdb_id ? { ...cr, ...updated } : cr
         ),
       }));
@@ -74,7 +74,7 @@ export function useToggleContentRelation() {
       // Rollback
       setUser((prev) => ({
         ...prev,
-        contentRelations: prev.contentRelations.map((cr) =>
+        content_relations: prev.content_relations.map((cr) =>
           cr.tmdb_id === item.tmdb_id ? { ...cr, [field]: prevValue } : cr
         ),
       }));

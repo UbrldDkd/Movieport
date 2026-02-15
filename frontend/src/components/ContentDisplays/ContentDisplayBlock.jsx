@@ -1,6 +1,9 @@
+// Utils helpers
+import { Keys } from '../../utils/constants/Keys';
+
+// Components
 import ContentCard from './ContentCard/ContentCard';
 import ContentCardWithContentRelations from './ContentCard/ContentCardWithContentRelations';
-import { Keys } from '../../utils/constants/Keys';
 
 // display content as a block
 export default function ContentDisplayBlock({
@@ -14,10 +17,11 @@ export default function ContentDisplayBlock({
   const { details } = API1;
 
   return (
-    <div className='w-full  flex justify-center'>
+    <div className={`w-full  flex bg-zinc-500 justify-${justify}`}>
       {/* shrink-to-content container */}
-      <div className={`flex flex-wrap gap-2.5 justify-${justify} w-fit`}>
-        {content && Array.isArray(content) ? (
+      <div className={`flex w-full flex-wrap gap-2.5 justify-${justify} w-fit`}>
+        {content &&
+          Array.isArray(content) &&
           content
             .slice(0, displayAmount)
             .map((item) =>
@@ -25,14 +29,12 @@ export default function ContentDisplayBlock({
                 <ContentCardWithContentRelations
                   key={item[details.id]}
                   item={item}
+                  view={view}
                 />
               ) : (
                 <ContentCard key={item[details.id]} item={item} view={view} />
               )
-            )
-        ) : (
-          <p className='text-base text-red-900'>Content not found</p>
-        )}
+            )}
       </div>
     </div>
   );

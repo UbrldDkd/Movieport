@@ -1,14 +1,19 @@
-// Standard library
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+// Icons
 import { FaPenFancy } from 'react-icons/fa';
 import { GiCaptainHatProfile } from 'react-icons/gi';
+
+// Third-party
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+// Components
+import { Tooltip } from '../../components/Common/Tooltip.jsx';
+import FollowButton from './Common/FollowButton.jsx'; // New follow button
+
+// Utils animations
 import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
 
 export default function ProfileCard({ user }) {
-  const [tooltip, setTooltip] = useState(false);
-
   if (!user) return null;
 
   const { username, lists, contentRelations, isOwner } = user;
@@ -36,13 +41,16 @@ export default function ProfileCard({ user }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className='px-3 py-2.5 my-2 border border-zinc-800/10 rounded-r-full flex flex-col-reverse md:flex-row items-center justify-between gap-6 bg-zinc-900/70'
+      className='px-3 py-2.5 my-2  rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-zinc-900/90'
     >
       {/* Stats section */}
-      <div className='flex items-center'>
+      <div className='flex md:flex-row flex-col gap-2 md:gap-0 items-start md:items-center'>
         {stats.map((stat, idx) => (
           <div key={stat.label} className='flex items-center'>
-            <Link to={stat.link} className='flex flex-col items-center px-3'>
+            <Link
+              to={stat.link}
+              className='flex gap-1 md:flex-col items-center px-3'
+            >
               <span className='text-zinc-300 text-base font-semibold'>
                 {stat.value}
               </span>
@@ -51,56 +59,29 @@ export default function ProfileCard({ user }) {
               </span>
             </Link>
             {idx < stats.length - 1 && (
-              <div className='h-8 w-px bg-red-950 mx-1' />
+              <div className='h-8 w-px bg-red-950 mx-1 opacity-0 md:opacity-100' />
             )}
           </div>
         ))}
       </div>
 
       {/* Profile section */}
-      <div className='flex items-center gap-6'>
+      <div className='flex md:flex-row  items-center   gap-2 md:gap-6'>
         <div
           className={`flex flex-col gap-2 ${
             !isOwner && 'items-end text-right'
           }`}
         >
-          <h1 className='text-2xl  text-zinc-200'>{username}</h1>
+          <h1 className='text-2xl text-zinc-200'>{username}</h1>
 
-          {/* Follow/unFollow button(only when viewing another profile) */}
-          <div className='flex items-center gap-3 '>
+          {/* Follow/unFollow button (only when viewing another profile) */}
+          <div className='flex items-center gap-3  '>
             {!isOwner && TEMP_FOLLOWS_YOU && (
               <div className='text-xs text-zinc-400 font-semibold tracking-wider justify-center'>
                 Follows you
               </div>
             )}
-            {!isOwner && (
-              <button
-                className='min-w-[105px] text-zinc-300/90 hover:cursor-pointer bg-zinc-800 text-xs font-semibold tracking-widest py-1 rounded-xs px-2 text-center transition-colors duration-200'
-                onMouseEnter={(e) => {
-                  if (!TEMP_FOLLOWING) return;
-                  e.currentTarget.textContent = 'UNFOLLOW';
-                  e.currentTarget.classList.remove(
-                    'bg-zinc-800',
-                    'text-zinc-300/90'
-                  );
-                  e.currentTarget.classList.add('bg-red-900', 'text-zinc-900');
-                }}
-                onMouseLeave={(e) => {
-                  if (!TEMP_FOLLOWING) return;
-                  e.currentTarget.textContent = 'FOLLOWING';
-                  e.currentTarget.classList.remove(
-                    'bg-red-900',
-                    'text-zinc-900'
-                  );
-                  e.currentTarget.classList.add(
-                    'bg-zinc-800',
-                    'text-zinc-300/90'
-                  );
-                }}
-              >
-                {TEMP_FOLLOWING ? 'FOLLOWING' : 'FOLLOW'}
-              </button>
-            )}
+            {!isOwner && <FollowButton isFollowing={TEMP_FOLLOWING} />}
           </div>
         </div>
 
@@ -110,24 +91,16 @@ export default function ProfileCard({ user }) {
           </div>
 
           {isOwner && (
-            <>
-              <button
-                className='absolute -bottom-2 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
-                onMouseEnter={() => setTooltip(true)}
-                onMouseLeave={() => setTooltip(false)}
+            <div className='-mt-6'>
+              <Tooltip
+                label='Edit Profile'
+                position='bottom-5 -left-11.25 -mt-2'
               >
-                <FaPenFancy size={20} />
-              </button>
-
-              <div
-                className={`absolute bottom-6.5 -left-11.25 bg-zinc-700 font-semibold tracking-wider backdrop-blur-3xl  text-zinc-300 text-xs px-2 py-1 rounded shadow-md transition-opacity duration-200 ${
-                  tooltip ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                }`}
-              >
-                Edit Profile
-                <div className='absolute top-full left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-zinc-700 -translate-x-1/2' />
-              </div>
-            </>
+                <button className='absolute -bottom-4 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'>
+                  <FaPenFancy size={20} />
+                </button>
+              </Tooltip>
+            </div>
           )}
         </div>
       </div>

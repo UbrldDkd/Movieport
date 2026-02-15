@@ -1,5 +1,7 @@
-// ProfileMainWatchlist.jsx
+// Third-party
 import { Link } from 'react-router-dom';
+
+// Components
 import ListCardPosters from '../../../components/List/ListCardPosters';
 
 export default function ProfileMainWatchlist({ watchlist }) {
@@ -15,7 +17,7 @@ export default function ProfileMainWatchlist({ watchlist }) {
           {watchlist.length}
         </Link>
       </div>
-      <div className='h-[0.5px] bg-zinc-500' />
+      <div className='border-b border-zinc-600' />
       <ListCardPosters items={watchlist} linkUrl='watchlist/' />
     </div>
   );

@@ -5,7 +5,6 @@ import { useCreateList } from '../../../../../../../api/lists/useCreateList';
 import { AuthContext } from '../../../../../../../api/account/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { Keys } from '../../../../../../../utils/constants/Keys';
 import { cleanItem } from '../../../../../../../utils/helpers/cleanItem';
 
 export function useListHandlers({
@@ -28,8 +27,6 @@ export function useListHandlers({
   const createList = useCreateList();
 
   const { user } = useContext(AuthContext);
-
-  const { details } = Keys.API1;
 
   // Helper to normalize empty values
   const normalize = (v) =>
@@ -58,8 +55,6 @@ export function useListHandlers({
   };
 
   const handleRemoveItem = (tmdb_id) => {
-    const inOriginal = list.items.some((i) => i.tmdb_id === tmdb_id);
-
     // Remove item from newList (both create and edit mode)
     setNewList((prev) => ({
       ...prev,
@@ -67,6 +62,7 @@ export function useListHandlers({
     }));
 
     if (mode === 'edit') {
+      const inOriginal = list.items?.some((i) => i.tmdb_id === tmdb_id);
       // Remove from itemsToAdd if it was added during this edit session
       setItemsToAdd((prev) => prev.filter((i) => i !== tmdb_id));
 
@@ -87,16 +83,16 @@ export function useListHandlers({
     if (newList.items.some((i) => i.tmdb_id === tmdb_id)) return;
 
     // Use contentRelations context if item exists there
-    const existingItem = user?.contentRelations.find(
+    const existingItem = user?.content_relations.find(
       (cr) => Number(cr.tmdb_id) === Number(tmdb_id)
     );
 
-    const cleanItem = cleanItem(item);
+    const cleanedItem = cleanItem(item);
 
     // Build the complete item object with all necessary fields for the backend
     const newItem = existingItem
       ? existingItem // Use existing relation as-is since it has all fields
-      : cleanItem;
+      : cleanedItem;
 
     // Update the list optimistically
     setNewList((prev) => ({

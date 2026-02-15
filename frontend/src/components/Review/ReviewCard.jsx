@@ -19,7 +19,7 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
     <div className='bg-zinc-800/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors flex flex-col sm:flex-row gap-4'>
       {/* Left column: ContentCard */}
       {includeItemDetails && (
-        <div className='flex-shrink-0'>
+        <div className='flex-shrink-0 '>
           <ContentCard item={item} view='sm' />
         </div>
       )}

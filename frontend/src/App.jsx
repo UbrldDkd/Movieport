@@ -36,7 +36,7 @@ export default function App() {
         <Route path='/:username/list/:title_slug/' element={<List />} />
 
         {/* Explicit profile tabs */}
-        <Route path='/:username/watched/' element={<ProfileBrowse />} />
+        <Route path='/:username/watched/:subtab?' element={<ProfileBrowse />} />
         <Route path='/:username/activity/' element={<ProfileBrowse />} />
         <Route path='/:username/reviews/' element={<ProfileBrowse />} />
         <Route path='/:username/lists/' element={<ProfileBrowse />} />

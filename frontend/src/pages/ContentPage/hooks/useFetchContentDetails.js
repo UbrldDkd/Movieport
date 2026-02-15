@@ -19,6 +19,8 @@ export function useFetchContentDetails({
     const { details: details1, Url: Url1, API_KEY: API_KEY1 } = API1;
     const { Url: Url2, API_KEY: API_KEY2 } = API2;
 
+    const mediaTypePath = mediaType === 'film' ? 'movie' : 'tv';
+
     const fetchContent = async () => {
       try {
         setIsLoading(true);
@@ -27,13 +29,13 @@ export function useFetchContentDetails({
 
         // Fetch base TMDb data with aggregate_credits for TV
         const tmdbRes = await fetch(
-          `${Url1}${mediaType}/${id}?api_key=${API_KEY1}&language=en-US&append_to_response=alternative_titles,release_dates${mediaType === 'tv' ? ',aggregate_credits' : ''}`
+          `${Url1}${mediaTypePath}/${id}?api_key=${API_KEY1}&language=en-US&append_to_response=alternative_titles,release_dates${mediaType === 'tv' ? ',aggregate_credits' : ''}`
         );
 
         if (!tmdbRes.ok) {
           if (tmdbRes.status === 404) {
             throw new Error(
-              `${mediaType === 'movie' ? 'Movie' : 'TV show'} not found`
+              `${mediaTypePath === 'film' ? 'Movie' : 'TV show'} not found`
             );
           }
           throw new Error(`Failed to load content (${tmdbRes.status})`);

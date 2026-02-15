@@ -6,7 +6,7 @@ export function cleanItem(item) {
 
   const { details } = Keys.API1;
 
-  const mediaType = item[details.movieTitle] ? 'movie' : 'tv';
+  const mediaType = item[details.movieTitle] ? 'film' : 'tv';
 
   const cleanedItem = {
     tmdb_id: Number(item?.tmdb_id || item?.[details.id]),

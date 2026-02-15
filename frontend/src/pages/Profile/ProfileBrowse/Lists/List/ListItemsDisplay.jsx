@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import ContentCard from '../../../../../components/ContentDisplays/ContentCard/ContentCard';
+import ContentDisplayBlock from '../../../../../components/ContentDisplays/ContentDisplayBlock';
 import ContentCardListView from '../../../../../components/ContentDisplays/ContentCard/ContentCardListView';
 import {
   itemVariants,
@@ -20,30 +20,32 @@ export default function ListItemsDisplay({ items, view }) {
 
   return (
     <AnimatePresence mode='wait'>
-      <motion.div
-        key={view}
-        variants={containerVariants}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-        className={`grid gap-2.5 ${
-          view === 'list' ? 'grid-cols-1' : 'grid-cols-auto-fill'
-        }`}
-        style={{
-          gridTemplateColumns:
-            view === 'list' ? '1fr' : 'repeat(auto-fill, minmax(140px, 1fr))',
-        }}
-      >
-        {items.map((item, i) => (
-          <motion.div key={item.tmdb_id || i} variants={itemVariants}>
-            {view === 'list' ? (
+      {view === 'grid' ? (
+        <motion.div
+          key='grid'
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+          exit='exit'
+        >
+          <ContentDisplayBlock content={items} view='lg' justify='start' />
+        </motion.div>
+      ) : (
+        <motion.div
+          key='list'
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+          exit='exit'
+          className='flex flex-col gap-2.5'
+        >
+          {items.map((item, i) => (
+            <motion.div key={item.tmdb_id || i} variants={itemVariants}>
               <ContentCardListView item={item} />
-            ) : (
-              <ContentCard item={item} view='lg' />
-            )}
-          </motion.div>
-        ))}
-      </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }

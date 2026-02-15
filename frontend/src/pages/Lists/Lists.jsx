@@ -70,7 +70,7 @@ export default function Lists() {
       <div className='bg-zinc-800/30 mt-2 p-3 rounded-sm'>
         <ListsSectionSummary header='Curated by Movieport' />
       </div>
-      <div className='flex gap-2'>
+      <div className='flex md:flex-row flex-col gap-2'>
         <div className='bg-zinc-800/30 flex-1 mt-2 p-3 rounded-sm'>
           <ListsSection header='Film lists' posterAmount={3} url />
         </div>

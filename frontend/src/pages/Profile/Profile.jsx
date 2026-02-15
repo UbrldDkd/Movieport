@@ -1,10 +1,17 @@
-import { useParams, useNavigate } from 'react-router-dom';
+// Icons
 import { GiShipWreck } from 'react-icons/gi';
 
+// Third-party
+import { useParams, useNavigate } from 'react-router-dom';
+
+// Components
 import ProfileCard from './ProfileCard';
 import ProfileNavBar from './ProfileNavBar';
 import ProfileMain from './ProfileMain/ProfileMain.jsx';
 import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
+
+// Hooks
+
 import { useUserToDisplay } from './hooks/useUserToDisplay.js';
 
 export default function Profile() {

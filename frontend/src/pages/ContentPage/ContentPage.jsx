@@ -85,7 +85,7 @@ export default function ContentPage() {
     <div className='relative w-full min-h-screen bg-zinc-950'>
       <div className='relative z-5 flex flex-col text-zinc-400'>
         {/* Backdrop */}
-        <div className='relative -mt-18 z-0'>
+        <div className='relative  z-0'>
           <ContentPageBackdrop backdropUrl={backdropUrl} />
 
           <div className='relative z-10'>

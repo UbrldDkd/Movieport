@@ -20,7 +20,7 @@ export default function Navbar() {
   const [value, setValue] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  const isMoviePage = useMatch('/movie/:id');
+  const isMoviePage = useMatch('/film/:id');
   const isTvPage = useMatch('/tv/:id');
 
   const isContentPage = isMoviePage || isTvPage;
@@ -39,7 +39,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className='relative'>
+    <div className='relative z-50'>
       <nav
         className={`${
           isContentPage ? 'fixed top-0 left-0 w-full z-50' : 'relative'

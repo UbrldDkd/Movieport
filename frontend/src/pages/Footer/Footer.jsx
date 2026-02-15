@@ -62,7 +62,27 @@ export default function Footer() {
               © 2025 Movieport. All rights reserved.
             </p>
             <p className='text-xs text-zinc-600'>
-              Movie data provided by TMDb. OMDb used as backup.
+              Movie data provided by{' '}
+              {
+                <Link
+                  className='bg-zinc-900/90 py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
+                  to='https://www.themoviedb.org'
+                  target='_blank'
+                >
+                  TMDB
+                </Link>
+              }
+              .{' '}
+              {
+                <Link
+                  className='bg-zinc-900/90 py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
+                  to='https://www.omdb.org/es/us'
+                  target='_blank'
+                >
+                  OMDB
+                </Link>
+              }{' '}
+              used as backup.
             </p>
           </div>
         )}

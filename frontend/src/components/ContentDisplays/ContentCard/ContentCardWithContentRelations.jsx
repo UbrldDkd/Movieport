@@ -1,6 +1,9 @@
-import ContentCard from '../ContentCard/ContentCard';
+// Icons
 import { IoIosStar } from 'react-icons/io';
 import { VscHeartFilled } from 'react-icons/vsc';
+
+// Components
+import ContentCard from '../ContentCard/ContentCard';
 
 export default function ContentCardWithContentRelations({ item, view }) {
   const maxStars = 5;

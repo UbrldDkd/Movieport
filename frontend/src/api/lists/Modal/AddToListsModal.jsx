@@ -43,7 +43,7 @@ export default function AddToListsModal({ item, onClose }) {
       {/* Modal */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className='bg-zinc-900 border z-2 border-zinc-700 rounded-sm p-4 flex flex-col gap-3 w-full max-w-md text-zinc-300/90 shadow-xl transition-all duration-300 ease-out'
+        className='bg-zinc-900 border z-2 border-zinc-800 rounded-sm p-4 flex flex-col gap-3 w-full max-w-md text-zinc-300/90 shadow-xl transition-all duration-300 ease-out'
       >
         <h2 className='font-semibold  tracking-widest'>
           Add <span className='text-zinc-200'>{item.title}</span> to lists

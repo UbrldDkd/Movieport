@@ -1,7 +1,16 @@
+// React
 import { useState, useContext, useMemo } from 'react';
+
+// Third-party
 import { useParams } from 'react-router-dom';
+
+// API hooks
 import { useGetList } from '../../../../../api/lists/useGetList';
+
+// Context
 import { AuthContext } from '../../../../../api/account/auth/AuthContext';
+
+// Components
 import ListHeader from './ListHeader';
 import ListItemsDisplay from './ListItemsDisplay';
 import ListActions from './ListActions';
@@ -37,9 +46,9 @@ export default function List() {
   }, [list, page]);
 
   const watchedCount = useMemo(() => {
-    if (!list?.items || !user?.contentRelations) return 0;
+    if (!list?.items || !user?.content_relations) return 0;
     const ids = new Set(list.items.map((i) => i.tmdb_id));
-    return user.contentRelations.filter(
+    return user.content_relations.filter(
       (cr) => ids.has(cr.tmdb_id) && cr.watched
     ).length;
   }, [list, user]);
@@ -59,9 +68,9 @@ export default function List() {
 
   return (
     <div className='min-h-screen w-full bg-zinc-950 text-zinc-200 overflow-x-hidden'>
-      <div className='mx-auto max-w-[1000px] mt-2 grid grid-cols-1 lg:grid-cols-[6fr_1.3fr] gap-2.5 min-w-0'>
+      <div className='mx-2 md:mx-auto max-w-[1006px] mt-2 md:grid  grid grid-cols-1 lg:grid-cols-[6fr_1.3fr] gap-2.5 min-w-0'>
         {/* Main content */}
-        <div className='bg-zinc-900/90 p-3 border border-zinc-800 rounded-sm overflow-visible'>
+        <div className='bg-zinc-900/90 p-3  rounded-sm overflow-visible'>
           <ListHeader
             list={list}
             username={username}
@@ -93,12 +102,20 @@ export default function List() {
         </div>
 
         {/* Sidebar */}
-        <div className='flex flex-col gap-2'>
-          <ListActions username={username} list={list} />
-          <WatchedPercentage
-            watchedCount={watchedCount}
-            totalCount={list.items.length}
-          />
+        <div className='flex flex-row md:flex-col gap-2'>
+          <div className='w-full md:w-auto '>
+            <ListActions
+              username={username}
+              list={list}
+              className='w-2/3  md:w-auto'
+            />
+          </div>
+          <div className='w-1/3  md:w-auto'>
+            <WatchedPercentage
+              watchedCount={watchedCount}
+              totalCount={list.items.length}
+            />
+          </div>
         </div>
       </div>
     </div>

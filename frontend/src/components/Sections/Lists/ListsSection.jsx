@@ -1,12 +1,19 @@
-import ListCard from '../../List/ListCard';
+// React
 import PropTypes from 'react';
+
+// Third-party
+import { Link } from 'react-router-dom';
+
+// Components
+import ListCard from '../../List/ListCard';
+import SectionHeader from '../Common/SectionHeader';
 
 export default function ListsSection({
   header,
   lists = [],
   isLoading,
   posterAmount,
-  url,
+  url = '12',
 }) {
   if (isLoading) {
     return (
@@ -88,21 +95,18 @@ export default function ListsSection({
 
   return (
     <div className=''>
-      <h2 className=' font-semibold text-zinc-300/90'>{header}</h2>
-      <div className='mt-1 mb-2 border-b border-zinc-600' />
-      <div className='flex flex-col gap-4'>
+      <SectionHeader header={header} url={url} />
+
+      <div className='flex flex-col  gap-4'>
         {displayLists.slice(0, 4).map((list) => (
           <div
             key={list.id}
-            className='bg-zinc-900/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors  group'
+            className='bg-zinc-900/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors  '
           >
             <ListCard list={list} posterAmount={posterAmount} />
           </div>
         ))}
       </div>
-      <button className='mt-4 text-sm text-zinc-400 hover:text-zinc-300 font-medium transition-colors'>
-        View all {lists.length || '16'} lists
-      </button>
     </div>
   );
 }

@@ -12,7 +12,7 @@ class ContentRelations(models.Model):
     title = models.CharField(max_length=255, default='')
     poster_path = models.CharField(max_length=500, default='')
     release_date = models.DateField(null=True, blank=True)
-    media_type = models.CharField(max_length=10, choices=[('movie', 'Movie'), ('tv', 'TV')], default='movie')
+    media_type = models.CharField(max_length=10, choices=[('film', 'Film'), ('tv', 'TV')], default='movie')
     liked = models.BooleanField(default=False)
     watchlisted = models.BooleanField(default=False)
     watched = models.BooleanField(default=False)

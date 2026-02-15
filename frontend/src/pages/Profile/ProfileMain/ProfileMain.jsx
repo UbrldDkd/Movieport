@@ -1,4 +1,4 @@
-// ProfileMain.jsx
+// Components
 import ProfileContentSection from './ProfileContentSection';
 import ProfileMainWatchlist from './ProfileMainWatchlist';
 import ProfileMainRecentLists from './ProfileMainRecentLists';
@@ -16,20 +16,21 @@ export default function ProfileMain({ user }) {
 
   const twoWeeksAgo = new Date();
   twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+
   const recentListsCount = (user?.lists || []).filter(
     (list) => new Date(list.created_at) >= twoWeeksAgo
   ).length;
 
   return (
-    <div className='flex flex-col min-h-110 md:grid md:grid-cols-[4fr_2fr] gap-6 mt-2'>
+    <div className='flex flex-col min-h-screen md:min-h-110 md:grid md:grid-cols-[4fr_2fr] md:gap-6 mt-2'>
       {/* Left column */}
-      <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/70 rounded-sm px-3'>
+      <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/90 rounded-sm px-3'>
         {user?.favourites && (
-          <ProfileContentSection header='FAVOURITES' items={user?.favourites} />
+          <ProfileContentSection header='Favourites' items={user?.favourites} />
         )}
         {user?.likes && (
           <ProfileContentSection
-            header='RECENTLY LIKED'
+            header='Recently liked'
             url={`likes/films/`}
             items={user?.likes}
           />
@@ -37,7 +38,7 @@ export default function ProfileMain({ user }) {
       </div>
 
       {/* Right column */}
-      <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/90 rounded-sm py-2.5 px-3'>
+      <div className='flex flex-col gap-4  w-full  md:min-w-0 bg-zinc-900/90 rounded-sm py-2.5 px-3'>
         <ProfileMainWatchlist watchlist={user?.watchlist} />
         <ProfileMainRecentLists
           recentLists={recentLists}
