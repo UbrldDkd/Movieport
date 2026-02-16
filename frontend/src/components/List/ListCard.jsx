@@ -1,6 +1,3 @@
-// React
-import { useState } from 'react';
-
 // Icons
 import { GiLockedHeart, GiCaptainHatProfile } from 'react-icons/gi';
 import { FaPen, FaFilm } from 'react-icons/fa6';

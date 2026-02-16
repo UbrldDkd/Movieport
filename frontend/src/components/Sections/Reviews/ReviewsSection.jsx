@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Components
 import ReviewCard from '../../Review/ReviewCard';
+import SectionHeader from '../Common/SectionHeader';
 
 export default function ReviewsSection({
   header,
@@ -88,20 +89,8 @@ export default function ReviewsSection({
 
   return (
     <div>
-      <div className='flex justify-between items-baseline'>
-        <h2 className='font-semibold text-zinc-300/90 tracking-wide'>
-          {header}
-        </h2>
-        {url && (
-          <Link
-            to={url}
-            className='text-xs font-semibold tracking-widest text-zinc-400 hover:text-zinc-200'
-          >
-            VIEW ALL
-          </Link>
-        )}
-      </div>
-      <div className='border-b border-zinc-600 mt-2 mb-3' />
+      <SectionHeader header={header} />
+
       <div className='space-y-4'>
         {displayReviews.slice(0, 3).map((review) => (
           <ReviewCard

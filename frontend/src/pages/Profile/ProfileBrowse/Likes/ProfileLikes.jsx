@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 
 // Third-party
 import { useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
 
 // API hooks
 import { useGetListsByIds } from '../../../../api/lists/useGetListsByIds';
@@ -89,7 +89,7 @@ export default function ProfileLikes({
       {/* Animated Tab Content */}
       <AnimatePresence mode='wait'>
         {subtab === 'films' && (
-          <motion.div
+          <Motion.div
             key='films'
             variants={tabVariants}
             initial='hidden'
@@ -102,11 +102,11 @@ export default function ProfileLikes({
               username={username}
               isOwner={isOwner}
             />
-          </motion.div>
+          </Motion.div>
         )}
 
         {subtab === 'tv-shows' && (
-          <motion.div
+          <Motion.div
             key='tv-shows'
             variants={tabVariants}
             initial='hidden'
@@ -119,11 +119,11 @@ export default function ProfileLikes({
               username={username}
               isOwner={isOwner}
             />
-          </motion.div>
+          </Motion.div>
         )}
 
         {subtab === 'lists' && (
-          <motion.div
+          <Motion.div
             key='lists'
             variants={tabVariants}
             initial='hidden'
@@ -150,7 +150,7 @@ export default function ProfileLikes({
                 isOwner={isOwner}
               />
             )}
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </div>

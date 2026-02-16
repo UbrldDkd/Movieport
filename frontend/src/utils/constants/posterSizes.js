@@ -4,7 +4,7 @@ export const posterSizes = {
     tmdb: 'w500',
   },
   similarSection: {
-    width: 'w-[85px] sm:w-[90px] md:w-[100px] lg:w-[109px]',
+    width: 'w-[81.5px] sm:w-[94.5px] md:w-[100px] lg:w-[114px]',
     tmdb: 'w500',
   },
   md: {

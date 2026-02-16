@@ -2,12 +2,12 @@ import { useRef, useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import ContentCard from './ContentCard/ContentCard.jsx';
-import ContentPagePosterStats from './Common/PosterStats/PosterStats.jsx';
+import PosterStats from './Common/PosterStats/PosterStats.jsx';
 import { Keys } from '../../utils/constants/Keys.js';
 
 export default function ContentDisplayX({
   content,
-  view,
+  view = 'lg',
   includeStats = false,
 }) {
   const { API1 } = Keys;
@@ -61,12 +61,12 @@ export default function ContentDisplayX({
       <div
         ref={trackRef}
         onScroll={updateArrows}
-        className='flex md:space-x-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 md:px-6'
+        className='flex space-x-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 md:px-6'
       >
-        {content.map((item) => (
+        {content?.map((item) => (
           <div key={item[details.id]} className='snap-start flex-shrink-0 '>
             <ContentCard item={item} view={view} />
-            {includeStats && <ContentPagePosterStats />}
+            {includeStats && <PosterStats />}
           </div>
         ))}
       </div>

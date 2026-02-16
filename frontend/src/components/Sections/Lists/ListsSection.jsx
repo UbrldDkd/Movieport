@@ -18,20 +18,7 @@ export default function ListsSection({
   if (isLoading) {
     return (
       <div>
-        <div className='flex justify-between'>
-          <h2 className='text-lg font-semibold cursor-default text-zinc-200 mb-4'>
-            {header}
-          </h2>
-
-          {url && (
-            <Link
-              to={url}
-              className='text-xs font-semibold tracking-widest text-zinc-400 hover:text-zinc-200'
-            >
-              VIEW ALL
-            </Link>
-          )}
-        </div>
+        <SectionHeader header={header} />
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           {[...Array(4)].map((_, i) => (
             <div

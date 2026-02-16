@@ -85,26 +85,23 @@ export default function ContentPage() {
     <div className='relative w-full min-h-screen bg-zinc-950'>
       <div className='relative z-5 flex flex-col text-zinc-400'>
         {/* Backdrop */}
-        <div className='relative  z-0'>
+        <div className='relative z-0'>
           <ContentPageBackdrop backdropUrl={backdropUrl} />
 
-          <div className='relative z-10'>
-            <div className='relative w-full pt-4 px-2 sm:px-3 md:p-5 lg:px-10'>
-              <div className='relative z-10 w-full max-w-screen mx-auto rounded-md shadow-lg'></div>
-            </div>
+          <div className='relative z-10 px-2 sm:px-3 md:px-5 lg:px-10 pt-4'>
+            <div className='w-full max-w-screen mx-auto rounded-md shadow-lg' />
           </div>
         </div>
 
         {/* Main Content Container */}
-        <div className='relative w-full flex flex-col md:flex-row gap-4 md:gap-10 md:-mt-90 z-10 px-4 md:px-65 items-start pt-8 md:pt-45'>
-          {/* Fade from transparent to zinc-950 at top edge */}
-          <div className='absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-transparent to-zinc-950 pointer-events-none -z-1' />
-          {/* Solid zinc-950 below fade */}
-          <div className='absolute top-60 left-0 right-0 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
+        <div className='relative z-10 flex flex-col md:flex-row gap-6 md:gap-10 px-3 sm:px-5 md:px-8 lg:px-65 pt-6 md:pt-45 md:-mt-90'>
+          {/* Gradient overlays */}
+          <div className='absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-transparent to-zinc-950 pointer-events-none -z-1' />
+          <div className='absolute inset-x-0 top-60 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
 
-          {/* Poster Column - Sticky on desktop */}
-          <div className='hidden md:block shrink-0 z-10 sticky top-16 self-start'>
-            <div>
+          {/* Poster Column (desktop only) */}
+          <div className='hidden md:block shrink-0 sticky top-16 self-start z-10'>
+            <div className='flex flex-col gap-1'>
               <ContentPagePoster
                 displayPosterUrl={posterUrl}
                 title={
@@ -115,38 +112,38 @@ export default function ContentPage() {
               />
 
               <PosterStats isLoading={isLoading} />
-
-              {mediaType === 'tv' && seasonContent && (
-                <div className='mt-4'>
-                  <div className='w-full h-px bg-zinc-700 my-4' />
-                  <SeasonDropdown
-                    seasonCount={content?.tmdb[details.seasonCount]}
-                    selectedSeason={selectedSeason}
-                    setSelectedSeason={setSelectedSeason}
-                  />
-                  <EpisodesGrid
-                    seasonContent={seasonContent}
-                    id={content?.tmdb?.[details.id]}
-                    episodeNumber={Number(episodeNumber)}
-                  />
-                </div>
-              )}
             </div>
+
+            {mediaType === 'tv' && seasonContent && (
+              <div className='mt-4'>
+                <div className='w-full h-px bg-zinc-700 my-4' />
+                <SeasonDropdown
+                  seasonCount={content?.tmdb[details.seasonCount]}
+                  selectedSeason={selectedSeason}
+                  setSelectedSeason={setSelectedSeason}
+                />
+                <EpisodesGrid
+                  seasonContent={seasonContent}
+                  id={content?.tmdb?.[details.id]}
+                  episodeNumber={Number(episodeNumber)}
+                />
+              </div>
+            )}
           </div>
 
           {/* Main Content Column */}
-          <div className='w-full md:w-auto md:flex-1'>
+          <div className='w-full md:flex-1 space-y-10 md:max-w-xl mx-auto'>
             <ContentPageMain
               content={content}
               current={current}
               isLoading={isLoading}
               mediaType={mediaType}
             />
-            <ReviewsSection header={'Popular reviews'} isLoading={isLoading} />
 
-            {/* TODO: add actual lists which feature the item later */}
+            <ReviewsSection header='Popular reviews' isLoading={isLoading} />
+
             <ListsSection
-              header={'Popular featuring lists'}
+              header='Popular featuring lists'
               isLoading={isLoading}
             />
 
@@ -155,6 +152,7 @@ export default function ContentPage() {
               currentId={content?.tmdb?.[details.id]}
               mediaType={mediaType}
             />
+
             <SimilarContentSection
               id={content?.tmdb?.[details.id]}
               mediaType={mediaType}

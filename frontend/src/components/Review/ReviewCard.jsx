@@ -12,11 +12,7 @@ import { renderStars } from '../../utils/style/ui/renderStars';
 import ContentCard from '../ContentDisplays/ContentCard/ContentCard';
 import { Tooltip } from '../Common/Tooltip';
 
-export default function ReviewCard({
-  review,
-  includeItemDetails = false,
-  forProfile = true,
-}) {
+export default function ReviewCard({ review, includeItemDetails = false }) {
   const item = review.content_relation;
 
   return (
@@ -43,16 +39,14 @@ export default function ReviewCard({
         {/* User info & stars */}
         <div className='flex  mb-2'>
           <div className='flex items-baseline gap-2'>
-            {!forProfile && (
-              <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
-                <GiCaptainHatProfile className='text-sm' />
-              </div>
-            )}
+            <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
+              <GiCaptainHatProfile className='text-sm' />
+            </div>
+
             <div>
               <div className='text-sm flex gap-3 font-semibold text-zinc-300'>
-                {!forProfile && (
-                  <span>{review.user || `User ${review.id}`}</span>
-                )}
+                <span>{review.user || `User ${review.id}`}</span>
+
                 <Tooltip label={`${review.rating}/5`}>
                   <div className='flex items-center gap-0.25'>
                     {renderStars({ rating: review.rating, size: 18 })}
@@ -65,26 +59,22 @@ export default function ReviewCard({
         </div>
 
         {/* Review text */}
-        <p className='text-base tracking-wide text-zinc-300/90 leading-relaxed mb-3'>
+        <p className='text-base tracking-wide text-zinc-300/90 leading-6 mb-3'>
           {review.review || review.reviews || 'Great movie!'}
         </p>
 
         {/* Likes & more reviews */}
         <div className='flex items-center justify-between'>
-          {!forProfile && (
-            <button className='flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-400 transition-colors'>
-              TODO: add like button to review
-              <VscHeartFilled className='text-base' />
-              <VscHeart />
-              <span>{formatNumber(review.like_count)}</span>
-            </button>
-          )}
+          <button className='flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-400 transition-colors'>
+            {/* TODO: add like button to review */}
+            <VscHeartFilled className='text-base' />
+            <VscHeart />
+            <span>{formatNumber(review.like_count)}</span>
+          </button>
 
-          {!forProfile && (
-            <span className='text-xs text-zinc-600 hover:text-zinc-500 cursor-pointer transition-colors'>
-              More reviews by {review.user || 'this user'}
-            </span>
-          )}
+          <span className='text-xs text-zinc-600 hover:text-zinc-500 cursor-pointer transition-colors'>
+            More reviews by {review.user || 'this user'}
+          </span>
         </div>
       </div>
     </div>

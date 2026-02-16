@@ -32,7 +32,7 @@ export default function PosterStats({ stats = {}, isLoading }) {
   }
 
   return (
-    <div className='flex flex-wrap justify-center gap-2 sm:gap-3 font-semibold  text-zinc-400 text-xs'>
+    <div className='flex flex-wrap justify-center gap-2  font-semibold  text-zinc-400 text-xs'>
       <Stat
         icon={VscHeartFilled}
         value={s.liked_by}
