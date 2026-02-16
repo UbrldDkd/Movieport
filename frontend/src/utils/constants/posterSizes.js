@@ -1,6 +1,6 @@
 export const posterSizes = {
   sm: {
-    width: 'w-[55px] sm:w-[60px] md:w-[65px] lg:w-[70px]',
+    width: 'w-[70px] sm:w-[75px] md:w-[77px] lg:w-[70px]',
     tmdb: 'w500',
   },
   similarSection: {

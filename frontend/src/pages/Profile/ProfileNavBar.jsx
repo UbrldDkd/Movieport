@@ -16,7 +16,7 @@ export default function ProfileNavBar({ username }) {
 
   return (
     <nav className='w-full rounded-sm font-sans'>
-      <div className='flex items-center justify-center rounded-l-sm rounded-r-3xl bg-zinc-900/90 py-1 relative overflow-x-auto'>
+      <div className='flex items-center justify-center rounded-sm  bg-zinc-900/90 py-1 relative overflow-x-auto'>
         <div className='flex flex-col md:flex-row w-full md:w-auto divide-y md:divide-y-0 divide-zinc-800/50 '>
           {navLinks.map((link) => {
             const active =

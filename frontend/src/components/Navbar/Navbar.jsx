@@ -49,7 +49,7 @@ export default function Navbar() {
             : 'bg-red-950 shadow-md'
         }`}
       >
-        <div className='max-w-7xl mx-auto flex items-center justify-between h-full'>
+        <div className='mx-2 md:mx-5 lg:ml-30 lg:mr-12  mx-auto flex items-center justify-between h-full'>
           <div className='flex items-center space-x-2 md:space-x-6'>
             <Link to='/'>
               <Logo />

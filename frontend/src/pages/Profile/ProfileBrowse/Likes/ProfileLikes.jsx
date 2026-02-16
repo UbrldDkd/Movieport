@@ -43,7 +43,7 @@ export default function ProfileLikes({
   const tvShows = items?.filter((i) => i.media_type === 'tv');
 
   return (
-    <div className='bg-zinc-900/90  rounded-sm p-2 sm:p-3 text-zinc-400'>
+    <div className='bg-zinc-900/90  rounded-sm p-3 text-zinc-400'>
       {/* Tabs */}
       <div className='relative flex gap-2 sm:gap-4 text-xs font-semibold tracking-widest mb-3'>
         <button

@@ -14,6 +14,7 @@ import ProfileLists from './Lists/ProfileLists.jsx';
 import ProfileWatchlist from './Watchlist/ProfileWatchlist.jsx';
 import ProfileLikes from './Likes/ProfileLikes.jsx';
 import ProfileActivity from './Activity/ProfileActivity.jsx';
+import ProfileReviews from './Reviews/ProfileReviews.jsx';
 import PageContainer from '../../../components/WrapperContainers/PageContainer.jsx';
 
 const navLinks = [
@@ -94,7 +95,7 @@ export default function ProfileBrowse() {
 
         <Link
           to={`/${userToDisplay.username}/`}
-          className='hidden sm:flex absolute right-1.5 items-center gap-2'
+          className='hidden md:flex absolute right-1.5 items-center gap-2'
         >
           <span className='text-sm font-medium'>{userToDisplay.username}</span>
           <div className='w-8 h-8 rounded-full border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
@@ -123,6 +124,7 @@ export default function ProfileBrowse() {
             />
           )}
           {activeTab === 'activity' && <ProfileActivity />}
+          {activeTab === 'reviews' && <ProfileReviews />}
           {activeTab === 'lists' && (
             <ProfileLists
               lists={userToDisplay.lists}

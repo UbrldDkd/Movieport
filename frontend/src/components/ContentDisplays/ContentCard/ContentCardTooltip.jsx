@@ -14,6 +14,7 @@ import { ListsModalContext } from '../../../api/lists/Modal/Context/ListsModalCo
 export default function ContentCardTooltip({ item, current, onClose }) {
   const { openModal } = useContext(ListsModalContext);
   const toggleField = useToggleContentRelation();
+  console.log('Current relations:', current); // Debug log to check current relations
 
   const [rating, setRating] = useState(current?.rating || 0);
   const [hoverRating, setHoverRating] = useState(0);

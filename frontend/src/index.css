@@ -7,7 +7,8 @@ html {
   padding: 0;
   min-height: 100%;
   min-width: 360px;
-  overflow-y: scroll; /* main scrollbar, always reserved */
+  overflow-y: auto;
+  overflow-x: hidden; /* main scrollbar, always reserved */
 }
 
 body {

@@ -17,7 +17,7 @@ export default function ContentDisplayBlock({
   const { details } = API1;
 
   return (
-    <div className={`w-full  flex bg-zinc-500 justify-${justify}`}>
+    <div className={`w-full  flex  justify-${justify}`}>
       {/* shrink-to-content container */}
       <div className={`flex w-full flex-wrap gap-2.5 justify-${justify} w-fit`}>
         {content &&

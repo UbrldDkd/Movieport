@@ -103,7 +103,7 @@ export default function ListsSection({
             key={list.id}
             className='bg-zinc-900/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors  '
           >
-            <ListCard list={list} posterAmount={posterAmount} />
+            <ListCard list={list} posterAmount={posterAmount} compact='md' />
           </div>
         ))}
       </div>

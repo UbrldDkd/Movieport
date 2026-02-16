@@ -21,7 +21,7 @@ export default function ListCard({ list, username, posterAmount }) {
 
   return (
     <div className='flex flex-col sm:flex-row mb-1 rounded-xl '>
-      <ListCardPosters items={items} linkUrl={linkUrl} />
+      <ListCardPosters items={items} linkUrl={linkUrl} compact='md' />
 
       <div className='mt-2 sm:mt-0 sm:ml-2 flex flex-col flex-1 min-w-0'>
         {/* Title and lock icon */}

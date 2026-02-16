@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+
+@layer components {
+  .container {
+    @apply rounded-sm p-3 bg-bgPrimary;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-md font-semibold text-white bg-primary hover:bg-orange-600 transition-colors;
+  }
+
+  .card {
+    @apply rounded-lg p-6 text-white bg-bgSecondary shadow-lg;
+  }
+
+  .animate-fadeIn {
+    animation: fade-in-up 0.35s ease-out forwards;
+    will-change: opacity, transform;
+  }
+}
+
+/* Non-Tailwind CSS (scrollbars, etc.) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Keyframes */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
