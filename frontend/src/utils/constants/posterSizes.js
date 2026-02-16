@@ -1,22 +1,31 @@
 export const posterSizes = {
   sm: {
-    width: 'w-[70px] sm:w-[75px] md:w-[77px] lg:w-[70px]',
+    width:
+      'min-w-[75px] max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
     tmdb: 'w500',
   },
+
   similarSection: {
-    width: 'w-[81.5px] sm:w-[94.5px] md:w-[100px] lg:w-[114px]',
+    width:
+      'min-w-[82px] max-w-[82px] sm:min-w-[95px] sm:max-w-[95px] md:min-w-[100px] md:max-w-[100px] lg:min-w-[114px] lg:max-w-[114px]',
     tmdb: 'w500',
   },
+
   md: {
-    width: 'w-[90px] sm:w-[100px] md:w-[110px] lg:w-[120px]',
+    width:
+      'min-w-[90px] max-w-[90px] sm:min-w-[100px] sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',
     tmdb: 'w500',
   },
+
   lg: {
-    width: 'w-[110px] sm:w-[120px] md:w-[135px] lg:w-[150px]',
+    width:
+      'min-w-[132px] max-w-[110px] sm:min-w-[120px] sm:max-w-[120px] md:min-w-[135px] md:max-w-[135px] lg:min-w-[150px] lg:max-w-[150px]',
     tmdb: 'w500',
   },
+
   xl: {
-    width: 'w-[140px] sm:w-[160px] md:w-[180px] lg:w-[220px]',
+    width:
+      'min-w-[140px] max-w-[140px] sm:min-w-[160px] sm:max-w-[160px] md:min-w-[180px] md:max-w-[180px] lg:min-w-[220px] lg:max-w-[220px]',
     tmdb: 'w780',
   },
 };

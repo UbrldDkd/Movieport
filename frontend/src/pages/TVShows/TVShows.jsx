@@ -9,21 +9,27 @@ export default function TVShows() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60 min-h-screen mt-2 space-y-3 rounded-sm p-3 '>
-        <div className='px-10.5 md:px-23 lg:px-23.5'>
+      <div className=' bg-zinc-900/60 min-h-screen mt-2 space-y-10 rounded-sm p-3 '>
+        {/* latest tv shows section */}
+        <div className='mx-auto max-w-[792px]'>
           <SectionHeader header='Latest TV Shows' />
 
           <ContentDisplayX content={tvShows.popular} includeStats={true} />
         </div>
+
+        {/* two column layout */}
         <div className='flex'>
+          {/* first column */}
           <div className='flex-1'></div>
+
+          {/* second column */}
           <div className='flex-2'>
             {' '}
             <ReviewsSection header='Newly reviewed' />
           </div>
         </div>
 
-        <div className=' md:px-2 lg:px-13.5 mt-10'>
+        <div className=' max-w-[865px] mx-auto'>
           <SectionHeader header='Popular this week' />
           <ContentDisplayX content={tvShows.popular} view='sm' />
         </div>

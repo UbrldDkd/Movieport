@@ -88,7 +88,7 @@ export default function EditList() {
       : Boolean(newList?.title?.trim());
 
   return (
-    <div className='min-h-screen h-full bg-zinc-950 text-zinc-300/90 md:px-20 sm:px-5 lg:px-58'>
+    <div className='min-h-screen mx-auto h-full bg-zinc-950 text-zinc-300/90 justify-center max-w-[1020px]'>
       <div className='max-w-7xl mx-auto pt-2'>
         <div className='bg-zinc-900/90 border border-zinc-800 rounded-sm px-4 py-3 overflow-visible'>
           <div className='text-[22px] text-zinc-300/90 pb-3'>

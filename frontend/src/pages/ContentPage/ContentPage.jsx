@@ -94,7 +94,7 @@ export default function ContentPage() {
         </div>
 
         {/* Main Content Container */}
-        <div className='relative z-10 flex flex-col md:flex-row gap-6 md:gap-10 px-3 sm:px-5 md:px-8 lg:px-65 pt-6 md:pt-45 md:-mt-90'>
+        <div className='relative z-10 flex flex-col md:flex-row space-x-10  px-3 sm:px-5 md:px-8 lg:min-w- pt-6 md:pt-45 md:-mt-90'>
           {/* Gradient overlays */}
           <div className='absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-transparent to-zinc-950 pointer-events-none -z-1' />
           <div className='absolute inset-x-0 top-60 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
