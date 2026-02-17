@@ -9,7 +9,7 @@ export default function TVShows() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60 min-h-screen mt-2 space-y-10 rounded-sm p-3 '>
+      <div className=' bg-zinc-900/60 min-h-screen space-y-10 rounded-sm p-3 '>
         {/* latest tv shows section */}
         <div className='mx-auto max-w-[792px]'>
           <SectionHeader header='Latest TV Shows' />

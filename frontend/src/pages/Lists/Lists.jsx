@@ -37,7 +37,7 @@ export default function Lists() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60 mt-2  flex flex-col p-3 rounded-sm'>
+      <div className=' bg-zinc-900/60   flex flex-col p-3 rounded-sm'>
         <div className='flex flex-col items-center justify-center pt-3 space-y-3 '>
           <div className='text-zinc-300/90 cursor-default text-2xl tracking-wider text-center font-semibold'>
             Keep track of films and TV your way.

@@ -76,15 +76,15 @@ export default function ProfileBrowse() {
   return (
     <PageContainer>
       {/* Navbar */}
-      <nav className='flex items-center justify-center rounded-l-sm rounded-r-3xl bg-zinc-900/90 py-1 mt-2 relative overflow-x-auto'>
-        <div className='flex flex-col md:flex-row w-full md:w-auto divide-y md:divide-y-0 divide-zinc-800/50 '>
+      <nav className='flex items-center py-1 justify-center rounded-l-sm rounded-r-3xl bg-zinc-900/90   relative overflow-x-auto'>
+        <div className='flex flex-col sm:w-auto sm:flex-row md:flex-row w-full md:w-auto divide-y md:divide-y-0 divide-zinc-800/50 '>
           {navLinks.map((item) => (
             <button
               key={item.to}
               onClick={() => handleTabClick(item.to)}
               className={`w-full md:w-auto text-left md:text-center tracking-wider hover:cursor-pointer text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
                 activeTab === item.to
-                  ? 'text-zinc-200'
+                  ? 'text-zinc-200 md:bg-transparent sm:bg-transparent bg-zinc-800'
                   : 'text-zinc-400 md:hover:bg-transparent hover:text-zinc-300 hover:bg-zinc-800'
               }`}
             >

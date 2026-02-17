@@ -14,17 +14,17 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
   const isLoggedIn = !!user;
 
   return (
-    <div className='bg-zinc-800/90 rounded-sm overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
+    <div className='bg-zinc-800 rounded-sm overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
       {isLoading ? (
-        <button className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+        <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
           Share
         </button>
       ) : !isLoggedIn ? (
         <>
-          <button className='w-full py-2.5 md:py-3 px-3 text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Log in or register to like, watchlist or review
           </button>
-          <button className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Share
           </button>
         </>
@@ -78,22 +78,22 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
 
           <ContentPageActionsRating initialRating={current?.rating || 0} />
 
-          <button className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Show your activity
           </button>
 
-          <button className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Review
           </button>
 
           <button
             onClick={() => openModal(item)}
-            className='w-full py-2.5 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+            className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
           >
             Add to lists
           </button>
 
-          <button className='w-full py-2.5 md:py-3 rounded-b-sm px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 rounded-b-sm px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Share
           </button>
         </>

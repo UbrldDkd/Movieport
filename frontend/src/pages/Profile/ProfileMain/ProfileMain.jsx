@@ -22,7 +22,7 @@ export default function ProfileMain({ user }) {
   ).length;
 
   return (
-    <div className='flex flex-col min-h-screen md:min-h-110 md:grid md:grid-cols-[4fr_2fr] md:gap-6 mt-2'>
+    <div className='flex flex-col min-h-screen md:min-h-110 md:grid md:grid-cols-[4fr_2fr] md:gap-6 '>
       {/* Left column */}
       <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/90 rounded-sm px-3'>
         {user?.favourites && (

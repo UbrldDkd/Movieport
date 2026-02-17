@@ -2,6 +2,7 @@ import { Keys } from '../../../utils/constants/Keys.js';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useFetchPreview } from './hooks/useFetchPreview.js';
+import MediaIcon from '../../ContentDisplays/ContentCard/MediaIcon.jsx';
 
 export default function SearchPreview({ value, setValue, setIsOpen }) {
   const ref = useRef(null);
@@ -12,6 +13,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { previewContent: content, isLoading, error } = useFetchPreview(value);
 
+  const mediaType = content?.[0]?.[details.movieTitle] ? 'movie' : 'tv';
   const displayCount = isMobile ? 4 : 6;
   const items = Array.isArray(content) ? content.slice(0, displayCount) : [];
   const expectedImages = items.filter((i) => i?.[details.poster]).length;
@@ -51,7 +53,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   return (
     <div
       ref={ref}
-      className='rounded-md mt-2 bg-zinc-950/90 scrollbar-hide transition-all duration-200 backdrop-blur-3xl shadow-lg inline-block p-2 w-[calc(100vw-2rem)] max-w-[280px] md:w-[320px] relative'
+      className='rounded-md mt-2 bg-zinc-900 scrollbar-hide transition-all duration-100 backdrop-blur-3xl shadow-lg inline-block p-3 w-[calc(100vw-2rem)] max-w-[280px] md:w-[320px] relative'
     >
       <div
         className={`transition-opacity duration-300 ${!isLoading && items.length ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -95,7 +97,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
                   </p>
                   <div className='flex justify-between items-center'>
                     <p className='text-zinc-400 text-xs md:text-sm'>
-                      {isMovie ? 'Movie' : 'TV Show'}
+                      <MediaIcon mediaType={mediaType} />
                     </p>
                     <p className='text-xs md:text-sm text-zinc-300'>
                       {typeof rating === 'number' ? rating.toFixed(1) : '—'}/10
@@ -120,8 +122,14 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
       </div>
 
       {!isLoading && !items.length && (
-        <div className='w-full h-20 md:h-30 flex items-center justify-center text-zinc-400 text-xs md:text-sm'>
+        <div className='w-full h-20 md:h-30  font-semibold tracking-wider flex items-center justify-center text-zinc-400 text-xs md:text-sm '>
           No results yet.
+        </div>
+      )}
+
+      {isLoading && (
+        <div className='w-full h-20 md:h-30  font-semibold tracking-wider flex items-center justify-center text-zinc-400 text-xs md:text-sm '>
+          <div className='animate-spin rounded-full h-8 w-8 border-t-4 border-red-900 border-solid' />
         </div>
       )}
     </div>

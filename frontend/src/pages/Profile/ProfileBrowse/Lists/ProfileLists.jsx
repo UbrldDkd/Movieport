@@ -28,7 +28,7 @@ export default function ProfileLists({ lists, username, isOwner }) {
 
   return (
     <div
-      className={`grid grid-cols-1 ${isOwner && 'md:grid-cols-[5fr_1fr]'} gap-2.5`}
+      className={`flex flex-col-reverse md:grid md:grid-cols-1 ${isOwner && 'md:grid-cols-[5fr_1fr]'} gap-2`}
     >
       {/* Lists */}
       <div className='bg-zinc-900/90  rounded-sm p-3 w-full text-zinc-200'>
@@ -61,7 +61,7 @@ export default function ProfileLists({ lists, username, isOwner }) {
 
       {/* Actions */}
       {isOwner && (
-        <div className='bg-zinc-900/90   rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
+        <div className='bg-zinc-900/90 rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
           <button
             onClick={() => navigate(createListURL)}
             className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'

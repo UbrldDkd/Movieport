@@ -1,5 +1,8 @@
-import SearchButton from './SearchButton';
+// Third-party
 import { useNavigate } from 'react-router-dom';
+
+// Components
+import SearchButton from './SearchButton';
 
 export default function SearchInput({
   value,
@@ -27,10 +30,8 @@ export default function SearchInput({
   const onChange = (e) => setValue(e.target.value);
 
   return (
-    <div className='flex space-x-2 md:space-x-3 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-zinc-300/90 px-3 md:px-2 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:w-64'>
+    <div className='flex space-x-3 md:space-x-1 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-zinc-300/90 px-1 md:px-2 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:w-64'>
       <SearchButton onClick={onSubmit} />
-
-      <div className='w-px h-8 bg-zinc-400' />
 
       <input
         type='text'
@@ -41,7 +42,7 @@ export default function SearchInput({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder='Search...'
-        className='flex-1 bg-transparent focus:outline-none text-zinc-200 hover:cursor-pointer placeholder-zinc-400 text-sm md:text-base'
+        className='flex-1 min-w-0 bg-transparent placeholder:tracking-wider placeholder:text-zinc-300 placeholder:text-sm  placeholder:font-semibold focus:outline-none text-zinc-300 hover:cursor-pointer placeholder-zinc-400 text-sm font-semibold tracking-wider truncate'
       />
     </div>
   );

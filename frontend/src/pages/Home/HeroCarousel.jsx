@@ -105,7 +105,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
                 to={`/${movie[details.movieTitle] ? 'movie' : 'tv'}/${movie[details.id]}`}
                 className='inline-block'
               >
-                <button className='mt-2 rounded-3xl border border-zinc-400 bg-transparent px-2 py-1 text-sm text-zinc-300 transition-colors duration-300 hover:bg-red-950 md:mt-4 md:px-3 md:text-base'>
+                <button className='mt-2 rounded-3xl border-2 border-zinc-500 bg-transparent px-2 py-1 text-sm font-semibold text-zinc-300 cursor-pointer hover:border-red-950 transition-colors duration-300 hover:bg-red-950 md:mt- md:px-3 md:text-base'>
                   View now
                 </button>
               </Link>
@@ -114,7 +114,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
         ))}
       </div>
 
-      <div className='absolute bottom-3 left-1/2 z-20 -translate-x-1/2 md:bottom-6'>
+      <div className='absolute bottom-1 left-1/2 z-20 -translate-x-1/2 md:bottom-0'>
         <PaginationPanel
           totalPages={movies.length}
           currentPage={currentIndex}

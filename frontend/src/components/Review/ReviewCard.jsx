@@ -16,44 +16,49 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
   const item = review.content_relation;
 
   return (
-    <div className='bg-zinc-800/30 p-4 rounded-sm hover:bg-zinc-800/40 transition-colors flex flex-col sm:flex-row gap-4'>
+    <div className='bg-zinc-800/30 p-3 rounded-sm hover:bg-zinc-800/40 transition-colors flex flex-col sm:flex-row gap-4'>
       {/* Left column: ContentCard */}
       {includeItemDetails && (
-        <div className='flex-shrink-0 '>
-          <ContentCard item={item} view='sm' />
-        </div>
+        <div className='flex-shrink-0 hidden sm:flex-shrink'></div>
       )}
 
       {/* Right column: Review details */}
       <div className='flex-1 flex flex-col justify-between'>
         {/* Optional item title + release_date */}
-        {includeItemDetails && item && (
-          <div className='flex items-baseline gap-2 mb-2 text-xl text-zinc-300 font-semibold'>
-            <span>{item.title}</span>
-            <span className='text-zinc-500 text-base'>
-              {item.release_date.slice(0, 4)}
-            </span>
-          </div>
-        )}
-
-        {/* User info & stars */}
-        <div className='flex  mb-2'>
-          <div className='flex items-baseline gap-2'>
-            <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
-              <GiCaptainHatProfile className='text-sm' />
-            </div>
-
-            <div>
-              <div className='text-sm flex gap-3 font-semibold text-zinc-300'>
-                <span>{review.user || `User ${review.id}`}</span>
-
-                <Tooltip label={`${review.rating}/5`}>
-                  <div className='flex items-center gap-0.25'>
-                    {renderStars({ rating: review.rating, size: 18 })}
-                  </div>
-                </Tooltip>
+        <div className='flex space-x-2'>
+          <ContentCard view='sm' item={item} />
+          <div className='flex flex-col'>
+            {includeItemDetails && item && (
+              <div className='flex items-baseline gap-2 mb-1  sm:text-lg md:text-xl text-zinc-300 font-semibold'>
+                <span>{item.title}</span>
+                <span className='text-zinc-400 text-base'>
+                  {item.release_date.slice(0, 4)}
+                </span>
               </div>
-              <div className='text-xs text-zinc-500'>{review.created_at}</div>
+            )}
+
+            {/* User info & stars */}
+            <div className='flex  mb-2'>
+              <div className='flex items-baseline gap-2'>
+                <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
+                  <GiCaptainHatProfile className='text-sm' />
+                </div>
+
+                <div>
+                  <div className='text-sm flex gap-3 font-semibold text-zinc-300'>
+                    <span>{review.user || `User ${review.id}`}</span>
+
+                    <Tooltip label={`${review.rating}/5`}>
+                      <div className='flex items-center gap-0.25'>
+                        {renderStars({ rating: review.rating, size: 18 })}
+                      </div>
+                    </Tooltip>
+                  </div>
+                  <div className='text-xs text-zinc-500'>
+                    {review.created_at}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

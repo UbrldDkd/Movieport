@@ -25,8 +25,10 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
 
   return (
     <div
-      className={`grid gap-2.5 ${
-        isOwner ? 'md:grid-cols-[2fr_1fr] sm:grid-cols-1' : 'grid-cols-[1fr]'
+      className={`grid gap-2 ${
+        isOwner
+          ? 'md:grid-cols-[2fr_1fr] md:grid sm:flex sm:flex-col-reverse'
+          : 'grid-cols-[1fr]'
       }`}
     >
       {/* Main watchlist */}

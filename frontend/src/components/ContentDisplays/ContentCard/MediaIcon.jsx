@@ -13,7 +13,7 @@ export default function MediaIcon({ mediaType }) {
   console.log(label);
   return (
     <div className='inline-block relative'>
-      <Tooltip label={label} position={'-top-7 -left-4'}>
+      <Tooltip label={label} position={'-top-7 -left-3.5'}>
         {/* Icon */}
         {mediaType === 'movie' ? (
           <FaFilm className='text-zinc-400' />

@@ -41,15 +41,15 @@ export default function ProfileCard({ user }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className='px-3 py-2.5 my-2  rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-zinc-900/90'
+      className='px-3 py-2   rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-zinc-900/90'
     >
       {/* Stats section */}
-      <div className='flex md:flex-row flex-col gap-2 md:gap-0 items-start md:items-center'>
+      <div className='flex md:flex-row sm:flex-row flex-col gap-2 sm:gap-0 md:gap-0 items-start md:items-center'>
         {stats.map((stat, idx) => (
           <div key={stat.label} className='flex items-center'>
             <Link
               to={stat.link}
-              className='flex gap-1 md:flex-col items-center px-3'
+              className='flex gap-1 sm:flex-col md:flex-col items-center px-3'
             >
               <span className='text-zinc-300 text-base font-semibold'>
                 {stat.value}
@@ -59,7 +59,7 @@ export default function ProfileCard({ user }) {
               </span>
             </Link>
             {idx < stats.length - 1 && (
-              <div className='h-8 w-px bg-red-950 mx-1 opacity-0 md:opacity-100' />
+              <div className='h-8 w-px bg-red-950 mx-1 opacity-0 sm:opacity-100 md:opacity-100' />
             )}
           </div>
         ))}
@@ -94,9 +94,9 @@ export default function ProfileCard({ user }) {
             <div className='-mt-6'>
               <Tooltip
                 label='Edit Profile'
-                position='bottom-5 -left-11.25 -mt-2'
+                position='bottom-5.5 -left-11.25 -mt-2'
               >
-                <button className='absolute -bottom-4 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'>
+                <button className='absolute -bottom-3 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'>
                   <FaPenFancy size={20} />
                 </button>
               </Tooltip>

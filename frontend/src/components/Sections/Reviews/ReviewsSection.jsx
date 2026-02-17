@@ -91,7 +91,7 @@ export default function ReviewsSection({
     <div>
       <SectionHeader header={header} />
 
-      <div className='space-y-4'>
+      <div className='space-y-2.5'>
         {displayReviews.slice(0, 3).map((review) => (
           <ReviewCard
             key={review.id}

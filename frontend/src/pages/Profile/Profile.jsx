@@ -47,10 +47,12 @@ export default function Profile() {
 
   return (
     <PageContainer>
-      <ProfileCard user={userToDisplay} />
-      <ProfileNavBar username={userToDisplay?.username} />
-      <div className='flex flex-col flex-1 min-w-0 gap-4'>
-        <ProfileMain user={userToDisplay} />
+      <div className='flex flex-col space-y-2'>
+        <ProfileCard user={userToDisplay} />
+        <ProfileNavBar username={userToDisplay?.username} />
+        <div className='flex flex-col flex-1 min-w-0 gap-4'>
+          <ProfileMain user={userToDisplay} />
+        </div>
       </div>
     </PageContainer>
   );

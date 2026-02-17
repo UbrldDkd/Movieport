@@ -10,6 +10,7 @@ import { useListHandlers } from './handlers/useListHandlers';
 import EditListHeader from './EditListHeader';
 import EditListActions from './EditListActions';
 import EditListItemsDisplay from './EditListItemsDisplay';
+import PageContainer from '../../../../../../components/WrapperContainers/PageContainer';
 
 export default function EditList() {
   const location = useLocation();
@@ -88,39 +89,37 @@ export default function EditList() {
       : Boolean(newList?.title?.trim());
 
   return (
-    <div className='min-h-screen mx-auto h-full bg-zinc-950 text-zinc-300/90 justify-center max-w-[1020px]'>
-      <div className='max-w-7xl mx-auto pt-2'>
-        <div className='bg-zinc-900/90 border border-zinc-800 rounded-sm px-4 py-3 overflow-visible'>
-          <div className='text-[22px] text-zinc-300/90 pb-3'>
-            {mode === 'edit'
-              ? 'Edit list'
-              : mode === 'create'
-                ? 'Create List'
-                : ''}
-          </div>
-
-          <EditListHeader newList={newList} handleChange={handleChange} />
-
-          <EditListActions
-            username={username}
-            list={originalList}
-            draft={draft}
-            view={view}
-            mode={mode}
-            hasChanges={hasChanges}
-            handleAddItem={handleAddItem}
-            handleSubmitEdit={handleSubmitEdit}
-            handleClear={handleClear}
-            setView={setView}
-          />
-
-          <EditListItemsDisplay
-            items={newList?.items}
-            view={view}
-            handleRemoveItem={handleRemoveItem}
-          />
+    <PageContainer>
+      <div className='bg-zinc-900/90  max-w-[1020] rounded-sm p-3 overflow-visible'>
+        <div className='text-[22px] text-zinc-300/90 pb-3'>
+          {mode === 'edit'
+            ? 'Edit list'
+            : mode === 'create'
+              ? 'Create List'
+              : ''}
         </div>
+
+        <EditListHeader newList={newList} handleChange={handleChange} />
+
+        <EditListActions
+          username={username}
+          list={originalList}
+          draft={draft}
+          view={view}
+          mode={mode}
+          hasChanges={hasChanges}
+          handleAddItem={handleAddItem}
+          handleSubmitEdit={handleSubmitEdit}
+          handleClear={handleClear}
+          setView={setView}
+        />
+
+        <EditListItemsDisplay
+          items={newList?.items}
+          view={view}
+          handleRemoveItem={handleRemoveItem}
+        />
       </div>
-    </div>
+    </PageContainer>
   );
 }
