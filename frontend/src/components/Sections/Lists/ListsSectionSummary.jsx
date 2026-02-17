@@ -69,14 +69,14 @@ export default function ListsSectionSummary({
 
   const axisClass =
     displayAxis === 'y'
-      ? 'flex-col items-center'
+      ? 'flex flex-col gap-2 '
       : 'md:flex-row flex-col justify-center flex-nowrap md:flex-wrap';
 
   return (
     <div>
       <SectionHeader header={header} />
       <div
-        className={`flex ${axisClass}  scrollbar-hide gap-5 md:gap-11 justify-center  overflow-x-auto md:overflow-visible`}
+        className={`flex ${axisClass}  scrollbar-hide gap-2 md:gap-11 justify-center  overflow-x-auto md:overflow-visible`}
       >
         {staticLists.map((list) => (
           <div

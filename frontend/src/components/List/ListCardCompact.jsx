@@ -29,7 +29,7 @@ export default function ListCardCompact({
 
   return (
     <div
-      className='flex flex-col gap-2 pl-2 pr-1.5 pt-1.5 pb-2 
+      className='flex flex-col bg-zinc-400  gap-2 pl-2 pr-1.5 pt-1.5 pb-2 
        
       transition-colors
         '

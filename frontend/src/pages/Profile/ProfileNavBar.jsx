@@ -15,7 +15,7 @@ export default function ProfileNavBar({ username }) {
   ];
 
   return (
-    <nav className='w-full rounded-sm font-sans'>
+    <nav className='w-full rounded-sm '>
       <div className='flex items-center justify-center rounded-sm  bg-zinc-900/90 py-1 relative overflow-x-auto'>
         <div className='flex flex-col sm:flex-row sm:flex md:flex-row w-full md:w-auto  divide-y sm:w-auto sm:divide-y-0 md:divide-y-0 divide-zinc-800/50 '>
           {navLinks.map((link) => {
@@ -27,10 +27,10 @@ export default function ProfileNavBar({ username }) {
               <Link
                 key={link.label}
                 to={link.to}
-                className={`w-full md:w-auto text-left md:text-center tracking-wider hover:cursor-pointer text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
+                className={`w-full md:w-auto text-left md:text-center tracking-wider text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
                   active
-                    ? 'text-zinc-200'
-                    : 'text-zinc-400 md:hover:bg-transparent hover:bg-zinc-800'
+                    ? 'text-zinc-200  cursor-default'
+                    : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
                 {link.label}

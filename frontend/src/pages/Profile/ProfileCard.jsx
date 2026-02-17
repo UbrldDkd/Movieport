@@ -61,7 +61,7 @@ export default function ProfileCard({ user }) {
               </span>
             </Link>
             {idx < stats.length - 1 && (
-              <div className='h-8 w-px bg-red-950 mx-1 opacity-0 sm:opacity-100 md:opacity-100' />
+              <div className='h-10 border-r  border-red-950 mx-1 opacity-0 sm:opacity-100 md:opacity-100' />
             )}
           </div>
         ))}

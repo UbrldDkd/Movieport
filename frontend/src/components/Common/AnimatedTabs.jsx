@@ -23,11 +23,11 @@ export default function AnimatedTabs({ tabs, activeKey, onChange }) {
           onClick={() => onChange(tab.key)}
           className={`whitespace-nowrap ${
             activeKey === tab.key
-              ? 'text-zinc-200'
+              ? 'text-zinc-200 '
               : 'text-zinc-400 cursor-pointer'
           }`}
         >
-          {tab.label}
+          {tab.label.toUpperCase()}
         </button>
       ))}
 

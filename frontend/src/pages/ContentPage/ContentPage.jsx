@@ -85,7 +85,7 @@ export default function ContentPage() {
   return (
     <PageContainer>
       {/* Backdrop */}
-      <div className='relative w-full bg-zinc-300 z-0'>
+      <div className='relative w-full z-0'>
         <ContentPageBackdrop backdropUrl={backdropUrl} />
       </div>
 
