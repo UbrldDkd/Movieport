@@ -7,16 +7,6 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
   const [currentPage, setCurrentPage] = useState(1);
   const view = 'lg'; // card size
 
-  if (!items || items.length === 0) {
-    return (
-      <div className='py-12 text-center text-zinc-400 font-medium text-sm bg-zinc-900/90 rounded-sm p-3'>
-        {isOwner
-          ? 'Your watchlist is empty'
-          : `${username} hasn't added any items to their watchlist yet`}
-      </div>
-    );
-  }
-
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const paginatedItems = items.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -34,10 +24,21 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
       {/* Main watchlist */}
       <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-200'>
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
-          {`${isOwner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
-            items.length
-          } ${items.length > 1 ? 'FILMS' : 'FILM'}`}
+          {items.length > 0
+            ? `${isOwner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
+                items.length
+              } ${items.length > 1 ? 'FILMS' : 'FILM'}`
+            : `
+            ${isOwner ? 'YOUR' : `${username.toUpperCase()}'S`} WATCHLIST IS EMPTY`}
         </h2>
+
+        {!items.length && (
+          <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
+            {isOwner
+              ? `You haven't added anything to your watchlist yet`
+              : `${username} hasn't added anything to their watchlist yet`}
+          </div>
+        )}
 
         <ContentDisplayBlock
           content={paginatedItems}

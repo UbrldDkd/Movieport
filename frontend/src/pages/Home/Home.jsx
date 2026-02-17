@@ -59,7 +59,7 @@ export default function Home() {
               </button>
             </div>
             {/* <div className='border-b border-zinc-600 mx-11 md:mx-14 mb-3' /> */}
-            <div className='mx-2 justify-center sm:mx-11 md:mx-14'>
+            <div className='mx-2 justify-center sm:mx-11 md:max-w-[953px]'>
               <ContentDisplayX
                 content={toShow === 'films' ? movies.popular : tvShows.popular}
                 view={'lg'}

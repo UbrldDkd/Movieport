@@ -13,9 +13,9 @@ export default function ContentCardPoster({ title, posterPath, view }) {
   return (
     <div
       className={`relative ${width} aspect-[2/3] rounded-sm overflow-hidden bg-zinc-800 shadow-md
-        border-2 border-zinc-800/90
+        border-2 border-zinc-800
         outline outline-transparent
-        hover:outline-2 hover:outline-zinc-800/90
+        hover:outline-2 hover:outline-zinc-800
         transition-all duration-150`}
     >
       {posterUrl ? (

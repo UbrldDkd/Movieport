@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import ContentDisplayBlock from '../../../../../components/ContentDisplays/ContentDisplayBlock';
-import ContentCardListView from '../../../../../components/ContentDisplays/ContentCard/ContentCardListView';
+import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
+import ContentCardListView from '../../components/ContentDisplays/ContentCard/ContentCardListView';
 import {
   itemVariants,
   containerVariants,
-} from '../../../../../utils/style/animations/motionVariants';
+} from '../../utils/style/animations/motionVariants';
 
 export default function ListItemsDisplay({ items, view }) {
   if (!items) return null;

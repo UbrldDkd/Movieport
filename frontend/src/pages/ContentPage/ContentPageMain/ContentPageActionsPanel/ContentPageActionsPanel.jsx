@@ -14,7 +14,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
   const isLoggedIn = !!user;
 
   return (
-    <div className='bg-zinc-800 rounded-sm overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
+    <div className='bg-zinc-800 rounded-sm h-fit overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
       {isLoading ? (
         <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
           Share

@@ -18,7 +18,7 @@ export default function ContentDisplayBlock({
 
   return (
     <div
-      className={`w-full ${view === 'lg' ? 'px-2' : view === 'md' ? 'px-1' : 'px-4.75'} sm:px-0 md:px-0 bg-zinc-200  flex  justify-${justify}`}
+      className={`w-full ${view === 'lg' ? 'px-2' : view === 'md' ? 'px-1' : 'px-4.75'} sm:px-0 md:px-0   flex  justify-${justify}`}
     >
       {/* shrink-to-content container */}
       <div className={`flex w-full flex-wrap gap-2.5 justify-${justify}`}>

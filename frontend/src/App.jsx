@@ -3,13 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 // Profile
 import Profile from './pages/Profile/Profile.jsx';
 import ProfileBrowse from './pages/Profile/ProfileBrowse/ProfileBrowse.jsx';
-import EditList from './pages/Profile/ProfileBrowse/Lists/List/EditList/EditList.jsx';
+import EditList from './pages/List/EditList/EditList.jsx';
+import Settings from './pages/Profile/Settings/Settings.jsx';
 
 // General
 import Films from './Pages/Films/Films.jsx';
 import TVShows from './Pages/TVShows/TVShows.jsx';
 import Lists from './Pages/Lists/Lists.jsx';
-import List from './pages/Profile/ProfileBrowse/Lists/List/List.jsx';
+import List from './pages/List/List.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage.jsx';
 import ContentPage from './pages/ContentPage/ContentPage.jsx';
@@ -27,13 +28,15 @@ export default function App() {
       <ScrollToTop />
 
       <Routes>
-        {/* Profile routes first to prevent conflicts with media routes */}
+        {/* Profile only routes first to prevent conflicts with media routes */}
         <Route path='/:username/list/create/' element={<EditList />} />
         <Route
           path='/:username/list/:title_slug/edit/'
           element={<EditList />}
         />
         <Route path='/:username/list/:title_slug/' element={<List />} />
+        <Route path='/settings/' element={<Settings />} />
+        <Route path='/settings/:tab' element={<Settings />} />
 
         {/* Explicit profile tabs */}
         <Route path='/:username/watched/:subtab?' element={<ProfileBrowse />} />

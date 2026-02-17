@@ -5,7 +5,7 @@ import { GiLockedHeart, GiCaptainHatProfile } from 'react-icons/gi';
 import { FaThLarge, FaList } from 'react-icons/fa';
 
 // Utils/Helpers
-import { timeAgo } from '../../../../../utils/helpers/timeAgo';
+import { timeAgo } from '../../utils/helpers/timeAgo';
 
 export default function ListHeader({ list, username, view, setView }) {
   const [hover, setHover] = useState(false);

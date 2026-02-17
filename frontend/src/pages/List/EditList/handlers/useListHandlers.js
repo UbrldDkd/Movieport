@@ -1,11 +1,11 @@
-import { useAddItems } from '../../../../../../../api/lists/useAddItems';
-import { useRemoveItems } from '../../../../../../../api/lists/useRemoveItems';
-import { useUpdateList } from '../../../../../../../api/lists/useUpdateList';
-import { useCreateList } from '../../../../../../../api/lists/useCreateList';
-import { AuthContext } from '../../../../../../../api/account/auth/AuthContext';
+import { useAddItems } from '../../../../api/lists/useAddItems';
+import { useRemoveItems } from '../../../../api/lists/useRemoveItems';
+import { useUpdateList } from '../../../../api/lists/useUpdateList';
+import { useCreateList } from '../../../../api/lists/useCreateList';
+import { AuthContext } from '../../../../api/account/auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { cleanItem } from '../../../../../../../utils/helpers/cleanItem';
+import { cleanItem } from '../../../../utils/helpers/cleanItem';
 
 export function useListHandlers({
   username,

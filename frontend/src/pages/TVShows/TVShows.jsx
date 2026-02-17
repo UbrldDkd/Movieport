@@ -1,5 +1,8 @@
-import PageContainer from '../../components/WrapperContainers/PageContainer';
+// Hooks
 import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
+
+// Components
+import PageContainer from '../../components/WrapperContainers/PageContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';

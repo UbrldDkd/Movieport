@@ -5,10 +5,10 @@ import { useState, useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 // API hooks
-import { useGetList } from '../../../../../api/lists/useGetList';
+import { useGetList } from '../../api/lists/useGetList';
 
 // Context
-import { AuthContext } from '../../../../../api/account/auth/AuthContext';
+import { AuthContext } from '../../api/account/auth/AuthContext';
 
 // Components
 import ListHeader from './ListHeader';

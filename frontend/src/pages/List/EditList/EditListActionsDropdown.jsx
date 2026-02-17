@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PiMagnifyingGlassFill } from 'react-icons/pi';
-import { Keys } from '../../../../../../utils/constants/Keys';
+import { Keys } from '../../../utils/constants/Keys';
 
 export default function EditListActionsDropdown({
   searchVal,

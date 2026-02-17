@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import ContentCard from '../../../../../../components/ContentDisplays/ContentCard/ContentCard';
-import ContentCardListView from '../../../../../../components/ContentDisplays/ContentCard/ContentCardListView';
+import ContentCard from '../../../components/ContentDisplays/ContentCard/ContentCard';
+import ContentCardListView from '../../../components/ContentDisplays/ContentCard/ContentCardListView';
 import {
   itemVariants,
   containerVariants,
-} from '../../../../../../utils/style/animations/motionVariants';
-import ContentDisplayBlock from '../../../../../../components/ContentDisplays/ContentDisplayBlock';
+} from '../../../utils/style/animations/motionVariants';
+import ContentDisplayBlock from '../../../components/ContentDisplays/ContentDisplayBlock';
 
 export default function EditListItems({ items, view, handleRemoveItem }) {
   if (!items?.length) return null;

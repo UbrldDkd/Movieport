@@ -4,16 +4,18 @@ import { GiCaptainHatProfile } from 'react-icons/gi';
 
 // Third-party
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import { Tooltip } from '../../components/Common/Tooltip.jsx';
 import FollowButton from './Common/FollowButton.jsx'; // New follow button
 
 // Utils animations
-import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
+import { fadeInUpVariants } from '../../utils/style/animations/MotionVariants.js';
 
 export default function ProfileCard({ user }) {
+  const navigate = useNavigate();
   if (!user) return null;
 
   const { username, lists, contentRelations, isOwner } = user;
@@ -36,7 +38,7 @@ export default function ProfileCard({ user }) {
   const TEMP_FOLLOWS_YOU = true;
 
   return (
-    <motion.div
+    <Motion.div
       variants={fadeInUpVariants}
       initial='hidden'
       animate='visible'
@@ -96,7 +98,10 @@ export default function ProfileCard({ user }) {
                 label='Edit Profile'
                 position='bottom-5.5 -left-11.25 -mt-2'
               >
-                <button className='absolute -bottom-3 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'>
+                <button
+                  onClick={() => navigate(`/settings/`)}
+                  className='absolute -bottom-3 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
+                >
                   <FaPenFancy size={20} />
                 </button>
               </Tooltip>
@@ -104,6 +109,6 @@ export default function ProfileCard({ user }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </Motion.div>
   );
 }

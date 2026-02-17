@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
 // API hooks
-import { useGetList } from '../../../../../../api/lists/useGetList';
+import { useGetList } from '../../../api/lists/useGetList';
 import { useListHandlers } from './handlers/useListHandlers';
 
 // Components
 import EditListHeader from './EditListHeader';
 import EditListActions from './EditListActions';
 import EditListItemsDisplay from './EditListItemsDisplay';
-import PageContainer from '../../../../../../components/WrapperContainers/PageContainer';
+import PageContainer from '../../../components/WrapperContainers/PageContainer';
 
 export default function EditList() {
   const location = useLocation();
@@ -77,9 +77,6 @@ export default function EditList() {
     setItemsToAdd,
     setItemsToRemove,
   });
-
-  // unsaved changes detection
-  const hasTitle = Boolean(newList?.title?.trim());
 
   const hasChanges =
     mode === 'edit'

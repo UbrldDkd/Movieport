@@ -46,8 +46,8 @@ export default function NavProfileDropdown() {
         {/* Dropdown */}
         <div
           className={`
-            absolute right-0 top-full mt-3.5 w-40 backdrop-blur-xl
-            bg-zinc-900/90   rounded-b-sm shadow-lg z-50
+            absolute right-0 top-full mt-3.5 w-40 
+            bg-zinc-900   rounded-b-sm shadow-lg z-50
             transition-all duration-200 ease-out
             transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
           `}

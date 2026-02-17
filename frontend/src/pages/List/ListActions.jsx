@@ -9,12 +9,12 @@ import { IoShareSocialSharp } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 
 // API hooks
-import { useUpdateList } from '../../../../../api/lists/useUpdateList';
-import { useDeleteList } from '../../../../../api/lists/useDeleteList';
-import { useToggleLikeList } from '../../../../../api/lists/useToggleLikeList';
+import { useUpdateList } from '../../api/lists/useUpdateList';
+import { useDeleteList } from '../../api/lists/useDeleteList';
+import { useToggleLikeList } from '../../api/lists/useToggleLikeList';
 
 // Context
-import { AuthContext } from '../../../../../api/account/auth/AuthContext';
+import { AuthContext } from '../../api/account/auth/AuthContext';
 
 export default function ListActions({ username, list }) {
   const navigate = useNavigate();

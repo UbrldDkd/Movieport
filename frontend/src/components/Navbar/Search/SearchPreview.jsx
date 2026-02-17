@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useFetchPreview } from './hooks/useFetchPreview.js';
 import MediaIcon from '../../ContentDisplays/ContentCard/MediaIcon.jsx';
+import { Tooltip } from '../../Common/Tooltip.jsx';
 
 export default function SearchPreview({ value, setValue, setIsOpen }) {
   const ref = useRef(null);
@@ -14,7 +15,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   const { previewContent: content, isLoading, error } = useFetchPreview(value);
 
   const mediaType = content?.[0]?.[details.movieTitle] ? 'movie' : 'tv';
-  const displayCount = isMobile ? 4 : 6;
+  const displayCount = isMobile ? 4 : 5;
   const items = Array.isArray(content) ? content.slice(0, displayCount) : [];
   const expectedImages = items.filter((i) => i?.[details.poster]).length;
   const showMore = !isLoading && items.length && loadedCount >= expectedImages;
@@ -25,8 +26,8 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
     setValue('');
   };
 
-  const handleItemClick = (id, isMovie) => {
-    navigate(`/${isMovie ? 'movie' : 'tv'}/${id}`);
+  const handleItemClick = (id, isFilm) => {
+    navigate(`/${isFilm ? 'film' : 'tv'}/${id}`);
     setIsOpen('searchPreview', false);
     setValue('');
   };
@@ -53,14 +54,14 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   return (
     <div
       ref={ref}
-      className='rounded-md mt-2 bg-zinc-900 scrollbar-hide transition-all duration-100 backdrop-blur-3xl shadow-lg inline-block p-3 w-[calc(100vw-2rem)] max-w-[280px] md:w-[320px] relative'
+      className='rounded-b-md  bg-zinc-900 scrollbar-hide transition-all duration-100 shadow-lg  min-w-full p-2 relative'
     >
       <div
         className={`transition-opacity duration-300 ${!isLoading && items.length ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       >
         {items.map((item, idx) => {
           const id = item?.[details.id];
-          const isMovie = !!item?.[details.movieTitle];
+          const isFilm = !!item?.[details.movieTitle];
           const title =
             item?.[details.movieTitle] || item?.[details.tvTitle] || 'Untitled';
           const poster = item?.[details.poster];
@@ -70,15 +71,15 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
             <button
               key={id ?? `placeholder-${idx}`}
               type='button'
-              onMouseDown={() => handleItemClick(id, isMovie)}
+              onMouseDown={() => handleItemClick(id, isFilm)}
               className='block w-full text-left cursor-pointer'
             >
-              <div className='inline-flex gap-2 p-1.5 md:p-2 w-full hover:bg-zinc-800 rounded transition-colors duration-200'>
+              <div className='inline-flex gap-2 p-2 w-full hover:bg-zinc-800 rounded transition-colors duration-100'>
                 {poster ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${poster}`}
                     alt={title}
-                    className='w-12 h-18 md:w-16 md:h-24 object-cover rounded shrink-0'
+                    className='max-w-12 h-18 md:max-w-16 md:h-24 object-cover rounded shrink-0'
                     onLoad={handleImgLoad}
                     onError={handleImgLoad}
                   />
@@ -92,7 +93,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
                   />
                 )}
                 <div className='flex flex-col gap-1 md:gap-2 flex-1 min-w-0'>
-                  <p className='font-semibold text-zinc-300 leading-snug text-xs md:text-sm truncate'>
+                  <p className='font-semibold max-w-30.5  md:max-w-43  lg:max-w-48    text-zinc-300 leading-snug text-xs md:text-sm truncate'>
                     {title}
                   </p>
                   <div className='flex justify-between items-center'>
@@ -100,7 +101,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
                       <MediaIcon mediaType={mediaType} />
                     </p>
                     <p className='text-xs md:text-sm text-zinc-300'>
-                      {typeof rating === 'number' ? rating.toFixed(1) : '—'}/10
+                      {rating && rating.toFixed(1)}
                     </p>
                   </div>
                 </div>
@@ -113,7 +114,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
           <div className='mt-2 text-center w-full'>
             <button
               onClick={handleExpand}
-              className='text-zinc-300 hover:text-zinc-100 text-xs md:text-sm cursor-pointer bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded transition-colors duration-200'
+              className='text-zinc-300 hover:text-zinc-200 text-xs md:text-xs  font-semibold tracking-wider cursor-pointer bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded transition-colors duration-200'
             >
               See more results
             </button>
@@ -122,7 +123,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
       </div>
 
       {!isLoading && !items.length && (
-        <div className='w-full h-20 md:h-30  font-semibold tracking-wider flex items-center justify-center text-zinc-400 text-xs md:text-sm '>
+        <div className=' w-full h-20 md:h-30    font-semibold tracking-wider flex items-center justify-center text-zinc-400 text-xs md:text-sm '>
           No results yet.
         </div>
       )}

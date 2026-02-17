@@ -50,7 +50,7 @@ export default function ContentDisplayX({
       <button
         onClick={() => scroll(-1)}
         disabled={!canLeft}
-        className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 ${
+        className={`absolute rounded-r-full bg-zinc-800 top-1/2 -translate-y-1/2 z-20 ${
           canLeft ? 'opacity-100' : 'opacity-30 pointer-events-none'
         }`}
       >
@@ -61,7 +61,7 @@ export default function ContentDisplayX({
       <div
         ref={trackRef}
         onScroll={updateArrows}
-        className='flex space-x-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 md:px-6'
+        className='flex p-0.5 gap-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory '
       >
         {content?.map((item) => (
           <div key={item[details.id]} className='snap-start flex-shrink-0 '>
@@ -75,7 +75,7 @@ export default function ContentDisplayX({
       <button
         onClick={() => scroll(1)}
         disabled={!canRight}
-        className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 ${
+        className={`absolute bg-zinc-800 rounded-l-full right-0 top-1/2 -translate-y-1/2 z-20 ${
           canRight ? 'opacity-100' : 'opacity-30 pointer-events-none'
         }`}
       >

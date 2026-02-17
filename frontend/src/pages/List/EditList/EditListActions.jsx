@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaList, FaThLarge } from 'react-icons/fa';
 
-import { useDeleteList } from '../../../../../../api/lists/useDeleteList';
-import { useFetchPreview } from '../../../../../../components/Navbar/Search/hooks/useFetchPreview';
-import { Keys } from '../../../../../../utils/constants/Keys';
+import { useDeleteList } from '../../../api/lists/useDeleteList';
+import { useFetchPreview } from '../../../components/Navbar/Search/hooks/useFetchPreview';
+import { Keys } from '../../../utils/constants/Keys';
 import EditListActionsDropdown from './EditListActionsDropdown';
 
 export default function EditListActions({
