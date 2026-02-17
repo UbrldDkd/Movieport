@@ -1,7 +1,7 @@
 export const posterSizes = {
   sm: {
     width:
-      'min-w-[75px] max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
+      ' max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
     tmdb: 'w500',
   },
 
@@ -18,8 +18,7 @@ export const posterSizes = {
   },
 
   lg: {
-    width:
-      'min-w-[132px] max-w-[110px] sm:min-w-[120px] sm:max-w-[120px] md:min-w-[135px] md:max-w-[135px] lg:min-w-[150px] lg:max-w-[150px]',
+    width: 'min-w-[132px] max-w-[132px]  lg:min-w-[150px] lg:max-w-[150px]',
     tmdb: 'w500',
   },
 

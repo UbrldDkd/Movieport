@@ -22,6 +22,7 @@ import PosterStats from '../../components/ContentDisplays/Common/PosterStats/Pos
 
 // Utils
 import { Keys } from '../../utils/constants/Keys.js';
+import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
 
 export default function ContentPage() {
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -78,88 +79,82 @@ export default function ContentPage() {
   }, [episodeNumber, seasonNumber]);
 
   const current = useMemo(() => {
-    return user?.contentRelations?.find((r) => r.tmdb_id === Number(id)) || {};
-  }, [user?.contentRelations, id]);
+    return user?.content_relations?.find((r) => r.tmdb_id === Number(id)) || {};
+  }, [user?.content_relations, id]);
 
   return (
-    <div className='relative w-full min-h-screen bg-zinc-950'>
-      <div className='relative z-5 flex flex-col text-zinc-400'>
-        {/* Backdrop */}
-        <div className='relative z-0'>
-          <ContentPageBackdrop backdropUrl={backdropUrl} />
+    <PageContainer>
+      {/* Backdrop */}
+      <div className='relative w-full bg-zinc-300 z-0'>
+        <ContentPageBackdrop backdropUrl={backdropUrl} />
+      </div>
 
-          <div className='relative z-10 px-2 sm:px-3 md:px-5 lg:px-10 pt-4'>
-            <div className='w-full max-w-screen mx-auto rounded-md shadow-lg' />
+      {/* Main Content Container */}
+      <div className='relative z-10 flex flex-col md:flex-row space-x-10  -mt-20  mx-auto max-w-[1000px]'>
+        {/* Gradient overlays */}
+        <div className='absolute inset-x-0 top-0 h-60 bg-gradient-to-b w-full from-transparent to-zinc-950 pointer-events-none -z-1' />
+        <div className='absolute inset-x-0 top-60 bottom-0 bg-zinc-950 w-full pointer-events-none -z-1' />
+
+        {/* Poster Column (desktop only) */}
+        <div className='hidden md:block shrink-0 sticky top-16 self-start z-10'>
+          <div className='flex flex-col gap-1'>
+            <ContentPagePoster
+              displayPosterUrl={posterUrl}
+              title={
+                content?.tmdb?.[details.movieTitle] ||
+                content?.tmdb?.[details.tvTitle]
+              }
+              isLoading={isLoading}
+            />
+
+            <PosterStats isLoading={isLoading} />
           </div>
+
+          {mediaType === 'tv' && seasonContent && (
+            <div className='mt-4'>
+              <div className='w-full h-px bg-zinc-700 my-4' />
+              <SeasonDropdown
+                seasonCount={content?.tmdb[details.seasonCount]}
+                selectedSeason={selectedSeason}
+                setSelectedSeason={setSelectedSeason}
+              />
+              <EpisodesGrid
+                seasonContent={seasonContent}
+                id={content?.tmdb?.[details.id]}
+                episodeNumber={Number(episodeNumber)}
+              />
+            </div>
+          )}
         </div>
 
-        {/* Main Content Container */}
-        <div className='relative z-10 flex flex-col md:flex-row space-x-10  px-3 sm:px-5 md:px-8 lg:min-w- pt-6 md:pt-45 md:-mt-90'>
-          {/* Gradient overlays */}
-          <div className='absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-transparent to-zinc-950 pointer-events-none -z-1' />
-          <div className='absolute inset-x-0 top-60 bottom-0 bg-zinc-950 pointer-events-none -z-1' />
+        {/* Main Content Column */}
+        <div className='w-full md:flex-1 space-y-10 md:max-w-xl mx-auto'>
+          <ContentPageMain
+            content={content}
+            current={current}
+            isLoading={isLoading}
+            mediaType={mediaType}
+          />
 
-          {/* Poster Column (desktop only) */}
-          <div className='hidden md:block shrink-0 sticky top-16 self-start z-10'>
-            <div className='flex flex-col gap-1'>
-              <ContentPagePoster
-                displayPosterUrl={posterUrl}
-                title={
-                  content?.tmdb?.[details.movieTitle] ||
-                  content?.tmdb?.[details.tvTitle]
-                }
-                isLoading={isLoading}
-              />
+          <ReviewsSection header='Popular reviews' isLoading={isLoading} />
 
-              <PosterStats isLoading={isLoading} />
-            </div>
+          <ListsSection
+            header='Popular featuring lists'
+            isLoading={isLoading}
+          />
 
-            {mediaType === 'tv' && seasonContent && (
-              <div className='mt-4'>
-                <div className='w-full h-px bg-zinc-700 my-4' />
-                <SeasonDropdown
-                  seasonCount={content?.tmdb[details.seasonCount]}
-                  selectedSeason={selectedSeason}
-                  setSelectedSeason={setSelectedSeason}
-                />
-                <EpisodesGrid
-                  seasonContent={seasonContent}
-                  id={content?.tmdb?.[details.id]}
-                  episodeNumber={Number(episodeNumber)}
-                />
-              </div>
-            )}
-          </div>
+          <RelatedContentSection
+            collectionData={content?.tmdb?.[details.movieCollection]}
+            currentId={content?.tmdb?.[details.id]}
+            mediaType={mediaType}
+          />
 
-          {/* Main Content Column */}
-          <div className='w-full md:flex-1 space-y-10 md:max-w-xl mx-auto'>
-            <ContentPageMain
-              content={content}
-              current={current}
-              isLoading={isLoading}
-              mediaType={mediaType}
-            />
-
-            <ReviewsSection header='Popular reviews' isLoading={isLoading} />
-
-            <ListsSection
-              header='Popular featuring lists'
-              isLoading={isLoading}
-            />
-
-            <RelatedContentSection
-              collectionData={content?.tmdb?.[details.movieCollection]}
-              currentId={content?.tmdb?.[details.id]}
-              mediaType={mediaType}
-            />
-
-            <SimilarContentSection
-              id={content?.tmdb?.[details.id]}
-              mediaType={mediaType}
-            />
-          </div>
+          <SimilarContentSection
+            id={content?.tmdb?.[details.id]}
+            mediaType={mediaType}
+          />
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 }

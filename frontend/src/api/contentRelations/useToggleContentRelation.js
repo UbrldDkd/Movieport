@@ -16,7 +16,7 @@ export function useToggleContentRelation() {
   async function toggleField(item, field) {
     if (!item || !field) return `failed to toggle ${field}`;
 
-    const current = user?.contentRelations?.find(
+    const current = user?.content_relations?.find(
       (cr) => cr.tmdb_id === item.tmdb_id
     );
     const prevValue = current ? current[field] : false;
@@ -30,14 +30,14 @@ export function useToggleContentRelation() {
       if (exists) {
         return {
           ...prev,
-          contentRelations: relations.map((cr) =>
+          content_relations: relations.map((cr) =>
             cr.tmdb_id === item.tmdb_id ? { ...cr, [field]: newValue } : cr
           ),
         };
       } else {
         return {
           ...prev,
-          contentRelations: [...relations, { ...item, [field]: newValue }],
+          content_relations: [...relations, { ...item, [field]: newValue }],
         };
       }
     });

@@ -27,7 +27,7 @@ export default function ContentCard({ item, view }) {
 
   const { user } = useContext(AuthContext);
 
-  const current = user?.contentRelations?.find(
+  const current = user?.content_relations?.find(
     (cr) => cr.tmdb_id === cleanedItem.tmdb_id
   );
 

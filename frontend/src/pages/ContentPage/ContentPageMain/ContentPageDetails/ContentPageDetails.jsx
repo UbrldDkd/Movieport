@@ -100,7 +100,7 @@ export default function ContentPageDetails({ content, isLoading }) {
       : ['cast', 'crew', 'details', 'genres'];
 
   return (
-    <div className='mt-8 max-w-100'>
+    <div className=' '>
       <div className='rounded-sm  border border-zinc-900/50'>
         <div className='flex bg-zinc-900/30 backdrop-blur-sm'>
           {tabs.map((tab) => (

@@ -1,7 +1,7 @@
 // ContentPageBackdrop.jsx
 export default function ContentPageBackdrop({ backdropUrl }) {
   return (
-    <div className='relative w-[80%] mx-auto pointer-events-none z-0 -mb-'>
+    <div className='relative w-full mx-auto pointer-events-none z-0 -mb-10'>
       <div
         className='w-full aspect-video bg-cover bg-center'
         style={{ backgroundImage: `url(${backdropUrl})` }}

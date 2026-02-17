@@ -17,7 +17,7 @@ export default function ListCardCompact({
   list,
   posterAmount,
   includeItemCount,
-  compact = 'md',
+  compact = 'sm',
 }) {
   const [filmTooltip, setFilmTooltip] = useState(false);
   const [tvTooltip, setTvTooltip] = useState(false);

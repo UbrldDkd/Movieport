@@ -50,8 +50,9 @@ export default function Lists() {
             Create a new list
           </button>
         </div>
-
-        <ListsSectionSummary header={'Featured lists'} />
+        <div className='md:px-10'>
+          <ListsSectionSummary header={'Featured lists'} />
+        </div>
       </div>
 
       <div className='w-full mt-2 flex flex-col lg:flex-row gap-2'>

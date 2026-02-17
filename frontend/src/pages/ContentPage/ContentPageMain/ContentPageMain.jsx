@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import ContentPageDetails from './ContentPageDetails/ContentPageDetails.jsx';
 import ContentPageActionsPanel from './ContentPageActionsPanel/ContentPageActionsPanel.jsx';
 import { Keys } from '../../../utils/constants/Keys.js';
+import { cleanItem } from '../../../utils/helpers/cleanItem.js';
 
 export default function ContentPageMain({
   content,
@@ -16,14 +17,7 @@ export default function ContentPageMain({
 
   const { tmdb = {}, omdb = {} } = content || {};
 
-  const item = {
-    title: tmdb?.[details1.movieTitle] || tmdb?.[details1.tvTitle],
-    tmdb_id: tmdb?.[details1.id],
-    media_type: mediaType,
-    poster_path: tmdb?.[details1.poster],
-    release_date:
-      tmdb?.[details1.movieReleaseDate] || tmdb?.[details1.tvReleaseDate],
-  };
+  const item = cleanItem(tmdb);
 
   const isMovie = tmdb?.[details1.movieTitle];
 
@@ -45,7 +39,7 @@ export default function ContentPageMain({
       [];
 
   const release =
-    mediaType === 'movie'
+    mediaType === 'film'
       ? tmdb?.[details1.movieReleaseDate]?.split('-')[0] ||
         (omdb?.[details2.release] && omdb[details2.release] !== 'N/A'
           ? omdb[details2.release]
@@ -97,7 +91,7 @@ export default function ContentPageMain({
       </div>
 
       {/* Content Layout */}
-      <div className='flex flex-col md:flex-row md:space-x-10 space-y-6 md:space-y-0'>
+      <div className='flex  flex-col md:flex-row w-full md:space-x-10 '>
         {/* Main */}
         <div className='w-full  md:flex-[7.5]'>
           {tmdb?.[details1.tagline] && (
@@ -113,7 +107,7 @@ export default function ContentPageMain({
           )}
 
           {isLoading ? (
-            <div className='space-y-2 mt-4'>
+            <div className='space-y-3 mt-4'>
               <div className='h-4 w-full bg-zinc-800/30 rounded-sm animate-pulse' />
               <div className='h-4 w-5/6 bg-zinc-800/30 rounded-sm animate-pulse' />
               <div className='h-4 w-3/4 bg-zinc-800/30 rounded-sm animate-pulse' />
@@ -126,13 +120,22 @@ export default function ContentPageMain({
                 : tmdb?.[details1.overview] || omdb?.[details2.overview]}
             </p>
           )}
-
-          <ContentPageDetails content={content} isLoading={isLoading} />
-          <div className='h-16' />
+          <div className='flex gap-2 sm:flex-row flex-col'>
+            <div className='flex-2'>
+              <ContentPageDetails content={content} isLoading={isLoading} />
+            </div>
+            <div className='sm:flex-1 md:hidden '>
+              <ContentPageActionsPanel
+                item={item}
+                current={current}
+                isLoading={isLoading}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Actions */}
-        <div className='w-full md:flex-[2.5] min-w-55'>
+        <div className='w-full hidden  sm:hidden md:flex md:flex-[2.5] '>
           <ContentPageActionsPanel
             item={item}
             current={current}

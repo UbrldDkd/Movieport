@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Keys } from '../../utils/constants/Keys';
 
-export default function ListCardPosters({ items, linkUrl, compact = 'sm' }) {
+export default function ListCardPosters({ items, linkUrl, compact }) {
   if (!items) return null;
 
   const { details } = Keys.API1;

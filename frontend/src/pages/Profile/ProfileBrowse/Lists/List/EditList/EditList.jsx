@@ -91,7 +91,7 @@ export default function EditList() {
   return (
     <PageContainer>
       <div className='bg-zinc-900/90  max-w-[1020] rounded-sm p-3 overflow-visible'>
-        <div className='text-[22px] text-zinc-300/90 pb-3'>
+        <div className='text-[22px] font-semibold tracking-wider text-zinc-300/90 pb-3'>
           {mode === 'edit'
             ? 'Edit list'
             : mode === 'create'

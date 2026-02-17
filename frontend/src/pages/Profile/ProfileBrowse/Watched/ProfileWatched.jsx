@@ -80,6 +80,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
           initial='hidden'
           animate='visible'
           exit='exit'
+          className=''
           transition={{ duration: 0.25, ease: 'easeOut' }}
         >
           {filteredItems.length > 0 ? (

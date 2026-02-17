@@ -17,9 +17,11 @@ export default function ContentDisplayBlock({
   const { details } = API1;
 
   return (
-    <div className={`w-full  flex  justify-${justify}`}>
+    <div
+      className={`w-full ${view === 'lg' ? 'px-2' : view === 'md' ? 'px-1' : 'px-4.75'} sm:px-0 md:px-0 bg-zinc-200  flex  justify-${justify}`}
+    >
       {/* shrink-to-content container */}
-      <div className={`flex w-full flex-wrap gap-2.5 justify-${justify} w-fit`}>
+      <div className={`flex w-full flex-wrap gap-2.5 justify-${justify}`}>
         {content &&
           Array.isArray(content) &&
           content

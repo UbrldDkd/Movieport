@@ -9,29 +9,33 @@ export default function TVShows() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60 min-h-screen space-y-10 rounded-sm p-3 '>
+      <div className=' bg-zinc-900/60 min-h-screen  space-y-6 md:space-y-10 rounded-sm p-3 '>
         {/* latest tv shows section */}
         <div className='mx-auto max-w-[792px]'>
           <SectionHeader header='Latest TV Shows' />
 
-          <ContentDisplayX content={tvShows.popular} includeStats={true} />
+          <div className='px-2 sm:px-0 md:px-0'>
+            <ContentDisplayX content={tvShows.popular} includeStats={true} />
+          </div>
         </div>
 
         {/* two column layout */}
-        <div className='flex'>
+        <div className='flex flex-col lg:flex-row gap-2'>
           {/* first column */}
           <div className='flex-1'></div>
 
           {/* second column */}
           <div className='flex-2'>
             {' '}
-            <ReviewsSection header='Newly reviewed' />
+            <ReviewsSection header='Newly reviewed' includeItemDetails />
           </div>
         </div>
 
-        <div className=' max-w-[865px] mx-auto'>
+        <div className=' max-w-[955px] mx-auto'>
           <SectionHeader header='Popular this week' />
-          <ContentDisplayX content={tvShows.popular} view='sm' />
+          <div className='px-5 sm:px-0 md:px-0'>
+            <ContentDisplayX content={tvShows.popular} view='sm' />
+          </div>
         </div>
       </div>
     </PageContainer>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ContentCard from '../../../../components/ContentDisplays/ContentCard/ContentCard';
+import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
 
 export default function ProfileLikesFilms({ items, username, isOwner }) {
   const ITEMS_PER_PAGE = 36;
@@ -30,21 +31,11 @@ export default function ProfileLikesFilms({ items, username, isOwner }) {
 
   return (
     <>
-      <div
-        className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5'
-        style={{
-          gridTemplateColumns: `repeat(auto-fill, ${cardWidth}px)`,
-          justifyContent: 'center',
-        }}
-      >
-        {paginatedItems.map((item, i) => (
-          <ContentCard
-            key={item.tmdb_id || `${item.tmdb?.id}-${i}`}
-            item={item}
-            view={view}
-          />
-        ))}
-      </div>
+      <ContentDisplayBlock
+        content={paginatedItems}
+        view={view}
+        justify='start'
+      />
 
       {totalPages > 1 && (
         <div className='flex justify-center items-center gap-2 mt-4'>

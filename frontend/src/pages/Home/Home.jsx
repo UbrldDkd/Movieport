@@ -28,7 +28,7 @@ export default function Home() {
       />
 
       <PageContainer>
-        <div className='w-full mt-5 max-w-[1140px] bg-zinc-900/90 rounded-sm flex py-3 flex-col gap-6 md:gap-10 px-2 md:px-3 items-center relative'>
+        <div className='w-full mt-5 max-w-[1140px] bg-zinc-900/90 rounded-sm flex p-3 flex-col gap-6 md:gap-10  md:px-3 items-center relative'>
           {/* Movies / TV Toggle */}
           <div className='w-full flex flex-col gap-3'>
             <div className='flex flex-wrap items-baseline gap-2 md:gap-3'>
@@ -59,7 +59,7 @@ export default function Home() {
               </button>
             </div>
             {/* <div className='border-b border-zinc-600 mx-11 md:mx-14 mb-3' /> */}
-            <div className='mx-3 justify-center sm:mx-11 md:mx-14'>
+            <div className='mx-2 justify-center sm:mx-11 md:mx-14'>
               <ContentDisplayX
                 content={toShow === 'films' ? movies.popular : tvShows.popular}
                 view={'lg'}
