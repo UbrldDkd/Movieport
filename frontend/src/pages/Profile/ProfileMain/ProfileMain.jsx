@@ -22,23 +22,23 @@ export default function ProfileMain({ user }) {
   ).length;
 
   return (
-    <div className='flex flex-col min-h-screen md:min-h-110 md:grid md:grid-cols-[4fr_2fr] md:gap-10 gap-2 '>
+    <div className='flex flex-col md:flex-row w-full min-h-screen gap-2 md:gap-10'>
       {/* Left column */}
-      <div className='flex flex-col gap-4 w-full md:min-w-0 bg-zinc-900/90 rounded-sm px-3'>
+      <div className='flex-1 flex flex-col gap-4 bg-zinc-900/90 rounded-sm px-3'>
         {user?.favourites && (
           <ProfileContentSection header='Favourites' items={user?.favourites} />
         )}
         {user?.likes && (
           <ProfileContentSection
             header='Recently liked'
-            url={`likes/films/`}
+            url='likes/films/'
             items={user?.likes}
           />
         )}
       </div>
 
       {/* Right column */}
-      <div className='flex flex-col gap-4  w-full  md:min-w-0 bg-zinc-900/90 rounded-sm py-2.5 px-3'>
+      <div className='flex flex-col gap-4 md:w-[268px] bg-zinc-900/90 rounded-sm py-2.5 px-3'>
         <ProfileMainWatchlist watchlist={user?.watchlist} />
         <ProfileMainRecentLists
           recentLists={recentLists}

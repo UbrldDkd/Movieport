@@ -1,12 +1,7 @@
-// Standard library
 import { useContext } from 'react';
 
-// Third-party
-import axios from 'axios';
-
-// Local application
 import { AuthContext } from '../account/auth/AuthContext';
-import { ensureCsrf } from '../account/auth/ensureCsrf';
+import authApiClient from '../account/auth/authApiClient';
 
 export const useAddItems = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -14,11 +9,9 @@ export const useAddItems = () => {
   const addItems = async ({ listId, items }) => {
     if (!user) return;
 
-    // Ensure items is always an array for consistent processing
     const itemsArray = Array.isArray(items) ? items : [items];
     const contentRelations = user.contentRelations || [];
 
-    // Build optimistic items - use existing relations if available, otherwise use the item data
     const optimisticItems = itemsArray.map((item) => {
       const existing = contentRelations.find(
         (cr) => cr.tmdb_id === item.tmdb_id
@@ -26,12 +19,11 @@ export const useAddItems = () => {
       return (
         existing || {
           ...item,
-          optimistic: true, // Mark as optimistic for rollback
+          optimistic: true,
         }
       );
     });
 
-    // Optimistically add items to the list in user context
     setUser((prev) => ({
       ...prev,
       lists: prev.lists.map((list) =>
@@ -46,29 +38,15 @@ export const useAddItems = () => {
     }));
 
     try {
-      const csrfToken = await ensureCsrf();
+      const res = await authApiClient.post('/lists/add_items/', {
+        list: listId,
+        items: items,
+      });
 
-      const res = await axios.post(
-        'http://127.0.0.1:8000/lists/add_items/',
-        {
-          list: listId,
-          items: items, // Send items as-is (single object or array)
-        },
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken,
-          },
-        }
-      );
+      const addedItems = res.data;
 
-      const addedItems = res.data; // Backend returns the added ContentRelations
-
-      // Update user context with real backend data
       setUser((prev) => ({
         ...prev,
-        // Update content_relations with new items
         content_relations: [
           ...prev.content_relations,
           ...addedItems.filter(
@@ -78,7 +56,6 @@ export const useAddItems = () => {
               )
           ),
         ],
-        // Replace optimistic items with real backend items in the list
         lists: prev.lists.map((list) =>
           list.id === listId
             ? {
@@ -98,7 +75,6 @@ export const useAddItems = () => {
     } catch (err) {
       console.error('Failed to add items:', err);
 
-      // Rollback optimistic items
       const tmdbIds = itemsArray.map((item) => item.tmdb_id);
 
       setUser((prev) => ({

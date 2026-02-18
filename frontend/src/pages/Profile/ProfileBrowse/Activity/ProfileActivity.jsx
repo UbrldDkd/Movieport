@@ -63,7 +63,7 @@ export default function ProfileActivity() {
 
   // Render star rating
   const renderStars = (rating) => (
-    <span className='inline-flex items-center gap-0.5'>
+    <span className='inline-flex bg-zinc-400  items-center h-full gap-0.5 '>
       {[1, 2, 3, 4, 5].map((i) => {
         const half = i - 0.5;
         if (rating >= i)
@@ -72,7 +72,7 @@ export default function ProfileActivity() {
           return (
             <span
               key={i}
-              className='relative w-4 h-4 inline-block overflow-hidden'
+              className='relative  w-4 h-4 inline-block overflow-hidden'
             >
               <IoIosStar className='absolute w-4 h-4 text-red-900 left-0 top-0 ' />
               <IoIosStar className='w-4 h-4 text-zinc-600' />
@@ -105,19 +105,21 @@ export default function ProfileActivity() {
       .filter(Boolean);
     return (
       <div className='flex justify-between items-start'>
-        <div className='flex flex-wrap gap-1 items-center'>
+        <div className='flex bg-zinc-800 items-center  gap-1 '>
           <span className='font-semibold text-zinc-300/90'>{username}</span>
           {sorted.map((a, i) => (
             <span key={i}>
               {i > 0 && ', '}
-              {a.action === 'rated' ? renderStars(a.rating) : a.action}
+              {a.action === 'rated' ? renderStars(a.rating, a.title) : a.action}
             </span>
           ))}
           <span className='text-zinc-300/90 font-semibold'>
             {actions[0].title}
           </span>
         </div>
-        <div className='text-zinc-500 text-xs'>{timeAgo(actions[0].date)}</div>
+        <div className='text-zinc-500  bg-zinc-200 text-xs'>
+          {timeAgo(actions[0].date)}
+        </div>
       </div>
     );
   };
@@ -147,7 +149,7 @@ export default function ProfileActivity() {
         .map((a, i) => (
           <div
             key={i}
-            className='bg-zinc-900/90 rounded-sm px-3 py-2 text-zinc-400/90 text-sm'
+            className='bg-zinc-900/90 rounded-sm px-3 py-2 text-zinc-500/80 tracking-wider  font-semibold text-xs '
           >
             {a.type === 'item' ? renderItem(a.actions) : renderList(a)}
           </div>

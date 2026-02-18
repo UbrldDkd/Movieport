@@ -1,6 +1,5 @@
 import { useContext } from 'react';
-import axios from 'axios';
-import { ensureCsrf } from '../account/auth/ensureCsrf';
+import authApiClient from '../account/auth/authApiClient';
 import { AuthContext } from '../account/auth/AuthContext';
 
 export const useRemoveItems = () => {
@@ -12,13 +11,12 @@ export const useRemoveItems = () => {
 
     let previousItems = [];
 
-    // Optimistic removal: update state before API call
     setUser((prev) => ({
       ...prev,
       lists: prev.lists.map((list) => {
         if (list.id !== listId) return list;
 
-        previousItems = list.items; // save for rollback
+        previousItems = list.items;
         const updatedItems = list.items.filter(
           (item) => !ids.includes(item.tmdb_id)
         );
@@ -32,28 +30,16 @@ export const useRemoveItems = () => {
     }));
 
     try {
-      const csrfToken = await ensureCsrf();
+      const res = await authApiClient.post('/lists/remove_items/', { list: listId, tmdb_ids: ids });
 
-      const data = await axios.post(
-        'http://127.0.0.1:8000/lists/remove_items/',
-        { list: listId, tmdb_ids: ids },
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken,
-          },
-        }
-      );
+      const data = res.data;
 
-      // Update context
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((list) =>
           list.id === listId
             ? {
                 ...list,
-                // remove items whose tmdb_id is in the ids array
                 items: list.items.filter((item) => !ids.includes(item.tmdb_id)),
                 item_count: list.items.length - ids.length,
               }
@@ -65,7 +51,6 @@ export const useRemoveItems = () => {
     } catch (err) {
       console.error('RemoveItems error:', err);
 
-      // Rollback to previous state
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((list) =>

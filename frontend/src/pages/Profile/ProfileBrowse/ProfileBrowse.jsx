@@ -83,9 +83,9 @@ export default function ProfileBrowse() {
               <button
                 key={item.to}
                 onClick={() => handleTabClick(item.to)}
-                className={`w-full md:w-auto text-left md:text-center hover:text-zinc-300 hover:bg-zinc-800 tracking-wider  text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
+                className={`w-full md:hover:bg-transparent sm:hover:bg-transparentmd:w-auto text-left md:text-center hover:text-zinc-300 hover:bg-zinc-800 tracking-wider  text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
                   activeTab === item.to
-                    ? 'text-zinc-200 bg-zinc-800 cursor-default'
+                    ? 'text-zinc-200 md:bg-transparent sm:bg-transparentbg-zinc-800 cursor-default'
                     : 'text-zinc-400 cursor-pointer '
                 }`}
               >

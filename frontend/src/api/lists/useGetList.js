@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ensureCsrf } from '../account/auth/ensureCsrf.js';
+import publicApiClient from '../publicApiClient';
 
 export const useGetList = (username, title_slug) => {
   const [list, setList] = useState(null);
@@ -12,23 +12,10 @@ export const useGetList = (username, title_slug) => {
     const getList = async () => {
       setLoading(true);
       try {
-        const csrfToken = await ensureCsrf();
+        const res = await publicApiClient.get(`/lists/list/${username}/${title_slug}/`);
 
-        // 1Fetch the list from your backend
-        const listRes = await fetch(
-          `http://127.0.0.1:8000/lists/list/${username}/${title_slug}/`,
-          {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrfToken,
-            },
-          }
-        );
-        if (!listRes.ok)
-          throw new Error(`Failed to fetch list: ${listRes.status}`);
-        const listData = await listRes.json();
+        if (!res.data) throw new Error(`Failed to fetch list`);
+        const listData = res.data;
 
         setList(listData);
       } catch (err) {

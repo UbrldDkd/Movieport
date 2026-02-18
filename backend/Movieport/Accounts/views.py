@@ -1,11 +1,12 @@
-from django.contrib.auth import login, logout, get_user_model
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.contrib.auth import get_user_model
 import traceback
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.http import HttpResponse
 
 from .serializers import RegisterSerializer, LoginSerializer
 from Lists.models import Lists
@@ -37,19 +38,56 @@ def register_user(request):
     serializer = RegisterSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = serializer.save()
-    login(request, user)
-    return Response(build_auth_response(user, request), status=status.HTTP_201_CREATED)
+    refresh = RefreshToken.for_user(user)
+    access_token = refresh.access_token
+
+    response = Response(build_auth_response(user, request), status=status.HTTP_201_CREATED)
+    response.set_cookie(
+        'access_token',
+        str(access_token),
+        max_age=60*30,
+        httponly=True,
+        samesite='Lax',
+        secure=False
+    )
+    response.set_cookie(
+        'refresh_token',
+        str(refresh),
+        max_age=60*60*24*7,
+        httponly=True,
+        samesite='Lax',
+        secure=False
+    )
+    return response
 
 
 @api_view(['POST'])
-@csrf_exempt
 @permission_classes([AllowAny])
 def login_user(request):
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = serializer.validated_data['user']
-    login(request, user)
-    return Response(build_auth_response(user, request), status=status.HTTP_200_OK)
+    refresh = RefreshToken.for_user(user)
+    access_token = refresh.access_token
+
+    response = Response(build_auth_response(user, request), status=status.HTTP_200_OK)
+    response.set_cookie(
+        'access_token',
+        str(access_token),
+        max_age=60*30,
+        httponly=True,
+        samesite='Lax',
+        secure=False
+    )
+    response.set_cookie(
+        'refresh_token',
+        str(refresh),
+        max_age=60*60*24*7,
+        httponly=True,
+        samesite='Lax',
+        secure=False
+    )
+    return response
 
 
 @api_view(['GET'])
@@ -66,17 +104,12 @@ def check_auth(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def logout_user(request):
-    logout(request)
-    return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
-
-
-@api_view(['GET'])
-@ensure_csrf_cookie
 @permission_classes([AllowAny])
-def get_csrf(request):
-    return Response({"detail": "CSRF cookie set"}, status=status.HTTP_200_OK)
+def logout_user(request):
+    response = Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+    response.delete_cookie('access_token')
+    response.delete_cookie('refresh_token')
+    return response
 
 
 @api_view(['GET'])

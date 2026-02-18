@@ -1,4 +1,6 @@
 import SettingsForm from './SettingsForm';
+
+import FavouritesSelection from './FavouritesSelection/FavouritesSelection';
 export default function ProfileTab() {
   return (
     <div className='flex flex-col'>
@@ -6,7 +8,7 @@ export default function ProfileTab() {
         Profile
       </div>
 
-      <div className='w-full  flex min-h-screen   gap-6 md:gap-10'>
+      <div className='w-full md:flex-row sm:flex-row flex-col flex min-h-screen   gap-6 md:gap-10'>
         {/* First column */}
         <div className='flex flex-col bg-zinc-00 min-h-screen w-full gap-4 '>
           <SettingsForm />
@@ -14,8 +16,8 @@ export default function ProfileTab() {
         </div>
 
         {/* Second column */}
-        <div className=' bg-zinc-300 flex flex-col w-full min-h-screen'>
-          aaa
+        <div className=' flex flex-col w-full min-h-screen'>
+          <FavouritesSelection />
         </div>
       </div>
     </div>

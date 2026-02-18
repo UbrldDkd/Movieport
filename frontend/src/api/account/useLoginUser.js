@@ -1,6 +1,7 @@
 // hooks/useLoginUser.js
 import { useState, useContext } from 'react';
 import { AuthContext } from './auth/AuthContext';
+import authApiClient from './auth/authApiClient';
 
 export default function useLoginUser() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,24 +13,11 @@ export default function useLoginUser() {
     setError('');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/accounts/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-        credentials: 'include',
-      });
+      const res = await authApiClient.post('/accounts/login/', formData);
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.detail || 'Login failed');
-      }
-
-      const data = await res.json();
+      const data = res.data;
 
       console.log('logged in user data', data);
-      // Set user context
       setUser({
         id: data.id,
         username: data.username,
@@ -40,7 +28,7 @@ export default function useLoginUser() {
 
       return data;
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.detail || err.message || 'Login failed');
       console.error('Login error:', err);
       return null;
     } finally {

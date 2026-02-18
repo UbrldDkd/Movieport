@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Keys } from '../../utils/constants/Keys';
+import publicApiClient from '../publicApiClient';
 
 export function useGetContentRelationsByUsername(username) {
   const [contentRelations, setContentRelations] = useState([]);
@@ -11,13 +12,10 @@ export function useGetContentRelationsByUsername(username) {
 
     const getContentRelations = async () => {
       try {
-        const res = await fetch(
-          `http://127.0.0.1:8000/content_relations/by_username/${username}/`
-        );
-        if (!res.ok) throw new Error('Could not fetch content relations');
-        const data = await res.json();
+        const res = await publicApiClient.get(`/content_relations/by_username/${username}/`);
+        if (!res.data) throw new Error('Could not fetch content relations');
+        const data = res.data;
 
-        // Fetch TMDB details for each relation
         const relationsWithTMDB = await Promise.all(
           data.map(async (relation) => {
             if (!relation.tmdb_id) return relation;

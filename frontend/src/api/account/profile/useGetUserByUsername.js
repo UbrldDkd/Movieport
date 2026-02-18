@@ -1,6 +1,5 @@
-// Third-party imports
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import publicApiClient from '../../publicApiClient';
 
 export function useGetUserByUsername(username) {
   const [data, setData] = useState(null);
@@ -15,12 +14,7 @@ export function useGetUserByUsername(username) {
         setLoading(true);
         setError(null);
 
-        const res = await axios.get(
-          `http://127.0.0.1:8000/accounts/get_user/${username}/`,
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await publicApiClient.get(`/accounts/get_user/${username}/`);
 
         console.log('user data', res.data);
         setData(res.data);

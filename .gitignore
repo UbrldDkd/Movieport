@@ -78,6 +78,7 @@ coverage/
 frontend/src/output.css
 
 # Lockfiles
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
+/package.json
+/package-lock.json

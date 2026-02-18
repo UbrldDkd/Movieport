@@ -27,10 +27,10 @@ export default function ProfileNavBar({ username }) {
               <Link
                 key={link.label}
                 to={link.to}
-                className={`w-full md:w-auto text-left md:text-center tracking-wider text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
+                className={`w-full sm:hover:bg-transparent md:hover:bg-transparent md:w-auto text-left md:text-center hover:text-zinc-300 hover:bg-zinc-800 tracking-wider  text-xs sm:text-sm font-medium rounded px-2 sm:px-3 py-2 transition-colors whitespace-nowrap ${
                   active
-                    ? 'text-zinc-200  cursor-default'
-                    : 'text-zinc-400 hover:text-zinc-200'
+                    ? 'text-zinc-200 sm:bg-transparent md:bg-transparent bg-zinc-800 cursor-default'
+                    : 'text-zinc-400 cursor-pointer '
                 }`}
               >
                 {link.label}

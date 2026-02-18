@@ -57,7 +57,7 @@ export default function Settings() {
         </div>
 
         <div className='w-full ' />
-        
+
         {activeTab === 'profile' && <ProfileTab />}
 
         {/* Content goes here */}

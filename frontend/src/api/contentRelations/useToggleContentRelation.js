@@ -1,14 +1,6 @@
-// React
 import { useContext } from 'react';
-
-// Context
 import { AuthContext } from '../account/auth/AuthContext';
-
-// API hooks
-import { ensureCsrf } from '../account/auth/ensureCsrf';
-
-// Third-party
-import axios from 'axios';
+import authApiClient from '../account/auth/authApiClient';
 
 export function useToggleContentRelation() {
   const { user, setUser } = useContext(AuthContext);
@@ -22,7 +14,6 @@ export function useToggleContentRelation() {
     const prevValue = current ? current[field] : false;
     const newValue = !prevValue;
 
-    // Optimistic UI
     setUser((prev) => {
       const relations = prev.content_relations || [];
       const exists = relations.find((r) => r.tmdb_id === item.tmdb_id);
@@ -43,23 +34,10 @@ export function useToggleContentRelation() {
     });
 
     try {
-      const csrfToken = await ensureCsrf();
-
-      const response = await axios.post(
-        'http://127.0.0.1:8000/content_relations/toggle/',
-        { item, field },
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken,
-          },
-        }
-      );
+      const response = await authApiClient.post('/content_relations/toggle/', { item, field });
 
       const updated = response.data;
 
-      // Reconcile with backend
       setUser((prev) => ({
         ...prev,
         content_relations: prev.content_relations.map((cr) =>
@@ -71,7 +49,6 @@ export function useToggleContentRelation() {
     } catch (err) {
       console.error('Failed to toggle content relation:', err);
 
-      // Rollback
       setUser((prev) => ({
         ...prev,
         content_relations: prev.content_relations.map((cr) =>

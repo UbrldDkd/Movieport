@@ -38,7 +38,6 @@ export function useUserToDisplay(username) {
     }
 
     const isOwner = user?.username?.toLowerCase() === username.toLowerCase();
-    console.log('isOwner:', isOwner);
 
     if (isOwner) {
       const contentRelations = user?.content_relations || [];
@@ -57,7 +56,6 @@ export function useUserToDisplay(username) {
     } else if (fetchedUser) {
       const contentRelations = fetchedUser?.content_relations || [];
       console.log('Using fetched user data:', fetchedUser);
-      console.log('Content relations:', contentRelations);
 
       setUserToDisplay({
         ...fetchedUser,

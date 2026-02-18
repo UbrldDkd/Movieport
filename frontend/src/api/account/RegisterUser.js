@@ -1,23 +1,12 @@
+import authApiClient from './auth/authApiClient';
+
 const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
   setIsLoading(true);
   setError('');
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/accounts/register/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-      credentials: 'include',
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      const errorMessages = Object.values(data).flat().join(' ');
-      throw new Error(errorMessages);
-    }
+    const res = await authApiClient.post('/accounts/register/', formData);
+    const data = res.data;
 
     if (setUser) {
       setUser({
@@ -32,7 +21,10 @@ const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
     console.log('Registration successful:', data);
     return data;
   } catch (err) {
-    setError(err.message);
+    const errorMessages = err.response?.data
+      ? Object.values(err.response.data).flat().join(' ')
+      : err.message || 'Registration failed';
+    setError(errorMessages);
     console.error('Registration error:', err);
     return null;
   } finally {

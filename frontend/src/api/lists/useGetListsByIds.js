@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Keys } from '../../utils/constants/Keys';
-import { ensureCsrf } from '../account/auth/ensureCsrf';
+import publicApiClient from '../publicApiClient';
 
 export function useGetListsByIds(likedListIds) {
   const [lists, setLists] = useState([]);
@@ -18,23 +18,13 @@ export function useGetListsByIds(likedListIds) {
       setError(null);
 
       try {
-        const csrfToken = await ensureCsrf();
+        const res = await publicApiClient.post('/lists/lists_by_ids/', { list_ids: likedListIds });
 
-        const res = await fetch('http://127.0.0.1:8000/lists/lists_by_ids/', {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken,
-          },
-          body: JSON.stringify({ list_ids: likedListIds }),
-        });
-
-        if (!res.ok) {
-          throw new Error(`Failed to fetch lists (${res.status})`);
+        if (!res.data) {
+          throw new Error(`Failed to fetch lists`);
         }
 
-        const listsData = await res.json();
+        const listsData = res.data;
 
         for (const list of listsData) {
           if (!list.items?.length) continue;
