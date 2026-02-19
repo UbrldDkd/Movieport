@@ -1,6 +1,6 @@
 import { SLOT_COUNT, MOCK_ITEMS } from './constants';
 import { useFavoritesHandlers } from './handlers/useFavouritesHandlers';
-import { PosterSlot } from './CardVariations/PosterSlot';
+import PosterSlot from './CardVariations/PosterSlot';
 
 export default function FavoritesSelection({ items = MOCK_ITEMS }) {
   const { slots, draggedPos, dragOverPos, droppedPos, handlers } =

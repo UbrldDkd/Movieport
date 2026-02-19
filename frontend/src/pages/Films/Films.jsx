@@ -15,8 +15,6 @@ export default function Films() {
   return (
     <PageContainer>
       <ContentContainer>
-        <div className='  '></div>
-
         {/* Popular movies section */}
         <div className='flex-1   mx-auto   overflow-hidden md:max-w-[993px] justify-center lg:px-9.5 md:px-3 w-full'>
           <SectionHeader header='Popular this week' />

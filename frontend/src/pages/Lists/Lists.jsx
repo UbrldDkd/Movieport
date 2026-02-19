@@ -14,6 +14,7 @@ import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalCont
 import PageContainer from '../../components/WrapperContainers/PageContainer';
 
 // Components
+import ContentContainer from '../../components/WrapperContainers/ContentContainer';
 import ListsSectionSummary from '../../components/Sections/Lists/ListsSectionSummary';
 import ListsSection from '../../components/Sections/Lists/ListsSection';
 
@@ -37,7 +38,7 @@ export default function Lists() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60   flex flex-col p-3 rounded-sm'>
+      <ContentContainer>
         <div className='flex flex-col items-center justify-center pt-3 space-y-3 '>
           <div className='text-zinc-300/90 cursor-default text-2xl tracking-wider text-center font-semibold'>
             Keep track of films and TV your way.
@@ -53,7 +54,7 @@ export default function Lists() {
         <div className='md:px-10'>
           <ListsSectionSummary header={'Featured lists'} />
         </div>
-      </div>
+      </ContentContainer>
 
       <div className='w-full mt-2 flex flex-col lg:flex-row gap-2'>
         <div className='w-full lg:flex-[7.5] p-3 rounded-sm bg-zinc-900/60'>
