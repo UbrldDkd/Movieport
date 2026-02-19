@@ -11,6 +11,12 @@ export const posterSizes = {
     tmdb: 'w500',
   },
 
+  favouritesSection: {
+    width:
+      'min-w-[100px] sm:min-w-[100px] sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',
+    tmdb: 'w500',
+  },
+
   md: {
     width:
       'min-w-[90px] max-w-[90px] sm:min-w-[100px] sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',

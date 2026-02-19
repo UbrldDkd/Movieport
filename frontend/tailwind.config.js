@@ -16,12 +16,12 @@ export default {
           '50%': { opacity: '0.5' },
         },
         'drop-expand-fade': {
-          '0%': { 
+          '0%': {
             transform: 'scale(1)',
             opacity: '1',
             'box-shadow': '0 0 0 0px rgb(69 10 10 / 1)',
           },
-          '100%': { 
+          '100%': {
             transform: 'scale(1.5)',
             opacity: '0',
             'box-shadow': '0 0 0 40px rgb(69 10 10 / 0)',
