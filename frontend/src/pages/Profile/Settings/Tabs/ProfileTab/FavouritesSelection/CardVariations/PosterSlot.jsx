@@ -4,7 +4,7 @@ import Placeholder from './Placeholder';
 import DropTarget from './DropTarget';
 
 export default function PosterSlot({ item, pos, status, handlers }) {
-  const { width } = posterSizes.md;
+  const { width } = posterSizes.favouritesSection;
 
   // Only show the item if it's not the currently dragged item
   const isDraggedHere = status.draggedPos === pos;

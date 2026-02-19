@@ -45,7 +45,7 @@ export default function ContentDisplayX({
   };
 
   return (
-    <div className='relative w-full'>
+    <div className='relative  '>
       {/* LEFT ARROW */}
       <button
         onClick={() => scroll(-1)}

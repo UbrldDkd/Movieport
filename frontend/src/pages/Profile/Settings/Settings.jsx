@@ -1,7 +1,9 @@
 import PageContainer from '../../../components/WrapperContainers/PageContainer';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import AnimatedTabs from '../../../components/Common/AnimatedTabs';
 import ProfileTab from './Tabs/ProfileTab/ProfileTab';
+import { tabVariants } from '../../../utils/style/animations/motionVariants.js';
 
 export default function Settings() {
   const { tab } = useParams();
@@ -54,12 +56,25 @@ export default function Settings() {
             </button>
           ))}
         </div>
-        <div className='w-full ' />
-        {activeTab === 'profile' && <ProfileTab />}
-        {/* Content goes here */}
-        <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
-          SAVE
-        </button>{' '}
+        {/* Tab content */}
+        <AnimatePresence mode='wait'>
+          <motion.div
+            key={activeTab}
+            variants={tabVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className='space-y-6'
+          >
+            <div className='w-full ' />
+            {activeTab === 'profile' && <ProfileTab />}
+            {/* Content goes here */}
+            <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
+              SAVE
+            </button>{' '}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </PageContainer>
   );

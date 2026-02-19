@@ -1,13 +1,13 @@
 import { SLOT_COUNT, MOCK_ITEMS } from './constants';
-import { useFavoritesHandlers } from './handlers';
-import { PosterSlot } from './CardVariations';
+import { useFavoritesHandlers } from './handlers/useFavouritesHandlers';
+import { PosterSlot } from './CardVariations/PosterSlot';
 
 export default function FavoritesSelection({ items = MOCK_ITEMS }) {
   const { slots, draggedPos, dragOverPos, droppedPos, handlers } =
     useFavoritesHandlers(items, SLOT_COUNT);
 
   return (
-    <div className='flex flex-col bg-zinc-900 mx-auto  items-start justify-start'>
+    <div className='flex flex-col  mx-auto  items-start justify-start'>
       <p className='block tracking-widest text-xs font-medium text-zinc-300 mb-3'>
         FAVORITE FILMS
       </p>
@@ -26,7 +26,7 @@ export default function FavoritesSelection({ items = MOCK_ITEMS }) {
           />
         ))}
       </div>
-      <div className='text-xs font-semibold  mt-3 text-zinc-500 tracking-wider '>
+      <div className='text-xs cursor-default font-semibold  mt-3 text-zinc-500 tracking-wider '>
         {' '}
         Drag and drop to reorder{' '}
       </div>

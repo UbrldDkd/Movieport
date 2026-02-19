@@ -1,4 +1,4 @@
-import SettingsForm from './SettingsForm';
+import SettingsForm from './SettingsForm/SettingsForm';
 
 import FavouritesSelection from './FavouritesSelection/FavouritesSelection';
 export default function ProfileTab() {

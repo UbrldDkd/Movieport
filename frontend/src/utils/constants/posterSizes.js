@@ -1,7 +1,7 @@
 export const posterSizes = {
   sm: {
     width:
-      ' max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
+      ' min-w-[60px] max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
     tmdb: 'w500',
   },
 
@@ -13,7 +13,7 @@ export const posterSizes = {
 
   favouritesSection: {
     width:
-      'min-w-[100px] sm:min-w-[100px] sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',
+      'min-w-[100px]  sm:min-w-[75px] sm:w-full  sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',
     tmdb: 'w500',
   },
 
@@ -30,7 +30,7 @@ export const posterSizes = {
 
   xl: {
     width:
-      'min-w-[140px] max-w-[140px] sm:min-w-[160px] sm:max-w-[160px] md:min-w-[180px] md:max-w-[180px] lg:min-w-[220px] lg:max-w-[220px]',
+      'min-w-[137px] max-w-[1px] sm:min-w-[160px] sm:max-w-[160px] md:min-w-[180px] md:max-w-[180px] lg:min-w-[220px] lg:max-w-[220px]',
     tmdb: 'w780',
   },
 };

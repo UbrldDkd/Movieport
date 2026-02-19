@@ -1,9 +1,8 @@
-// hooks/useLoginUser.js
 import { useState, useContext } from 'react';
 import { AuthContext } from './auth/AuthContext';
 import authApiClient from './auth/authApiClient';
 
-export default function useLoginUser() {
+export function useLoginUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const { setUser } = useContext(AuthContext);

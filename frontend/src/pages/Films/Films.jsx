@@ -4,6 +4,7 @@ import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
 // Components
 import PageContainer from '../../components/WrapperContainers/PageContainer';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
+import ContentContainer from '../../components/WrapperContainers/ContentContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
@@ -13,11 +14,11 @@ export default function Films() {
 
   return (
     <PageContainer>
-      <div className='bg-zinc-900/60 rounded-sm min-h-screen  p-3 flex-col flex'>
-        <div className=' flex justify-between '></div>
+      <ContentContainer>
+        <div className='  '></div>
 
         {/* Popular movies section */}
-        <div className=' max-w-[993px] mx-auto justify-center lg:px-9.5 md:px-3'>
+        <div className='flex-1   mx-auto   overflow-hidden md:max-w-[993px] justify-center lg:px-9.5 md:px-3 w-full'>
           <SectionHeader header='Popular this week' />
 
           <ContentDisplayX
@@ -48,7 +49,7 @@ export default function Films() {
             />
           </div>
         </div>
-      </div>
+      </ContentContainer>
     </PageContainer>
   );
 }

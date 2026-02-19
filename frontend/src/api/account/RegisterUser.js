@@ -1,6 +1,6 @@
 import authApiClient from './auth/authApiClient';
 
-const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
+export async function registerUser(formData, setError, setIsLoading, setUser) {
   setIsLoading(true);
   setError('');
 
@@ -14,7 +14,7 @@ const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
         username: data.username,
         contentRelations: data.content_relations || [],
         lists: data.lists || [],
-        likedListIds: data.liked_list_ids || []
+        likedListIds: data.liked_list_ids || [],
       });
     }
 
@@ -30,6 +30,4 @@ const RegisterUser = async (formData, setError, setIsLoading, setUser) => {
   } finally {
     setIsLoading(false);
   }
-};
-
-export default RegisterUser;
+}

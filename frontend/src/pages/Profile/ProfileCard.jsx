@@ -42,7 +42,7 @@ export default function ProfileCard({ user }) {
       variants={fadeInUpVariants}
       initial='hidden'
       animate='visible'
-      transition={{ duration: 0.35, ease: 'easeOut' }}
+      transition={{ duration: 0.1, ease: 'easeOut' }}
       className='px-3 py-2   rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-zinc-900/90'
     >
       {/* Stats section */}

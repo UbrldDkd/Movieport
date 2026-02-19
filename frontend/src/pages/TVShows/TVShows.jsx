@@ -3,6 +3,7 @@ import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
 
 // Components
 import PageContainer from '../../components/WrapperContainers/PageContainer';
+import ContentContainer from '../../components/WrapperContainers/ContentContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
@@ -12,7 +13,7 @@ export default function TVShows() {
 
   return (
     <PageContainer>
-      <div className=' bg-zinc-900/60 min-h-screen  space-y-6 md:space-y-10 rounded-sm p-3 '>
+      <ContentContainer>
         {/* latest tv shows section */}
         <div className='mx-auto max-w-[792px]'>
           <SectionHeader header='Latest TV Shows' />
@@ -40,7 +41,7 @@ export default function TVShows() {
             <ContentDisplayX content={tvShows.popular} view='sm' />
           </div>
         </div>
-      </div>
+      </ContentContainer>
     </PageContainer>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { IoClose } from 'react-icons/io5';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 
@@ -37,9 +38,9 @@ export default function AuthModal({ isOpen, onClose, activeTab = 'login' }) {
       >
         <button
           onClick={onClose}
-          className='absolute -top-1 right-1.5 text-zinc-400 hover:text-white text-2xl cursor-pointer'
+          className='absolute top-1 right-1 transition-colors duration-100 text-zinc-400 hover:text-zinc-300 text-2xl cursor-pointer'
         >
-          ×
+          <IoClose />
         </button>
 
         <div className='w-full'>

@@ -23,18 +23,16 @@ export default function ContentCardListView({ item, onRemove }) {
   };
 
   return (
-    <div className='flex items-start gap-3 bg-zinc-800/10 border border-zinc-700 rounded-xs px-2 pb-2 pt-4'>
-      <div>
-        <ContentCard item={item} view={'sm'} />
-      </div>
+    <div className='flex items-start gap-3 bg-zinc-800/10 border border-zinc-700 rounded-xs px-2 md:py-4 sm:py-2 py-2  pt-'>
+      <ContentCard item={item} view={'sm'} />
 
       <div className='flex-1 flex flex-col justify-center'>
         <div className='flex flex-col'>
-          <div className='flex items-baseline gap-3'>
-            <span className='text-xl tracking-wider text-zinc-200 font-semibold'>
+          <div className='flex items-center gap-3'>
+            <span className='md:text-xl sm:text-lg tracking-wider text-zinc-200 font-semibold'>
               {filteredItem?.title}
             </span>
-            <span className='text-lg text-zinc-400'>
+            <span className='font-semibold md:text-lg text-zinc-400'>
               {filteredItem?.release_date.slice(0, 4)}
             </span>
           </div>

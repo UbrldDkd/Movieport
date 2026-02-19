@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
-import useLoginUser from '../../useLoginUser';
+import { useLoginForm } from './sanatisers/useLoginForm';
+
+const inputClass =
+  'w-full bg-zinc-800 border-2 border-zinc-700 text-zinc-300 px-2 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 [&:-webkit-autofill]:![box-shadow:0_0_0_999px_theme(colors.zinc.800)_inset] [&:-webkit-autofill]:![-webkit-text-fill-color:theme(colors.zinc.300)]';
+
+const Label = ({ children }) => (
+  <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-1'>
+    {children}
+  </label>
+);
 
 export default function LoginForm({ onClose, switchToRegister }) {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const [rememberMe, setRememberMe] = useState(false);
-  const { loginUser, isLoading, error } = useLoginUser();
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const data = await loginUser(formData);
-
-    if (data) {
-      setFormData({ username: '', password: '' });
-      console.log('Logged in as:', data.username);
-      onClose();
-      // redirect or fetch protected data here if needed
-    }
-  }
+  const {
+    formData,
+    rememberMe,
+    setRememberMe,
+    isLoading,
+    error,
+    handleChange,
+    handleSubmit,
+  } = useLoginForm({ onClose });
 
   return (
     <form onSubmit={handleSubmit} className='space-y-3'>
@@ -35,30 +32,27 @@ export default function LoginForm({ onClose, switchToRegister }) {
           Register
         </button>
       </p>
+
       <div>
-        <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-2'>
-          Username
-        </label>
+        <Label>Username</Label>
         <input
           type='text'
           name='username'
           value={formData.username}
           onChange={handleChange}
-          className='w-full bg-zinc-800 border-2 border-zinc-700 text-white px-3 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200'
+          className={inputClass}
           required
         />
       </div>
 
       <div>
-        <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-2'>
-          Password
-        </label>
+        <Label>Password</Label>
         <input
           type='password'
           name='password'
           value={formData.password}
           onChange={handleChange}
-          className='w-full bg-zinc-800 border-2 border-zinc-700 text-zinc-300 px-3 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200'
+          className={inputClass}
           required
         />
       </div>
@@ -73,18 +67,18 @@ export default function LoginForm({ onClose, switchToRegister }) {
         />
         <label
           htmlFor='rememberMe'
-          className='text-xs font-semibold  text-zinc-300 cursor-pointer'
+          className='text-xs font-semibold text-zinc-300 cursor-pointer'
         >
           Remember me
         </label>
       </div>
 
-      {error && <p className='text-red-500 text-sm'>{error}</p>}
+      {error && <p className='text-red-500 text-xs'>{error}</p>}
 
       <button
         type='submit'
         disabled={isLoading}
-        className='w-full bg-red-950 hover:bg-red-900 text-white font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
+        className='w-full bg-red-950 hover:bg-red-900 text-zinc-300 font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
       >
         {isLoading ? 'Logging in...' : 'Login'}
       </button>

@@ -1,18 +1,12 @@
-// React
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-
 import { AnimatePresence, motion } from 'framer-motion';
 
-// Utils/Helpers
 import { useIsLoggedIn } from '../../../utils/helpers/useIsLoggedIn';
 import { cleanItem } from '../../../utils/helpers/cleanItem';
 import { tooltipVariants } from '../../../utils/style/animations/motionVariants';
-
-// Context
 import { AuthContext } from '../../../api/account/auth/AuthContext';
 
-// Components
 import ContentCardPoster from './ContentCardPoster';
 import ContentCardActions from './ContentCardActions';
 import ContentCardTooltip from './ContentCardTooltip';
@@ -20,32 +14,23 @@ import ContentCardTooltip from './ContentCardTooltip';
 export default function ContentCard({ item, view }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
-  // Formats both tmdb and backend objects as one for multi-use
   const cleanedItem = cleanItem(item);
-
   const { user } = useContext(AuthContext);
-
   const current = user?.content_relations?.find(
     (cr) => cr.tmdb_id === cleanedItem.tmdb_id
   );
-
   const isLoggedIn = useIsLoggedIn();
 
   return (
-    <div
+    <motion.div
       className='relative inline-block overflow-visible group'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* CARD-LEVEL LOADING PULSE */}
-      {!loaded && (
-        <div className='absolute inset-0 rounded-sm bg-zinc- animate-pulse-slow z-0' />
-      )}
-
-      {/* TODO: fix this loading state */}
-
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -54,7 +39,6 @@ export default function ContentCard({ item, view }) {
             initial='initial'
             animate='animate'
             exit='exit'
-            transition={{ duration: 0.2 }}
             className='absolute -top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
           >
             <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
@@ -70,7 +54,6 @@ export default function ContentCard({ item, view }) {
           title={cleanedItem.title}
           posterPath={cleanedItem.poster_path}
           view={view}
-          onLoad={() => setLoaded(true)}
         />
       </Link>
 
@@ -95,6 +78,6 @@ export default function ContentCard({ item, view }) {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
