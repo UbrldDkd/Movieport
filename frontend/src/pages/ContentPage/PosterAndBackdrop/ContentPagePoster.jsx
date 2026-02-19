@@ -6,6 +6,7 @@ export default function ContentPagePoster({
   isLoading,
 }) {
   const [loaded, setLoaded] = useState();
+  console.log(displayPosterUrl);
 
   useEffect(() => {
     setLoaded(false);

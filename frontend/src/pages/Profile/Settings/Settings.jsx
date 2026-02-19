@@ -22,11 +22,10 @@ export default function Settings() {
 
   return (
     <PageContainer>
-      <div className='flex flex-col space-y-3 bg-zinc-900 p-3 min-h-screen rounded-sm max-w-[1020px] w-full mx-auto'>
+      <div className='flex flex-col space-y-3 bg-zinc-900 p-3  rounded-sm max-w-[1020px] w-full mx-auto'>
         <div className='text-zinc-300/90 cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold'>
           Account settings
         </div>
-
         {/* Tabs */}
         <div className='hidden sm:block'>
           <AnimatedTabs
@@ -55,12 +54,12 @@ export default function Settings() {
             </button>
           ))}
         </div>
-
         <div className='w-full ' />
-
         {activeTab === 'profile' && <ProfileTab />}
-
         {/* Content goes here */}
+        <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
+          SAVE
+        </button>{' '}
       </div>
     </PageContainer>
   );

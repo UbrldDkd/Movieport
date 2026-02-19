@@ -6,22 +6,27 @@ import { useListsModal } from '../../../../api/lists/Modal/Context/ListsModalCon
 import { AuthContext } from '../../../../api/account/auth/AuthContext';
 import { useContext } from 'react';
 import ContentPageActionsRating from './ContentPageActionsRating';
+import { useAuthModal } from '../../../../api/account/auth/Modal/Context/AuthModalContext';
 
 export default function ContentPageActionsPanel({ item, current, isLoading }) {
   const toggleField = useToggleContentRelation();
-  const { openModal } = useListsModal();
+  const { openModal: openListModal } = useListsModal();
   const { user } = useContext(AuthContext);
   const isLoggedIn = !!user;
+  const { openModal: openAuthModal } = useAuthModal();
 
   return (
-    <div className='bg-zinc-800 rounded-sm h-fit overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
+    <div className='bg-zinc-800 min-w-53 rounded-sm h-fit overflow-visible divide-y-2 divide-zinc-900/90 w-full'>
       {isLoading ? (
         <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
           Share
         </button>
       ) : !isLoggedIn ? (
         <>
-          <button className='w-full py-2 md:py-3 px-3 text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button
+            onClick={() => openAuthModal()}
+            className='w-full py-2 md:py-3 focus:outline-none px-3 text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+          >
             Log in or register to like, watchlist or review
           </button>
           <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
@@ -87,7 +92,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
           </button>
 
           <button
-            onClick={() => openModal(item)}
+            onClick={() => openListModal(item)}
             className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
           >
             Add to lists

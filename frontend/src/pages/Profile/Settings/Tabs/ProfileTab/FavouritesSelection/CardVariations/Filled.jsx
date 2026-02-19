@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { posterSizes } from '../../../../../../../utils/constants/posterSizes';
 
-export default function Filled({ item, onRemove }) {
+export default function Filled({ item, onRemove, status }) {
   const [loaded, setLoaded] = useState(false);
-  const { tmdb } = posterSizes.md;
+  const { tmdb } = posterSizes.favouritesSection;
 
   return (
-    <div className='w-full h-full transition-transform duration-150 ease-out hover:scale-105 will-change-transform'>
+    <div
+      className={`w-full h-full transition-transform duration-150 ease-out  will-change-transform ${status?.isDragging || status?.isDragOver ? 'opacity-100' : ' hover:scale-105'}`}
+    >
       <div className='group relative w-full aspect-[2/3] rounded-sm overflow-hidden bg-zinc-800 shadow-md border-2 border-zinc-800  transition-all duration-150'>
         {!loaded && (
           <div className='absolute inset-0 bg-zinc-700 animate-pulse-slow' />
@@ -22,7 +24,7 @@ export default function Filled({ item, onRemove }) {
         <div className='absolute inset-0 bg-black/0 rounded-sm transition-all duration-200' />
         <button
           onClick={onRemove}
-          className='absolute backdrop-blur-3xl top-0 hover:text-zinc-200 text-zinc-300 z-10 w-6 h-6 flex items-start justify-start p-0.5 bg-black/70 hover:bg-red-950 text-sm rounded-br-full opacity-0 group-hover:opacity-100 transition-all duration-200'
+          className={`absolute backdrop-blur-3xl top-0 hover:text-zinc-200 text-zinc-300 z-10 w-6 h-6 flex items-start justify-start p-0.5 bg-black/70 hover:bg-red-950 text-sm rounded-br-full transition-all duration-200 ${status?.isDragging || status?.isDragOver ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`}
         >
           <MdOutlineClose />
         </button>

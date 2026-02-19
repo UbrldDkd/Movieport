@@ -5,12 +5,17 @@ import DropTarget from './DropTarget';
 
 export default function PosterSlot({ item, pos, status, handlers }) {
   const { width } = posterSizes.md;
-  const showDropTarget = status.isDragOver && item;
+
+  // Only show the item if it's not the currently dragged item
+  const isDraggedHere = status.draggedPos === pos;
+  const showItem = item && !isDraggedHere;
+
+  const showDropTarget = status.isDragOver && showItem;
 
   return (
     <div className={`relative ${width}`} style={{ aspectRatio: '2/3' }}>
       {status.isDragOver && (
-        <div className='absolute inset-0 z-10 pointer-events-none ' />
+        <div className='absolute inset-0 z-10 pointer-events-none' />
       )}
 
       <div
@@ -29,17 +34,21 @@ export default function PosterSlot({ item, pos, status, handlers }) {
         }}
         onDrop={() => handlers.onDrop(pos)}
         onDragEnd={handlers.onDragEnd}
-        className={`absolute inset-0 rounded-sm  shadow-md transition-transform duration-150
+        className={`absolute inset-0 rounded-sm shadow-md transition-transform duration-150
           ${!item ? 'cursor-pointer' : 'cursor-grab active:cursor-grabbing'}
-          ${status.isDragging ? 'opacity-70' : ''}
-          `}
+          ${isDraggedHere ? ' pointer-events-none' : ''}
+        `}
       >
         {showDropTarget ? (
-          <DropTarget showBorder />
-        ) : item ? (
-          <Filled item={item} onRemove={() => handlers.onRemove(pos)} />
+          <DropTarget status={status} />
+        ) : showItem ? (
+          <Filled
+            item={item}
+            onRemove={() => handlers.onRemove(pos)}
+            status={status}
+          />
         ) : (
-          <Placeholder />
+          <Placeholder status={status} />
         )}
       </div>
     </div>

@@ -135,7 +135,7 @@ export default function ContentPageMain({
         </div>
 
         {/* Actions */}
-        <div className='w-full hidden  sm:hidden md:flex md:flex-[2.5] '>
+        <div className='w-full hidden  sm:hidden md:flex md:flex-[2.5]  '>
           <ContentPageActionsPanel
             item={item}
             current={current}

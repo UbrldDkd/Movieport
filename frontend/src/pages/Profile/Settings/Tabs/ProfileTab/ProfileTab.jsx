@@ -4,7 +4,7 @@ import FavouritesSelection from './FavouritesSelection/FavouritesSelection';
 export default function ProfileTab() {
   return (
     <div className='flex flex-col'>
-      <div className='text-lg mb-2  font-semibolt tracking-wider text-zinc-300'>
+      <div className='text-lg mb-2  font-semibold tracking-wider text-zinc-300'>
         Profile
       </div>
 

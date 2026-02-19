@@ -9,37 +9,51 @@ export function usePositionState(initialItems, slotCount) {
   }, [initialItems]);
 
   const getSlots = (itemsArray) =>
-    Array.from({ length: slotCount }, (_, i) =>
-      itemsArray.find((item) => item.position === i) ?? null
+    Array.from(
+      { length: slotCount },
+      (_, i) => itemsArray.find((item) => item.position === i) ?? null
     );
 
   const calculatePreview = (fromPos, hoverPos) => {
-    if (fromPos === hoverPos || fromPos === null) return null;
+    if (fromPos === null) return null;
 
-    const newItems = items.map((item) => ({ ...item }));
-    const draggedItem = newItems.find((item) => item.position === fromPos);
+    // Remove dragged item from source slot
+    const newItems = items
+      .filter((item) => item.position !== fromPos)
+      .map((i) => ({ ...i }));
 
-    if (!draggedItem) return null;
-    const targetSlot = newItems.find((item) => item.position === hoverPos);
+    const draggedItem = items.find((item) => item.position === fromPos);
+    if (!draggedItem) return getSlots(newItems);
 
-    if (!targetSlot) {
-      draggedItem.position = hoverPos;
-    } else {
-      draggedItem.position = hoverPos;
-      newItems.forEach((item) => {
-        if (item === draggedItem || item.position === fromPos) return;
-        if (fromPos < hoverPos && item.position > fromPos && item.position <= hoverPos) {
-          item.position = item.position - 1;
-        } else if (fromPos > hoverPos && item.position >= hoverPos && item.position < fromPos) {
-          item.position = item.position + 1;
-        }
-      });
-    }
+    // Assign dragged item to hover position
+    const draggedClone = { ...draggedItem, position: hoverPos ?? fromPos };
+    newItems.push(draggedClone);
 
+    // Shift other items
+    newItems.forEach((item) => {
+      if (item === draggedClone) return;
+      if (
+        fromPos < hoverPos &&
+        item.position > fromPos &&
+        item.position <= hoverPos
+      ) {
+        item.position -= 1;
+      } else if (
+        fromPos > hoverPos &&
+        item.position >= hoverPos &&
+        item.position < fromPos
+      ) {
+        item.position += 1;
+      }
+    });
+
+    // Build preview slots
     const slots = new Array(slotCount).fill(null);
     newItems.forEach((item) => {
-      if (item.position >= 0 && item.position < slotCount) slots[item.position] = item;
+      if (item.position >= 0 && item.position < slotCount)
+        slots[item.position] = item;
     });
+
     return slots;
   };
 
@@ -49,14 +63,7 @@ export function usePositionState(initialItems, slotCount) {
 
   const applyPreview = () => {
     if (previewSlots) {
-      setItems((prev) =>
-        previewSlots
-          .filter(Boolean)
-          .map((slot) => {
-            const existing = prev.find((item) => item.poster_path === slot.poster_path);
-            return existing ? { ...existing, position: slot.position } : slot;
-          })
-      );
+      setItems(previewSlots.filter(Boolean).map((slot) => ({ ...slot })));
       setPreviewSlots(null);
     }
   };
@@ -65,5 +72,10 @@ export function usePositionState(initialItems, slotCount) {
     setItems((prev) => prev.filter((item) => item.position !== pos));
   };
 
-  return { slots: previewSlots || getSlots(items), setPreview, applyPreview, removeItem };
+  return {
+    slots: previewSlots || getSlots(items),
+    setPreview,
+    applyPreview,
+    removeItem,
+  };
 }

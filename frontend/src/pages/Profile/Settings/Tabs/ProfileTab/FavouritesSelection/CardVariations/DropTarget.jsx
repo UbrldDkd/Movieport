@@ -1,7 +1,12 @@
-export default function DropTarget({ showBorder }) {
+export default function DropTarget({ status }) {
   return (
-    <div
-      className={`relative w-full aspect-[2/3] rounded-sm shadow-md border-2  transition-all duration-100  ${showBorder ? ' border-red-950 border-dashed border-2 ' : ' border-zinc-800 border-2'}`}
-    />
+    <div className='relative w-full aspect-[2/3] rounded-sm  border-2 border-transparent transition-all duration-100'>
+      {status.isDragOver && (
+        <div className='absolute inset-0 rounded-sm border-2 border-red-950 border-dashed' />
+      )}
+      {status.isDropped && (
+        <div className='absolute inset-0 rounded-sm animate-drop-expand-fade' />
+      )}
+    </div>
   );
 }

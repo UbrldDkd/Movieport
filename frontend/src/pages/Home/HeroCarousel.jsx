@@ -102,7 +102,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
               </p>
 
               <Link
-                to={`/${movie[details.movieTitle] ? 'movie' : 'tv'}/${movie[details.id]}`}
+                to={`/${movie[details.movieTitle] ? 'film' : 'tv'}/${movie[details.id]}`}
                 className='inline-block'
               >
                 <button className='mt-2 rounded-3xl border-2 border-zinc-500 bg-transparent px-2 py-1 text-sm font-semibold text-zinc-300 cursor-pointer hover:border-red-950 transition-colors duration-300 hover:bg-red-950 md:mt- md:px-3 md:text-base'>

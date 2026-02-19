@@ -26,6 +26,10 @@ export default function FavoritesSelection({ items = MOCK_ITEMS }) {
           />
         ))}
       </div>
+      <div className='text-xs font-semibold  mt-3 text-zinc-500 tracking-wider '>
+        {' '}
+        Drag and drop to reorder{' '}
+      </div>
     </div>
   );
 }
