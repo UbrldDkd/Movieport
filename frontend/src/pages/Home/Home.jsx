@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 // Hooks
 import { useFetchMainContent } from './hooks/useFetchMainContent.js';
-
+import { motion as Motion } from 'framer-motion';
+import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
 // Components
 import HeroCarousel from './HeroCarousel.jsx';
 import ContentDisplayX from './../../components/ContentDisplays/ContentDisplayX.jsx';
@@ -28,7 +29,14 @@ export default function Home() {
       />
 
       <PageContainer>
-        <div className='w-full mt-5 max-w-[1140px] bg-zinc-900/90 rounded-sm flex p-3 flex-col gap-6 md:gap-10  md:px-3 items-center relative'>
+        <Motion.div
+          variants={fadeInUpVariants}
+          initial='hidden'
+          animate='visible'
+          transition={{ duration: 0.1, ease: 'easeOut' }}
+          className='w-full mt-5 max-w-[1140px] bg-zinc-900/90 rounded-sm flex p-3 flex-col gap-6 md:gap-10  md:px-3 items-center relative'
+        >
+          {' '}
           {/* Movies / TV Toggle */}
           <div className='w-full flex flex-col gap-3'>
             <div className='flex flex-wrap items-baseline gap-2 md:gap-3'>
@@ -70,7 +78,6 @@ export default function Home() {
               posterAmount={10}
             />
           </div>
-
           {/* Now Playing */}
           <div className='w-full flex flex-col '>
             <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
@@ -83,7 +90,6 @@ export default function Home() {
               view='lg'
             />
           </div>
-
           {/* Top Rated */}
           <div className='w-full flex flex-col'>
             <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
@@ -96,7 +102,6 @@ export default function Home() {
               view='lg'
             />
           </div>
-
           {/* Coming Soon */}
           <div className='w-full flex flex-col '>
             <h2 className='text-zinc-300/90 text-base -mb-1 tracking-wide font-semibold cursor-default'>
@@ -109,7 +114,7 @@ export default function Home() {
               view='lg'
             />
           </div>
-        </div>
+        </Motion.div>
       </PageContainer>
     </div>
   );

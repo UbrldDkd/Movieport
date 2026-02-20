@@ -60,7 +60,6 @@ export function useGetListsByIds(likedListIds) {
 
         setLists(listsData);
       } catch (err) {
-        console.error(err);
         setError(err);
         setLists([]);
       } finally {

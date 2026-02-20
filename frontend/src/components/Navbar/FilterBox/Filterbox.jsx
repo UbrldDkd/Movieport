@@ -12,7 +12,7 @@ export default function Filterbox() {
   const [selectedGenres, setSelectedGenres] = useState([]); // state to hold selected genres
   const [selectedYears, setSelectedYears] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
-  const [mediaType, setMediaType] = useState('movie'); // media type can be 'movie' or 'tv'
+  const [mediaType, setMediaType] = useState('film'); // media type can be 'movie' or 'tv'
   const [isOpen, setIsOpen] = useState(false); // state for dropdown visibility
   const [matchType, setMatchType] = useState('any'); // 'or' or 'and' for genre matching
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
@@ -74,10 +74,9 @@ export default function Filterbox() {
   ];
 
   // Validate mediaType to ensure it is either 'movie' or 'tv'
-  const validMediaTypes = ['movie', 'tv'];
+  const validMediaTypes = ['film', 'tv'];
   if (!validMediaTypes.includes(mediaType)) {
-    console.error(`Invalid media type: ${mediaType}. Defaulting to 'movie'.`);
-    setMediaType('movie');
+    setMediaType('film');
   }
 
   const dropdownRef = useRef(null);
@@ -310,9 +309,9 @@ export default function Filterbox() {
           <div className='flex-1 flex flex-col justify-between'>
             <div className='flex space-x-1 mt-5'>
               <button
-                onClick={() => setMediaType('movie')}
+                onClick={() => setMediaType('film')}
                 className={`flex-1 font-semibold tracking-wider text-sm px-1 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1
-            ${mediaType === 'movie' ? 'bg-red-950 text-zinc-300' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'}`}
+            ${mediaType === 'film' ? 'bg-red-950 text-zinc-300' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'}`}
               >
                 Movies
               </button>

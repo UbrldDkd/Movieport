@@ -13,7 +13,6 @@ export function useLogoutUser() {
       setUser(null);
       return { success: true, message: data?.message || 'Logged out successfully' };
     } catch (err) {
-      console.error('Logout error:', err);
       setUser(null);
       return { success: true, message: 'Logged out' };
     }

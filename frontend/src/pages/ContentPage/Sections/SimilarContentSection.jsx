@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { useFetchSimilar } from '../hooks/useFetchSimilar';
 import ContentDisplayX from '../../../components/ContentDisplays/ContentDisplayX';
 import SectionHeader from '../../../components/Sections/Common/SectionHeader';
 
 export default function SimilarContentSection({ id, mediaType, releaseDate }) {
-  const navigate = useNavigate();
   const { content, error } = useFetchSimilar({ id, mediaType, releaseDate });
 
   if (error) {
@@ -17,14 +15,12 @@ export default function SimilarContentSection({ id, mediaType, releaseDate }) {
     <section className='w-full pb-5 '>
       {/* Header */}
       <SectionHeader
-        header={`Similar ${mediaType === 'movie' ? 'films' : 'TV shows'}`}
+        header={`Similar ${mediaType === 'film' ? 'films' : 'TV shows'}`}
         url={`/discover/${mediaType}/${id}`}
       />
 
-      <div className='h-[1.5px] border-b-1 border-zinc-700 mb-3 mt-2' />
-
       {/* Cards */}
-      <div className=' justify-center lg:max-w-[700px]'>
+      <div className=' w-full flex-1 max-w-106.5  mx-auto   overflow-hidden justify-center sm:max-w-[700px] lg:max-w-[700px]'>
         <ContentDisplayX content={content} view='similarSection' />
       </div>
     </section>

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('action_type', models.CharField(choices=[('watched', 'Watched'), ('liked', 'Liked'), ('watchlisted', 'Watchlisted'), ('rated', 'Rated')], max_length=50)),
                 ('title', models.CharField(default='', max_length=255)),
                 ('poster_path', models.CharField(default='', max_length=500)),
-                ('media_type', models.CharField(default='movie', max_length=10)),
+                ('media_type', models.CharField(default='film', max_length=10)),
                 ('rating', models.DecimalField(blank=True, decimal_places=1, max_digits=2, null=True)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='content_activities', to=settings.AUTH_USER_MODEL)),

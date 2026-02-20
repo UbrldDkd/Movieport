@@ -8,9 +8,6 @@ export function useFavoritesHandlers(initialItems, slotCount = 4) {
   const onDragStart = (pos) => {
     dragState.setDraggedPos(pos);
     dragState.setDragOverPos(null);
-
-    // Immediately remove from source slot logically
-    positionState.setPreview(pos, null);
   };
 
   const onDragOver = (pos) => {

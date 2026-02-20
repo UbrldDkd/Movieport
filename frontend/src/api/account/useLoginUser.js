@@ -16,7 +16,6 @@ export function useLoginUser() {
 
       const data = res.data;
 
-      console.log('logged in user data', data);
       setUser({
         id: data.id,
         username: data.username,
@@ -28,7 +27,6 @@ export function useLoginUser() {
       return data;
     } catch (err) {
       setError(err.response?.data?.detail || err.message || 'Login failed');
-      console.error('Login error:', err);
       return null;
     } finally {
       setIsLoading(false);

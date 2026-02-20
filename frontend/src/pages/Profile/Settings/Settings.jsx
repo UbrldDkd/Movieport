@@ -10,6 +10,7 @@ import PageContainer from '../../../components/WrapperContainers/PageContainer';
 import AnimatedTabs from '../../../components/Common/AnimatedTabs';
 import ProfileTab from './Tabs/ProfileTab/ProfileTab';
 import AuthTab from './Tabs/AuthTab/AuthTab';
+import AvatarTab from './Tabs/AvatarTab/AvatarTab.jsx';
 
 export default function Settings() {
   const { tab } = useParams();
@@ -25,8 +26,6 @@ export default function Settings() {
     { key: 'notifications', label: 'Notifications' },
     { key: 'data', label: 'Data' },
   ];
-
-  console.log('Active tab:', activeTab);
 
   return (
     <PageContainer>
@@ -76,12 +75,10 @@ export default function Settings() {
             <div className='w-full ' />
             {activeTab === 'profile' && <ProfileTab />}
             {activeTab === 'auth' && <AuthTab />}
+            {activeTab === 'avatar' && <AvatarTab />}
             {/* Content goes here */}
           </motion.div>
         </AnimatePresence>
-        <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
-          SAVE
-        </button>{' '}
       </div>
     </PageContainer>
   );

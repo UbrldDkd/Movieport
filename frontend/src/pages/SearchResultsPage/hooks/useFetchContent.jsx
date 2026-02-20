@@ -24,7 +24,7 @@ export function useFetchContent({
         setIsLoading(true);
         setError(null);
 
-        const validMediaTypes = ['movie', 'tv'];
+        const validMediaTypes = ['film', 'tv'];
         if (!validMediaTypes.includes(mediaType)) {
           setError(new Error(`Invalid media type: ${mediaType}`));
           setContent([]);

@@ -25,8 +25,8 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
       {/* Right column: Review details */}
       <div className='flex-1 flex flex-col justify-between'>
         {/* Optional item title + release_date */}
-        <div className='flex space-x-2'>
-          <ContentCard view='sm' item={item} />
+        <div className='flex pr-2 space-x-2 mb-1'>
+          {includeItemDetails && item && <ContentCard view='sm' item={item} />}
           <div className='flex flex-col'>
             {includeItemDetails && item && (
               <div className='flex items-baseline gap-2 mb-1  sm:text-lg md:text-xl text-zinc-300 font-semibold'>
@@ -38,27 +38,23 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
             )}
 
             {/* User info & stars */}
-            <div className='flex  mb-2'>
-              <div className='flex items-baseline gap-2'>
+            <div className='flex flex-col gap-2 '>
+              <div className='flex  items-center gap-2'>
                 <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
                   <GiCaptainHatProfile className='text-sm' />
                 </div>
+                <span className='text-sm font-semibold text-zinc-300'>
+                  {review.user || `User ${review.id}`}
+                </span>
 
-                <div>
-                  <div className='text-sm flex gap-3 font-semibold text-zinc-300'>
-                    <span>{review.user || `User ${review.id}`}</span>
-
-                    <Tooltip label={`${review.rating}/5`}>
-                      <div className='flex items-center gap-0.25'>
-                        {renderStars({ rating: review.rating, size: 18 })}
-                      </div>
-                    </Tooltip>
+                <Tooltip label={`${review.rating}/5`}>
+                  <div className='flex items-center gap-0.25'>
+                    {renderStars({ rating: review.rating, size: 18 })}
                   </div>
-                  <div className='text-xs text-zinc-500'>
-                    {review.created_at}
-                  </div>
-                </div>
+                </Tooltip>
               </div>
+
+              <div className='text-xs  text-zinc-500'>{review.created_at}</div>
             </div>
           </div>
         </div>

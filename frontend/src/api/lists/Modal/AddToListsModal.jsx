@@ -11,8 +11,6 @@ export default function AddToListsModal({ item, onClose }) {
   const [search, setSearch] = useState('');
   const [miniModalOpen, setMiniModalOpen] = useState(false);
 
-  console.log('itemtoadd', item);
-
   const listsToShow = useMemo(() => {
     if (!user?.lists) return [];
     let filtered = user.lists.filter((l) => (isPublic ? l.public : !l.public));

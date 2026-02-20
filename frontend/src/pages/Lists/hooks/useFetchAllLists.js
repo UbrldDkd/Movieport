@@ -17,9 +17,7 @@ export function useFetchAllLists() {
         });
 
         setData(res.data);
-        console.log('Lists data:', res.data);
       } catch (err) {
-        console.error('Failed to fetch lists:', err);
         setError(err);
         setData([]);
       } finally {

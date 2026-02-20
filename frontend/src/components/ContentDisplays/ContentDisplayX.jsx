@@ -64,7 +64,10 @@ export default function ContentDisplayX({
         className='flex p-0.5 gap-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory '
       >
         {content?.map((item) => (
-          <div key={item[details.id]} className='snap-start flex-shrink-0 '>
+          <div
+            key={item[details.id]}
+            className='snap-start flex-shrink-0 '
+          >
             <ContentCard item={item} view={view} />
             {includeStats && <PosterStats />}
           </div>

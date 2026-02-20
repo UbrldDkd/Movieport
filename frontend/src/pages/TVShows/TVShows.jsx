@@ -11,6 +11,14 @@ import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
 export default function TVShows() {
   const { tvShows, error, isLoading } = useFetchMainContent();
 
+  if (isLoading) {
+    return (
+      <div className='flex h-[85vh] w-full items-center justify-center'>
+        <div className='h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-red-900' />
+      </div>
+    );
+  }
+
   return (
     <PageContainer>
       <ContentContainer>
@@ -24,16 +32,6 @@ export default function TVShows() {
         </div>
 
         {/* two column layout */}
-        <div className='flex flex-col lg:flex-row gap-2'>
-          {/* first column */}
-          <div className='flex-1'></div>
-
-          {/* second column */}
-          <div className='flex-2'>
-            {' '}
-            <ReviewsSection header='Newly reviewed' includeItemDetails />
-          </div>
-        </div>
 
         <div className='  mx-auto flex-1  overflow-hidden md:max-w-[955px] justify-center  w-full'>
           <SectionHeader header='Popular this week' />

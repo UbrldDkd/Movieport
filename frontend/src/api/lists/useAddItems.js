@@ -73,8 +73,6 @@ export const useAddItems = () => {
 
       return addedItems;
     } catch (err) {
-      console.error('Failed to add items:', err);
-
       const tmdbIds = itemsArray.map((item) => item.tmdb_id);
 
       setUser((prev) => ({

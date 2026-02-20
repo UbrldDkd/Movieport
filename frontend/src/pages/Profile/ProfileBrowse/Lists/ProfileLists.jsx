@@ -10,15 +10,11 @@ export default function ProfileLists({ lists, username, isOwner }) {
   const createListURL = `/${username}/list/create/`;
   const filteredLists = isOwner ? lists : lists.filter((l) => l.public);
 
-  console.log('ProfileLists props:', { lists, username, isOwner });
-
   if (!username) {
-    console.log('ProfileLists: No username, returning null');
     return null;
   }
 
   if (!lists) {
-    console.log('ProfileLists: No lists data, showing loading state');
     return (
       <div className='w-full h-[50vh] flex items-center justify-center'>
         <div className='animate-spin rounded-full h-8 w-8 border-t-4 border-red-900 border-solid' />

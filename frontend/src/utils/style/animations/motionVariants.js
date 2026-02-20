@@ -71,12 +71,40 @@ export const itemVariants = {
   exit: { opacity: 0, y: -10 },
 };
 
+export const contentCardContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05, ease: 'easeOut' },
+  },
+  exit: { opacity: 0 },
+};
+
+export const contentCardContainerVariantsFast = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.02, ease: 'easeOut' },
+  },
+  exit: { opacity: 0 },
+};
+
 // ── Tabs ───────────────────────────────────────────────────────────
 
 export const tabVariants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
   exit: { opacity: 0, y: -10 },
+};
+
+// ── Image loading ───────────────────────────────────────────────────
+
+export const imageFadeInVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+  },
 };
 
 // ── Tooltip ────────────────────────────────────────────────────────

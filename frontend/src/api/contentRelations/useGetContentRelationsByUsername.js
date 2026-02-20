@@ -33,9 +33,7 @@ export function useGetContentRelationsByUsername(username) {
         );
 
         setContentRelations(relationsWithTMDB);
-        console.log('cr', relationsWithTMDB);
       } catch (err) {
-        console.log(err);
       }
     };
 

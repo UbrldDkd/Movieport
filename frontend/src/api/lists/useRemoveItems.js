@@ -47,11 +47,9 @@ export const useRemoveItems = () => {
         ),
       }));
 
-      return data;
-    } catch (err) {
-      console.error('RemoveItems error:', err);
-
-      setUser((prev) => ({
+return data;
+      } catch (err) {
+        setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((list) =>
           list.id === listId

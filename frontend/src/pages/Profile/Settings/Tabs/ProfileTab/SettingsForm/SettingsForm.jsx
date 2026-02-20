@@ -1,5 +1,5 @@
 import PronounsSelectionDropdown from './PronounsSelectionDropdown';
-import SettingInput from './SettingInput';
+import SettingInput from '../../../SettingInput';
 
 export default function SettingsForm() {
   return (
@@ -13,6 +13,9 @@ export default function SettingsForm() {
       <SettingInput label='Email Address' name='email' type='email' required />
       <SettingInput label='Bio' name='bio' multiline />
       <PronounsSelectionDropdown username='Machvi' />
+      <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
+        SAVE
+      </button>{' '}
     </div>
   );
 }

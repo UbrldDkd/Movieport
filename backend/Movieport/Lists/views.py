@@ -128,7 +128,7 @@ class ListsViewSet(viewsets.ViewSet):
                         'title': item.get('title', ''),
                         'poster_path': item.get('poster_path', ''),
                         'release_date': item.get('release_date'),
-                        'media_type': item.get('media_type', 'movie'),
+                        'media_type': item.get('media_type', 'film'),
                     }
                 )
                 new_list.items.add(content_relation)
@@ -231,7 +231,7 @@ class ListsViewSet(viewsets.ViewSet):
                         'title': item.get('title', ''),
                         'poster_path': item.get('poster_path', ''),
                         'release_date': item.get('release_date'),
-                        'media_type': item.get('media_type', 'movie'),
+                        'media_type': item.get('media_type', 'film'),
 }
                 )
                 content_item.lists.add(lst)

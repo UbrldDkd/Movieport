@@ -16,10 +16,8 @@ export function useGetUserByUsername(username) {
 
         const res = await publicApiClient.get(`/accounts/get_user/${username}/`);
 
-        console.log('user data', res.data);
         setData(res.data);
       } catch (err) {
-        console.error('Failed to fetch user:', err);
         setError(err);
         setData(null);
       } finally {

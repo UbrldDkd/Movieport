@@ -7,8 +7,6 @@ export default function DetailsTab({ details, isLoading }) {
     alternativeTitles,
   } = details;
 
-  console.log(details);
-
   const renderSkeleton = () => (
     <div className='space-y-6 animate-pulse'>
       {[...Array(5)].map((_, i) => (

@@ -23,7 +23,7 @@ export default function RelatedContent({
     <section className='w-full pb-5'>
       <div className='flex items-center justify-between'>
         <h3 className='text-base font-semibold tracking-wider text-zinc-300'>
-          Related {mediaType === 'movie' ? 'films' : 'tv-shows'}
+          Related {mediaType === 'film' ? 'films' : 'tv-shows'}
         </h3>
       </div>
 

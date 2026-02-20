@@ -24,7 +24,7 @@ export function useFetchContent({
         setIsLoading(true);
         setError(null);
 
-        const validMediaTypes = ['movie', 'tv'];
+        const validMediaTypes = ['film', 'tv'];
         if (!validMediaTypes.includes(mediaType)) {
           setError(new Error(`Invalid media type: ${mediaType}`));
           setContent([]);
@@ -53,7 +53,7 @@ export function useFetchContent({
         // Hybrid sorting: newest first, then popularity if no extra filters
         let sortQuery = '';
         if (mediaType) {
-          if (mediaType === 'movie') {
+          if (mediaType === 'film') {
             sortQuery = noExtraFilters
               ? `&sort_by=primary_release_date.desc,popularity.desc&primary_release_date.lte=${today}`
               : `&sort_by=primary_release_date.desc&primary_release_date.lte=${today}`;

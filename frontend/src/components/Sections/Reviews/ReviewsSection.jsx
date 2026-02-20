@@ -15,7 +15,7 @@ export default function ReviewsSection({
   if (isLoading) {
     return (
       <div>
-        <h2 className='font-semibold text-zinc-300/90'>{header}</h2>
+        <SectionHeader header={header} url={url} />
         <div className='space-y-4'>
           {[...Array(2)].map((_, i) => (
             <div
@@ -46,7 +46,7 @@ export default function ReviewsSection({
       content_relation: {
         title: 'Everything Everywhere All At Once',
         poster_path: '/poster1.jpg',
-        media_type: 'movie',
+        media_type: 'film',
         tmdb_id: 12345,
         release_date: '2022-03-11',
       },
@@ -78,7 +78,7 @@ export default function ReviewsSection({
       content_relation: {
         title: 'The Batman',
         poster_path: '/poster3.jpg',
-        media_type: 'movie',
+        media_type: 'film',
         tmdb_id: 54321,
         release_date: '2022-03-04',
       },

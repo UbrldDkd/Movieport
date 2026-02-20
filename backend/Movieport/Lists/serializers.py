@@ -24,7 +24,7 @@ class ListsSerializer(serializers.ModelSerializer):
         return obj.items.count()
 
     def get_film_count(self, obj):
-        return obj.items.filter(media_type='movie').count()
+        return obj.items.filter(media_type='film').count()
     
     def get_tv_count(self, obj):
         return obj.items.filter(media_type='tv').count()

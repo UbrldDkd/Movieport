@@ -14,7 +14,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { previewContent: content, isLoading, error } = useFetchPreview(value);
 
-  const mediaType = content?.[0]?.[details.movieTitle] ? 'movie' : 'tv';
+  const mediaType = content?.[0]?.[details.movieTitle] ? 'film' : 'tv';
   const displayCount = isMobile ? 4 : 5;
   const items = Array.isArray(content) ? content.slice(0, displayCount) : [];
   const expectedImages = items.filter((i) => i?.[details.poster]).length;

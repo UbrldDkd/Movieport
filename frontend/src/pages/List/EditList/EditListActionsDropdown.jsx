@@ -62,7 +62,7 @@ export default function EditListActionsDropdown({
         }`}
       >
         {previewContent?.map((tmdb, idx) => {
-          const mediaType = tmdb[details.movieTitle] ? 'movie' : 'tv';
+          const mediaType = tmdb[details.movieTitle] ? 'film' : 'tv';
           // Define a clean item object
           const item = {
             title: tmdb[details.movieTitle] || tmdb[details.tvTitle] || '',
@@ -70,7 +70,7 @@ export default function EditListActionsDropdown({
               tmdb[details.movieReleaseDate]?.slice(0, 10) || // keep full date if needed
               tmdb[details.tvReleaseDate]?.slice(0, 10) ||
               '',
-            media_type: mediaType || 'movie', // fallback to 'movie'
+            media_type: mediaType || 'film', // fallback to 'film'
             tmdb_id: tmdb[details.id],
             poster_path: tmdb[details.poster],
           };

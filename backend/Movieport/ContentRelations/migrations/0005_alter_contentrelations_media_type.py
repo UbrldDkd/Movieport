@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contentrelations',
             name='media_type',
-            field=models.CharField(choices=[('film', 'Film'), ('tv', 'TV')], default='movie', max_length=10),
+            field=models.CharField(choices=[('film', 'Film'), ('tv', 'TV')], default='film', max_length=10),
         ),
     ]

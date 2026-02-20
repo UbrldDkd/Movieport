@@ -21,7 +21,7 @@ export function useFetchSimilar({
         if (!id || !mediaType) return;
 
         // Validate media type
-        const validMediaTypes = ['movie', 'tv'];
+        const validMediaTypes = ['film', 'tv'];
         if (!validMediaTypes.includes(mediaType)) {
           setError(new Error(`Invalid media type: ${mediaType}`));
           setContent([]);
@@ -72,7 +72,6 @@ export function useFetchSimilar({
 
         setContent(allContent);
       } catch (err) {
-        console.error('Error fetching similar content:', err);
         setError(err);
       } finally {
         setIsLoading(false);

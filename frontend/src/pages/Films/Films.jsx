@@ -11,7 +11,13 @@ import SectionHeader from '../../components/Sections/Common/SectionHeader';
 
 export default function Films() {
   const { movies, error, isLoading } = useFetchMainContent();
-
+  if (isLoading) {
+    return (
+      <div className='flex h-[85vh] w-full items-center justify-center'>
+        <div className='h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-red-900' />
+      </div>
+    );
+  }
   return (
     <PageContainer>
       <ContentContainer>

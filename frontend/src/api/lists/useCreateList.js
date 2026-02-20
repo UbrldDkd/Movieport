@@ -8,8 +8,6 @@ export const useCreateList = () => {
   const createList = async (newList) => {
     if (!newList?.title) return null;
 
-    console.log('list to create', newList);
-
     const tempId = `temp-${Date.now()}`;
     const optimisticList = {
       ...newList,

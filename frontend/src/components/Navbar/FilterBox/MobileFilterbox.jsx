@@ -12,7 +12,7 @@ export default function MobileFilterbox() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedYears, setSelectedYears] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
-  const [mediaType, setMediaType] = useState('movie');
+  const [mediaType, setMediaType] = useState('film');
   const [isOpen, setIsOpen] = useState(false);
   const [matchType, setMatchType] = useState('any');
   const [activeTab, setActiveTab] = useState('genres'); // genres, years, countries
@@ -72,10 +72,9 @@ export default function MobileFilterbox() {
     { code: 'UA', name: 'Ukraine' },
   ];
 
-  const validMediaTypes = ['movie', 'tv'];
+  const validMediaTypes = ['film', 'tv'];
   if (!validMediaTypes.includes(mediaType)) {
-    console.error(`Invalid media type: ${mediaType}. Defaulting to 'movie'.`);
-    setMediaType('movie');
+    setMediaType('film');
   }
 
   const dropdownRef = useRef(null);
@@ -268,9 +267,9 @@ export default function MobileFilterbox() {
             </div>
             <div className='flex space-x-1'>
               <button
-                onClick={() => setMediaType('movie')}
+                onClick={() => setMediaType('film')}
                 className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1 ${
-                  mediaType === 'movie'
+                  mediaType === 'film'
                     ? 'bg-red-950 text-white border border-red-800'
                     : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
                 }`}

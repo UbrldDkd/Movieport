@@ -49,10 +49,10 @@ export function useFetchContentDetails({
 
         // Fetch credits for movies (for TV, aggregate_credits is already in tmdbData)
         const creditsData =
-          mediaType === 'movie'
+          mediaType === 'film'
             ? await (async () => {
                 const creditsRes = await fetch(
-                  `${Url1}${mediaType}/${id}/credits?api_key=${API_KEY1}&language=en-US`
+                  `${Url1}${mediaTypePath}/${id}/credits?api_key=${API_KEY1}&language=en-US`
                 );
                 if (creditsRes.ok) {
                   const creditsContentType =
@@ -91,7 +91,6 @@ export function useFetchContentDetails({
               }
             }
           } catch (omdbErr) {
-            console.warn('OMDb fetch failed:', omdbErr);
           }
         }
 
@@ -100,7 +99,7 @@ export function useFetchContentDetails({
           tmdb: fullTmdb,
           omdb: omdbData,
           title:
-            mediaType === 'movie'
+            mediaType === 'film'
               ? tmdbData[details1.movieTitle]
               : tmdbData[details1.tvTitle],
         });
@@ -126,7 +125,6 @@ export function useFetchContentDetails({
               setSeasonContent(null);
             }
           } catch (seasonErr) {
-            console.warn('Season fetch failed:', seasonErr);
             setSeasonContent(null);
           }
         } else {
@@ -134,7 +132,6 @@ export function useFetchContentDetails({
         }
       } catch (err) {
         setError(err.message || 'An error occurred');
-        console.error('Content fetch error:', err);
       } finally {
         setIsLoading(false);
       }

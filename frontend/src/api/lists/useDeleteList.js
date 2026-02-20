@@ -12,10 +12,9 @@ export const useDeleteList = () => {
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.filter((list) => list.id !== listId),
-      }));
-    } catch (err) {
-      console.error('Delete list error:', err);
-      throw err;
+}));
+      } catch (err) {
+        throw err;
     }
   };
 

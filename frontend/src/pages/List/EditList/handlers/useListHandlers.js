@@ -9,7 +9,7 @@ import { cleanItem } from '../../../../utils/helpers/cleanItem';
 
 export function useListHandlers({
   username,
-  list,
+  originalList,
   newList,
   draft,
   itemsToAdd,
@@ -34,7 +34,7 @@ export function useListHandlers({
 
   const handleChange = (field, value) => {
     const newValue = normalize(value);
-    const oldValue = normalize(list?.[field]);
+    const oldValue = normalize(originalList?.[field]);
 
     // Update the working copy of the list in edit mode, set values for payload in create mode
     setNewList((prev) => ({ ...prev, [field]: value }));
@@ -62,7 +62,7 @@ export function useListHandlers({
     }));
 
     if (mode === 'edit') {
-      const inOriginal = list.items?.some((i) => i.tmdb_id === tmdb_id);
+      const inOriginal = originalList.items?.some((i) => i.tmdb_id === tmdb_id);
       // Remove from itemsToAdd if it was added during this edit session
       setItemsToAdd((prev) => prev.filter((i) => i !== tmdb_id));
 
@@ -77,7 +77,6 @@ export function useListHandlers({
 
   const handleAddItem = (item) => {
     const tmdb_id = item.tmdb_id;
-    console.log('item to add', item);
 
     // Skip if item already exists
     if (newList.items.some((i) => i.tmdb_id === tmdb_id)) return;
@@ -151,7 +150,7 @@ export function useListHandlers({
     setItemsToRemove([]);
 
     if (mode === 'edit') {
-      setNewList(list); // reset to original list
+      setNewList(originalList); // reset to original list
     }
 
     if (mode === 'create') {

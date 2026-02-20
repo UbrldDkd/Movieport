@@ -19,7 +19,6 @@ export const useGetList = (username, title_slug) => {
 
         setList(listData);
       } catch (err) {
-        console.error('Fetch single list error:', err);
         setError(err);
       } finally {
         setLoading(false);

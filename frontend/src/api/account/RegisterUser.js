@@ -18,14 +18,12 @@ export async function registerUser(formData, setError, setIsLoading, setUser) {
       });
     }
 
-    console.log('Registration successful:', data);
     return data;
   } catch (err) {
     const errorMessages = err.response?.data
       ? Object.values(err.response.data).flat().join(' ')
       : err.message || 'Registration failed';
     setError(errorMessages);
-    console.error('Registration error:', err);
     return null;
   } finally {
     setIsLoading(false);

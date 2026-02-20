@@ -48,7 +48,7 @@ def register_user(request):
         max_age=60*30,
         httponly=True,
         samesite='Lax',
-        secure=False
+        secure=True
     )
     response.set_cookie(
         'refresh_token',
@@ -56,7 +56,7 @@ def register_user(request):
         max_age=60*60*24*7,
         httponly=True,
         samesite='Lax',
-        secure=False
+        secure=True
     )
     return response
 
@@ -77,7 +77,7 @@ def login_user(request):
         max_age=60*30,
         httponly=True,
         samesite='Lax',
-        secure=False
+        secure=True
     )
     response.set_cookie(
         'refresh_token',
@@ -85,7 +85,7 @@ def login_user(request):
         max_age=60*60*24*7,
         httponly=True,
         samesite='Lax',
-        secure=False
+        secure=True
     )
     return response
 

@@ -2,6 +2,7 @@
 import ProfileContentSection from './ProfileContentSection';
 import ProfileMainWatchlist from './ProfileMainWatchlist';
 import ProfileMainRecentLists from './ProfileMainRecentLists';
+import { MOCK_ITEMS } from '../Settings/Tabs/ProfileTab/FavouritesSelection/constants';
 
 export default function ProfileMain({ user }) {
   if (!user) return null;
@@ -26,7 +27,7 @@ export default function ProfileMain({ user }) {
       {/* Left column */}
       <div className='flex-1 flex flex-col gap-4 bg-zinc-900/90 rounded-sm px-3'>
         {user?.favourites && (
-          <ProfileContentSection header='Favourites' items={user?.favourites} />
+          <ProfileContentSection header='Favourites' items={MOCK_ITEMS} />
         )}
         {user?.likes && (
           <ProfileContentSection

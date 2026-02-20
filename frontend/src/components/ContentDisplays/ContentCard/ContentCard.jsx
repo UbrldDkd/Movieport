@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
 
 import { useIsLoggedIn } from '../../../utils/helpers/useIsLoggedIn';
 import { cleanItem } from '../../../utils/helpers/cleanItem';
@@ -23,29 +23,26 @@ export default function ContentCard({ item, view }) {
   const isLoggedIn = useIsLoggedIn();
 
   return (
-    <motion.div
-      className='relative inline-block overflow-visible group'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
+    <div
+      className='relative  overflow-visible group'
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <AnimatePresence>
         {hovered && (
-          <motion.div
+          <Motion.div
             key='title-tooltip'
             variants={tooltipVariants}
             initial='initial'
             animate='animate'
             exit='exit'
-            className='absolute -top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
+            className='absolute  -top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
           >
             <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
               {cleanedItem.title} ({cleanedItem.release_date?.slice(0, 4)})
             </div>
             <div className='w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-zinc-800' />
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
 
@@ -78,6 +75,6 @@ export default function ContentCard({ item, view }) {
           />
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

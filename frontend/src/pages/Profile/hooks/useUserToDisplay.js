@@ -20,13 +20,6 @@ export function useUserToDisplay(username) {
   const [displayIsLoading, setDisplayIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('useUserToDisplay called with:', {
-      username,
-      user,
-      fetchedUser,
-      fetchedUserIsLoading,
-    });
-
     if (!username) {
       setDisplayIsLoading(false);
       return;
@@ -41,7 +34,6 @@ export function useUserToDisplay(username) {
 
     if (isOwner) {
       const contentRelations = user?.content_relations || [];
-      console.log('Using logged-in user data:', user);
 
       setUserToDisplay({
         ...user,
@@ -55,7 +47,6 @@ export function useUserToDisplay(username) {
       });
     } else if (fetchedUser) {
       const contentRelations = fetchedUser?.content_relations || [];
-      console.log('Using fetched user data:', fetchedUser);
 
       setUserToDisplay({
         ...fetchedUser,
@@ -68,7 +59,6 @@ export function useUserToDisplay(username) {
         isOwner: false,
       });
     } else {
-      console.log('No user found, setting userToDisplay to null');
       setUserToDisplay(null);
     }
 

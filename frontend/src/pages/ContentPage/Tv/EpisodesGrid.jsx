@@ -6,7 +6,6 @@ export default function EpisodesGrid({ seasonContent, id, episodeNumber }) {
   }
 
   const seasonNumber = seasonContent?.season_number;
-  console.log('seasoncontent', seasonContent);
   return (
     <div className='shrink-0  pb-2'>
       <div className=' pr-1'>

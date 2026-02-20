@@ -10,7 +10,6 @@ import { Tooltip } from '../../Common/Tooltip';
 
 export default function MediaIcon({ mediaType, className }) {
   const label = mediaType === 'movie' ? 'Film' : 'Tv-show';
-  console.log(label);
   return (
     <div className='inline-block relative'>
       <Tooltip
@@ -18,7 +17,7 @@ export default function MediaIcon({ mediaType, className }) {
         position={`${className ? className : '-top-7 -left-3.5'}`}
       >
         {/* Icon */}
-        {mediaType === 'movie' ? (
+        {mediaType === 'film' ? (
           <FaFilm className='text-zinc-400' />
         ) : (
           <FiTv className='text-zinc-400' />

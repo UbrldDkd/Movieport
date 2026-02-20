@@ -89,7 +89,7 @@ class ContentRelationsViewSet(viewsets.ViewSet):
         title = request.data.get("title", '')
         poster_path = request.data.get("poster_path", '')
         release_date = request.data.get("release_date")
-        media_type = request.data.get("media_type", 'movie')
+        media_type = request.data.get("media_type", 'film')
 
         if not tmdb_id:
             return Response({"error": "tmdb_id required"}, status=400)

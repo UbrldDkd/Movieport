@@ -10,8 +10,6 @@ export default function HeroCarousel({ movies, isLoading, error }) {
   const { details } = Keys.API1;
   const baseUrl = 'https://image.tmdb.org/t/p/original';
 
-  console.log(movies);
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (movies.length > 0) return;

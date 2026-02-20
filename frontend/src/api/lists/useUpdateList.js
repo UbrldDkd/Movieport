@@ -16,20 +16,14 @@ export const useUpdateList = () => {
 
       if (!res.data) throw new Error('Failed to update list');
       const data = res.data;
-      console.log('List updated:', data);
 
       setUser((prev) => ({
         ...prev,
         lists: prev.lists.map((l) => (l.id === data.id ? data : l)),
       }));
-      console.log(
-        'updated list',
-        user?.lists.find((l) => l.id === data.id)
-      );
 
       return data;
     } catch (err) {
-      console.error('UpdateList error:', err);
       return null;
     }
   };
