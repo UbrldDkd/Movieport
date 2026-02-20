@@ -43,7 +43,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 w-full z-50 h-16 px-4 transition-colors ${
           isContentPage
-            ? 'bg-gradient-to-b from-zinc-950 via-zinc-950/60 to-transparent'
+            ? 'bg-gradient-to-b hover:via-zinc-950/70 from-zinc-950 via-zinc-950/60 to-transparent'
             : 'bg-red-950 shadow-md'
         }`}
       >

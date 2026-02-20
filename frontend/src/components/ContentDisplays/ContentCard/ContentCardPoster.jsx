@@ -20,7 +20,7 @@ export default function ContentCardPoster({ title, posterPath, view }) {
       className={`relative ${width} aspect-[2/3] rounded-sm overflow-hidden bg-zinc-800 shadow-md border-2 border-zinc-800 outline outline-transparent hover:outline-2 hover:outline-zinc-800 transition-all duration-150`}
     >
       {showFallback ? (
-        <div className='w-full h-full font-semibold flex items-center justify-center text-zinc-500 text-[10px] text-center px-1'>
+        <div className='w-full h-full font-semibold font-semibold flex items-center justify-center text-zinc-500 text-[10px] text-center px-1'>
           {title}
         </div>
       ) : (

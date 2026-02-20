@@ -15,7 +15,7 @@ export default function TVShows() {
     <PageContainer>
       <ContentContainer>
         {/* latest tv shows section */}
-        <div className='mx-auto max-w-[792px]'>
+        <div className='flex-1   mx-auto   overflow-hidden md:max-w-[792px] justify-center  w-full'>
           <SectionHeader header='Latest TV Shows' />
 
           <div className='px-2 sm:px-0 md:px-0'>
@@ -35,9 +35,9 @@ export default function TVShows() {
           </div>
         </div>
 
-        <div className=' max-w-[955px] mx-auto'>
+        <div className='  mx-auto flex-1  overflow-hidden md:max-w-[955px] justify-center  w-full'>
           <SectionHeader header='Popular this week' />
-          <div className='px-5 sm:px-0 md:px-0'>
+          <div className='px-3 sm:px-0 md:px-0'>
             <ContentDisplayX content={tvShows.popular} view='sm' />
           </div>
         </div>

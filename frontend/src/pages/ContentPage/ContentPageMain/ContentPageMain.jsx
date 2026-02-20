@@ -19,24 +19,23 @@ export default function ContentPageMain({
 
   const item = cleanItem(tmdb);
 
-  const isMovie = tmdb?.[details1.movieTitle];
-
-  const directorOrCreator = isMovie
-    ? // Movies: get directors
-      (tmdb?.credits?.crew || tmdb?.aggregate_credits?.crew || [])
-        .filter((c) => c.job === 'Director')
-        .map((c) => c.name)
-    : // TV: get creators from created_by field first
-      tmdb?.created_by?.map((c) => c.name) ||
-      // Fallback to crew with Creator job
-      (tmdb?.credits?.crew || [])
-        .filter((c) => c.job === 'Creator')
-        .map((c) => c.name) ||
-      // Fallback to aggregate_credits
-      (tmdb?.aggregate_credits?.crew || [])
-        .filter((c) => c.jobs?.some((j) => j.job === 'Creator'))
-        .map((c) => c.name) ||
-      [];
+  const directorOrCreator =
+    mediaType === 'film'
+      ? // Movies: get directors
+        (tmdb?.credits?.crew || tmdb?.aggregate_credits?.crew || [])
+          .filter((c) => c.job === 'Director')
+          .map((c) => c.name)
+      : // TV: get creators from created_by field first
+        tmdb?.created_by?.map((c) => c.name) ||
+        // Fallback to crew with Creator job
+        (tmdb?.credits?.crew || [])
+          .filter((c) => c.job === 'Creator')
+          .map((c) => c.name) ||
+        // Fallback to aggregate_credits
+        (tmdb?.aggregate_credits?.crew || [])
+          .filter((c) => c.jobs?.some((j) => j.job === 'Creator'))
+          .map((c) => c.name) ||
+        [];
 
   const release =
     mediaType === 'film'
@@ -51,9 +50,9 @@ export default function ContentPageMain({
       {/* Header */}
       <div className='mb-8'>
         {isLoading ? (
-          <div className='w-full max-w-md h-10 bg-zinc-800/50 rounded-sm animate-pulse' />
+          <div className='w-full  h-10 bg-zinc-800/50 rounded-sm animate-pulse' />
         ) : (
-          <div className='flex items-baseline font-medium gap-x-3 flex-wrap'>
+          <div className='flex items-baseline  font-medium gap-x-3 flex-wrap'>
             <h1 className='text-3xl md:text-4xl font-medium text-zinc-200'>
               {tmdb?.[details1.movieTitle] || tmdb?.[details1.tvTitle]}
             </h1>
@@ -63,9 +62,10 @@ export default function ContentPageMain({
                 {release}
               </Link>
             )}
+
             {directorOrCreator && (
               <span className='text-sm md:text-base text-zinc-400'>
-                {isMovie ? 'Directed' : 'Created'} by{' '}
+                {mediaType === 'film' ? 'Directed' : 'Created'} by{' '}
                 {Array.isArray(directorOrCreator) ? (
                   directorOrCreator.map((name, i, arr) => (
                     <span key={i}>
@@ -114,17 +114,17 @@ export default function ContentPageMain({
               <div className='h-4 w-4/5 bg-zinc-800/30 rounded-sm animate-pulse' />
             </div>
           ) : (
-            <p className='text-sm md:text-base text-zinc-300/90 leading-relaxed mb-6'>
-              {mediaType === 'movie'
+            <p className='text-sm  md:text-base text-zinc-300/90 leading-relaxed mb-6'>
+              {mediaType === 'film'
                 ? tmdb?.[details1.overview]
                 : tmdb?.[details1.overview] || omdb?.[details2.overview]}
             </p>
           )}
           <div className='flex gap-2 sm:flex-row flex-col'>
-            <div className='flex-2'>
+            <div className='flex md:flex-2'>
               <ContentPageDetails content={content} isLoading={isLoading} />
             </div>
-            <div className='sm:flex-1 md:hidden '>
+            <div className='flex sm:flex-1 md:hidden '>
               <ContentPageActionsPanel
                 item={item}
                 current={current}

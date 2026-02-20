@@ -1,12 +1,20 @@
-// ContentDetails.jsx
+// React
 import { useState } from 'react';
+
+// Third-party
 import { AnimatePresence, motion } from 'framer-motion';
-import { Keys } from '../../../../utils/constants/Keys';
+
+// Components
 import CastTab from './tabs/CastTab';
 import CrewTab from './tabs/CrewTab';
 import DetailsTab from './tabs/DetailsTab';
 import GenresTab from './tabs/GenresTab';
 import ReleasesTab from './tabs/ReleasesTab';
+
+// Utils helpers
+import { Keys } from '../../../../utils/constants/Keys';
+
+// Utils animation
 import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 export default function ContentPageDetails({ content, isLoading }) {
@@ -14,7 +22,7 @@ export default function ContentPageDetails({ content, isLoading }) {
   const { details } = Keys.API1;
 
   const tmdb = content?.tmdb;
-  const mediaType = tmdb?.[details.movieTitle] ? 'movie' : 'tv';
+  const mediaType = tmdb?.[details.movieTitle] ? 'film' : 'tv';
 
   const credits = tmdb?.aggregate_credits || tmdb?.credits || {};
 
@@ -70,7 +78,7 @@ export default function ContentPageDetails({ content, isLoading }) {
     spokenLanguages:
       tmdb?.[details.SpokenLanguages]?.map((l) => l.english_name) || [],
     alternativeTitles:
-      (mediaType === 'movie'
+      (mediaType === 'film'
         ? tmdb?.alternative_titles?.titles
         : tmdb?.alternative_titles?.results
       )?.map((t) => ({
@@ -95,7 +103,7 @@ export default function ContentPageDetails({ content, isLoading }) {
   const genres = tmdb?.[details.genres]?.map((g) => g.name) || [];
 
   const tabs =
-    mediaType === 'movie'
+    mediaType === 'film'
       ? ['cast', 'crew', 'details', 'genres', 'releases']
       : ['cast', 'crew', 'details', 'genres'];
 
