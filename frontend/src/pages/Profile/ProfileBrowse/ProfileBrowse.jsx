@@ -15,7 +15,7 @@ import ProfileWatchlist from './Watchlist/ProfileWatchlist.jsx';
 import ProfileLikes from './Likes/ProfileLikes.jsx';
 import ProfileActivity from './Activity/ProfileActivity.jsx';
 import ProfileReviews from './Reviews/ProfileReviews.jsx';
-import PageContainer from '../../../components/WrapperContainers/PageContainer.jsx';
+import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer.jsx';
 
 const navLinks = [
   { label: 'Watched', to: 'watched' },
@@ -74,7 +74,7 @@ export default function ProfileBrowse() {
   }
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       <div className='space-y-2'>
         {/* Navbar */}
         <nav className='flex items-center sm:py-1 md:py-1 justify-center rounded-l-sm rounded-r-3xl bg-bg-secondary   relative overflow-x-auto'>
@@ -154,6 +154,6 @@ export default function ProfileBrowse() {
           </motion.div>
         </AnimatePresence>
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }

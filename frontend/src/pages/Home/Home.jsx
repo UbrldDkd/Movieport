@@ -10,7 +10,7 @@ import HeroCarousel from './HeroCarousel.jsx';
 import ContentDisplayX from './../../components/ContentDisplays/ContentDisplayX.jsx';
 import ContentDisplayBlock from './../../components/ContentDisplays/ContentDisplayBlock.jsx';
 import ListsSection from '../../components/Sections/Lists/ListsSection.jsx';
-import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer.jsx';
 
 export default function Home() {
   const [toShow, setToShow] = useState('films');
@@ -28,7 +28,7 @@ export default function Home() {
         error={error}
       />
 
-      <PageContainer>
+      <BackgroundContainer>
         <Motion.div
           variants={fadeInUpVariants}
           initial='hidden'
@@ -115,7 +115,7 @@ export default function Home() {
             />
           </div>
         </Motion.div>
-      </PageContainer>
+      </BackgroundContainer>
     </div>
   );
 }

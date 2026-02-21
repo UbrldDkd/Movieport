@@ -22,7 +22,7 @@ import PosterStats from '../../components/ContentDisplays/Common/PosterStats/Pos
 
 // Utils
 import { Keys } from '../../utils/constants/Keys.js';
-import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer.jsx';
 
 export default function ContentPage() {
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function ContentPage() {
   }, [user?.content_relations, id]);
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       {/* Backdrop */}
       <div className='relative w-full z-0'>
         <ContentPageBackdrop backdropUrl={backdropUrl} />
@@ -155,6 +155,6 @@ export default function ContentPage() {
           />
         </div>
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }

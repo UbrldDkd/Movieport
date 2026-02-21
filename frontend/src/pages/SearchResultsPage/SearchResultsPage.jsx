@@ -8,7 +8,7 @@ import { useFetchSimilar } from './hooks/useFetchSimilar.jsx';
 import { DeadEndFilters } from './DeadEndFilters.jsx';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock.jsx';
 
-export default function DisplayByMedia() {
+export default function SearchResultsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams] = useSearchParams();
   const [value, setValue] = useState();
@@ -257,7 +257,7 @@ export default function DisplayByMedia() {
                 <button
                   onClick={() => handlePageChange(1)}
                   disabled={currentPage === 1}
-                  className='w-[60px] px-2 py-1 text-sm font-normal pointer-events-auto bg-gradient-to-r from-zinc-400 to-zinc-950 text-red-950 disabled:cursor-default rounded-l-3xl'
+                  className='w-[60px] px-2 py-1 text-xs  font-semibold tracking-wider pointer-events-auto bg-gradient-to-r from-zinc-400 to-zinc-950 text-red-950 disabled:cursor-default rounded-l-3xl'
                 >
                   First
                 </button>
@@ -267,7 +267,7 @@ export default function DisplayByMedia() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-l-3xl bg-gradient-to-r from-red-950 to-zinc-950 text-text-primary disabled:cursor-default'
+                className='px-3 py-1.5 min-w-26 text-start text-sm font-semibold cursor-pointer rounded-l-sm bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-400 tracking-wider disabled:cursor-default'
               >
                 Previous
               </button>
@@ -283,7 +283,7 @@ export default function DisplayByMedia() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-r-3xl bg-gradient-to-l from-red-950 to-zinc-950 text-text-primary disabled:cursor-default'
+                className=' px-3 py-1.5 text-end min-w-26 font-semibold cursor-pointer rounded-r-sm bg-gradient-to-l from-red-950 to-zinc-950 text-zinc-400 tracking-wider disabled:cursor-default'
               >
                 Next
               </button>

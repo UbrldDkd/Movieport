@@ -2,7 +2,7 @@
 import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
 
 // Components
-import PageContainer from '../../components/WrapperContainers/PageContainer';
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
 import ContentContainer from '../../components/WrapperContainers/ContentContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
@@ -19,7 +19,7 @@ export default function Films() {
     );
   }
   return (
-    <PageContainer>
+    <BackgroundContainer>
       {/* Popular movies section */}
       <ContentContainer>
         <div className='flex-1   mx-auto   overflow-hidden md:max-w-[993px] justify-center lg:px-9.5 md:px-3 w-full'>
@@ -31,11 +31,9 @@ export default function Films() {
             includeStats={true}
           />
         </div>
-      </ContentContainer>
 
-      {/* Vertical 2 column movies container */}
-      <div className='flex flex-col md:flex-row mt-2 gap-2 md:gap-2'>
-        <ContentContainer>
+        {/* Vertical 2 column movies container */}
+        <div className='flex flex-col md:flex-row mt-2 gap-2 md:gap-2'>
           {/* Popular reviews section */}
           <div className='flex-1 md:flex-2 mt-6 md:mt-0'>
             <ReviewsSection
@@ -44,11 +42,9 @@ export default function Films() {
               url={'dddd'}
             />
           </div>
-        </ContentContainer>
 
-        <ContentContainer>
           <div className='  mx-auto flex'>
-            <div className='flex-1  md:mx-10 md:max-w-[327px] mx-auto  mt-1 w-full'>
+            <div className='flex-1  md:mx-10 md:max-w-[252px] mx-auto   w-full'>
               <SectionHeader header='Picks by Movieport' />
               <ContentDisplayBlock
                 content={movies.nowPlaying}
@@ -58,8 +54,8 @@ export default function Films() {
               />
             </div>
           </div>
-        </ContentContainer>
-      </div>
-    </PageContainer>
+        </div>
+      </ContentContainer>
+    </BackgroundContainer>
   );
 }

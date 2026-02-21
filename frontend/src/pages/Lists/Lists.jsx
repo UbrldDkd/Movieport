@@ -11,7 +11,7 @@ import { AuthContext } from '../../api/account/auth/AuthContext';
 import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalContext';
 
 // Containers
-import PageContainer from '../../components/WrapperContainers/PageContainer';
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
 
 // Components
 import ContentContainer from '../../components/WrapperContainers/ContentContainer';
@@ -37,7 +37,7 @@ export default function Lists() {
   };
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       <ContentContainer>
         <div className='flex flex-col items-center justify-center pt-3 space-y-3 '>
           <div className='text-text-primary cursor-default text-2xl tracking-wider text-center font-semibold'>
@@ -92,6 +92,6 @@ export default function Lists() {
           </ContentContainer>
         </div>
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }

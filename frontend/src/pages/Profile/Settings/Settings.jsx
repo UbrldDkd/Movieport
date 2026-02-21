@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { tabVariants } from '../../../utils/style/animations/motionVariants.js';
 
 // Components
-import PageContainer from '../../../components/WrapperContainers/PageContainer';
+import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer';
 import AnimatedTabs from '../../../components/Common/AnimatedTabs';
 import ProfileTab from './Tabs/ProfileTab/ProfileTab';
 import AuthTab from './Tabs/AuthTab/AuthTab';
@@ -28,7 +28,7 @@ export default function Settings() {
   ];
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       <div className='flex flex-col space-y-3 bg-bg-secondary p-3  rounded-sm max-w-[1020px] w-full mx-auto'>
         <div className='text-text-primary cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold'>
           Account settings
@@ -80,6 +80,6 @@ export default function Settings() {
           </motion.div>
         </AnimatePresence>
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }

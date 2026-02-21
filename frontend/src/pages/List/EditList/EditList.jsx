@@ -10,7 +10,7 @@ import { useListHandlers } from './handlers/useListHandlers';
 import EditListHeader from './EditListHeader';
 import EditListActions from './EditListActions';
 import EditListItemsDisplay from './EditListItemsDisplay';
-import PageContainer from '../../../components/WrapperContainers/PageContainer';
+import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer';
 
 export default function EditList() {
   const location = useLocation();
@@ -86,7 +86,7 @@ export default function EditList() {
       : Boolean(newList?.title?.trim());
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       <div className='bg-bg-secondary  max-w-[1020] rounded-sm p-3 overflow-visible'>
         <div className='text-[22px] font-semibold tracking-wider text-text-primary pb-3'>
           {mode === 'edit'
@@ -117,6 +117,6 @@ export default function EditList() {
           handleRemoveItem={handleRemoveItem}
         />
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }

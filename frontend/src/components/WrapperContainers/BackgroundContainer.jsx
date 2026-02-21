@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { containerVariantsStagger } from '../../utils/style/animations/motionVariants';
 
-export default function PageContainer({ children }) {
+export default function BackgroundContainer({ children }) {
   return (
     <motion.div
       className='min-h-screen  bg-zinc-950 text-zinc-200'

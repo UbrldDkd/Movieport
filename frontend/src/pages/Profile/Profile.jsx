@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ProfileCard from './ProfileCard';
 import ProfileNavBar from './ProfileNavBar';
 import ProfileMain from './ProfileMain/ProfileMain.jsx';
-import PageContainer from '../../components/WrapperContainers/PageContainer.jsx';
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer.jsx';
 
 // Hooks
 
@@ -46,7 +46,7 @@ export default function Profile() {
   }
 
   return (
-    <PageContainer>
+    <BackgroundContainer>
       <div className='flex flex-col space-y-2'>
         <ProfileCard user={userToDisplay} />
         <ProfileNavBar username={userToDisplay?.username} />
@@ -54,6 +54,6 @@ export default function Profile() {
           <ProfileMain user={userToDisplay} />
         </div>
       </div>
-    </PageContainer>
+    </BackgroundContainer>
   );
 }
