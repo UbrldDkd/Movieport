@@ -61,14 +61,14 @@ export default function MovieCard({ content, showFullDate = false }) {
   return (
     <div
       ref={cardRef}
-      className='w-[110px] md:w-[170px] flex-shrink-0 text-zinc-300 hover:text-zinc-400 transition-colors duration-300 relative'
+      className='w-[110px] md:w-[170px] flex-shrink-0 text-text-primary hover:text-zinc-400 transition-colors duration-300 relative'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
       {/* Poster container with fixed aspect ratio and size */}
-      <div className='aspect-[2/3] w-[110px] md:w-[170px] bg-zinc-900 rounded overflow-hidden select-none cursor-pointer'>
+      <div className='aspect-[2/3] w-[110px] md:w-[170px] bg-bg-secondary rounded overflow-hidden select-none cursor-pointer'>
         <img
           src={`https://image.tmdb.org/t/p/original/${content[details.poster]}`}
           alt={content[details.movieTitle] || content[details.tvTitle]}
@@ -117,7 +117,7 @@ export default function MovieCard({ content, showFullDate = false }) {
         <p className='text-zinc-400 select-none cursor-pointer hover:text-zinc-500 transition-colors duration-300 text-xs md:text-sm'>
           {content[details.movieTitle] ? 'Movie' : 'TV Show'}
         </p>
-        <p className='text-zinc-300 select-none cursor-pointer text-right pr-1 text-xs md:text-sm'>
+        <p className='text-text-primary select-none cursor-pointer text-right pr-1 text-xs md:text-sm'>
           {Number(content?.[details.rating].toFixed(1))}/10
         </p>
       </div>
@@ -155,7 +155,7 @@ export default function MovieCard({ content, showFullDate = false }) {
           {/* Overview (scrollable if content overflows) */}
           <div className='flex-1 overflow-hidden min-h-0 '>
             <p className='text-zinc-400 text-xs mb-1'>Overview:</p>
-            <div className='text-zinc-300 text-xs leading-tight overflow-auto pr-1 scrollbar-hide max-h-[5.5rem] md:max-h-[8.5rem]'>
+            <div className='text-text-primary text-xs leading-tight overflow-auto pr-1 scrollbar-hide max-h-[5.5rem] md:max-h-[8.5rem]'>
               <p className='whitespace-normal'>
                 {content[details.overview] || 'No overview available.'}
               </p>

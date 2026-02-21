@@ -12,7 +12,7 @@ export default function ProfileMainRecentLists({
 
   return (
     <div className='flex flex-col gap-2 w-full'>
-      <div className='flex justify-between items-center text-xs font-semibold tracking-widest text-zinc-300/90'>
+      <div className='flex justify-between items-center text-xs font-semibold tracking-widest text-text-primary'>
         <Link className='-mb-1' to='lists/'>
           RECENT LISTS
         </Link>
@@ -41,7 +41,7 @@ export default function ProfileMainRecentLists({
             </span>
 
             <div className='w-full overflow-hidden'>
-              <p className='text-zinc-300/80 text-[13px] font-semibold break-words whitespace-pre-wrap max-h-20 overflow-y-auto scrollbar-hide'>
+              <p className='text-text-secondary text-[13px] font-semibold break-words whitespace-pre-wrap max-h-20 overflow-y-auto scrollbar-hide'>
                 {list.description}
               </p>
             </div>

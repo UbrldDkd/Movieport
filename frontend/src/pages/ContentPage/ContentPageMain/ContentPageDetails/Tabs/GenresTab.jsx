@@ -45,14 +45,14 @@ export default function GenresTab({ genres, mediaType, isLoading }) {
           <Link
             key={index}
             to={`/${mediaType}?genres=${genreId}&match=any`}
-            className='px-3 py-1.5 bg-zinc-900 text-zinc-300 text-xs font-semibold tracking-wide rounded-sm hover:bg-red-900 hover:text-zinc-100 transition-all duration-200'
+            className='px-3 py-1.5 bg-bg-secondary text-text-primary text-xs font-semibold tracking-wide rounded-sm hover:bg-red-900 hover:text-zinc-100 transition-all duration-200'
           >
             {genre}
           </Link>
         ) : (
           <span
             key={index}
-            className='px-4 py-2 bg-zinc-900 text-zinc-500 text-xs font-semibold tracking-wide rounded-sm'
+            className='px-4 py-2 bg-bg-secondary text-zinc-500 text-xs font-semibold tracking-wide rounded-sm'
           >
             {genre}
           </span>

@@ -47,12 +47,12 @@ export default function NavProfileDropdown() {
         <div
           className={`
             absolute right-0 top-full mt-3.5 w-40 
-            bg-zinc-900   rounded-b-sm shadow-lg z-50
+            bg-bg-secondary   rounded-b-sm shadow-lg z-50
             transition-all duration-200 ease-out
             transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
           `}
         >
-          <div className='flex flex-col py-1 text-sm tracking-wider text-zinc-300/90'>
+          <div className='flex flex-col py-1 text-sm tracking-wider text-text-primary'>
             {dropdownLinks.map((link, idx) => (
               <Link
                 key={idx}

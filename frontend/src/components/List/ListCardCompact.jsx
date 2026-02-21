@@ -63,7 +63,7 @@ export default function ListCardCompact({
               <GiCaptainHatProfile className='text-sm text-zinc-400' />
             </button>
 
-            <span className='font-semibold cursor-pointer text-zinc-300/90 break-words'>
+            <span className='font-semibold cursor-pointer text-text-primary break-words'>
               {list.username}
             </span>
 
@@ -83,7 +83,7 @@ export default function ListCardCompact({
                 >
                   <FaFilm />
                   <div
-                    className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-zinc-300/90 text-xs bg-zinc-800/90 backdrop-blur-3xl font-semibold whitespace-nowrap transition-opacity duration-200 pointer-events-none z-10 ${filmTooltip ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-text-primary text-xs bg-zinc-800/90 backdrop-blur-3xl font-semibold whitespace-nowrap transition-opacity duration-200 pointer-events-none z-10 ${filmTooltip ? 'opacity-100' : 'opacity-0'}`}
                   >
                     {list.film_count} {list.film_count > 1 ? 'Films' : 'Film'}
                     <div className='absolute top-full left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-zinc-800/90 -translate-x-1/2' />
@@ -102,7 +102,7 @@ export default function ListCardCompact({
                 >
                   <FiTv />
                   <div
-                    className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-zinc-300/90 bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-xs whitespace-nowrap transition-opacity duration-200 pointer-events-none z-10 ${tvTooltip ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-text-primary bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-xs whitespace-nowrap transition-opacity duration-200 pointer-events-none z-10 ${tvTooltip ? 'opacity-100' : 'opacity-0'}`}
                   >
                     {list.tv_count} {list.tv_count > 1 ? 'TV-shows' : 'TV-show'}
                     <div className='absolute top-full left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-zinc-800/90 -translate-x-1/2' />

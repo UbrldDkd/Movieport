@@ -1,4 +1,4 @@
-import { PRESET_AVATARS } from './presetAvatars';
+import { PRESET_AVATARS } from './constants/presetAvatars';
 
 /**
  * Renders a single circular avatar at `size` px.
@@ -24,7 +24,7 @@ export function AvatarDisplay({ selected, customDataUrl, size }) {
         height: size,
         background: isCustom ? '#18181b' : preset?.bg,
       }}
-      className='rounded-full border-2 border-zinc-600 overflow-hidden flex items-center justify-center flex-shrink-0'
+      className='rounded-full border-2 border-zinc-700 overflow-hidden flex items-center justify-center flex-shrink-0'
     >
       {isCustom && customDataUrl ? (
         <img

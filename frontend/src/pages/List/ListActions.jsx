@@ -47,10 +47,10 @@ export default function ListActions({ username, list }) {
   };
 
   return (
-    <div className='bg-zinc-900/90  rounded-sm p-2 flex flex-col gap-2 opacity-0 animate-fadeIn'>
+    <div className='bg-bg-secondary  rounded-sm p-2 flex flex-col gap-2 opacity-0 animate-fadeIn'>
       {/* Likes / Share */}
       {is_owner ? (
-        <div className='flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest text-zinc-300/90 rounded'>
+        <div className='flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest text-text-primary/90 rounded'>
           <FaHeart className='text-zinc-500/90' />
           {list?.likes_count ?? 0} likes
         </div>
@@ -61,8 +61,8 @@ export default function ListActions({ username, list }) {
             disabled={isTogglingLike}
             className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest rounded transition-colors ${
               isTogglingLike
-                ? 'opacity-50 cursor-not-allowed bg-zinc-800/90 text-zinc-300'
-                : 'bg-zinc-800/90 text-zinc-300 hover:bg-zinc-700 hover:cursor-pointer'
+                ? 'opacity-50 cursor-not-allowed bg-zinc-800/90 text-text-primary'
+                : 'bg-zinc-800/90 text-text-primary hover:bg-zinc-700 hover:cursor-pointer'
             }`}
           >
             <FaHeart
@@ -75,7 +75,7 @@ export default function ListActions({ username, list }) {
                 : 'Like this list'}
           </button>
 
-          <button className='flex items-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800 hover:bg-zinc-700 hover:cursor-pointer text-zinc-300 transition-colors'>
+          <button className='flex items-center gap-2 px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800 hover:bg-zinc-700 hover:cursor-pointer text-text-primary transition-colors'>
             <IoShareSocialSharp className='text-[17px]' />
             Share
           </button>
@@ -94,14 +94,14 @@ export default function ListActions({ username, list }) {
 
           <button
             onClick={handleTogglePublic}
-            className='px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800/90 hover:bg-zinc-700 hover:cursor-pointer text-zinc-300 transition-colors'
+            className='px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800/90 hover:bg-zinc-700 hover:cursor-pointer text-text-primary transition-colors'
           >
             Make List {isPublic ? 'Private' : 'Public'}
           </button>
 
           <button
             onClick={handleDelete}
-            className='px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800/90 hover:bg-red-950 hover:cursor-pointer text-zinc-300 transition-colors'
+            className='px-3 py-2 text-xs font-semibold tracking-widest rounded bg-zinc-800/90 hover:bg-red-950 hover:cursor-pointer text-text-primary transition-colors'
           >
             Delete List
           </button>

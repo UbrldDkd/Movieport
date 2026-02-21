@@ -1,8 +1,9 @@
+//
 import { useState, useRef, useEffect } from 'react';
 import { PresetGrid } from './PresetGrid';
 import { CustomUpload } from './CustomUpload';
-import { useCrop } from './useCrop';
-import { renderCrop } from './renderCrop';
+import { useCrop } from './helpers/useCrop';
+import { renderCrop } from './helpers/renderCrop';
 import { SizePreview } from './SizePreview';
 
 const CROP_SIZE = 220;
@@ -60,26 +61,12 @@ export default function AvatarTab() {
     setCropMode(false);
   };
 
-  // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className='flex flex-col gap-6'>
-      <div className='text-lg font-semibold tracking-wider text-zinc-300'>
+    <div className='flex flex-col gap-2'>
+      <div className='text-lg font-semibold tracking-wider text-text-primary'>
         Avatar
       </div>
 
-      {/* ── Preset grid ───────────────────────────────────────────────────── */}
-      <PresetGrid selectedId={selected} onSelect={handleSelectPreset} />
-
-      {/* ── Divider ───────────────────────────────────────────────────────── */}
-      <div className='flex items-center gap-3'>
-        <div className='flex-1 h-px bg-zinc-800' />
-        <span className='text-[10px] uppercase tracking-widest text-zinc-600'>
-          or
-        </span>
-        <div className='flex-1 h-px bg-zinc-800' />
-      </div>
-
-      {/* ── Custom upload ─────────────────────────────────────────────────── */}
       <CustomUpload
         isSelected={selected === 'custom'}
         croppedDataUrl={croppedDataUrl}
@@ -92,15 +79,25 @@ export default function AvatarTab() {
         onSaveCrop={handleSaveCrop}
         onCancelCrop={handleCancelCrop}
       />
+      <div className='flex items-center gap-3'>
+        <div className='flex-1 h-px bg-zinc-800' />
+        <span className='text-[10px] uppercase tracking-widest text-zinc-600'>
+          or
+        </span>
+        <div className='flex-1 h-px bg-zinc-800' />
+      </div>
 
-      {/* ── Size preview ──────────────────────────────────────────────────── */}
-      <SizePreview selected={selected} customDataUrl={croppedDataUrl} />
+      <PresetGrid selectedId={selected} onSelect={handleSelectPreset} />
+      <SizePreview
+        selected={selected}
+        customDataUrl={croppedDataUrl}
+        username='Machvi'
+      />
 
-      {/* ── Save ──────────────────────────────────────────────────────────── */}
-      <div className='flex justify-end pt-1'>
-        <button className='px-5 py-2 rounded text-sm bg-zinc-200 text-zinc-900 hover:bg-white font-semibold tracking-wide transition-all'>
-          Save avatar
-        </button>
+      <div className='flex justify-start pt-1'>
+        <button className='bg-zinc-800/90 w-fit px-3 py-1.5 hover:cursor-pointer transition-colors duration-120 hover:bg-zinc-700 text-xs font-semibold rounded tracking-widest disabled:opacity-50 disabled:cursor-not-allowed'>
+          SAVE AVATAR
+        </button>{' '}
       </div>
     </div>
   );

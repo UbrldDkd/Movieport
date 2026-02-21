@@ -53,7 +53,7 @@ export default function EditListHeader({ newList, handleChange }) {
           onChange={(e) => handleChange('description', e.target.value)}
           placeholder='Add a description for your list...'
           rows={5}
-          className='mt-1 placeholder:font-semibold placeholder:tracking-wide w-full max-w-full tracking-wide bg-zinc-800/70 border-2 border-zinc-700/90 text-zinc-300/90 text-[16px] leading-4.5 px-2 py-1.5 rounded-sm resize-none focus:outline-none focus:bg-zinc-700 scrollbar-hide box-border placeholder:text-zinc-600'
+          className='mt-1 placeholder:font-semibold placeholder:tracking-wide w-full max-w-full tracking-wide bg-zinc-800/70 border-2 border-zinc-700/90 text-text-primary text-[16px] leading-4.5 px-2 py-1.5 rounded-sm resize-none focus:outline-none focus:bg-zinc-700 scrollbar-hide box-border placeholder:text-zinc-600'
         />
       </div>
     </div>

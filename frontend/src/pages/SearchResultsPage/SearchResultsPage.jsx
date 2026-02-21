@@ -192,7 +192,7 @@ export default function DisplayByMedia() {
                           className={`text-sm font-light cursor-default mr-2 ${
                             GenreMap[id] === 'Horror'
                               ? 'text-red-800'
-                              : 'text-zinc-300'
+                              : 'text-text-primary'
                           }`}
                         >
                           {GenreMap[id]}
@@ -210,7 +210,7 @@ export default function DisplayByMedia() {
                       {selectedYears.map((y) => (
                         <span
                           key={y}
-                          className='text-sm font-light cursor-default mr-2 text-zinc-300'
+                          className='text-sm font-light cursor-default mr-2 text-text-primary'
                         >
                           {y}
                         </span>
@@ -227,7 +227,7 @@ export default function DisplayByMedia() {
                       {selectedCountries.map((c) => (
                         <span
                           key={c}
-                          className='text-sm font-light cursor-default text-zinc-300 mr-2'
+                          className='text-sm font-light cursor-default text-text-primary mr-2'
                         >
                           {c}
                         </span>
@@ -267,13 +267,13 @@ export default function DisplayByMedia() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-l-3xl bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-300 disabled:cursor-default'
+                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-l-3xl bg-gradient-to-r from-red-950 to-zinc-950 text-text-primary disabled:cursor-default'
               >
                 Previous
               </button>
 
               {/* Current Page */}
-              <div className='flex items-center justify-center py-3 px-2 text-zinc-300 font-light rounded bg-gradient-to-r from-zinc-950/10 via-zinc-900 to-zinc-950/10'>
+              <div className='flex items-center justify-center py-3 px-2 text-text-primary font-light rounded bg-gradient-to-r from-zinc-950/10 via-zinc-900 to-zinc-950/10'>
                 <p className='cursor-pointer font-light'>
                   Page {currentPage}/{totalPages}
                 </p>
@@ -283,7 +283,7 @@ export default function DisplayByMedia() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-r-3xl bg-gradient-to-l from-red-950 to-zinc-950 text-zinc-300 disabled:cursor-default'
+                className='px-1 min-w-19 text-center font-light p-2 cursor-pointer rounded-r-3xl bg-gradient-to-l from-red-950 to-zinc-950 text-text-primary disabled:cursor-default'
               >
                 Next
               </button>

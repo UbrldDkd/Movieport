@@ -1,7 +1,7 @@
 import { useRegisterForm } from './sanatisers/useRegisterForm';
 
 const inputClass = (hasError) =>
-  `w-full bg-zinc-800 border-2 ${hasError ? 'border-red-950' : 'border-zinc-700'} text-zinc-300 px-3 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 [&:-webkit-autofill]:![box-shadow:0_0_0_999px_theme(colors.zinc.800)_inset] [&:-webkit-autofill]:![-webkit-text-fill-color:theme(colors.zinc.300)]`;
+  `w-full bg-zinc-800 border-2 ${hasError ? 'border-red-950' : 'border-zinc-700'} text-text-primary px-3 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 [&:-webkit-autofill]:![box-shadow:0_0_0_999px_theme(colors.zinc.800)_inset] [&:-webkit-autofill]:![-webkit-text-fill-color:theme(colors.zinc.300)]`;
 
 const FieldError = ({ error }) =>
   error ? (
@@ -12,7 +12,7 @@ const FieldError = ({ error }) =>
 
 const Field = ({ label, error, children }) => (
   <div>
-    <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-1'>
+    <label className='block tracking-widest text-xs font-medium text-text-primary mb-1'>
       {label}
     </label>
     {children}
@@ -102,7 +102,7 @@ export default function RegisterForm({ onClose, switchToLogin }) {
             />
             <label
               htmlFor={name}
-              className='text-xs text-zinc-300 cursor-pointer'
+              className='text-xs text-text-primary cursor-pointer'
             >
               {label}
             </label>
@@ -115,7 +115,7 @@ export default function RegisterForm({ onClose, switchToLogin }) {
       <button
         type='submit'
         disabled={isLoading}
-        className='w-full bg-red-950 hover:bg-red-900 text-zinc-300 font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
+        className='w-full bg-red-950 hover:bg-red-900 text-text-primary font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
       >
         {isLoading ? 'Registering...' : 'Register'}
       </button>

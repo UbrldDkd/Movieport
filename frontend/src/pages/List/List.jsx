@@ -70,7 +70,7 @@ export default function List() {
     <div className='min-h-screen w-full bg-zinc-950 text-zinc-200 overflow-x-hidden'>
       <div className='mx-2 md:mx-auto max-w-[1006px] mt-2 md:grid  grid grid-cols-1 lg:grid-cols-[6fr_1.3fr] gap-2.5 min-w-0'>
         {/* Main content */}
-        <div className='bg-zinc-900/90 p-3  rounded-sm overflow-visible'>
+        <div className='bg-bg-secondary p-3  rounded-sm overflow-visible'>
           <ListHeader
             list={list}
             username={username}
@@ -87,7 +87,7 @@ export default function List() {
               >
                 Previous
               </button>
-              <span className='text-zinc-300'>
+              <span className='text-text-primary'>
                 Page {page} of {totalPages}
               </span>
               <button

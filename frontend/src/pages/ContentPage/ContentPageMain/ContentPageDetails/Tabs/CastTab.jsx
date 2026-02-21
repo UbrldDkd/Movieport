@@ -25,7 +25,7 @@ export default function CastTab({ cast, isLoading }) {
           key={index}
           className='flex items-center gap-2  rounded-sm transition-colors group'
         >
-          <Link className='text-zinc-300/90  hover:bg-zinc-900 transition-colors duration-50  rounded-sm py-1 px-2 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
+          <Link className='text-text-primary  hover:bg-bg-secondary transition-colors duration-50  rounded-sm py-1 px-2 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
             {actor.name}
           </Link>
           {actor.character && (

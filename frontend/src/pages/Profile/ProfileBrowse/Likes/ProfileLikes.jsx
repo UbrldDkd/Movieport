@@ -36,7 +36,7 @@ export default function ProfileLikes({
   ];
 
   return (
-    <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-400'>
+    <div className='bg-bg-secondary rounded-sm p-3 text-zinc-400'>
       {/* Tabs */}
       <AnimatedTabs
         tabs={tabs}

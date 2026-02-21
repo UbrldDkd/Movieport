@@ -23,26 +23,26 @@ export default function Footer() {
         {isOpen && (
           <div className='py-6 mt-3 flex flex-col items-center space-y-4'>
             {/* Short About */}
-            <p className='max-w-md text-zinc-300'>
+            <p className='max-w-md text-text-primary'>
               MoviePort is your personal film & Tv-show tracker. Organize your
               watchlist, likes, and lists all in one place.
             </p>
 
             {/* Navigation links */}
             <div className='flex flex-wrap justify-center gap-4 font-semibold'>
-              <Link to='/about' className='hover:text-white'>
+              <Link to='/about' className='hover:text-text-primary'>
                 About
               </Link>
-              <Link to='/contact' className='hover:text-white'>
+              <Link to='/contact' className='hover:text-text-primary'>
                 Contact
               </Link>
-              <Link to='/privacy' className='hover:text-white'>
+              <Link to='/privacy' className='hover:text-text-primary'>
                 Privacy
               </Link>
-              <Link to='/cookies' className='hover:text-white'>
+              <Link to='/cookies' className='hover:text-text-primary'>
                 Cookies
               </Link>
-              <Link to='/terms' className='hover:text-white'>
+              <Link to='/terms' className='hover:text-text-primary'>
                 Terms
               </Link>
             </div>
@@ -51,7 +51,7 @@ export default function Footer() {
             <div className='flex gap-4 mt-2 text-zinc-400'>
               <Link
                 to='https://github.com/UbrldDkd'
-                className='hover:text-zinc-300 text-xl'
+                className='hover:text-text-primary text-xl'
               >
                 <FaGithub />
               </Link>
@@ -65,7 +65,7 @@ export default function Footer() {
               Movie data provided by{' '}
               {
                 <Link
-                  className='bg-zinc-900/90 py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
+                  className='bg-bg-secondary py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
                   to='https://www.themoviedb.org'
                   target='_blank'
                 >
@@ -75,7 +75,7 @@ export default function Footer() {
               .{' '}
               {
                 <Link
-                  className='bg-zinc-900/90 py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
+                  className='bg-bg-secondary py-0.5 hover:bg-zinc-800 hover:text-zinc-400 font-semibold transition-colors duration-100 text-top rounded-xs px-0.5'
                   to='https://www.omdb.org/es/us'
                   target='_blank'
                 >

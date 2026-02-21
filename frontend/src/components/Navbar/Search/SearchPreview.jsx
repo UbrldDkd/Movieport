@@ -54,7 +54,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   return (
     <div
       ref={ref}
-      className='rounded-b-md  bg-zinc-900 scrollbar-hide transition-all duration-100 shadow-lg  min-w-full p-2 relative'
+      className='rounded-b-md  bg-bg-secondary scrollbar-hide transition-all duration-100 shadow-lg  min-w-full p-2 relative'
     >
       <div
         className={`transition-opacity duration-300 ${!isLoading && items.length ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -93,14 +93,14 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
                   />
                 )}
                 <div className='flex flex-col gap-1 md:gap-2 flex-1 min-w-0'>
-                  <p className='font-semibold max-w-30.5  md:max-w-43  lg:max-w-48    text-zinc-300 leading-snug text-xs md:text-sm truncate'>
+                  <p className='font-semibold max-w-30.5  md:max-w-43  lg:max-w-48    text-text-primary leading-snug text-xs md:text-sm truncate'>
                     {title}
                   </p>
                   <div className='flex justify-between items-center'>
                     <p className='text-zinc-400 text-xs md:text-sm'>
                       <MediaIcon mediaType={mediaType} />
                     </p>
-                    <p className='text-xs md:text-sm text-zinc-300'>
+                    <p className='text-xs md:text-sm text-text-primary'>
                       {rating && rating.toFixed(1)}
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
           <div className='mt-2 text-center w-full'>
             <button
               onClick={handleExpand}
-              className='text-zinc-300 hover:text-zinc-200 text-xs md:text-xs  font-semibold tracking-wider cursor-pointer bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded transition-colors duration-200'
+              className='text-text-primary hover:text-zinc-200 text-xs md:text-xs  font-semibold tracking-wider cursor-pointer bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded transition-colors duration-200'
             >
               See more results
             </button>

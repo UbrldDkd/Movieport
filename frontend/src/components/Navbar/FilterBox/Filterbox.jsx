@@ -184,7 +184,7 @@ export default function Filterbox() {
         ref={dropdownRef}
         className={`
     absolute top-full backdrop-blur-xl
-            bg-zinc-900/90 border border-zinc-800 rounded-md drop-shadow-black px-2 py-1.5 z-10 grid grid-cols-3 grid-rows-3 gap-2 max-w-[430px]
+            bg-bg-secondary border border-zinc-800 rounded-md drop-shadow-black px-2 py-1.5 z-10 grid grid-cols-3 grid-rows-3 gap-2 max-w-[430px]
     transition-all duration-300
     ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
   `}
@@ -212,7 +212,7 @@ export default function Filterbox() {
         {/* Left Panel for filtering by years*/}
         <div
           className={`
-  absolute top-0 left-[-220px] h-full w-52 bg-zinc-900/90 backdrop-blur-lg text-white rounded-md z-10 p-2 flex flex-col
+  absolute top-0 left-[-220px] h-full w-52 bg-bg-secondary backdrop-blur-lg text-white rounded-md z-10 p-2 flex flex-col
   transition-all duration-300
   ${
     leftPanelOpen
@@ -254,7 +254,7 @@ export default function Filterbox() {
         {/* Right Panel for filtering by countries */}
         <div
           className={`
-  absolute top-0 right-[-220px] h-full w-52 bg-zinc-900 text-white rounded-md z-10 p-2 flex flex-col
+  absolute top-0 right-[-220px] h-full w-52 bg-bg-secondary text-white rounded-md z-10 p-2 flex flex-col
   transition-all duration-300
   ${
     rightPanelOpen
@@ -311,7 +311,7 @@ export default function Filterbox() {
               <button
                 onClick={() => setMediaType('film')}
                 className={`flex-1 font-semibold tracking-wider text-sm px-1 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1
-            ${mediaType === 'film' ? 'bg-red-950 text-zinc-300' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'}`}
+            ${mediaType === 'film' ? 'bg-red-950 text-text-primary' : 'bg-zinc-500 text-zinc-950 hover:text-text-primary cursor-pointer'}`}
               >
                 Movies
               </button>
@@ -319,7 +319,7 @@ export default function Filterbox() {
               <button
                 onClick={() => setMediaType('tv')}
                 className={`flex-1 font-semibold tracking-wider text-sm px-1 py-1 rounded transition-colors duration-150 flex items-center justify-center gap-1
-            ${mediaType === 'tv' ? 'bg-red-950 text-white' : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'}`}
+            ${mediaType === 'tv' ? 'bg-red-950 text-white' : 'bg-zinc-500 text-zinc-950 hover:text-text-primary cursor-pointer'}`}
               >
                 TV-Shows
               </button>
@@ -328,7 +328,7 @@ export default function Filterbox() {
             {/* clears selected genres and filters */}
             <button
               onClick={handleClear}
-              className='col-span-3 font-semibold tracking-wider  bg-red-950 text-sm text-zinc-300/90 px-4 cursor-pointer py-1 rounded hover:text-zinc-500 transition-colors duration-140'
+              className='col-span-3 font-semibold tracking-wider  bg-red-950 text-sm text-text-primary/90 px-4 cursor-pointer py-1 rounded hover:text-zinc-500 transition-colors duration-140'
             >
               Clear selection
             </button>
@@ -340,7 +340,7 @@ export default function Filterbox() {
               <span className='text-xs font-semibold text-zinc-400 uppercase select-none'>
                 Match
               </span>
-              <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-zinc-900 text-zinc-300 text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200'>
+              <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-bg-secondary text-text-primary text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200'>
                 <p className='text-zinc-200 font-semibold'>
                   Choose how genres are matched:
                 </p>
@@ -404,7 +404,7 @@ export default function Filterbox() {
           >
             <button
               onClick={() => setIsOpen(false)}
-              className='col-span-3 bg-zinc-500 text-sm w-full text-zinc-950 px-4 cursor-pointer py-1 rounded hover:text-zinc-300 transition-colors duration-140'
+              className='col-span-3 bg-zinc-500 text-sm w-full text-zinc-950 px-4 cursor-pointer py-1 rounded hover:text-text-primary transition-colors duration-140'
             >
               Filter
             </button>

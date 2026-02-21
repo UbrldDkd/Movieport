@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 // CSS
 import './index.css';
+import './components.css';
 
 // Providers
 import { AuthProvider } from './api/account/auth/AuthProvider.jsx';

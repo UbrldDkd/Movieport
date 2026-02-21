@@ -54,10 +54,10 @@ export default function Trailer({ trailerOpen, id, mediaType }) {
   // Loading state
   if (isLoading)
     return (
-      <div className='w-full h-full flex items-center justify-center bg-zinc-900 rounded-md'>
+      <div className='w-full h-full flex items-center justify-center bg-bg-secondary rounded-md'>
         <div className='flex flex-col items-center space-y-4'>
           <div className='animate-spin rounded-full h-12 w-12 border-t-4 border-red-500 border-solid'></div>
-          <p className='text-zinc-300 text-lg font-medium'>
+          <p className='text-text-primary text-lg font-medium'>
             Loading trailer...
           </p>
         </div>

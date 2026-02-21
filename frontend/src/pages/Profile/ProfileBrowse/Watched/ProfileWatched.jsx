@@ -33,7 +33,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
   ];
 
   return (
-    <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-200'>
+    <div className='bg-bg-secondary rounded-sm p-3 text-zinc-200'>
       {/* Tabs */}
       <AnimatedTabs
         tabs={tabs}

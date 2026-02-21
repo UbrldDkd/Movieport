@@ -40,7 +40,7 @@ export default function Lists() {
     <PageContainer>
       <ContentContainer>
         <div className='flex flex-col items-center justify-center pt-3 space-y-3 '>
-          <div className='text-zinc-300/90 cursor-default text-2xl tracking-wider text-center font-semibold'>
+          <div className='text-text-primary cursor-default text-2xl tracking-wider text-center font-semibold'>
             Keep track of films and TV your way.
           </div>
 
@@ -57,11 +57,11 @@ export default function Lists() {
       </ContentContainer>
 
       <div className='w-full mt-2 flex flex-col lg:flex-row gap-2'>
-        <div className='w-full lg:flex-[7.5] p-3 rounded-sm bg-zinc-900/60'>
+        <div className='w-full lg:flex-[7.5] p-3 rounded-sm bg-bg-secondary/60'>
           <ListsSection header='Starred lists' posterAmount={5} />
         </div>
 
-        <div className='w-full lg:flex-[2.5] bg-zinc-900/60 rounded-sm p-3'>
+        <div className='w-full lg:flex-[2.5] bg-bg-secondary/60 rounded-sm p-3'>
           <ListsSectionSummary
             header='Popular lists this week'
             displayAxis='y'

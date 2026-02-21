@@ -23,7 +23,7 @@ export default function ContentPagePoster({
 
   return (
     <div className='hidden md:block'>
-      <div className='w-[220px] h-[330px] rounded-sm flex items-center justify-center relative bg-zinc-900 shadow-lg'>
+      <div className='w-[220px] h-[330px] rounded-sm flex items-center justify-center relative bg-bg-secondary shadow-lg'>
         <img
           src='/assets/lightHouse.gif'
           alt='Loading...'

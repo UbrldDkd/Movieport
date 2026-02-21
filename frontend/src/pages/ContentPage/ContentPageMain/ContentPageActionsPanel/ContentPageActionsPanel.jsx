@@ -18,18 +18,18 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
   return (
     <div className='bg-zinc-800 md:min-w-53 rounded-sm h-fit overflow-visible divide-y-2 divide-zinc-900/90 '>
       {isLoading ? (
-        <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+        <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
           Share
         </button>
       ) : !isLoggedIn ? (
         <>
           <button
             onClick={() => openAuthModal()}
-            className='w-full py-2 md:py-3 focus:outline-none px-3 text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+            className='w-full py-2 md:py-3 focus:outline-none px-3 text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
           >
             Log in or register to like, watchlist or review
           </button>
-          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Share
           </button>
         </>
@@ -44,7 +44,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
                 {current.watched ? <PiEyeClosed /> : <PiEye />}
               </button>
               <div className='absolute left-1/2 -translate-x-1/2 -top-10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50'>
-                <div className='bg-zinc-900 text-zinc-300 text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
+                <div className='bg-bg-secondary text-text-primary text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
                   {current.watched ? 'Remove from watched' : 'Mark as watched'}
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
                 {current.liked ? <GoHeartFill /> : <GoHeart />}
               </button>
               <div className='absolute left-1/2 -translate-x-1/2 -top-10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50'>
-                <div className='bg-zinc-900 text-zinc-300 text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
+                <div className='bg-bg-secondary text-text-primary text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
                   {current.liked ? 'Unlike' : 'Like'}
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
                 {current.watchlisted ? <TbClockCheck /> : <TbClockPlus />}
               </button>
               <div className='absolute left-1/2 -translate-x-1/2 -top-10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50'>
-                <div className='bg-zinc-900 text-zinc-300 text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
+                <div className='bg-bg-secondary text-text-primary text-xs px-3 py-1.5 font-semibold tracking-wider rounded-xs whitespace-nowrap'>
                   {current.watchlisted
                     ? 'Remove from watchlist'
                     : 'Add to watchlist'}
@@ -83,22 +83,22 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
 
           <ContentPageActionsRating initialRating={current?.rating || 0} />
 
-          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Show your activity
           </button>
 
-          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Review
           </button>
 
           <button
             onClick={() => openListModal(item)}
-            className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+            className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
           >
             Add to lists
           </button>
 
-          <button className='w-full py-2 md:py-3 rounded-b-sm px-3 text-xs md:text-sm text-zinc-300/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button className='w-full py-2 md:py-3 rounded-b-sm px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Share
           </button>
         </>

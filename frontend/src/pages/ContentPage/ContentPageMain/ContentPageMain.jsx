@@ -59,7 +59,7 @@ export default function ContentPageMain({
             </h1>
 
             {release && (
-              <Link className='text-sm md:text-[20px] text-zinc-300/90  underline underline-offset-4 hover:cursor-pointer'>
+              <Link className='text-sm md:text-[20px] text-text-primary  underline underline-offset-4 hover:cursor-pointer'>
                 {release}
               </Link>
             )}
@@ -69,7 +69,7 @@ export default function ContentPageMain({
                 {Array.isArray(directorOrCreator) ? (
                   directorOrCreator.map((name, i, arr) => (
                     <span key={i}>
-                      <Link className='text-zinc-300/90 underline underline-offset-4 hover:cursor-pointer'>
+                      <Link className='text-text-primary underline underline-offset-4 hover:cursor-pointer'>
                         {name}
                       </Link>
                       {i < arr.length - 2
@@ -80,7 +80,7 @@ export default function ContentPageMain({
                     </span>
                   ))
                 ) : (
-                  <Link className='text-zinc-300 underline underline-offset-2 hover:cursor-pointer'>
+                  <Link className='text-text-primary underline underline-offset-2 hover:cursor-pointer'>
                     {directorOrCreator}
                   </Link>
                 )}
@@ -114,7 +114,7 @@ export default function ContentPageMain({
               <div className='h-4 w-4/5 bg-zinc-800/30 rounded-sm animate-pulse' />
             </div>
           ) : (
-            <p className='text-sm md:text-base text-zinc-300/90 leading-relaxed mb-6'>
+            <p className='text-sm md:text-base text-text-primary leading-relaxed mb-6'>
               {mediaType === 'film'
                 ? tmdb?.[details1.overview]
                 : tmdb?.[details1.overview] || omdb?.[details2.overview]}

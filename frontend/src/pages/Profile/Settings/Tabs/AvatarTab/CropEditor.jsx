@@ -25,7 +25,7 @@ export function CropEditor({
 
   return (
     <div className='flex flex-col gap-4'>
-      <p className='text-[11px] text-zinc-500 -mb-1'>
+      <p className='text-[11px] font-semibold text-zinc-500 -mb-1'>
         Drag to reposition · scroll or use slider to zoom
       </p>
 
@@ -40,7 +40,7 @@ export function CropEditor({
             clampedZoom(-e.deltaY * 0.002);
           }}
           style={{ width: cropSize, height: cropSize }}
-          className='relative rounded-full overflow-hidden bg-zinc-900 border-2 border-zinc-700 select-none flex-shrink-0'
+          className='relative rounded-full overflow-hidden bg-bg-secondary border-2 border-zinc-700 select-none flex-shrink-0'
         >
           <img
             src={imageSrc}
@@ -89,7 +89,7 @@ export function CropEditor({
       <div className='flex gap-2'>
         <button
           onClick={reset}
-          className='text-xs text-zinc-500 hover:text-zinc-300 transition-colors px-2 py-1'
+          className='text-xs text-zinc-500 hover:text-text-primary transition-colors px-2 py-1'
         >
           Reset
         </button>

@@ -49,7 +49,7 @@ export default function CrewTab({ crew, isLoading }) {
           key={job}
           className='flex items-start gap-3 py-2 px-2 rounded-sm transition-colors'
         >
-          <span className='text-zinc-300/60 font-semibold items-baseline gap-2 flex text-sm tracking-wide min-w-[140px] md:min-w-[180px] flex-shrink-0'>
+          <span className='text-zinc-400 font-semibold items-baseline gap-2 flex text-sm tracking-wide min-w-[140px] md:min-w-[180px] flex-shrink-0'>
             {pluralize(job, names.length)}
             <span className='flex-1 border-b-1 h-2 border-zinc-500 border-dotted self-center' />
           </span>
@@ -57,7 +57,7 @@ export default function CrewTab({ crew, isLoading }) {
             {names.map((name, index) => (
               <div
                 key={index}
-                className='text-zinc-300/90 hover:bg-zinc-900 bg-zinc-900/50 transition-colors duration-100 px-2 py-1 rounded-sm hover:cursor-pointer font-semibold text-sm tracking-wide'
+                className='text-text-primary hover:bg-bg-secondary bg-bg-secondary/50 transition-colors duration-100 px-2 py-1 rounded-sm hover:cursor-pointer font-semibold text-sm tracking-wide'
               >
                 {name}
               </div>

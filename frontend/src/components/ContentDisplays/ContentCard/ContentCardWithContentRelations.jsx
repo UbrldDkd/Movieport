@@ -61,7 +61,7 @@ export default function ContentCardWithContentRelations({ item, view }) {
           <IoIosStar
             key={`empty-${i}`}
             size={iconSize}
-            className='text-zinc-300'
+            className='text-text-primary'
           />
         ))}
 

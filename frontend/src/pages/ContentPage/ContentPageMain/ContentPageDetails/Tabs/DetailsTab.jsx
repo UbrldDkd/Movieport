@@ -36,7 +36,7 @@ export default function DetailsTab({ details, isLoading }) {
     <div className='space-y-6'>
       {Object.keys(groupedAlternativeTitles).length > 0 && (
         <div>
-          <div className='text-zinc-300/90 cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
+          <div className='text-text-primary cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
             Alternative Titles
           </div>
           <div className='space-y-0.5'>
@@ -47,7 +47,7 @@ export default function DetailsTab({ details, isLoading }) {
                   {titles.slice(0, 2).map((title, index) => (
                     <div
                       key={index}
-                      className='text-zinc-400 flex items-baseline  justify-between text-sm py-1 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors'
+                      className='text-zinc-400 flex items-baseline  justify-between text-sm py-1 px-2 hover:bg-bg-secondary/30 rounded-sm transition-colors'
                     >
                       {title.title}
                       <div className='flex cursor-default items-center justify-center text-zinc-500 bg-zinc-800 rounded-xs w-5 h-5 text-xs font-medium'>
@@ -63,14 +63,14 @@ export default function DetailsTab({ details, isLoading }) {
 
       {studios.length > 0 && (
         <div>
-          <h3 className='text-zinc-300/90 cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
+          <h3 className='text-text-primary cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
             {studios.length > 1 ? 'Studios' : 'Studio'}
           </h3>
           <div className='flex flex-wrap gap-1  '>
             {studios.map((studio, index) => (
               <div
                 key={index}
-                className='text-zinc-400 bg-zinc-900/50 hover:cursor-pointer hover:bg-zinc-900 text-sm py-1 px-2 hover:text-zinc-300/90 rounded-sm transition-colors'
+                className='text-zinc-400 bg-bg-secondary/50 hover:cursor-pointer hover:bg-bg-secondary text-sm py-1 px-2 hover:text-text-primary rounded-sm transition-colors'
               >
                 {studio}
               </div>
@@ -81,14 +81,14 @@ export default function DetailsTab({ details, isLoading }) {
 
       {countries.length > 0 && (
         <div>
-          <h3 className='text-zinc-300/90 cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
+          <h3 className='text-text-primary cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
             {countries.length > 1 ? 'Countries' : 'Country'}
           </h3>
           <div className='flex gap-1'>
             {countries.map((country, index) => (
               <div
                 key={index}
-                className='text-zinc-400 hover:text-zinc-300/90 text-sm  bg-zinc-900/50  py-1 px-2 hover:bg-zinc-900 hover:cursor-pointer rounded-sm transition-colors'
+                className='text-zinc-400 hover:text-text-primary text-sm  bg-bg-secondary/50  py-1 px-2 hover:bg-bg-secondary hover:cursor-pointer rounded-sm transition-colors'
               >
                 {country}
               </div>
@@ -99,10 +99,10 @@ export default function DetailsTab({ details, isLoading }) {
 
       {primaryLanguage && (
         <div>
-          <h3 className='text-zinc-300/90 cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
+          <h3 className='text-text-primary cursor-default font-semibold tracking-wider uppercase text-xs mb-3'>
             Primary Language
           </h3>
-          <div className='text-zinc-400  text-sm py-1 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors'>
+          <div className='text-zinc-400  text-sm py-1 px-2 hover:bg-bg-secondary/30 rounded-sm transition-colors'>
             {primaryLanguage}
           </div>
         </div>
@@ -110,14 +110,14 @@ export default function DetailsTab({ details, isLoading }) {
 
       {spokenLanguages.length > 0 && (
         <div>
-          <h3 className='text-zinc-300/90 font-semibold tracking-wider uppercase text-xs mb-3'>
+          <h3 className='text-text-primary font-semibold tracking-wider uppercase text-xs mb-3'>
             Spoken Languages
           </h3>
           <div className='flex flex-wrap'>
             {spokenLanguages.map((lang, index) => (
               <div
                 key={index}
-                className='text-zinc-400 text-sm py-1 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors'
+                className='text-zinc-400 text-sm py-1 px-2 hover:bg-bg-secondary/30 rounded-sm transition-colors'
               >
                 {lang}
               </div>

@@ -110,7 +110,7 @@ export default function ContentPageDetails({ content, isLoading }) {
   return (
     <div className='mt-3 '>
       <div className='rounded-sm  border border-zinc-900/50'>
-        <div className='flex bg-zinc-900/30 backdrop-blur-sm'>
+        <div className='flex bg-bg-secondary/30 backdrop-blur-sm'>
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -118,7 +118,7 @@ export default function ContentPageDetails({ content, isLoading }) {
               className={`flex-1 px-2 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 relative ${
                 activeTab === tab
                   ? 'text-zinc-200'
-                  : 'text-zinc-500 hover:cursor-pointer hover:text-zinc-400 hover:bg-zinc-900/20'
+                  : 'text-zinc-500 hover:cursor-pointer hover:text-zinc-400 hover:bg-bg-secondary/20'
               }`}
             >
               {tab}

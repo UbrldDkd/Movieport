@@ -5,7 +5,7 @@ export default function SectionHeader({ header, url }) {
   return (
     <>
       <div className='flex justify-between items-baseline'>
-        <div className=' font-semibold tracking-widest text-zinc-300/90'>
+        <div className=' font-semibold tracking-widest text-text-primary'>
           {header}
         </div>{' '}
         {url && (

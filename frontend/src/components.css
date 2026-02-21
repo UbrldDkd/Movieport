@@ -1,21 +1,27 @@
 @import 'tailwindcss';
 
-@layer components {
-  .container {
-    @apply rounded-sm p-3 bg-bgPrimary;
-  }
+@theme {
+  --color-bg-primary: #121214;
+  --color-bg-secondary: #161617;
+  --color-bg-elevated: #171719;
 
+  --color-primary: #141313;
+  --color-primary-dark: #973610;
+
+  --color-text-primary: #dfdcd8;
+  --color-text-secondary: #e4e4e7;
+  --color-text-muted: #71717a;
+}
+
+@layer components {
   .btn-primary {
-    @apply px-4 py-2 rounded-md font-semibold text-white bg-primary hover:bg-orange-600 transition-colors;
+    @apply px-4 py-2 rounded font-semibold
+           bg-primary text-text-primary
+           hover:bg-primary-dark transition-colors;
   }
 
   .card {
-    @apply rounded-lg p-6 text-white bg-bgSecondary shadow-lg;
-  }
-
-  .animate-fadeIn {
-    animation: fade-in-up 0.35s ease-out forwards;
-    will-change: opacity, transform;
+    @apply bg-bg-secondary rounded p-4;
   }
 }
 

@@ -37,7 +37,7 @@ export default function Profile() {
         </div>
         <button
           onClick={() => navigate('/')}
-          className='text-sm hover:cursor-pointer font-semibold tracking-wider bg-zinc-900 px-2 py-0.5 text-zinc-300/90 hover:text-zinc-200 transition-colors duration-120 rounded-sm'
+          className='text-sm hover:cursor-pointer font-semibold tracking-wider bg-bg-secondary px-2 py-0.5 text-text-primary hover:text-zinc-200 transition-colors duration-120 rounded-sm'
         >
           Go back
         </button>

@@ -38,7 +38,7 @@ export default function ContentCard({ item, view }) {
             exit='exit'
             className='absolute  -top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center'
           >
-            <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-zinc-300/90 text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
+            <div className='bg-zinc-800/90 font-semibold tracking-wider backdrop-blur-3xl text-text-primary text-xs px-2 py-1 rounded-md shadow-md whitespace-nowrap'>
               {cleanedItem.title} ({cleanedItem.release_date?.slice(0, 4)})
             </div>
             <div className='w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-zinc-800' />

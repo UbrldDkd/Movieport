@@ -1,80 +1,67 @@
-// Icons
 import { GiCaptainHatProfile } from 'react-icons/gi';
-import { VscHeart, VscHeartFilled } from 'react-icons/vsc';
+import { VscHeartFilled } from 'react-icons/vsc';
 
-// Utils helpers
 import { formatNumber } from '../../utils/helpers/formatNumber';
-
-// Utils ui
 import { renderStars } from '../../utils/style/ui/renderStars';
-
-// Components
 import ContentCard from '../ContentDisplays/ContentCard/ContentCard';
 import { Tooltip } from '../Common/Tooltip';
 
 export default function ReviewCard({ review, includeItemDetails = false }) {
   const item = review.content_relation;
+  const username = review.user || `User ${review.id}`;
 
   return (
-    <div className='bg-zinc-800/30 p-3 rounded-sm hover:bg-zinc-800/40 transition-colors flex flex-col sm:flex-row gap-4'>
-      {/* Left column: ContentCard */}
-      {includeItemDetails && (
-        <div className='flex-shrink-0 hidden sm:flex-shrink'></div>
+    <div className='bg-zinc-800/30 hover:bg-zinc-800/50 transition-colors rounded-sm p-4 flex gap-4'>
+      {/* Poster */}
+      {includeItemDetails && item && (
+        <div className='flex-shrink-0'>
+          <ContentCard view='sm' item={item} />
+        </div>
       )}
 
-      {/* Right column: Review details */}
-      <div className='flex-1 flex flex-col justify-between'>
-        {/* Optional item title + release_date */}
-        <div className='flex pr-2 space-x-2 mb-1'>
-          {includeItemDetails && item && <ContentCard view='sm' item={item} />}
-          <div className='flex flex-col'>
-            {includeItemDetails && item && (
-              <div className='flex items-baseline gap-2 mb-1  sm:text-lg md:text-xl text-zinc-300 font-semibold'>
-                <span>{item.title}</span>
-                <span className='text-zinc-400 text-base'>
-                  {item.release_date.slice(0, 4)}
-                </span>
-              </div>
-            )}
-
-            {/* User info & stars */}
-            <div className='flex flex-col gap-2 '>
-              <div className='flex  items-center gap-2'>
-                <div className='w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-300'>
-                  <GiCaptainHatProfile className='text-sm' />
-                </div>
-                <span className='text-sm font-semibold text-zinc-300'>
-                  {review.user || `User ${review.id}`}
-                </span>
-
-                <Tooltip label={`${review.rating}/5`}>
-                  <div className='flex items-center gap-0.25'>
-                    {renderStars({ rating: review.rating, size: 18 })}
-                  </div>
-                </Tooltip>
-              </div>
-
-              <div className='text-xs  text-zinc-500'>{review.created_at}</div>
-            </div>
+      {/* Body */}
+      <div className='flex flex-col gap-3 flex-1 min-w-0'>
+        {/* Title */}
+        {includeItemDetails && item && (
+          <div className='flex items-baseline gap-2'>
+            <span className='text-zinc-200 font-semibold'>{item.title}</span>
+            <span className='text-zinc-500 text-sm'>
+              {item.release_date.slice(0, 4)}
+            </span>
           </div>
+        )}
+
+        {/* User row */}
+        <div className='flex items-center gap-2'>
+          <div className='w-7 h-7 rounded-full bg-zinc-700 flex items-center justify-center flex-shrink-0'>
+            <GiCaptainHatProfile className='text-zinc-400 text-sm' />
+          </div>
+          <span className='text-sm font-semibold text-text-primary'>
+            {username}
+          </span>
+          <Tooltip label={`${review.rating}/5`}>
+            <div className='flex items-center'>
+              {renderStars({ rating: review.rating, size: 16 })}
+            </div>
+          </Tooltip>
+          <span className='text-xs text-zinc-600 ml-auto'>
+            {review.created_at}
+          </span>
         </div>
 
         {/* Review text */}
-        <p className='text-base tracking-wide text-zinc-300/90 leading-6 mb-3'>
+        <p className='text-sm text-zinc-400 leading-relaxed tracking-wide'>
           {review.review || review.reviews || 'Great movie!'}
         </p>
 
-        {/* Likes & more reviews */}
-        <div className='flex items-center justify-between'>
-          <button className='flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-400 transition-colors'>
-            {/* TODO: add like button to review */}
-            <VscHeartFilled className='text-base' />
-            <VscHeart />
+        {/* Footer */}
+        <div className='flex items-center justify-between pt-1 border-t border-zinc-800'>
+          <button className='flex items-center gap-1.5 text-xs text-zinc-600 hover:text-red-900 transition-colors'>
+            <VscHeartFilled className='text-sm' />
             <span>{formatNumber(review.like_count)}</span>
           </button>
-
-          <span className='text-xs text-zinc-600 hover:text-zinc-500 cursor-pointer transition-colors'>
-            More reviews by {review.user || 'this user'}
+          <span className='text-xs text-zinc-600 hover:text-zinc-400 cursor-pointer transition-colors'>
+            More by {username}
           </span>
         </div>
       </div>

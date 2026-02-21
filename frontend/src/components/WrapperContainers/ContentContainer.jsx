@@ -3,9 +3,15 @@ import { fadeInUpVariants } from '../../utils/style/animations/motionVariants';
 
 export default function ContentContainer({ children }) {
   return (
-    <div className='bg-zinc-900/60  gap-3 md:gap-10 rounded-sm min-h-screen  p-3 flex-col flex'>
+    <Motion.div
+      variants={fadeInUpVariants}
+      initial='hidden'
+      animate='visible'
+      transition={{ duration: 0.1, ease: 'easeOut' }}
+      className='bg-bg-primary  gap-3 md:gap-10 rounded-sm min-h-screen  p-3 flex-col flex'
+    >
       {' '}
       {children}
-    </div>
+    </Motion.div>
   );
 }

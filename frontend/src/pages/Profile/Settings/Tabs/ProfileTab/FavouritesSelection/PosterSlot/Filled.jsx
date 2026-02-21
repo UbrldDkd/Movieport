@@ -24,7 +24,7 @@ export default function Filled({ item, onRemove, status }) {
         <div className='absolute inset-0 bg-black/0 rounded-sm transition-all duration-200' />
         <button
           onClick={onRemove}
-          className={`absolute backdrop-blur-3xl top-0 hover:text-zinc-200 text-zinc-300 z-10 w-6 h-6 flex items-start justify-start p-0.5 bg-black/70 hover:bg-red-950 text-sm rounded-br-full transition-all duration-200 ${status?.isDragging || status?.isDragOver ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`}
+          className={`absolute backdrop-blur-3xl top-0 hover:text-zinc-200 text-text-primary z-10 w-6 h-6 flex items-start justify-start p-0.5 bg-black/70 hover:bg-red-950 text-sm rounded-br-full transition-all duration-200 ${status?.isDragging || status?.isDragOver ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`}
         >
           <MdOutlineClose />
         </button>

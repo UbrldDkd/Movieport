@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className='max-w-3xl mx-auto px-6 py-10 font-light text-zinc-300'>
+    <div className='max-w-3xl mx-auto px-6 py-10 font-light text-text-primary'>
       <h1 className='text-3xl mb-4 text-white font-normal'>
         About This Project
       </h1>

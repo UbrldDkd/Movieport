@@ -103,7 +103,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
                 to={`/${movie[details.movieTitle] ? 'film' : 'tv'}/${movie[details.id]}`}
                 className='inline-block'
               >
-                <button className='mt-2 rounded-3xl border-2 border-zinc-500 bg-transparent px-2 py-1 text-sm font-semibold text-zinc-300 cursor-pointer hover:border-red-950 transition-colors duration-300 hover:bg-red-950 md:mt- md:px-3 md:text-base'>
+                <button className='mt-2 rounded-3xl border-2 border-zinc-500 bg-transparent px-2 py-1 text-sm font-semibold text-text-primary cursor-pointer hover:border-red-950 transition-colors duration-300 hover:bg-red-950 md:mt- md:px-3 md:text-base'>
                   View now
                 </button>
               </Link>

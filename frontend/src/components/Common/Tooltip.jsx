@@ -12,7 +12,7 @@ export function Tooltip({
       <span
         className={`absolute ${position}
           bg-zinc-700 font-semibold tracking-wider backdrop-blur-3xl
-          text-zinc-300 text-xs px-2 py-1 rounded shadow-md
+          text-text-primary text-xs px-2 py-1 rounded shadow-md
           opacity-0 group-hover:opacity-100 transition-opacity duration-200
           pointer-events-none z-1000 whitespace-nowrap`}
       >

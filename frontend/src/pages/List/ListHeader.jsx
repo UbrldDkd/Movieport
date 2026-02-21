@@ -34,7 +34,7 @@ export default function ListHeader({ list, username, view, setView }) {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           title={`Created: ${new Date(list.created_at).toLocaleString()}`}
-          className='cursor-help hover:text-zinc-300 transition-colors'
+          className='cursor-help hover:text-text-primary transition-colors'
         >
           {hover
             ? `Created: ${timeAgo(list.created_at)}`

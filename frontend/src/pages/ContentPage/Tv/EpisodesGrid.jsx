@@ -20,15 +20,15 @@ export default function EpisodesGrid({ seasonContent, id, episodeNumber }) {
                 flex justify-center items-center font-semibold
                 ${
                   episodeNumber === ep.episode_number
-                    ? 'bg-red-950 text-zinc-300 hover:bg-zinc-300 hover:text-red-950 cursor-default active:bg-zinc-200 active:text-red-900'
-                    : 'bg-zinc-900/90 backdrop-blur-3xl text-zinc-400 hover:bg-zinc-900 active:bg-zinc-700 active:text-zinc-300'
+                    ? 'bg-red-950 text-text-primary hover:bg-zinc-300 hover:text-red-950 cursor-default active:bg-zinc-200 active:text-red-900'
+                    : 'bg-bg-secondary backdrop-blur-3xl text-zinc-400 hover:bg-bg-secondary active:bg-zinc-700 active:text-text-primary'
                 }
               `}
             >
               Ep {ep.episode_number}
               <span
                 className='absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-                px-2 py-1 text-xs sm:text-sm font-semibold text-zinc-300
+                px-2 py-1 text-xs sm:text-sm font-semibold text-text-primary
                 bg-zinc-800/90 rounded opacity-0 group-hover:opacity-100
                 pointer-events-none duration-120 whitespace-nowrap z-50'
               >

@@ -35,8 +35,7 @@ export default {
         'drop-expand-fade': 'drop-expand-fade 500ms ease-out forwards',
       },
       colors: {
-        // flat keys — these generate usable Tailwind classes
-        primary: '#1E40AF',
+        primary: '#bg-[#121214]',
       },
     },
   },

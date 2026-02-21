@@ -22,7 +22,7 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
       }`}
     >
       {/* Main watchlist */}
-      <div className='bg-zinc-900/90 rounded-sm p-3 text-zinc-200'>
+      <div className='bg-bg-secondary rounded-sm p-3 text-zinc-200'>
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
           {items.length > 0
             ? `${isOwner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
@@ -56,7 +56,7 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
 
       {/* Actions column for owner */}
       {isOwner && (
-        <div className='bg-zinc-900/90  rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
+        <div className='bg-bg-secondary  rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
           <button className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'>
             Make Watchlist Private/Public
           </button>

@@ -56,7 +56,7 @@ export default function ReleasesTab({ releaseDates = [], isLoading }) {
       {sortedCountries.map(({ country, dates }) => (
         <div
           key={country}
-          className='flex items-center justify-between py-1.5 px-2 hover:bg-zinc-900/30 rounded-sm transition-colors group'
+          className='flex items-center justify-between py-1.5 px-2 hover:bg-bg-secondary/30 rounded-sm transition-colors group'
         >
           <div className='flex items-center gap-3'>
             <div
@@ -64,12 +64,12 @@ export default function ReleasesTab({ releaseDates = [], isLoading }) {
               onMouseEnter={() => setHoveredCountry(country)}
               onMouseLeave={() => setHoveredCountry(null)}
             >
-              <span className='text-zinc-500 text-xs font-medium bg-zinc-900/50 px-1.5 py-0.5 rounded cursor-help pointer-events-none'>
+              <span className='text-zinc-500 text-xs font-medium bg-bg-secondary/50 px-1.5 py-0.5 rounded cursor-help pointer-events-none'>
                 {country}
               </span>
 
               <div
-                className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-zinc-700 text-zinc-300/90 text-xs font-semibold tracking-widest rounded-sm whitespace-nowrap z-50 transition-opacity duration-120 pointer-events-none ${hoveredCountry === country ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-zinc-700 text-text-primary text-xs font-semibold tracking-widest rounded-sm whitespace-nowrap z-50 transition-opacity duration-120 pointer-events-none ${hoveredCountry === country ? 'opacity-100' : 'opacity-0'}`}
               >
                 {CountriesMap[country] || country}
                 <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-zinc-700' />

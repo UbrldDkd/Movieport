@@ -17,7 +17,7 @@ export default function PronounsSelectionDropdown({ username }) {
 
   return (
     <div className='flex flex-col ' ref={ref}>
-      <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-2 md:mt-5'>
+      <label className='block tracking-widest text-xs font-medium text-text-primary mb-2 md:mt-5'>
         Pronouns
       </label>
 
@@ -26,9 +26,9 @@ export default function PronounsSelectionDropdown({ username }) {
           <button
             type='button'
             onClick={() => setOpen((o) => !o)}
-            className='w-full max-w-30 text-sm font-semibold tracking-wider  gap-1 bg-zinc-800 border-2 border-zinc-700 text-zinc-300 px-2 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 flex items-center justify-between'
+            className='w-full max-w-30 text-sm font-semibold tracking-wider  gap-1 bg-zinc-800 border-2 border-zinc-700 text-text-primary px-2 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 flex items-center justify-between'
           >
-            <span className={selected ? 'text-zinc-300' : 'text-zinc-500'}>
+            <span className={selected ? 'text-text-primary' : 'text-zinc-500'}>
               {selected ?? 'Select pronouns'}
             </span>
             <svg
@@ -45,17 +45,17 @@ export default function PronounsSelectionDropdown({ username }) {
               />
             </svg>
           </button>
-          <div className='text-xs gap-1 flex font-semibold tracking-wider text-zinc-400'>
+          <div className='text-xs gap-1 flex font-semibold tracking-wider text-zinc-500'>
             <span>Example: </span>
             <div>
-              <span className='text-zinc-300'>{username}</span> added{' '}
-              <span className='text-zinc-300'>Trainspotting</span> to{' '}
+              <span className='text-text-primary'>{username}</span> added{' '}
+              <span className='text-text-primary'>Trainspotting</span> to{' '}
               {selected === PRONOUNS[0]
                 ? 'his'
                 : selected === PRONOUNS[1]
                   ? 'her'
                   : 'their'}{' '}
-              <span className='text-zinc-300 underline underline-offset-2'>
+              <span className='text-text-primary underline underline-offset-2'>
                 watchlist
               </span>
             </div>
@@ -76,7 +76,7 @@ export default function PronounsSelectionDropdown({ username }) {
                   ${
                     selected === pronoun
                       ? 'bg-red-950 text-zinc-100'
-                      : 'text-zinc-300 hover:bg-zinc-700'
+                      : 'text-text-primary hover:bg-zinc-700'
                   }`}
               >
                 {pronoun}

@@ -40,7 +40,7 @@ export default function ContentCardTooltip({ item, current, onClose }) {
 
       <button
         onClick={handleClear}
-        className={`absolute py-1.5 z-20  left-0 hover:cursor-pointer bg-zinc-900  top-6.5 -translate-y-1/2  text-zinc-500 hover:text-zinc-400 hover:bg-zinc-700/50 rounded-sm transition-all duration-150 flex items-center justify-center
+        className={`absolute py-1.5 z-20  left-0 hover:cursor-pointer bg-bg-secondary  top-6.5 -translate-y-1/2  text-zinc-500 hover:text-zinc-400 hover:bg-zinc-700/50 rounded-sm transition-all duration-150 flex items-center justify-center
           ${rating > 0 ? 'opacity-100' : 'opacity-0'}`}
       >
         <IoClose className='text-lg' />
@@ -87,7 +87,7 @@ export default function ContentCardTooltip({ item, current, onClose }) {
       {/* Watchlist button */}
       <button
         onClick={() => handleClick('watchlisted')}
-        className='w-full hover:cursor-pointer py-1.5 rounded bg-zinc-900 hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-zinc-300'
+        className='w-full hover:cursor-pointer py-1.5 rounded bg-bg-secondary hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-text-primary'
       >
         {current?.watchlisted ? 'Remove from Watchlist' : 'Add to Watchlist'}
       </button>
@@ -95,13 +95,13 @@ export default function ContentCardTooltip({ item, current, onClose }) {
       {/* Add to List button */}
       <button
         onClick={() => openModal({ item })}
-        className='w-full py-1.5 hover:cursor-pointer rounded bg-zinc-900 hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-zinc-300'
+        className='w-full py-1.5 hover:cursor-pointer rounded bg-bg-secondary hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-text-primary'
       >
         Add to List
       </button>
       <button
         onClick={() => openModal({ item })}
-        className='w-full py-1.5 rounded hover:cursor-pointer bg-zinc-900 hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-zinc-300'
+        className='w-full py-1.5 rounded hover:cursor-pointer bg-bg-secondary hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-text-primary'
       >
         Review
       </button>

@@ -38,7 +38,7 @@ export default function EpisodeDisplay({
     : 'https://via.placeholder.com/780x440?text=No+Image';
 
   return (
-    <div className='relative w-full bg-zinc-900 text-zinc-300 font-normal rounded-lg overflow-hidden shadow-lg mb-4 sm:mb-6'>
+    <div className='relative w-full bg-bg-secondary text-text-primary font-normal rounded-lg overflow-hidden shadow-lg mb-4 sm:mb-6'>
       {/* Close Button */}
       <button
         onClick={onClose}

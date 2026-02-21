@@ -17,7 +17,7 @@ export default function DisplaySelected({ selectedGenres }) {
       {selectedGenres.map((id) => (
         <span
           key={id}
-          className='bg-zinc-800 text-zinc-300 cursor-pointer rounded px-2 py-1 text-xs whitespace-normal'
+          className='bg-zinc-800 text-text-primary cursor-pointer rounded px-2 py-1 text-xs whitespace-normal'
         >
           {GenreMap[id]}
         </span>

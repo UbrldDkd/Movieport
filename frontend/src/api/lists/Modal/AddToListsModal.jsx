@@ -41,7 +41,7 @@ export default function AddToListsModal({ item, onClose }) {
       {/* Modal */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className='bg-zinc-900 border z-2 border-zinc-800 rounded-sm p-4 flex flex-col gap-3 w-full max-w-md text-zinc-300/90 shadow-xl transition-all duration-300 ease-out'
+        className='bg-bg-secondary border z-2 border-zinc-800 rounded-sm p-4 flex flex-col gap-3 w-full max-w-md text-text-primary shadow-xl transition-all duration-300 ease-out'
       >
         <h2 className='font-semibold  tracking-widest'>
           Add <span className='text-zinc-200'>{item.title}</span> to lists
@@ -74,7 +74,7 @@ export default function AddToListsModal({ item, onClose }) {
         {/* New list + search */}
         <div className='flex items-center gap-2'>
           <button
-            className='flex items-center gap-1 hover:cursor-pointer text-zinc-300 hover:text-zinc-100 transition-colors'
+            className='flex items-center gap-1 hover:cursor-pointer text-text-primary hover:text-zinc-100 transition-colors'
             onClick={() => setMiniModalOpen(true)}
           >
             <AiOutlinePlus size={18} />
@@ -130,7 +130,7 @@ export default function AddToListsModal({ item, onClose }) {
 
         {/* Selected counts */}
         {selectedLists.length > 0 && (
-          <div className='text-sm text-zinc-300 tracking-wider mt-2'>
+          <div className='text-sm text-text-primary tracking-wider mt-2'>
             {selectedLists.filter((l) => l.public).length > 0 && (
               <div>
                 {selectedLists.filter((l) => l.public).length} Public list

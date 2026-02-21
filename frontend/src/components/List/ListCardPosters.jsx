@@ -9,7 +9,7 @@ export default function ListCardPosters({ items, linkUrl, compact }) {
   const { details } = Keys.API1;
 
   const PLACEHOLDER_COUNT = 3;
-  const PLACEHOLDER_SHADES = ['bg-zinc-900', 'bg-zinc-800', 'bg-zinc-700'];
+  const PLACEHOLDER_SHADES = ['bg-bg-secondary', 'bg-zinc-800', 'bg-zinc-700'];
 
   return (
     <div className='flex -space-x-6 shrink-0'>

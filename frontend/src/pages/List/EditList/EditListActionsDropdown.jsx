@@ -57,7 +57,7 @@ export default function EditListActionsDropdown({
       />
 
       <div
-        className={`absolute top-full left-0 mt-1 w-full z-50 bg-zinc-900/80 border border-zinc-700 rounded-sm max-h-64 overflow-y-auto shadow-lg scrollbar-hide transition-opacity duration-100 ${
+        className={`absolute top-full left-0 mt-1 w-full z-50 bg-bg-secondary border border-zinc-700 rounded-sm max-h-64 overflow-y-auto shadow-lg scrollbar-hide transition-opacity duration-100 ${
           hasResults ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >

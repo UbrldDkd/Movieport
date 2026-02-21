@@ -164,7 +164,7 @@ export default function MobileFilterbox() {
       <div
         ref={dropdownRef}
         className={`
-          absolute top-full bg-zinc-900 rounded-md drop-shadow-black p-3 z-10 w-80 left-1/2 transform -translate-x-1/2
+          absolute top-full bg-bg-secondary rounded-md drop-shadow-black p-3 z-10 w-80 left-1/2 transform -translate-x-1/2
           transition-all duration-300
           ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
         `}
@@ -260,7 +260,7 @@ export default function MobileFilterbox() {
           <div>
             <div className='relative group inline-block cursor-help'>
               <p className='text-xs text-zinc-400 mb-1'>Media</p>
-              <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-40 bg-zinc-900 text-zinc-300 text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
+              <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-40 bg-bg-secondary text-text-primary text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
                 <p className='text-zinc-200 font-semibold'>Select media type</p>
                 <p>Choose between Movies or TV Shows to filter content.</p>
               </div>
@@ -271,7 +271,7 @@ export default function MobileFilterbox() {
                 className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1 ${
                   mediaType === 'film'
                     ? 'bg-red-950 text-white border border-red-800'
-                    : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
+                    : 'bg-zinc-500 text-zinc-950 hover:text-text-primary cursor-pointer'
                 }`}
               >
                 <svg
@@ -289,7 +289,7 @@ export default function MobileFilterbox() {
                 className={`flex-1 text-sm px-3 py-2 rounded transition-colors duration-150 flex items-center justify-center gap-1 ${
                   mediaType === 'tv'
                     ? 'bg-red-950 text-white border border-red-800'
-                    : 'bg-zinc-500 text-zinc-950 hover:text-zinc-300 cursor-pointer'
+                    : 'bg-zinc-500 text-zinc-950 hover:text-text-primary cursor-pointer'
                 }`}
               >
                 <svg
@@ -315,7 +315,7 @@ export default function MobileFilterbox() {
             <div className='flex flex-col space-y-2 w-3/5'>
               <div className='relative group inline-block cursor-help'>
                 <p className='text-xs text-zinc-400 mb-1'>Filter/Clear</p>
-                <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-zinc-900 text-zinc-300 text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
+                <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-bg-secondary text-text-primary text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
                   <p className='text-zinc-200 font-semibold'>
                     Filter by selections or clear all
                   </p>
@@ -327,7 +327,7 @@ export default function MobileFilterbox() {
               </div>
               <button
                 onClick={handleClear}
-                className='bg-red-950 text-sm text-zinc-300 px-4 cursor-pointer py-2 rounded hover:text-zinc-500 transition-colors duration-140'
+                className='bg-red-950 text-sm text-text-primary px-4 cursor-pointer py-2 rounded hover:text-zinc-500 transition-colors duration-140'
               >
                 Clear
               </button>
@@ -353,7 +353,7 @@ export default function MobileFilterbox() {
                 >
                   <button
                     onClick={() => setIsOpen(false)}
-                    className='w-full bg-zinc-500 text-sm text-zinc-950 px-4 cursor-pointer py-2 rounded hover:text-zinc-300 transition-colors duration-140'
+                    className='w-full bg-zinc-500 text-sm text-zinc-950 px-4 cursor-pointer py-2 rounded hover:text-text-primary transition-colors duration-140'
                   >
                     Filter
                   </button>
@@ -372,7 +372,7 @@ export default function MobileFilterbox() {
             <div className='flex flex-col space-y-2 w-2/5'>
               <div className='relative group inline-block cursor-help'>
                 <p className='text-xs text-zinc-400 mb-1'>Match</p>
-                <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-zinc-900 text-zinc-300 text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
+                <div className='absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-52 bg-bg-secondary text-text-primary text-xs p-2 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50'>
                   <p className='text-zinc-200 font-semibold'>
                     Choose how genres are matched:
                   </p>

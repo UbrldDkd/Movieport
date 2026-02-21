@@ -17,7 +17,7 @@ export function CustomUpload({
 
   return (
     <div>
-      <p className='text-xs uppercase tracking-widest text-zinc-500 mb-3'>
+      <p className='text-xs font-semibold  tracking-wider text-zinc-500 mb-3'>
         Upload your own
       </p>
       <input

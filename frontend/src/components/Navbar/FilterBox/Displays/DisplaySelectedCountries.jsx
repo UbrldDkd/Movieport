@@ -17,7 +17,7 @@ export default function DisplaySelectedCountries({ selectedCountries }) {
       {selectedCountries.map((c) => (
         <span
           key={c.code}
-          className='bg-zinc-800 text-zinc-300 cursor-pointer rounded px-2 py-1 text-xs whitespace-normal'
+          className='bg-zinc-800 text-text-primary cursor-pointer rounded px-2 py-1 text-xs whitespace-normal'
         >
           {c.name}
         </span>

@@ -25,7 +25,7 @@ export default function MiniCreateListModal({ onClose }) {
       {/* Modal */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className='bg-zinc-900 border z-2 border-zinc-800 rounded-sm p-4 flex flex-col gap-3 w-full max-w-sm text-zinc-200 shadow-xl'
+        className='bg-bg-secondary border z-2 border-zinc-800 rounded-sm p-4 flex flex-col gap-3 w-full max-w-sm text-zinc-200 shadow-xl'
       >
         <h2 className='font-semibold tracking-widest'>Create New List</h2>
 
@@ -41,8 +41,8 @@ export default function MiniCreateListModal({ onClose }) {
             <button
               className={`py-1 px-2  transition-colors duration-150 rounded-l-2xl hover:cursor-pointer border-2 border-zinc-700 text-xs tracking-widest font-semibold ${
                 isPublic
-                  ? 'bg-red-950 text-zinc-300 hover:text-zinc-400'
-                  : 'bg-zinc-800 text-zinc-200 hover:bg-zinc-900/90 hover:text-zinc-300'
+                  ? 'bg-red-950 text-text-primary hover:text-zinc-400'
+                  : 'bg-zinc-800 text-zinc-200 hover:bg-bg-secondary hover:text-text-primary'
               }`}
               onClick={() => setIsPublic(true)}
             >
@@ -51,8 +51,8 @@ export default function MiniCreateListModal({ onClose }) {
             <button
               className={`py-1 px-2 transition-colors duration-150 rounded-r-2xl hover:cursor-pointer border-2 border-zinc-700 text-xs font-semibold tracking-widest ${
                 !isPublic
-                  ? 'bg-red-950 text-zinc-300 hover:text-zinc-400'
-                  : 'bg-zinc-800 text-zinc-200 hover:bg-zinc-900/90 hover:text-zinc-300'
+                  ? 'bg-red-950 text-text-primary hover:text-zinc-400'
+                  : 'bg-zinc-800 text-zinc-200 hover:bg-bg-secondary hover:text-text-primary'
               }`}
               onClick={() => setIsPublic(false)}
             >

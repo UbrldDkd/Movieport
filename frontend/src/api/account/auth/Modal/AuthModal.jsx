@@ -27,7 +27,7 @@ export default function AuthModal({ isOpen, onClose, activeTab = 'login' }) {
   return (
     <div
       onClick={handleClickOutside}
-      className={`fixed inset-0 bg-zinc-900/95 backdrop-blur-3xl flex items-center justify-center z-50 transition-all duration-250 ${
+      className={`fixed inset-0 bg-bg-secondary flex items-center justify-center z-50 transition-all duration-250 ${
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -38,13 +38,13 @@ export default function AuthModal({ isOpen, onClose, activeTab = 'login' }) {
       >
         <button
           onClick={onClose}
-          className='absolute top-1 right-1 transition-colors duration-100 text-zinc-400 hover:text-zinc-300 text-2xl cursor-pointer'
+          className='absolute top-1 right-1 transition-colors duration-100 text-zinc-400 hover:text-text-primary text-2xl cursor-pointer'
         >
           <IoClose />
         </button>
 
         <div className='w-full'>
-          <h2 className='text-xl text-center font-bold text-zinc-300 mb-4 capitalize'>
+          <h2 className='text-xl text-center font-bold text-text-primary mb-4 capitalize'>
             {tab === 'login' ? 'Log into Movieport' : 'Join Movieport'}
           </h2>
         </div>

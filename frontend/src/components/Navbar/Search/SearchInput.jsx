@@ -30,7 +30,7 @@ export default function SearchInput({
   const onChange = (e) => setValue(e.target.value);
 
   return (
-    <div className='flex space-x-3 md:space-x-1 bg-red-950 hover:bg-zinc-900 focus-within:bg-zinc-900 rounded-3xl text-zinc-300/90 px-1 md:px-2 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:max-w-64'>
+    <div className='flex space-x-3 md:space-x-1 bg-red-950 hover:bg-bg-secondary focus-within:bg-bg-secondary rounded-3xl text-text-primary px-1 md:px-2 py-1 md:py-1.5 transition-colors duration-300 max-w-[160px] md:max-w-none md:max-w-64'>
       <SearchButton onClick={onSubmit} />
 
       <input
@@ -42,7 +42,7 @@ export default function SearchInput({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder='Search...'
-        className='flex-1 min-w-0 bg-transparent placeholder:tracking-wider placeholder:text-zinc-300 placeholder:text-sm  placeholder:font-semibold focus:outline-none text-zinc-300 hover:cursor-pointer placeholder-zinc-400 text-sm font-semibold tracking-wider truncate'
+        className='flex-1 min-w-0 bg-transparent placeholder:tracking-wider placeholder:text-text-primary placeholder:text-sm  placeholder:font-semibold focus:outline-none text-text-primary hover:cursor-pointer placeholder-zinc-400 text-sm font-semibold tracking-wider truncate'
       />
     </div>
   );

@@ -87,7 +87,7 @@ function Placeholder({ isDragging }) {
         outline outline-transparent hover:outline-2 hover:outline-zinc-800
       `}
     >
-      <div className='shadow-[0_0_10px_rgba(0,0,0,0.10)] shadow-zinc-900/90 w-8 h-8 flex items-center justify-center bg-zinc-700 text-zinc-300 text-xl rounded-xs transition-all duration-200'>
+      <div className='shadow-[0_0_10px_rgba(0,0,0,0.10)] shadow-zinc-900/90 w-8 h-8 flex items-center justify-center bg-zinc-700 text-text-primary text-xl rounded-xs transition-all duration-200'>
         +
       </div>
     </div>
@@ -216,8 +216,8 @@ export default function Favourites({ movies = MOCK_MOVIES }) {
   };
 
   return (
-    <div className='flex flex-col bg-zinc-900 min-h-screen p-8 items-start justify-start'>
-      <p className='block tracking-widest text-xs font-medium text-zinc-300 mb-3'>
+    <div className='flex flex-col bg-bg-secondary min-h-screen p-8 items-start justify-start'>
+      <p className='block tracking-widest text-xs font-medium text-text-primary mb-3'>
         FAVORITE FILMS
       </p>
       <div className='flex gap-2.5 flex-wrap sm:flex-nowrap'>

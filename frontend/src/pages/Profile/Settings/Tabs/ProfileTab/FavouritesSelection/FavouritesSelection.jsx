@@ -8,7 +8,7 @@ export default function FavoritesSelection({ items = MOCK_ITEMS }) {
 
   return (
     <div className='flex flex-col  mx-auto  items-start justify-start'>
-      <p className='block tracking-widest text-xs font-medium text-zinc-300 mb-3'>
+      <p className='block tracking-widest text-xs font-medium text-text-primary mb-3'>
         FAVORITE FILMS
       </p>
       <div className='flex gap-2.5 flex-wrap sm:flex-nowrap'>

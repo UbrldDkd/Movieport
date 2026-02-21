@@ -43,17 +43,17 @@ export default function ProfileCard({ user }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.1, ease: 'easeOut' }}
-      className='px-3 py-2   rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-zinc-900/90'
+      className='px-3 py-2   rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-bg-secondary'
     >
       {/* Stats section */}
-      <div className='flex md:flex-row sm:flex-row flex-col gap-2 sm:gap-0 md:gap-0 items-start md:items-center'>
+      <div className='flex md:flex-row sm:flex-row flex-col gap-3 sm:gap-0 md:gap-0 items-center  justify-start md:items-center'>
         {stats.map((stat, idx) => (
           <div key={stat.label} className='flex items-center'>
             <Link
               to={stat.link}
-              className='flex gap-1 sm:flex-col md:flex-col items-center px-3'
+              className='flex gap-1  sm:flex-col md:flex-col items-center px-3'
             >
-              <span className='text-zinc-300 text-base font-semibold'>
+              <span className='text-text-primary text-base font-semibold'>
                 {stat.value}
               </span>
               <span className='text-[12px] tracking-widest text-zinc-400/80 font-semibold hover:text-red-900/60 transition-colors'>
@@ -61,7 +61,7 @@ export default function ProfileCard({ user }) {
               </span>
             </Link>
             {idx < stats.length - 1 && (
-              <div className='h-10 border-r  border-red-950 mx-1 opacity-0 sm:opacity-100 md:opacity-100' />
+              <div className='h-10 border-r  border-red-950 mx-1 hidden sm:flex md:flex' />
             )}
           </div>
         ))}
@@ -74,7 +74,7 @@ export default function ProfileCard({ user }) {
             !isOwner && 'items-end text-right'
           }`}
         >
-          <h1 className='text-2xl text-zinc-200'>{username}</h1>
+          <h1 className='text-2xl text-text-primary'>{username}</h1>
 
           {/* Follow/unFollow button (only when viewing another profile) */}
           <div className='flex items-center gap-3  '>
@@ -100,7 +100,7 @@ export default function ProfileCard({ user }) {
               >
                 <button
                   onClick={() => navigate(`/settings/`)}
-                  className='absolute -bottom-3 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-zinc-900 text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
+                  className='absolute -bottom-3 -left-4.5 p-1.5 cursor-pointer transition-colors duration-100 bg-bg-secondary text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 rounded-full'
                 >
                   <FaPenFancy size={20} />
                 </button>

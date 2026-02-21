@@ -46,7 +46,7 @@ export default function ListCard({ list, username, posterAmount }) {
               </button>
               <button
                 onClick={() => navigate(`/${list.username}`)}
-                className='text-zinc-300/90 font-semibold truncate max-w-[100px] sm:max-w-[150px]'
+                className='text-text-primary font-semibold truncate max-w-[100px] sm:max-w-[150px]'
               >
                 {list.username}
               </button>
@@ -88,7 +88,7 @@ export default function ListCard({ list, username, posterAmount }) {
                 className='block  py-[1.5px] flex-shrink-0'
               >
                 {' '}
-                <div className='text-zinc-500 hover:text-zinc-300 transition-colors duration-120'>
+                <div className='text-zinc-500 hover:text-text-primary transition-colors duration-120'>
                   <FaPen className='text-sm' />
                 </div>
               </Link>
@@ -98,7 +98,7 @@ export default function ListCard({ list, username, posterAmount }) {
 
         {/* Description */}
         {list.description && (
-          <div className='mt-1 max-h-36 w-full overflow-y-auto rounded-sm text-xs text-zinc-300/90 tracking-wide leading-snug break-words scrollbar-hide'>
+          <div className='mt-1 max-h-36 w-full overflow-y-auto rounded-sm text-xs text-text-primary tracking-wide leading-snug break-words scrollbar-hide'>
             {list.description}
           </div>
         )}

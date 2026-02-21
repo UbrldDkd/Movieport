@@ -16,7 +16,7 @@ export default function ProfileDropdown({ isOpen, setIsOpen }) {
       {/* Dropdown */}
       <div
         className={
-          'absolute right-0 mt-3.5 w-36 bg-zinc-900 border border-zinc-800 rounded-md shadow-lg z-20 transition-all duration-150' +
+          'absolute right-0 mt-3.5 w-36 bg-bg-secondary border border-zinc-800 rounded-md shadow-lg z-20 transition-all duration-150' +
           (isOpen
             ? 'opacity-100 visible'
             : 'opacity-0 invisible group-hover:opacity-100 group-hover:visible')

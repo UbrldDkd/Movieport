@@ -1,10 +1,10 @@
 import { useLoginForm } from './sanatisers/useLoginForm';
 
 const inputClass =
-  'w-full bg-zinc-800 border-2 border-zinc-700 text-zinc-300 px-2 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 [&:-webkit-autofill]:![box-shadow:0_0_0_999px_theme(colors.zinc.800)_inset] [&:-webkit-autofill]:![-webkit-text-fill-color:theme(colors.zinc.300)]';
+  'w-full bg-zinc-800 border-2 border-zinc-700 text-text-primary px-2 py-1 rounded focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 [&:-webkit-autofill]:![box-shadow:0_0_0_999px_theme(colors.zinc.800)_inset] [&:-webkit-autofill]:![-webkit-text-fill-color:theme(colors.zinc.300)]';
 
 const Label = ({ children }) => (
-  <label className='block tracking-widest text-xs font-medium text-zinc-300 mb-1'>
+  <label className='block tracking-widest text-xs font-medium text-text-primary mb-1'>
     {children}
   </label>
 );
@@ -67,7 +67,7 @@ export default function LoginForm({ onClose, switchToRegister }) {
         />
         <label
           htmlFor='rememberMe'
-          className='text-xs font-semibold text-zinc-300 cursor-pointer'
+          className='text-xs font-semibold text-text-primary cursor-pointer'
         >
           Remember me
         </label>
@@ -78,7 +78,7 @@ export default function LoginForm({ onClose, switchToRegister }) {
       <button
         type='submit'
         disabled={isLoading}
-        className='w-full bg-red-950 hover:bg-red-900 text-zinc-300 font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
+        className='w-full bg-red-950 hover:bg-red-900 text-text-primary font-semibold py-1.5 rounded transition disabled:opacity-50 cursor-pointer'
       >
         {isLoading ? 'Logging in...' : 'Login'}
       </button>

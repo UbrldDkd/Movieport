@@ -25,7 +25,7 @@ export default function ProfileMain({ user }) {
   return (
     <div className='flex flex-col md:flex-row w-full min-h-screen gap-2 md:gap-10'>
       {/* Left column */}
-      <div className='flex-1 flex flex-col gap-4 bg-zinc-900/90 rounded-sm px-3'>
+      <div className='flex-1 flex flex-col gap-4 bg-bg-secondary rounded-sm px-3'>
         {user?.favourites && (
           <ProfileContentSection header='Favourites' items={MOCK_ITEMS} />
         )}
@@ -39,7 +39,7 @@ export default function ProfileMain({ user }) {
       </div>
 
       {/* Right column */}
-      <div className='flex flex-col gap-4 md:w-[268px] bg-zinc-900/90 rounded-sm py-2.5 px-3'>
+      <div className='flex flex-col gap-4 md:w-[268px] bg-bg-secondary rounded-sm py-3 px-3'>
         <ProfileMainWatchlist watchlist={user?.watchlist} />
         <ProfileMainRecentLists
           recentLists={recentLists}

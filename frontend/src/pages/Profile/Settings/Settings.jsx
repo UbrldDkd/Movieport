@@ -29,8 +29,8 @@ export default function Settings() {
 
   return (
     <PageContainer>
-      <div className='flex flex-col space-y-3 bg-zinc-900 p-3  rounded-sm max-w-[1020px] w-full mx-auto'>
-        <div className='text-zinc-300/90 cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold'>
+      <div className='flex flex-col space-y-3 bg-bg-secondary p-3  rounded-sm max-w-[1020px] w-full mx-auto'>
+        <div className='text-text-primary cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold'>
           Account settings
         </div>
         {/* Tabs */}
