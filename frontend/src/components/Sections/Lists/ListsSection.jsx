@@ -88,7 +88,7 @@ export default function ListsSection({
         {displayLists.slice(0, 4).map((list) => (
           <div
             key={list.id}
-            className='bg-bg-secondary/30 p-4 rounded-sm hover:bg-secondary transition-colors  '
+            className=' p-4 rounded-sm hover:bg-secondary transition-colors  '
           >
             <ListCard list={list} posterAmount={posterAmount} compact='md' />
           </div>

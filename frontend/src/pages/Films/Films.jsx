@@ -20,8 +20,8 @@ export default function Films() {
   }
   return (
     <PageContainer>
+      {/* Popular movies section */}
       <ContentContainer>
-        {/* Popular movies section */}
         <div className='flex-1   mx-auto   overflow-hidden md:max-w-[993px] justify-center lg:px-9.5 md:px-3 w-full'>
           <SectionHeader header='Popular this week' />
 
@@ -31,8 +31,11 @@ export default function Films() {
             includeStats={true}
           />
         </div>
+      </ContentContainer>
 
-        <div className='flex flex-col md:flex-row mt-10 gap-2 md:gap-3'>
+      {/* Vertical 2 column movies container */}
+      <div className='flex flex-col md:flex-row mt-2 gap-2 md:gap-2'>
+        <ContentContainer>
           {/* Popular reviews section */}
           <div className='flex-1 md:flex-2 mt-6 md:mt-0'>
             <ReviewsSection
@@ -41,19 +44,22 @@ export default function Films() {
               url={'dddd'}
             />
           </div>
+        </ContentContainer>
 
-          {/* Vertical 2 column movies container */}
-          <div className='flex-1  md:mx-10 md:max-w-[251px] mx-auto  mt-1 w-full'>
-            <SectionHeader header='Picks by Movieport' />
-            <ContentDisplayBlock
-              content={movies.nowPlaying}
-              view='md'
-              displayAmount={6}
-              justify='center'
-            />
+        <ContentContainer>
+          <div className='  mx-auto flex'>
+            <div className='flex-1  md:mx-10 md:max-w-[327px] mx-auto  mt-1 w-full'>
+              <SectionHeader header='Picks by Movieport' />
+              <ContentDisplayBlock
+                content={movies.nowPlaying}
+                view='md'
+                displayAmount={6}
+                justify='center'
+              />
+            </div>
           </div>
-        </div>
-      </ContentContainer>
+        </ContentContainer>
+      </div>
     </PageContainer>
   );
 }

@@ -34,7 +34,7 @@ export default function Home() {
           initial='hidden'
           animate='visible'
           transition={{ duration: 0.1, ease: 'easeOut' }}
-          className='w-full mt-5 max-w-[1140px] bg-bg-secondary/50 rounded-sm flex p-3 flex-col gap-6 md:gap-10  md:px-3 items-center relative'
+          className='w-full mt-5 max-w-[1140px] bg-bg-primary rounded-sm flex p-3 flex-col gap-6 md:gap-10  md:px-3 items-center relative'
         >
           {' '}
           {/* Movies / TV Toggle */}

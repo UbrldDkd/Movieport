@@ -7,6 +7,8 @@ import ContentContainer from '../../components/WrapperContainers/ContentContaine
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
+import ListsSection from '../../components/Sections/Lists/ListsSection';
+import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 
 export default function TVShows() {
   const { tvShows, error, isLoading } = useFetchMainContent();
@@ -32,7 +34,18 @@ export default function TVShows() {
         </div>
 
         {/* two column layout */}
+        <div className='flex flex-col lg:flex-row gap-10'>
+          {/* first column */}
+          <div className='flex-2'>
+            <ListsSection header='Popular Tv show lists this week' />
+          </div>
 
+          {/* second column */}
+          <div className='flex-1'>
+            {' '}
+            <ReviewsSection header='Newly reviewed' includeItemDetails />
+          </div>
+        </div>
         <div className='  mx-auto flex-1  overflow-hidden md:max-w-[955px] justify-center  w-full'>
           <SectionHeader header='Popular this week' />
           <div className='px-3 sm:px-0 md:px-0'>

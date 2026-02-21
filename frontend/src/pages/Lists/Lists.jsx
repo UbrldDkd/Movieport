@@ -51,33 +51,45 @@ export default function Lists() {
             Create a new list
           </button>
         </div>
-        <div className='md:px-10'>
+
+        <div className='md:px-10 '>
           <ListsSectionSummary header={'Featured lists'} />
         </div>
       </ContentContainer>
 
       <div className='w-full mt-2 flex flex-col lg:flex-row gap-2'>
-        <div className='w-full lg:flex-[7.5] p-3 rounded-sm bg-bg-secondary/60'>
-          <ListsSection header='Starred lists' posterAmount={5} />
+        <div className='w-full flex-3 '>
+          <ContentContainer>
+            <ListsSection header='Starred lists' posterAmount={5} />
+          </ContentContainer>
         </div>
 
-        <div className='w-full lg:flex-[2.5] bg-bg-secondary/60 rounded-sm p-3'>
-          <ListsSectionSummary
-            header='Popular lists this week'
-            displayAxis='y'
-            compact='lg'
-          />
+        <div className='w-full  max-w-[240px]'>
+          <ContentContainer>
+            <ListsSectionSummary
+              header='Popular lists this week'
+              displayAxis='y'
+              compact='lg'
+            />
+          </ContentContainer>
         </div>
       </div>
-      <div className='bg-zinc-800/30 mt-2 p-3 rounded-sm'>
-        <ListsSectionSummary header='Curated by Movieport' />
+
+      <div className='mt-2'>
+        <ContentContainer>
+          <ListsSectionSummary header='Curated by Movieport' />
+        </ContentContainer>
       </div>
       <div className='flex md:flex-row flex-col gap-2'>
-        <div className='bg-zinc-800/30 flex-1 mt-2 p-3 rounded-sm'>
-          <ListsSection header='Film lists' posterAmount={3} url />
+        <div className=' flex-1 mt-2'>
+          <ContentContainer>
+            <ListsSection header='Film lists' posterAmount={3} url />
+          </ContentContainer>
         </div>
-        <div className='bg-zinc-800/30 flex-1 mt-2 p-3 rounded-sm'>
-          <ListsSection header='TV show lists' posterAmount={3} />
+        <div className=' flex-1 mt-2 '>
+          <ContentContainer>
+            <ListsSection header='TV show lists' posterAmount={3} />
+          </ContentContainer>
         </div>
       </div>
     </PageContainer>

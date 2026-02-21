@@ -60,7 +60,7 @@ export default function ProfileLists({ lists, username, isOwner }) {
         <div className='bg-bg-secondary rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
           <button
             onClick={() => navigate(createListURL)}
-            className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'
+            className='bg-[#252528] duration-100 trainsition-colors hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'
           >
             Create New List
           </button>

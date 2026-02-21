@@ -8,7 +8,7 @@ export default function ContentContainer({ children }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.1, ease: 'easeOut' }}
-      className='bg-bg-primary  gap-3 md:gap-10 rounded-sm min-h-screen  p-3 flex-col flex'
+      className='bg-bg-primary  gap-3 md:gap-10 rounded-sm   h-full p-3 flex-col flex'
     >
       {' '}
       {children}
