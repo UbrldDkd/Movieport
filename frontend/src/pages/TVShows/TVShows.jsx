@@ -3,7 +3,7 @@ import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
 
 // Components
 import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
-import ContentContainer from '../../components/WrapperContainers/ContentContainer';
+import PageContainer from '../../components/WrapperContainers/PageContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection';
@@ -23,7 +23,7 @@ export default function TVShows() {
 
   return (
     <BackgroundContainer>
-      <ContentContainer>
+      <PageContainer>
         {/* latest tv shows section */}
         <div className='flex-1   mx-auto   overflow-hidden md:max-w-[792px] justify-center  w-full'>
           <SectionHeader header='Latest TV Shows' />
@@ -52,7 +52,7 @@ export default function TVShows() {
             <ContentDisplayX content={tvShows.popular} view='sm' />
           </div>
         </div>
-      </ContentContainer>
+      </PageContainer>
     </BackgroundContainer>
   );
 }

@@ -2,7 +2,7 @@
 import ProfileContentSection from './ProfileContentSection';
 import ProfileMainWatchlist from './ProfileMainWatchlist';
 import ProfileMainRecentLists from './ProfileMainRecentLists';
-import ContentContainerScdr from '../../../components/WrapperContainers/ContentContainerScdr';
+import ContentContainer from '../../../components/WrapperContainers/ContentContainer';
 import { MOCK_ITEMS } from '../Settings/Tabs/ProfileTab/FavouritesSelection/constants';
 
 export default function ProfileMain({ user }) {
@@ -28,7 +28,7 @@ export default function ProfileMain({ user }) {
       {/* Left column */}
 
       <div className='flex-1 '>
-        <ContentContainerScdr>
+        <ContentContainer>
           {user?.favourites && (
             <ProfileContentSection header='Favourites' items={MOCK_ITEMS} />
           )}
@@ -39,18 +39,18 @@ export default function ProfileMain({ user }) {
               items={user?.likes}
             />
           )}
-        </ContentContainerScdr>
+        </ContentContainer>
       </div>
 
       {/* Right column */}
       <div className=' gap-4 md:w-[268px] '>
-        <ContentContainerScdr>
+        <ContentContainer>
           <ProfileMainWatchlist watchlist={user?.watchlist} />
           <ProfileMainRecentLists
             recentLists={recentLists}
             recentListsCount={recentListsCount}
           />
-        </ContentContainerScdr>
+        </ContentContainer>
       </div>
     </div>
   );

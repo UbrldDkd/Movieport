@@ -11,10 +11,11 @@ import { useGetListsByIds } from '../../../../api/lists/useGetListsByIds';
 import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 // Components
-import AnimatedTabs from '../../../../components/Common/AnimatedTabs';
+import SlidingTabsNavigation from '../../../../components/Common/SlidingTabsNavigation';
 import ProfileLikesFilms from './ProfileLikesFilms';
 import ProfileLikesLists from './ProfileLikesLists';
 import ProfileLikesTvShows from './ProfileLikesTvShows';
+import ContentContainer from '../../../../components/WrapperContainers/ContentContainer';
 
 export default function ProfileLikes({
   items,
@@ -36,9 +37,9 @@ export default function ProfileLikes({
   ];
 
   return (
-    <div className='bg-bg-secondary rounded-sm p-3 text-zinc-400'>
+    <ContentContainer>
       {/* Tabs */}
-      <AnimatedTabs
+      <SlidingTabsNavigation
         tabs={tabs}
         activeKey={subtab}
         onChange={(key) => navigate(`/${username}/likes/${key}/`)}
@@ -111,6 +112,6 @@ export default function ProfileLikes({
           </Motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </ContentContainer>
   );
 }

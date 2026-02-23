@@ -1,16 +1,15 @@
 // Third-party
 import { useNavigate, useParams } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-
-// Animations
-import { tabVariants } from '../../../utils/style/animations/motionVariants.js';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
 
 // Components
 import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer';
-import AnimatedTabs from '../../../components/Common/AnimatedTabs';
+import SlidingTabsNavigation from '../../../components/Common/SlidingTabsNavigation';
 import ProfileTab from './Tabs/ProfileTab/ProfileTab';
 import AuthTab from './Tabs/AuthTab/AuthTab';
 import AvatarTab from './Tabs/AvatarTab/AvatarTab.jsx';
+import ContentContainer from '../../../components/WrapperContainers/ContentContainer.jsx';
+import TabsContainers from '../../../components/WrapperContainers/TabsContainer.jsx';
 
 export default function Settings() {
   const { tab } = useParams();
@@ -29,13 +28,14 @@ export default function Settings() {
 
   return (
     <BackgroundContainer>
-      <div className='flex flex-col space-y-3 bg-bg-secondary p-3  rounded-sm max-w-[1020px] w-full mx-auto'>
-        <div className='text-text-primary cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold'>
+      <ContentContainer className={'  max-w-[1020px] w-full mx-auto'}>
+        {/* title */}
+        <div className='text-text-primary cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold mb-3'>
           Account settings
         </div>
         {/* Tabs */}
-        <div className='hidden sm:block'>
-          <AnimatedTabs
+        <div className='hidden sm:block mb-10'>
+          <SlidingTabsNavigation
             tabs={tabs}
             activeKey={activeTab}
             onChange={(key) =>
@@ -46,6 +46,8 @@ export default function Settings() {
           />
           <div className='h-[1px] bg-zinc-700 -mt-3.25 w-full' />
         </div>
+
+        {/* mobile navigation for tabs */}
         <div className='flex  flex-col divide-y divide-zinc-900 sm:hidden md:hidden '>
           {tabs.map((t) => (
             <button
@@ -61,25 +63,13 @@ export default function Settings() {
             </button>
           ))}
         </div>
-        {/* Tab content */}
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={activeTab}
-            variants={tabVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className='space-y-6'
-          >
-            <div className='w-full ' />
-            {activeTab === 'profile' && <ProfileTab />}
-            {activeTab === 'auth' && <AuthTab />}
-            {activeTab === 'avatar' && <AvatarTab />}
-            {/* Content goes here */}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+
+        <TabsContainers activeTab={activeTab}>
+          {activeTab === 'profile' && <ProfileTab />}
+          {activeTab === 'auth' && <AuthTab />}
+          {activeTab === 'avatar' && <AvatarTab />}
+        </TabsContainers>
+      </ContentContainer>
     </BackgroundContainer>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function AnimatedTabs({ tabs, activeKey, onChange }) {
+export default function SlidingTabsNavigation({ tabs, activeKey, onChange }) {
   const refs = useRef({});
   const [borderStyle, setBorderStyle] = useState({ width: 0, left: 0 });
 

@@ -16,6 +16,7 @@ import ProfileLikes from './Likes/ProfileLikes.jsx';
 import ProfileActivity from './Activity/ProfileActivity.jsx';
 import ProfileReviews from './Reviews/ProfileReviews.jsx';
 import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer.jsx';
+import TabsContainers from '../../../components/WrapperContainers/TabsContainer.jsx';
 
 const navLinks = [
   { label: 'Watched', to: 'watched' },
@@ -108,51 +109,41 @@ export default function ProfileBrowse() {
         </nav>
 
         {/* Tab content */}
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={activeTab}
-            variants={tabVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className=' space-y-6 sm:space-y-10 pb-10'
-          >
-            {activeTab === 'watched' && (
-              <ProfileWatched
-                username={username}
-                items={userToDisplay.watched}
-                subtab={subtab}
-                isOwner={userToDisplay?.isOwner}
-              />
-            )}
-            {activeTab === 'activity' && <ProfileActivity />}
-            {activeTab === 'reviews' && <ProfileReviews />}
-            {activeTab === 'lists' && (
-              <ProfileLists
-                lists={userToDisplay.lists}
-                username={userToDisplay.username}
-                isOwner={userToDisplay.isOwner}
-              />
-            )}
-            {activeTab === 'watchlist' && (
-              <ProfileWatchlist
-                items={userToDisplay.watchlist}
-                username={userToDisplay.username}
-                isOwner={userToDisplay.isOwner}
-              />
-            )}
-            {activeTab === 'likes' && (
-              <ProfileLikes
-                items={userToDisplay.likes}
-                username={userToDisplay.username}
-                subtab={subtab}
-                isOwner={userToDisplay.isOwner}
-                likedListIds={userToDisplay.likedListIds}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <TabsContainers activeTab={activeTab}>
+          {activeTab === 'watched' && (
+            <ProfileWatched
+              username={username}
+              items={userToDisplay.watched}
+              subtab={subtab}
+              isOwner={userToDisplay?.isOwner}
+            />
+          )}
+          {activeTab === 'activity' && <ProfileActivity />}
+          {activeTab === 'reviews' && <ProfileReviews />}
+          {activeTab === 'lists' && (
+            <ProfileLists
+              lists={userToDisplay.lists}
+              username={userToDisplay.username}
+              isOwner={userToDisplay.isOwner}
+            />
+          )}
+          {activeTab === 'watchlist' && (
+            <ProfileWatchlist
+              items={userToDisplay.watchlist}
+              username={userToDisplay.username}
+              isOwner={userToDisplay.isOwner}
+            />
+          )}
+          {activeTab === 'likes' && (
+            <ProfileLikes
+              items={userToDisplay.likes}
+              username={userToDisplay.username}
+              subtab={subtab}
+              isOwner={userToDisplay.isOwner}
+              likedListIds={userToDisplay.likedListIds}
+            />
+          )}
+        </TabsContainers>
       </div>
     </BackgroundContainer>
   );

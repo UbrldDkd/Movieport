@@ -146,7 +146,7 @@ export default function SearchResultsPage() {
             />
           </motion.div>
         ) : content.length === 0 ? (
-          // No content
+          // No content result
           <motion.div
             key='no-content'
             initial={{ opacity: 0 }}
@@ -267,7 +267,7 @@ export default function SearchResultsPage() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className='px-3 py-1.5 min-w-26 text-start text-sm font-semibold cursor-pointer rounded-l-sm bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-400 tracking-wider disabled:cursor-default'
+                className='px-3 py-1.5 min-w-26 text-start font-semibold cursor-pointer rounded-l-sm bg-gradient-to-r from-red-950 to-zinc-950 text-zinc-400 tracking-wider disabled:cursor-default'
               >
                 Previous
               </button>

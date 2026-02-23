@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
 import Pagination from '../Pagination/Pagination';
-import AnimatedTabs from '../../../../components/Common/AnimatedTabs';
+import SlidingTabsNavigation from '../../../../components/Common/SlidingTabsNavigation';
 import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
 export default function ProfileWatched({ username, items, subtab, isOwner }) {
@@ -35,7 +35,7 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
   return (
     <div className='bg-bg-secondary rounded-sm p-3 text-zinc-200'>
       {/* Tabs */}
-      <AnimatedTabs
+      <SlidingTabsNavigation
         tabs={tabs}
         activeKey={subtab || 'films'}
         onChange={(key) => navigate(`/${username}/watched/${key}/`)}

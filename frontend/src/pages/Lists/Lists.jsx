@@ -14,7 +14,7 @@ import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalCont
 import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
 
 // Components
-import ContentContainer from '../../components/WrapperContainers/ContentContainer';
+import PageContainer from '../../components/WrapperContainers/PageContainer';
 import ListsSectionSummary from '../../components/Sections/Lists/ListsSectionSummary';
 import ListsSection from '../../components/Sections/Lists/ListsSection';
 
@@ -38,7 +38,7 @@ export default function Lists() {
 
   return (
     <BackgroundContainer>
-      <ContentContainer>
+      <PageContainer>
         <div className='flex flex-col items-center justify-center pt-3 space-y-3 '>
           <div className='text-text-primary cursor-default text-2xl tracking-wider text-center font-semibold'>
             Keep track of films and TV your way.
@@ -55,43 +55,33 @@ export default function Lists() {
         <div className='md:px-10 '>
           <ListsSectionSummary header={'Featured lists'} />
         </div>
-      </ContentContainer>
 
-      <div className='w-full mt-2 flex flex-col lg:flex-row gap-2'>
-        <div className='w-full flex-3 '>
-          <ContentContainer>
+        <div className='w-full mt-2 md:gap-10 flex flex-col lg:flex-row gap-2'>
+          <div className='w-full flex-3 '>
             <ListsSection header='Starred lists' posterAmount={5} />
-          </ContentContainer>
-        </div>
+          </div>
 
-        <div className='w-full  max-w-[240px]'>
-          <ContentContainer>
+          <div className='w-full  max-w-[218px]'>
             <ListsSectionSummary
               header='Popular lists this week'
               displayAxis='y'
               compact='lg'
             />
-          </ContentContainer>
+          </div>
         </div>
-      </div>
 
-      <div className='mt-2'>
-        <ContentContainer>
+        <div className='mt-2'>
           <ListsSectionSummary header='Curated by Movieport' />
-        </ContentContainer>
-      </div>
-      <div className='flex md:flex-row flex-col gap-2'>
-        <div className=' flex-1 mt-2'>
-          <ContentContainer>
+        </div>
+        <div className='flex md:flex-row md:gap-10 flex-col gap-2'>
+          <div className=' flex-1 mt-2'>
             <ListsSection header='Film lists' posterAmount={3} url />
-          </ContentContainer>
-        </div>
-        <div className=' flex-1 mt-2 '>
-          <ContentContainer>
+          </div>
+          <div className=' flex-1 mt-2 '>
             <ListsSection header='TV show lists' posterAmount={3} />
-          </ContentContainer>
+          </div>
         </div>
-      </div>
+      </PageContainer>
     </BackgroundContainer>
   );
 }
