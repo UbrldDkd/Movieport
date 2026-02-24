@@ -3,7 +3,7 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 // Context
-import { AuthContext } from '../../API/account/auth/AuthContext.js';
+import { AuthContext } from '../../api/account/auth/AuthContext.js';
 
 // Hooks
 import { useFetchContentDetails } from './hooks/useFetchContentDetails.js';

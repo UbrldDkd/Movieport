@@ -12,7 +12,7 @@ import { Tooltip } from '../../components/Common/Tooltip.jsx';
 import FollowButton from './Common/FollowButton.jsx'; // New follow button
 
 // Utils animations
-import { fadeInUpVariants } from '../../utils/style/animations/MotionVariants.js';
+import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
 
 export default function ProfileCard({ user }) {
   const navigate = useNavigate();

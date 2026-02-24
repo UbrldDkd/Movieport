@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { checkAuth } from '../Auth/checkAuth';
+import { checkAuth } from './checkAuth';
 import { AuthContext } from './AuthContext';
 
 export const AuthProvider = ({ children }) => {

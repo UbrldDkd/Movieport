@@ -78,8 +78,7 @@ export function useRegisterForm({ onClose }) {
       };
       await registerUser(sanitized, setSubmitError, setIsLoading, setUser);
       onClose();
-    } catch {
-    }
+    } catch {}
   };
 
   return {

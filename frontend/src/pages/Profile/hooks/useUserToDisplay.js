@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../../api/account/auth/AuthContext.js';
 
 // API hooks
-import { useGetUserByUsername } from '../../../api/account/Profile/useGetUserByUsername.js';
+import { useGetUserByUsername } from '../../../api/account/profile/useGetUserByUsername.js';
 
 // Sets display user by username(uses logged in user or fetched user)
 export function useUserToDisplay(username) {

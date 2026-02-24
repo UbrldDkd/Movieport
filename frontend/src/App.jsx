@@ -7,9 +7,9 @@ import EditList from './pages/List/EditList/EditList.jsx';
 import Settings from './pages/Profile/Settings/Settings.jsx';
 
 // General
-import Films from './Pages/Films/Films.jsx';
-import TVShows from './Pages/TVShows/TVShows.jsx';
-import Lists from './Pages/Lists/Lists.jsx';
+import Films from './pages/Films/Films.jsx';
+import TVShows from './pages/TVShows/TVShows.jsx';
+import Lists from './pages/Lists/Lists.jsx';
 import List from './pages/List/List.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage.jsx';

@@ -24,6 +24,8 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^(Motion|[A-Z_])' }],
+      'import/no-unresolved': ['error', { caseSensitive: true }],
     },
+    reslove: { preserveSymlinks: false },
   },
 ]);

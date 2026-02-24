@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Components
-import CastTab from './tabs/CastTab';
-import CrewTab from './tabs/CrewTab';
-import DetailsTab from './tabs/DetailsTab';
-import GenresTab from './tabs/GenresTab';
-import ReleasesTab from './tabs/ReleasesTab';
+import CastTab from './Tabs/CastTab';
+import CrewTab from './Tabs/CrewTab';
+import DetailsTab from './Tabs/DetailsTab';
+import GenresTab from './Tabs/GenresTab';
+import ReleasesTab from './Tabs/ReleasesTab';
 
 // Utils helpers
 import { Keys } from '../../../../utils/constants/Keys';
