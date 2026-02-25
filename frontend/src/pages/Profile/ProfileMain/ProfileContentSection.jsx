@@ -13,9 +13,8 @@ export default function ProfileContentSection({ header, url, items }) {
       {/* Responsive grid */}
       <ContentDisplayBlock
         content={items}
-        justify='start'
         displayAmount={4}
-        view={'lg'}
+        view={'profileContent'}
       />
     </section>
   );
