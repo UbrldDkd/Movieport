@@ -1,7 +1,6 @@
 // React
 import { useState } from 'react';
 import { Link, useMatch } from 'react-router-dom';
-
 // Modal
 import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalContext.js';
 
@@ -12,18 +11,35 @@ import MobileFilterbox from './FilterBox/MobileFilterbox.jsx';
 import SeachInput from './Search/SearchInput.jsx';
 import SearchPreview from './Search/SearchPreview.jsx';
 import NavProfileDropdown from './NavProfileDropdown.jsx';
-
+import MobileMenu from './MobileMenu.jsx';
 // Utils helpers
 import { useIsLoggedIn } from '../../utils/helpers/useIsLoggedIn.js';
+
+const navLinks = [
+  { label: 'Home', to: 'home' },
+  { label: 'Films', to: 'films' },
+  { label: 'TV Shows', to: 'tv' },
+  { label: 'Lists', to: 'lists' },
+];
 
 export default function Navbar() {
   const [value, setValue] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  const isMoviePage = useMatch('/film/:id');
-  const isTvPage = useMatch('/tv/:id');
+  const isFilmsPage = useMatch('/films/');
+  const isTvPage = useMatch('/tv/');
+  const isHomePage = useMatch('/') || useMatch('/');
 
-  const isContentPage = isMoviePage || isTvPage;
+  const activePage = isFilmsPage
+    ? 'films'
+    : isTvPage
+      ? 'tv'
+      : isHomePage
+        ? 'home'
+        : null;
+
+  const isContentPage =
+    activePage === 'films' || activePage === 'tv' || activePage === 'lists';
 
   const { openModal } = useAuthModal();
   const isLoggedIn = useIsLoggedIn();
@@ -39,36 +55,35 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`relative  z-50 ${!isContentPage && 'pt-16'}`}>
+    <div className={`relative z-50 ${!isContentPage && 'sm:pt-16 md:pt-16'}`}>
+      {' '}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 h-16 px-4 transition-colors ${
+        className={`fixed top-0 left-0 w-full z-50 transition-colors ${
           isContentPage
             ? 'bg-gradient-to-b hover:via-zinc-950/70 from-zinc-950 via-zinc-950/60 to-transparent'
             : 'bg-red-950 shadow-md'
         }`}
       >
-        <div className=' max-w-[1140px] mx-auto flex items-center justify-between h-full'>
-          <div className='flex items-center space-x-6 '>
+        {/* ── Desktop row ── */}
+        <div className='hidden sm:flex items-center justify-between h-16 px-4 max-w-[1140px] mx-auto'>
+          {/* Left: Logo + nav links */}
+          <div className='flex items-center space-x-6'>
             <Link to='/'>
               <Logo />
             </Link>
-
-            <div className='hidden sm:flex items-center md:flex space-x-2'>
-              <Link to='/'>
-                <NavButton label='Home' />
-              </Link>
-              <Link to='/films/'>
-                <NavButton label='Films' />
-              </Link>
-              <Link to='/tv/'>
-                <NavButton label='TV Shows' />
-              </Link>
-              <Link to='/lists/'>
-                <NavButton label='Lists' />
-              </Link>
+            <div className='flex items-center space-x-1'>
+              {navLinks.map((item) => (
+                <Link key={item.to} to={`/${item.to}`}>
+                  <NavButton
+                    label={item.label}
+                    isActive={activePage === item.to}
+                  />
+                </Link>
+              ))}
             </div>
           </div>
 
+          {/* Right: Search + auth */}
           <div className='flex items-center gap-3'>
             <div className='relative'>
               <SeachInput
@@ -78,7 +93,7 @@ export default function Navbar() {
                 setIsFocused={setIsSearchFocused}
               />
               {value && isSearchFocused && (
-                <div className='absolute transition-opacity duration-120 top-full mt-3 md:mt-2.5 z-40 w-full '>
+                <div className='absolute transition-opacity duration-120 top-full mt-2.5 z-40 w-full'>
                   <SearchPreview
                     value={value}
                     setValue={setValue}
@@ -106,21 +121,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      <div
-        className={`md:hidden transition-all duration-200 overflow-hidden ${
-          isOpen.mobileMenu
-            ? 'max-h-9 opacity-100'
-            : 'max-h-0 opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className='flex justify-center items-center gap-2 px-2'>
-          <Link to='/' onClick={() => handleOpen('mobileMenu', false)}>
-            <NavButton label='Home' />
-          </Link>
-          <MobileFilterbox />
-        </div>
-      </div>
     </div>
   );
 }

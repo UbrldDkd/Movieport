@@ -20,7 +20,7 @@ export default function SimilarContentSection({ id, mediaType, releaseDate }) {
       />
 
       {/* Cards */}
-      <div className=' w-full flex-1 max-w-106.5  mx-auto   overflow-hidden justify-center sm:max-w-[700px] lg:max-w-[700px]'>
+      <div className=' w-full flex-1 max-w-91.5  mx-auto   overflow-hidden justify-center sm:max-w-[700px] lg:max-w-[700px]'>
         <ContentDisplayX content={content} view='similarSection' />
       </div>
     </section>

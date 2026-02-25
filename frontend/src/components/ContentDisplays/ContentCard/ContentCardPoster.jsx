@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { posterSizes } from '../../../utils/constants/posterSizes';
-import { imageFadeInVariants, skeletonPulseVariants } from '../../../utils/style/animations/motionVariants.js';
+import {
+  imageFadeInVariants,
+  skeletonPulseVariants,
+} from '../../../utils/style/animations/motionVariants.js';
 
 export default function ContentCardPoster({ title, posterPath, view }) {
   const [loaded, setLoaded] = useState(false);

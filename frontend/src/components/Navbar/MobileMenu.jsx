@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../../api/account/auth/AuthContext';
+import { AuthContext } from '../../api/account/auth/AuthContext';
 
 export default function ProfileDropdown({ isOpen, setIsOpen }) {
   const handleLinkClick = () => {

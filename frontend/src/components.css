@@ -14,15 +14,6 @@
 }
 
 @layer components {
-  .btn-primary {
-    @apply px-4 py-2 rounded font-semibold
-           bg-primary text-text-primary
-           hover:bg-primary-dark transition-colors;
-  }
-
-  .card {
-    @apply bg-bg-secondary rounded p-4;
-  }
 }
 
 /* Non-Tailwind CSS (scrollbars, etc.) */

@@ -85,18 +85,18 @@ export default function ContentPage() {
   return (
     <BackgroundContainer>
       {/* Backdrop */}
-      <div className='relative w-full z-0'>
+      <div className='relative sm:mt-0 md:mt-0 w-full  z-0 '>
         <ContentPageBackdrop backdropUrl={backdropUrl} />
       </div>
 
       {/* Main Content Container */}
-      <div className='relative z-10 flex flex-col md:flex-row space-x-10  md:-mt-20  mx-auto max-w-[1000px]'>
+      <div className='relative z-10 flex flex-col md:flex-row space-x-10 -mt- md:-mt-20  mx-auto max-w-[1000px]'>
         {/* Gradient overlays */}
-        <div className='absolute inset-x-0 top-0 h-60 bg-gradient-to-b w-full from-transparent to-zinc-950 pointer-events-none -z-1' />
+        <div className='absolute inset-x-0 top-0 h-80 bg-gradient-to-b w-full from-transparent to-zinc-950 pointer-events-none -z-1' />
         <div className='absolute inset-x-0 top-60 bottom-0 bg-zinc-950 w-full pointer-events-none -z-1' />
 
         {/* Poster Column (desktop only) */}
-        <div className='hidden md:block shrink-0 sticky top-16 self-start z-10'>
+        <div className='hidden md:block shrink-0 md:sticky top-16 self-start z-10'>
           <div className='flex flex-col gap-1'>
             <ContentPagePoster
               displayPosterUrl={posterUrl}

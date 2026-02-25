@@ -5,7 +5,7 @@ export default function Logo() {
 
   return (
     <div
-      className='relative text-2xl font-bold flex items-center h-10'
+      className='relative text-2xl font-bold flex items-center '
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >

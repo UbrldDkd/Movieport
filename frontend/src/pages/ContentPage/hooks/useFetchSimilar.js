@@ -19,9 +19,12 @@ export function useFetchSimilar({ id, mediaType }) {
       try {
         // TMDB similar endpoint
         const res = await fetch(
-          `${Url}${mediaType}/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
+          `${Url}${mediaType === 'film' || 'movie' ? 'movie' : 'tv'}/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
         );
-        if (!res.ok) throw new Error(`Failed to fetch similar ${mediaType}`);
+        if (!res.ok)
+          throw new Error(
+            `Failed to fetch similar ${mediaType === 'film' || 'movie' ? 'movie' : 'tv'}`
+          );
 
         const data = await res.json();
 

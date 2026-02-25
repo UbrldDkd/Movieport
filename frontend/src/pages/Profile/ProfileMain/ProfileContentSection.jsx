@@ -11,7 +11,12 @@ export default function ProfileContentSection({ header, url, items }) {
       {/* Section header */}
       <SectionHeader header={header} url={url} />
       {/* Responsive grid */}
-      <ContentDisplayBlock content={items} displayAmount={4} view={'lg'} />
+      <ContentDisplayBlock
+        content={items}
+        justify='start'
+        displayAmount={4}
+        view={'lg'}
+      />
     </section>
   );
 }

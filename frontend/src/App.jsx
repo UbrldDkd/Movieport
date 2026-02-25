@@ -20,6 +20,7 @@ import Privacy from './pages/Privacy.jsx';
 import Contact from './pages/Contact.jsx';
 import Footer from './pages/Footer/Footer.jsx';
 import ScrollToTop from './utils/hooks/ScrollToTop.jsx';
+import MobileBottomNav from './components/Navbar/MobileBottomNav';
 
 export default function App() {
   return (
@@ -64,7 +65,7 @@ export default function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/lists/' element={<Lists />} />
       </Routes>
-
+      <MobileBottomNav />
       <Footer />
     </div>
   );
