@@ -54,6 +54,7 @@ export default function ProfileLikes({
             initial='hidden'
             animate='visible'
             exit='exit'
+            className='w-full'
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             <ProfileLikesFilms

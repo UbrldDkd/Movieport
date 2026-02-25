@@ -68,7 +68,7 @@ export default function ContentPageMain({
   return (
     <>
       {/* ── MOBILE ── */}
-      <div className='md:hidden'>
+      <div className='md:hidden sm:hidden'>
         {/* Top bar: back + three dots */}
         <div className='flex items-center justify-between px-4 py-3'>
           <button
@@ -93,7 +93,7 @@ export default function ContentPageMain({
               posterPath={tmdb[details1.poster]}
             />
           </div>
-          <div className='flex flex-col  items-start justify-start pb-1'>
+          <div className='flex flex-col  items-start justify-start w-full pb-1'>
             {isLoading ? (
               <div className='w-40 h-6 bg-zinc-800/50 rounded animate-pulse mb-2' />
             ) : (
@@ -157,7 +157,7 @@ export default function ContentPageMain({
       </div>
 
       {/* ── DESKTOP ── */}
-      <div className='hidden md:block w-full'>
+      <div className='hidden sm:block md:block w-full'>
         <div className='mb-8'>
           {isLoading ? (
             <div className='w-full max-w-md h-10 bg-zinc-800/50 rounded-sm animate-pulse' />
@@ -222,25 +222,28 @@ export default function ContentPageMain({
         <div className='md:hidden fixed inset-0 z-50 flex flex-col justify-end'>
           {/* Backdrop */}
           <div
-            className='absolute inset-0 bg-black/60'
+            className='absolute inset-0 bg-black/60 backdrop-blur-3xl'
             onClick={() => setActionsOpen(false)}
           />
           {/* Sheet */}
-          <div className='relative bg-zinc-900 rounded-t-2xl px-4 pt-4 pb-10 z-10'>
+          <div className='relative bg-zinc- rounded-t-2xl px-2 pt-4 pb-10 z-10'>
             <div className='flex items-center justify-between mb-4'>
-              <h2 className='text-sm font-semibold text-zinc-300'>{title}</h2>
-              <button
-                onClick={() => setActionsOpen(false)}
-                className='text-zinc-400 hover:text-white'
-              >
-                <IoClose className='text-xl' />
-              </button>
+              <h2 className=' font-semibold bg-zinc-400 text-center w-full text-zinc-800'>
+                {title}
+              </h2>
             </div>
             <ContentPageActionsPanel
               item={item}
               current={current}
               isLoading={isLoading}
             />
+            <div
+              onClick={() => setActionsOpen(false)}
+              className='py-2 rounded-sm mt-1 font-semibold text-zinc-300/90 w-full text-center text-sm bg-zinc-800'
+            >
+              {' '}
+              Done
+            </div>
           </div>
         </div>
       )}

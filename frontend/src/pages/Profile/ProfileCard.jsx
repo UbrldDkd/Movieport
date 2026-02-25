@@ -43,10 +43,10 @@ export default function ProfileCard({ user }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.1, ease: 'easeOut' }}
-      className='px-3 py-2   rounded-r-full flex  md:flex-row items-center justify-between gap-6 bg-bg-secondary'
+      className='px-3 py-2   justify-end rounded-r-full flex  md:flex-row items-center md:justify-between gap-6 bg-bg-secondary'
     >
       {/* Stats section */}
-      <div className='flex md:flex-row sm:flex-row flex-col gap-3 sm:gap-0 md:gap-0 items-center  justify-start md:items-center'>
+      <div className='hidden sm:flex  md:flex-row sm:flex-row flex-col gap-3 sm:gap-0 md:gap-0 items-center  justify-start md:items-center'>
         {stats.map((stat, idx) => (
           <div key={stat.label} className='flex items-center'>
             <Link

@@ -70,7 +70,6 @@ export default function Home() {
             <div className='mx-2 justify-center sm:mx-11 md:max-w-[953px]'>
               <ContentDisplayX
                 content={toShow === 'films' ? movies.popular : tvShows.popular}
-                view={'lg'}
               />
             </div>
             <ListsSection
@@ -87,7 +86,6 @@ export default function Home() {
             <ContentDisplayBlock
               content={movies.nowPlaying}
               displayAmount={12}
-              view='lg'
             />
           </div>
           {/* Top Rated */}
@@ -96,11 +94,7 @@ export default function Home() {
               Top Rated
             </h2>
             <div className='border-b border-zinc-600 mt-2 mb-3' />
-            <ContentDisplayBlock
-              content={movies.topRated}
-              displayAmount={12}
-              view='lg'
-            />
+            <ContentDisplayBlock content={movies.topRated} displayAmount={12} />
           </div>
           {/* Coming Soon */}
           <div className='w-full flex flex-col '>
@@ -111,7 +105,7 @@ export default function Home() {
             <ContentDisplayBlock
               content={movies.upcoming}
               displayAmount={12}
-              view='lg'
+              justify='start'
             />
           </div>
         </Motion.div>

@@ -26,7 +26,7 @@ export default function PronounsSelectionDropdown({ username }) {
           <button
             type='button'
             onClick={() => setOpen((o) => !o)}
-            className='w-full max-w-30 text-sm font-semibold tracking-wider  gap-1 bg-zinc-800 border-2 border-zinc-700 text-text-primary px-2 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 flex items-center justify-between'
+            className='w-full max-w-30 text-sm h-fit py-1.5 font-semibold tracking-wider  gap-1 bg-zinc-800 border-2 border-zinc-700 text-text-primary px-2 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200 flex items-center justify-between'
           >
             <span className={selected ? 'text-text-primary' : 'text-zinc-500'}>
               {selected ?? 'Select pronouns'}
@@ -63,7 +63,7 @@ export default function PronounsSelectionDropdown({ username }) {
         </div>
 
         {open && (
-          <div className='absolute max-w-30 top-full left-0 right-0 mt-1 bg-zinc-800 border-2 border-zinc-700 rounded-xs z-50 overflow-hidden'>
+          <div className='absolute max-w-30 top-full left-0 right-0 sm:mt-1 -mt-2 md:mt-1 bg-zinc-800 border-2 border-zinc-700 rounded-xs z-50 overflow-hidden'>
             {PRONOUNS.map((pronoun) => (
               <button
                 key={pronoun}

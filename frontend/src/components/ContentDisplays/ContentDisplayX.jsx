@@ -7,7 +7,7 @@ import { Keys } from '../../utils/constants/Keys.js';
 
 export default function ContentDisplayX({
   content,
-  view = 'lg',
+  view = 'sectionLg',
   includeStats = false,
 }) {
   const { API1 } = Keys;
@@ -45,7 +45,7 @@ export default function ContentDisplayX({
   };
 
   return (
-    <div className='relative  '>
+    <div className='relative   md:mx-0 sm:mx-0 -mx-2 '>
       {/* LEFT ARROW */}
       <button
         onClick={() => scroll(-1)}
@@ -61,15 +61,12 @@ export default function ContentDisplayX({
       <div
         ref={trackRef}
         onScroll={updateArrows}
-        className='flex p-0.5 gap-2.5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory '
+        className='flex p-0.5 gap-2 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory '
       >
         {content?.map((item) => (
-          <div
-            key={item[details.id]}
-            className='snap-start flex-shrink-0 '
-          >
+          <div key={item[details.id]} className='snap-start  flex-shrink-0 '>
             <ContentCard item={item} view={view} />
-            {includeStats && <PosterStats />}
+            {/* {includeStats && <PosterStats />} */}
           </div>
         ))}
       </div>

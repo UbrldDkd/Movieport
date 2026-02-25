@@ -1,5 +1,5 @@
 // Hooks
-import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
+import { useFetchFilms } from './hooks/useFetchFilms';
 
 // Components
 import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
@@ -8,15 +8,13 @@ import PageContainer from '../../components/WrapperContainers/PageContainer';
 import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
+import Spinner from '../../components/Common/loadingScreens/Spinner';
 
 export default function Films() {
-  const { movies, error, isLoading } = useFetchMainContent();
+  const { content, error, isLoading } = useFetchFilms();
+  console.log(content);
   if (isLoading) {
-    return (
-      <div className='flex h-[85vh] w-full items-center justify-center'>
-        <div className='h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-red-900' />
-      </div>
-    );
+    return <Spinner />;
   }
   return (
     <BackgroundContainer>
@@ -26,7 +24,7 @@ export default function Films() {
           <SectionHeader header='Popular this week' />
 
           <ContentDisplayX
-            content={movies?.popular}
+            content={content?.popular}
             view={'xl'}
             includeStats={true}
           />
@@ -47,7 +45,7 @@ export default function Films() {
             <div className='flex-1  md:mx-10 md:max-w-[252px] mx-auto   w-full'>
               <SectionHeader header='Picks by Movieport' />
               <ContentDisplayBlock
-                content={movies?.nowPlaying}
+                content={content.popular}
                 view='md'
                 displayAmount={6}
                 justify='center'

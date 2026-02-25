@@ -19,13 +19,13 @@ export default function CastTab({ cast, isLoading }) {
   }
 
   return (
-    <div className='w-full flex flex-col gap-0.5'>
+    <div className='max-w-80 md:max-w-76.5   min-w-0 flex flex-col gap-0.5'>
       {cast.map((actor, index) => (
         <div
           key={index}
-          className='flex items-center gap-2  rounded-sm transition-colors group'
+          className='flex items-center gap-2 min-w-0 rounded-sm transition-colors group'
         >
-          <Link className='text-text-primary  hover:bg-bg-secondary transition-colors duration-50  rounded-sm py-1 px-2 font-semibold text-sm tracking-wide max-w-[120px] md:max-w-[150px] truncate'>
+          <Link className='text-text-primary hover:bg-bg-secondary transition-colors duration-50 rounded-sm py-1 px-2 font-semibold text-sm tracking-wide shrink-0 max-w-[120px] md:max-w-[150px] truncate'>
             {actor.name}
           </Link>
           {actor.character && (
@@ -33,7 +33,7 @@ export default function CastTab({ cast, isLoading }) {
               <span className='text-zinc-600 hover:cursor-default text-xs font-medium shrink-0'>
                 as
               </span>
-              <span className='text-zinc-400/80 font-medium text-sm truncate flex-1 max-w-[calc(100%-150px)] md:max-w-[calc(100%-190px)]'>
+              <span className='text-zinc-400/80 font-medium text-sm truncate min-w-0 flex-1'>
                 {actor.character}
               </span>
             </>

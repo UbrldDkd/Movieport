@@ -9,7 +9,7 @@ import ContentCardWithContentRelations from './ContentCard/ContentCardWithConten
 export default function ContentDisplayBlock({
   content,
   displayAmount,
-  view = 'lg',
+  view = 'sectionLg',
   includeContentRelations,
   justify = 'center',
 }) {
@@ -17,11 +17,11 @@ export default function ContentDisplayBlock({
   const { details } = API1;
 
   return (
-    <div
-      className={`w-full ${view === 'lg' ? 'px-2' : view === 'md' ? 'px-1' : 'px-4.75'} sm:px-0 md:px-0   flex  justify-${justify}`}
-    >
+    <div className={`w-full sm:px-0 md:px-0   flex  justify-${justify}`}>
       {/* shrink-to-content container */}
-      <div className={`flex w-full  flex-wrap gap-2 justify-${justify}`}>
+      <div
+        className={`flex bg-zinc-400 w-full  flex-wrap gap-2 justify-${justify}`}
+      >
         {content &&
           Array.isArray(content) &&
           content.slice(0, displayAmount).map((item) =>

@@ -46,14 +46,17 @@ export default function Profile() {
   }
 
   return (
-    <BackgroundContainer>
-      <div className='flex flex-col space-y-2'>
-        <ProfileCard user={userToDisplay} />
-        <ProfileNavBar username={userToDisplay?.username} />
-        <div className='flex flex-col flex-1 min-w-0 gap-4'>
-          <ProfileMain user={userToDisplay} />
+    <div>
+      {/* <div className='fixed top-0 h-20 z-50 md:hidden sm:hidden w-full bg-red-950'></div> */}
+      <BackgroundContainer>
+        <div className='flex flex-col space-y-2 mt-0 sm:mt-0 md:mt-0'>
+          <ProfileCard user={userToDisplay} />
+          <ProfileNavBar username={userToDisplay?.username} />
+          <div className='flex flex-col flex-1 min-w-0 gap-4'>
+            <ProfileMain user={userToDisplay} />
+          </div>
         </div>
-      </div>
-    </BackgroundContainer>
+      </BackgroundContainer>
+    </div>
   );
 }

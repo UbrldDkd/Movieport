@@ -1,5 +1,5 @@
 // Hooks
-import { useFetchMainContent } from '../Home/hooks/useFetchMainContent';
+import { useFetchTVShows } from './hooks/useFetchTVShows';
 
 // Components
 import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
@@ -11,7 +11,7 @@ import ListsSection from '../../components/Sections/Lists/ListsSection';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 
 export default function TVShows() {
-  const { tvShows, error, isLoading } = useFetchMainContent();
+  const { content, error, isLoading } = useFetchTVShows();
 
   if (isLoading) {
     return (
@@ -25,11 +25,11 @@ export default function TVShows() {
     <BackgroundContainer>
       <PageContainer>
         {/* latest tv shows section */}
-        <div className='flex-1   mx-auto   overflow-hidden md:max-w-[792px] justify-center  w-full'>
+        <div className='flex-1   mx-auto overflow-hidden md:max-w-[785.5px] justify-center  w-full'>
           <SectionHeader header='Latest TV Shows' />
 
           <div className='px-2 sm:px-0 md:px-0'>
-            <ContentDisplayX content={tvShows.popular} includeStats={true} />
+            <ContentDisplayX content={content.popular} includeStats={true} />
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export default function TVShows() {
         <div className='  mx-auto flex-1  overflow-hidden md:max-w-[955px] justify-center  w-full'>
           <SectionHeader header='Popular this week' />
           <div className='px-3 sm:px-0 md:px-0'>
-            <ContentDisplayX content={tvShows.popular} view='sm' />
+            <ContentDisplayX content={content.popular} view='sm' />
           </div>
         </div>
       </PageContainer>

@@ -27,7 +27,7 @@ export default function ProfileMain({ user }) {
     <div className='flex flex-col md:flex-row w-full min-h-screen gap-2 '>
       {/* Left column */}
 
-      <div className='flex-1 '>
+      <div className='md:flex-1 sm:flex-1 '>
         <ContentContainer>
           {user?.favourites && (
             <ProfileContentSection header='Favourites' items={MOCK_ITEMS} />

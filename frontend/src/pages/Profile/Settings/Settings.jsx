@@ -48,7 +48,7 @@ export default function Settings() {
         </div>
 
         {/* mobile navigation for tabs */}
-        <div className='flex  flex-col divide-y divide-zinc-900 sm:hidden md:hidden '>
+        <div className='flex mb-3 flex-col divide-y divide-zinc-900 sm:hidden md:hidden '>
           {tabs.map((t) => (
             <button
               key={t.key}

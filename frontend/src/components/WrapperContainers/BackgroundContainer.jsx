@@ -9,7 +9,7 @@ export default function BackgroundContainer({ children }) {
       animate='visible'
       variants={containerVariantsStagger}
     >
-      <div className='mx-auto w-full pt-2 max-w-[1120px] px-2  mt-1.75 pb-8 flex flex-col'>
+      <div className='mx-auto w-full pt-2 max-w-[1120px] px-2   pb-8 flex flex-col'>
         {children}
       </div>
     </motion.div>

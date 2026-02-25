@@ -16,7 +16,7 @@ import NavProfileDropdown from './NavProfileDropdown.jsx';
 import { useIsLoggedIn } from '../../utils/helpers/useIsLoggedIn.js';
 
 const navLinks = [
-  { label: 'Home', to: 'home' },
+  { label: 'Home', to: '' },
   { label: 'Films', to: 'films' },
   { label: 'TV Shows', to: 'tv' },
   { label: 'Lists', to: 'lists' },
@@ -27,8 +27,8 @@ export default function Navbar() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const isFilmsPage = useMatch('/films/');
-  const isTvPage = useMatch('/tv/');
-  const isHomePage = useMatch('/') || useMatch('/');
+  const isTvPage = useMatch('tv');
+  const isHomePage = useMatch('/');
 
   const activePage = isFilmsPage
     ? 'films'
@@ -38,8 +38,7 @@ export default function Navbar() {
         ? 'home'
         : null;
 
-  const isContentPage =
-    activePage === 'films' || activePage === 'tv' || activePage === 'lists';
+  const isContentPage = useMatch('/:mediaType/:id/');
 
   const { openModal } = useAuthModal();
   const isLoggedIn = useIsLoggedIn();

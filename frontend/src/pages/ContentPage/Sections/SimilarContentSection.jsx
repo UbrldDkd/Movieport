@@ -12,7 +12,7 @@ export default function SimilarContentSection({ id, mediaType, releaseDate }) {
   if (!Array.isArray(content) || content.length === 0) return null;
 
   return (
-    <section className='w-full pb-5 '>
+    <section className='max-w-30 pb-5 '>
       {/* Header */}
       <SectionHeader
         header={`Similar ${mediaType === 'film' ? 'films' : 'TV shows'}`}

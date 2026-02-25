@@ -65,7 +65,7 @@ export const Keys = {
     },
 
     topics: {
-      movies: {
+      films: {
         popular: `movie/popular?api_key=`,
         nowPlaying: `movie/now_playing?api_key=`,
         topRated: `movie/top_rated?api_key=`,
