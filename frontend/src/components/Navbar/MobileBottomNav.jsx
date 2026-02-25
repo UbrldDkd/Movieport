@@ -13,7 +13,7 @@ import { AuthContext } from '../../api/account/auth/AuthContext.js';
 const tabs = [
   {
     label: 'Home',
-    to: '/',
+    to: '/home/',
     ActiveIcon: AiFillHome,
     InactiveIcon: AiOutlineHome,
   },

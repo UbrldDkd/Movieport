@@ -50,7 +50,7 @@ export default function App() {
         <Route path='/:username/' element={<Profile />} />
 
         {/* Main pages */}
-        <Route path='/' element={<Home />} />
+        <Route path='/home/' element={<Home />} />
         <Route path='/films/' element={<Films />} />
         <Route path='/tv/' element={<TVShows />} />
         <Route path='/explore/:mediaType' element={<SearchResultsPage />} />
@@ -60,9 +60,9 @@ export default function App() {
           path='/discover/:mediaType/:id/'
           element={<SearchResultsPage />}
         />
-        <Route path='/privacy' element={<Privacy />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
+        <Route path='/privacy/' element={<Privacy />} />
+        <Route path='/about/' element={<About />} />
+        <Route path='/contact/' element={<Contact />} />
         <Route path='/lists/' element={<Lists />} />
       </Routes>
       <MobileBottomNav />

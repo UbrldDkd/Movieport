@@ -29,7 +29,7 @@ export const posterSizes = {
   },
 
   lg: {
-    width: 'min-w-[80.75px] max-w-[132px]  lg:min-w-[150px] lg:max-w-[150px]',
+    width: 'min-w-[111.5px] max-w-[132px]  lg:min-w-[150px] lg:max-w-[150px]',
     tmdb: 'w500',
   },
 

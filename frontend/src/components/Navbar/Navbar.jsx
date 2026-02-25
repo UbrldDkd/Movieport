@@ -11,7 +11,7 @@ import MobileFilterbox from './FilterBox/MobileFilterbox.jsx';
 import SeachInput from './Search/SearchInput.jsx';
 import SearchPreview from './Search/SearchPreview.jsx';
 import NavProfileDropdown from './NavProfileDropdown.jsx';
-import MobileMenu from './MobileMenu.jsx';
+
 // Utils helpers
 import { useIsLoggedIn } from '../../utils/helpers/useIsLoggedIn.js';
 

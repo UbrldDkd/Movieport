@@ -97,7 +97,7 @@ export default function ContentPageMain({
             {isLoading ? (
               <div className='w-40 h-6 bg-zinc-800/50 rounded animate-pulse mb-2' />
             ) : (
-              <h1 className='text-lg font-semibold text-zinc-100 leading-snug'>
+              <h1 className='text-xl font-semibold text-zinc-100 leading-snug'>
                 {title}
               </h1>
             )}

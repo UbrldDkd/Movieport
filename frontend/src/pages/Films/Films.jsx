@@ -47,7 +47,7 @@ export default function Films() {
             <div className='flex-1  md:mx-10 md:max-w-[252px] mx-auto   w-full'>
               <SectionHeader header='Picks by Movieport' />
               <ContentDisplayBlock
-                content={movies.nowPlaying}
+                content={movies?.nowPlaying}
                 view='md'
                 displayAmount={6}
                 justify='center'
