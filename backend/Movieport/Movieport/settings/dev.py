@@ -1,26 +1,23 @@
-import os
 from .base import *
-from dotenv import load_dotenv
+import dj_database_url
+import os
 
-load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
-
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")
 DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+# DATABASE - local dev
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT"),
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL", "postgresql://user:password@localhost:5432/MoviePort"),
+        conn_max_age=600,
+    )
 }
 
+# Cookies
 SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SAMESITE = CSRF_COOKIE_SAMESITE = "Lax"
+
+# CORS
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -29,3 +26,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+# Static (local dev)
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Media (local dev)
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

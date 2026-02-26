@@ -28,7 +28,7 @@ export function useFetchMainContent() {
         const currentYear = new Date().getFullYear();
         const nextYear = currentYear + 1;
 
-        const [
+const [
           popularMovieRes,
           nowPlayingMovieRes,
           topRatedMovieRes,
@@ -37,17 +37,17 @@ export function useFetchMainContent() {
           popularTvShowsRes,
           discoverMoviesRes,
         ] = await Promise.all([
-          fetch(`${Url}${topics.movies.popular}${API_KEY}`),
-          fetch(`${Url}${topics.movies.nowPlaying}${API_KEY}`),
-          fetch(`${Url}${topics.movies.topRated}${API_KEY}`),
+          fetch(`${Url}${topics.films.popular}${API_KEY}`),
+          fetch(`${Url}${topics.films.nowPlaying}${API_KEY}`),
+          fetch(`${Url}${topics.films.topRated}${API_KEY}`),
           fetch(
-            `${Url}${topics.movies.upcoming}${API_KEY}&primary_release_year=${currentYear}&sort_by=popularity.desc`
+            `${Url}${topics.films.upcoming}${API_KEY}&primary_release_year=${currentYear}&sort_by=popularity.desc`
           ),
           fetch(
-            `${Url}${topics.movies.upcoming}${API_KEY}&primary_release_year=${nextYear}&sort_by=popularity.desc`
+            `${Url}${topics.films.upcoming}${API_KEY}&primary_release_year=${nextYear}&sort_by=popularity.desc`
           ),
           fetch(`${Url}${topics.tv.popular}${API_KEY}`),
-          fetch(`${Url}${topics.movies.discover}${API_KEY}`),
+          fetch(`${Url}${topics.films.discover}${API_KEY}`),
         ]);
 
         const responses = [

@@ -23,7 +23,7 @@ export default function Home() {
       }`}
     >
       <HeroCarousel
-        movies={movies.popular}
+        content={movies.popular}
         isLoading={isLoading}
         error={error}
       />

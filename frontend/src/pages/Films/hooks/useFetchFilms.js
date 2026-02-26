@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Keys } from '../../../utils/constants/Keys.js';
 
 export function useFetchFilms() {
-  const [films, setFilms] = useState({
+  const [content, setContent] = useState({
     popular: [],
     nowPlaying: [],
     topRated: [],
@@ -77,7 +77,7 @@ export function useFetchFilms() {
           .sort((a, b) => b.popularity - a.popularity)
           .slice(0, 20);
 
-        setFilms({
+        setContent({
           popular: popularData.results,
           nowPlaying: nowPlayingData.results,
           topRated: topRatedData.results,
@@ -94,5 +94,5 @@ export function useFetchFilms() {
     fetchData();
   }, []);
 
-  return { content: films, isLoading, error };
+  return { content, isLoading, error };
 }

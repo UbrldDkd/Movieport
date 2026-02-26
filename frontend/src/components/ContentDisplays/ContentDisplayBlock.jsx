@@ -19,9 +19,7 @@ export default function ContentDisplayBlock({
   return (
     <div className={`w-full sm:px-0 md:px-0   flex  justify-${justify}`}>
       {/* shrink-to-content container */}
-      <div
-        className={`flex bg-zinc-400 w-full  flex-wrap gap-2 justify-${justify}`}
-      >
+      <div className={`flex  w-full  flex-wrap gap-2 justify-${justify}`}>
         {content &&
           Array.isArray(content) &&
           content.slice(0, displayAmount).map((item) =>

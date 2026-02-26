@@ -8,3 +8,12 @@ PyJWT==2.11.0
 python-dotenv==1.2.1
 sqlparse==0.5.5
 tzdata==2025.3
+
+# Production dependencies
+gunicorn==25.1.0
+whitenoise==6.11.0
+dj-database-url==3.1.2
+
+# AWS S3 for media files
+django-storages==1.15.4
+boto3==1.35.99

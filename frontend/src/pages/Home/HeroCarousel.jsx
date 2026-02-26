@@ -4,7 +4,7 @@ import { Keys } from '../../utils/constants/Keys.js';
 import { GenreMap } from '../../utils/constants/GenreMap.js';
 import { Link } from 'react-router-dom';
 
-export default function HeroCarousel({ movies, isLoading, error }) {
+export default function HeroCarousel({ content, isLoading, error }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { details } = Keys.API1;
@@ -12,14 +12,14 @@ export default function HeroCarousel({ movies, isLoading, error }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (movies.length > 0) return;
-      setCurrentIndex((prev) => (prev + 1) % movies.length);
+      if (content.length === 0) return;
+      setCurrentIndex((prev) => (prev + 1) % content.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [movies.length]);
+  }, [content.length]);
 
   if (isLoading) {
-    return (
+    return (  
       <div className='flex h-[85vh] w-full items-center justify-center'>
         <div className='h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-red-900' />
       </div>
@@ -34,7 +34,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
 
   return (
     <div className='relative -mt-5 h-[400px] w-full overflow-hidden md:h-[85vh]'>
-      <div className='h-1.5 w-full bg-gradient-l-to-r from-zinc-950/40 via-zinc-900/20s to-zinc-950/40' />
+      <div className='h-1.5 w-full bg-gradient-l-to-r from-zinc-950/40 via-zinc-900/20 to-zinc-950/40' />
 
       <div className='pointer-events-none absolute inset-0 bg-zinc-950/40' />
       <div className='pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent' />
@@ -46,7 +46,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
         className='flex h-full transition-transform duration-1000 ease-in-out'
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {movies.map((movie) => (
+        {content.map((movie) => (
           <div
             key={movie[details.id]}
             className='relative h-full w-full flex-shrink-0 bg-cover bg-top'
@@ -114,7 +114,7 @@ export default function HeroCarousel({ movies, isLoading, error }) {
 
       <div className='absolute bottom-1 left-1/2 z-20 -translate-x-1/2 md:bottom-0'>
         <PaginationPanel
-          totalPages={movies.length}
+          totalPages={content.length}
           currentPage={currentIndex}
           onPageChange={setCurrentIndex}
         />

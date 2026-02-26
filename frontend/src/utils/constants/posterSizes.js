@@ -1,8 +1,8 @@
 export const posterSizes = {
   sm: {
     width:
-      ' min-w-[65.5px] max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
-    tmdb: 'w500',
+      ' min-w-[67.5px] max-w-[70px] sm:min-w-[75px] sm:max-w-[75px] md:min-w-[77px] md:max-w-[77px]',
+    tmdb: 'w200',
   },
   md: {
     width:

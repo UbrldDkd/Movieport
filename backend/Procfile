@@ -1,0 +1,2 @@
+release: cd Movieport && python manage.py migrate --noinput
+web: cd Movieport && gunicorn Movieport.wsgi --bind 0.0.0.0:$PORT --workers 4 --timeout 120 --log-file -

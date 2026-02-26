@@ -76,6 +76,8 @@ export const Keys = {
         popular: `tv/popular?api_key=`,
         topRated: `tv/top_rated?api_key=`,
         discover: `discover/tv?api_key=`,
+        airingToday: `tv/airing_today?api_key=`,
+        onTheAir: `tv/on_the_air?api_key=`,
       },
     },
 
