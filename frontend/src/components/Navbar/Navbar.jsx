@@ -38,7 +38,7 @@ export default function Navbar() {
         ? 'home'
         : null;
 
-  const isContentPage = useMatch('/:mediaType/:id/');
+  const isContentPage = useMatch('/movie/:id') || useMatch('/tv/:id');
 
   const { openModal } = useAuthModal();
   const isLoggedIn = useIsLoggedIn();

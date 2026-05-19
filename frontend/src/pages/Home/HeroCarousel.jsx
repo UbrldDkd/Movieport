@@ -19,7 +19,7 @@ export default function HeroCarousel({ content, isLoading, error }) {
   }, [content.length]);
 
   if (isLoading) {
-    return (  
+    return (
       <div className='flex h-[85vh] w-full items-center justify-center'>
         <div className='h-12 w-12 animate-spin rounded-full border-t-4 border-solid border-red-900' />
       </div>
