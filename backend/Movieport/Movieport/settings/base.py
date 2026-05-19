@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "storages",
+    "drf_spectacular",
 
     # Your apps
     "Accounts",
@@ -87,7 +88,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "Accounts.authentication.CookieJWTAuthentication",
     ],
+    
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+      "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "PAGE_SIZE": 20,
 }
 

@@ -46,6 +46,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Media Files (AWS S3)
 USE_S3 = os.environ.get("USE_S3") == "True"
 if USE_S3 or "AWS_ACCESS_KEY_ID" in os.environ:
+    
     # storages.backends.s3boto3.S3Boto3Storage
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     
