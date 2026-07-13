@@ -1,6 +1,10 @@
 // Third-party
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
+
+// Hooks
+import { useGetProfileSettings } from '../../../api/account/profile/settings/useGetProfileSettings';
 
 // Components
 import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer';
@@ -8,6 +12,7 @@ import SlidingTabsNavigation from '../../../components/Common/SlidingTabsNavigat
 import ProfileTab from './Tabs/ProfileTab/ProfileTab';
 import AuthTab from './Tabs/AuthTab/AuthTab';
 import AvatarTab from './Tabs/AvatarTab/AvatarTab.jsx';
+import NotificationsTab from './Tabs/NotificationsTab/NotificationsTab.jsx';
 import ContentContainer from '../../../components/WrapperContainers/ContentContainer.jsx';
 import TabsContainers from '../../../components/WrapperContainers/TabsContainer.jsx';
 
@@ -17,13 +22,15 @@ export default function Settings() {
 
   const activeTab = tab || 'profile';
 
+  const { settingsData, isLoading, error } = useGetProfileSettings();
+
+  console.log(settingsData);
+
   const tabs = [
     { key: 'profile', label: 'Profile' },
     { key: 'auth', label: 'Auth' },
     { key: 'avatar', label: 'Avatar' },
-    { key: 'connections', label: 'Connections' },
     { key: 'notifications', label: 'Notifications' },
-    { key: 'data', label: 'Data' },
   ];
 
   return (
@@ -33,6 +40,7 @@ export default function Settings() {
         <div className='text-text-primary cursor-default text-lg md:text-2xl tracking-wider text-center md:text-start font-semibold mb-3'>
           Account settings
         </div>
+
         {/* Tabs */}
         <div className='hidden sm:block mb-10'>
           <SlidingTabsNavigation
@@ -65,9 +73,19 @@ export default function Settings() {
         </div>
 
         <TabsContainers activeTab={activeTab}>
-          {activeTab === 'profile' && <ProfileTab />}
+          {activeTab === 'profile' && (
+            <ProfileTab
+              profileData={settingsData?.profile}
+              favourites={settingsData?.favourites}
+            />
+          )}
           {activeTab === 'auth' && <AuthTab />}
-          {activeTab === 'avatar' && <AvatarTab />}
+          {activeTab === 'avatar' && (
+            <AvatarTab avatar={settingsData?.avatar} />
+          )}
+          {activeTab === 'notifications' && (
+            <NotificationsTab notifications={settingsData?.notifications} />
+          )}
         </TabsContainers>
       </ContentContainer>
     </BackgroundContainer>

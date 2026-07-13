@@ -44,7 +44,7 @@ export const posterSizes = {
   },
   profileContent: {
     width:
-      'min-w-[85px]  sm:min-w-[75px] sm:w-full  sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[120px] lg:max-w-[120px]',
+      'min-w-[85px]  sm:min-w-[75px] sm:w-full  sm:max-w-[100px] md:min-w-[110px] md:max-w-[110px] lg:min-w-[150px] lg:max-w-[140px]',
     tmdb: 'w500',
   },
 };

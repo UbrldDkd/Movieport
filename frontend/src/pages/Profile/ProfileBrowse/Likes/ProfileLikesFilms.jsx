@@ -1,13 +1,9 @@
-// ProfileLikesFilms.jsx
-
-import { useEffect, useState } from 'react';
-import ContentCard from '../../../../components/ContentDisplays/ContentCard/ContentCard';
+import { useState } from 'react';
 import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
 
-export default function ProfileLikesFilms({ items, username, isOwner }) {
+export default function ProfileLikesFilms({ items = [], username, isOwner }) {
   const ITEMS_PER_PAGE = 36;
   const [currentPage, setCurrentPage] = useState(1);
-  const [view] = useState('lg');
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const paginatedItems = items.slice(
@@ -15,11 +11,11 @@ export default function ProfileLikesFilms({ items, username, isOwner }) {
     currentPage * ITEMS_PER_PAGE
   );
 
-  if (!items || items.length === 0) {
+  if (items.length === 0) {
     return (
       <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
         {isOwner
-          ? `You haven't liked any films yet`
+          ? "You haven't liked any films yet"
           : `${username} hasn't liked any films yet`}
       </div>
     );
@@ -27,11 +23,7 @@ export default function ProfileLikesFilms({ items, username, isOwner }) {
 
   return (
     <>
-      <ContentDisplayBlock
-        content={paginatedItems}
-        view={view}
-        justify='start'
-      />
+      <ContentDisplayBlock content={paginatedItems} view='lg' justify='start' />
 
       {totalPages > 1 && (
         <div className='flex justify-center items-center gap-2 mt-4'>

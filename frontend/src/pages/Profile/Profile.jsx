@@ -2,33 +2,32 @@
 import { GiShipWreck } from 'react-icons/gi';
 
 // Third-party
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Components
+import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer';
 import ProfileCard from './ProfileCard';
+import ProfileMain from './ProfileMain/ProfileMain';
 import ProfileNavBar from './ProfileNavBar';
-import ProfileMain from './ProfileMain/ProfileMain.jsx';
-import BackgroundContainer from '../../components/WrapperContainers/BackgroundContainer.jsx';
 
-// Hooks
-
-import { useUserToDisplay } from './hooks/useUserToDisplay.js';
+// API
+import { useGetUserByUsername } from '../../api/account/profile/useGetUserByUsername';
 
 export default function Profile() {
   const { username } = useParams();
   const navigate = useNavigate();
 
-  const { userToDisplay, isLoading, error } = useUserToDisplay(username);
-
+  const { data: user, isLoading, error } = useGetUserByUsername(username);
+  console.log('Profile.jsx - user data:', user);
   if (isLoading) {
     return (
       <div className='w-full h-[85vh] flex items-center justify-center'>
-        <div className='animate-spin rounded-full h-12 w-12 border-t-4 border-red-900 border-solid' />
+        <div className='animate-spin rounded-full h-12 w-12 border-t-4 border-red-900' />
       </div>
     );
   }
 
-  if (error) {
+  if (error || !user) {
     return (
       <div className='min-h-screen bg-zinc-950 text-zinc-200 flex flex-col items-center justify-center gap-4'>
         <GiShipWreck className='size-30' />
@@ -37,7 +36,7 @@ export default function Profile() {
         </div>
         <button
           onClick={() => navigate('/')}
-          className='text-sm hover:cursor-pointer font-semibold tracking-wider bg-bg-secondary px-2 py-0.5 text-text-primary hover:text-zinc-200 transition-colors duration-120 rounded-sm'
+          className='text-sm font-semibold tracking-wider bg-bg-secondary px-2 py-0.5 rounded-sm hover:text-zinc-200 transition-colors'
         >
           Go back
         </button>
@@ -46,17 +45,12 @@ export default function Profile() {
   }
 
   return (
-    <div>
-      {/* <div className='fixed top-0 h-20 z-50 md:hidden sm:hidden w-full bg-red-950'></div> */}
-      <BackgroundContainer>
-        <div className='flex flex-col space-y-2 mt-0 sm:mt-0 md:mt-0'>
-          <ProfileCard user={userToDisplay} />
-          <ProfileNavBar username={userToDisplay?.username} />
-          <div className='flex flex-col flex-1 min-w-0 gap-4'>
-            <ProfileMain user={userToDisplay} />
-          </div>
-        </div>
-      </BackgroundContainer>
-    </div>
+    <BackgroundContainer>
+      <div className='flex flex-col gap-2'>
+        <ProfileCard user={user} />
+        <ProfileNavBar username={user.username} />
+        <ProfileMain user={user} />
+      </div>
+    </BackgroundContainer>
   );
 }

@@ -6,6 +6,10 @@ import { GiCaptainHatProfile } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { motion as Motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+// Hooks
+import { useToggleFollow } from '../../api/network/useToggleFollow.js';
 
 // Components
 import { Tooltip } from '../../components/Common/Tooltip.jsx';
@@ -15,12 +19,13 @@ import FollowButton from './Common/FollowButton.jsx'; // New follow button
 import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
 
 export default function ProfileCard({ user }) {
+  const { username, lists, contentRelations, is_owner, watched } = user;
   const navigate = useNavigate();
   if (!user) return null;
+  const [isFollowing, setIsFollowing] = useState(user.is_following);
+  const { toggleFollow } = useToggleFollow(setIsFollowing);
 
-  const { username, lists, contentRelations, isOwner } = user;
-
-  const filmsCount = contentRelations?.filter((cr) => cr.watched).length || 0;
+  const filmsCount = watched?.length || 0;
   const listsCount = lists?.length || 0;
 
   const stats = [
@@ -30,12 +35,17 @@ export default function ProfileCard({ user }) {
       value: listsCount,
       link: `/${username}/lists/`,
     },
-    { label: 'FOLLOWERS', value: 123, link: `/${username}/followers/` },
-    { label: 'FOLLOWING', value: 45, link: `/${username}/following/` },
+    {
+      label: 'FOLLOWERS',
+      value: user?.followers.length || 0,
+      link: `/${username}/followers/`,
+    },
+    {
+      label: 'FOLLOWING',
+      value: user?.following.length || 0,
+      link: `/${username}/following/`,
+    },
   ];
-
-  const TEMP_FOLLOWING = true;
-  const TEMP_FOLLOWS_YOU = true;
 
   return (
     <Motion.div
@@ -71,19 +81,24 @@ export default function ProfileCard({ user }) {
       <div className='flex md:flex-row  items-center   gap-2 md:gap-6'>
         <div
           className={`flex flex-col gap-2 ${
-            !isOwner && 'items-end text-right'
+            !is_owner && 'items-end text-right'
           }`}
         >
           <h1 className='text-2xl text-text-primary'>{username}</h1>
 
           {/* Follow/unFollow button (only when viewing another profile) */}
           <div className='flex items-center gap-3  '>
-            {!isOwner && TEMP_FOLLOWS_YOU && (
+            {!is_owner && user.follows_you && (
               <div className='text-xs text-zinc-400 font-semibold tracking-wider justify-center'>
                 Follows you
               </div>
             )}
-            {!isOwner && <FollowButton isFollowing={TEMP_FOLLOWING} />}
+            {!is_owner && (
+              <FollowButton
+                isFollowing={isFollowing}
+                onClick={() => toggleFollow(username)}
+              />
+            )}
           </div>
         </div>
 
@@ -92,7 +107,7 @@ export default function ProfileCard({ user }) {
             <GiCaptainHatProfile className='text-5xl text-zinc-400' />
           </div>
 
-          {isOwner && (
+          {is_owner && (
             <div className='-mt-6'>
               <Tooltip
                 label='Edit Profile'

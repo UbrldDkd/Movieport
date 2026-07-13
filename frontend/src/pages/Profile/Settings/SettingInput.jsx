@@ -1,13 +1,15 @@
 export default function SettingInput({
   label,
   name,
+  value = '',
   type = 'text',
   multiline = false,
   required = false,
   placeholder = '',
+  onChange = () => {},
 }) {
   const baseClass =
-    'w-full bg-zinc-800 border-2 border-zinc-700 text-text-primary px-3 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200';
+    'w-full bg-zinc-800 border-2 border-zinc-700 text-[16px] text-text-primary px-3 sm:py-0.5 md:py-1 rounded-xs focus:outline-none focus:border-red-950 focus:bg-zinc-700 cursor-pointer transition duration-200';
 
   return (
     <div className='flex bg-zinc-400w-full flex-col'>
@@ -17,6 +19,8 @@ export default function SettingInput({
       {multiline ? (
         <textarea
           name={name}
+          value={value}
+          onChange={onChange}
           placeholder={placeholder}
           required={required}
           className={`${baseClass} max-h-[300px] min-h-full scrollbar-hide resize-none`}
@@ -25,6 +29,8 @@ export default function SettingInput({
         <input
           type={type}
           name={name}
+          value={value}
+          onChange={onChange}
           placeholder={placeholder}
           required={required}
           className={baseClass}

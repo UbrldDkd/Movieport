@@ -1,41 +1,50 @@
-import { useDragState } from './useDragState';
+import { useState } from 'react';
 import { usePositionState } from './usePositionState';
 
-export function useFavoritesHandlers(initialItems, slotCount = 4) {
-  const dragState = useDragState();
-  const positionState = usePositionState(initialItems, slotCount);
+export function useFavoritesHandlers(items, setItems, slotCount = 4) {
+  const positionState = usePositionState(items, setItems, slotCount);
+
+  const [draggedPos, setDraggedPos] = useState(null);
+  const [dragOverPos, setDragOverPos] = useState(null);
+  const [droppedPos, setDroppedPos] = useState(null);
 
   const onDragStart = (pos) => {
-    dragState.setDraggedPos(pos);
-    dragState.setDragOverPos(null);
+    setDraggedPos(pos);
+    setDragOverPos(null);
   };
 
   const onDragOver = (pos) => {
-    if (dragState.draggedPos === null) return;
-    dragState.setDragOverPos(pos);
-    positionState.setPreview(dragState.draggedPos, pos);
+    if (draggedPos === null) return;
+    setDragOverPos(pos);
+    positionState.setPreview(draggedPos, pos);
   };
 
   const onDrop = (pos) => {
-    if (dragState.draggedPos !== null) {
+    if (draggedPos !== null) {
       positionState.applyPreview();
-      dragState.setDroppedPos(pos);
+      setDroppedPos(pos);
     }
-    dragState.resetDragState();
+    reset();
   };
 
   const onDragEnd = () => {
-    if (dragState.draggedPos !== null) {
+    if (draggedPos !== null) {
       positionState.applyPreview();
     }
-    dragState.resetDragState();
+    reset();
+  };
+
+  const reset = () => {
+    setDraggedPos(null);
+    setDragOverPos(null);
+    setDroppedPos(null);
   };
 
   return {
     slots: positionState.slots,
-    draggedPos: dragState.draggedPos,
-    dragOverPos: dragState.dragOverPos,
-    droppedPos: dragState.droppedPos,
+    draggedPos,
+    dragOverPos,
+    droppedPos,
     handlers: {
       onDragStart,
       onDragOver,

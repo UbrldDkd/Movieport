@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const PRONOUNS = ['He/Him', 'She/Her', 'They/Them'];
 
-export default function PronounsSelectionDropdown({ username }) {
+export default function PronounsSelectionDropdown({ username, onChange }) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(PRONOUNS[2]);
   const ref = useRef(null);
@@ -71,6 +71,7 @@ export default function PronounsSelectionDropdown({ username }) {
                 onClick={() => {
                   setSelected(pronoun);
                   setOpen(false);
+                  onChange('pronouns', pronoun.toLocaleLowerCase());
                 }}
                 className={`w-full font-semibold tracking-wider text-left px-2 py-1.5 text-sm transition-colors duration-150 cursor-pointer
                   ${

@@ -2,12 +2,13 @@ import { useState } from 'react';
 import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
 import Pagination from '../Pagination/Pagination';
 
-export default function ProfileWatchlist({ items, username, isOwner }) {
+export default function ProfileWatchlist({ items = [], username, isOwner }) {
   const ITEMS_PER_PAGE = 36;
   const [currentPage, setCurrentPage] = useState(1);
-  const view = 'lg'; // card size
+  const view = 'lg';
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+
   const paginatedItems = items.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -15,28 +16,27 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
 
   return (
     <div
-      className={` gap-2 ${
+      className={`gap-2 ${
         isOwner
-          ? ' md:grid-cols-[2fr_1fr] md:grid sm:grid sm:grid-cols-[2fr_1fr] flex flex-col-reverse'
-          : 'grid-cols-[1fr]'
+          ? 'md:grid md:grid-cols-[2fr_1fr] sm:grid sm:grid-cols-[2fr_1fr] flex flex-col-reverse'
+          : 'grid grid-cols-1'
       }`}
     >
       {/* Main watchlist */}
       <div className='bg-bg-secondary rounded-sm p-3 text-zinc-200'>
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
           {items.length > 0
-            ? `${isOwner ? 'YOU WANT' : username.toUpperCase() + ' WANTS'} TO SEE ${
+            ? `${isOwner ? 'YOU WANT' : `${username.toUpperCase()} WANTS`} TO SEE ${
                 items.length
-              } ${items.length > 1 ? 'FILMS' : 'FILM'}`
-            : `
-            ${isOwner ? 'YOUR' : `${username.toUpperCase()}'S`} WATCHLIST IS EMPTY`}
+              } ${items.length === 1 ? 'FILM' : 'FILMS'}`
+            : `${isOwner ? 'YOUR' : `${username.toUpperCase()}'S`} WATCHLIST IS EMPTY`}
         </h2>
 
-        {!items.length && (
+        {items.length === 0 && (
           <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
             {isOwner
-              ? `You haven't added anything to your watchlist yet`
-              : `${username} hasn't added anything to their watchlist yet`}
+              ? "You haven't added anything to your watchlist yet."
+              : `${username} hasn't added anything to their watchlist yet.`}
           </div>
         )}
 
@@ -46,21 +46,23 @@ export default function ProfileWatchlist({ items, username, isOwner }) {
           justify='start'
         />
 
-        {/* Pagination */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
       </div>
 
-      {/* Actions column for owner */}
+      {/* Actions */}
       {isOwner && (
-        <div className='bg-bg-secondary  rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
-          <button className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'>
+        <div className='bg-bg-secondary rounded-sm p-2 text-zinc-200 flex flex-col gap-2'>
+          <button className='bg-zinc-800/90 hover:bg-zinc-700 hover:cursor-pointer font-semibold px-3 py-2 rounded tracking-widest text-start text-xs'>
             Make Watchlist Private/Public
           </button>
-          <button className='bg-zinc-800/90 hover:cursor-pointer font-semibold hover:bg-zinc-700 px-3 py-2 rounded tracking-widest text-start text-xs'>
+
+          <button className='bg-zinc-800/90 hover:bg-zinc-700 hover:cursor-pointer font-semibold px-3 py-2 rounded tracking-widest text-start text-xs'>
             Clear Watchlist
           </button>
         </div>

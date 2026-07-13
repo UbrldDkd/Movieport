@@ -3,7 +3,6 @@ import ProfileContentSection from './ProfileContentSection';
 import ProfileMainWatchlist from './ProfileMainWatchlist';
 import ProfileMainRecentLists from './ProfileMainRecentLists';
 import ContentContainer from '../../../components/WrapperContainers/ContentContainer';
-import { MOCK_ITEMS } from '../Settings/Tabs/ProfileTab/FavouritesSelection/constants';
 
 export default function ProfileMain({ user }) {
   if (!user) return null;
@@ -24,13 +23,16 @@ export default function ProfileMain({ user }) {
   ).length;
 
   return (
-    <div className='flex flex-col md:flex-row w-full min-h-screen gap-2 '>
+    <div className='flex flex-col md:flex-row w-full min-h-screen gap-10 '>
       {/* Left column */}
 
-      <div className='md:flex-1 sm:flex-1 '>
+      <div className='lg:flex-1 md:flex-1 '>
         <ContentContainer>
           {user?.favourites && (
-            <ProfileContentSection header='Favourites' items={MOCK_ITEMS} />
+            <ProfileContentSection
+              header='Favourites'
+              items={user.favourites}
+            />
           )}
           {user?.likes && (
             <ProfileContentSection

@@ -9,7 +9,9 @@ export default function ProfileContentSection({ header, url, items }) {
   return (
     <section className='space-y-2 my-2'>
       {/* Section header */}
-      <SectionHeader header={header} url={url} />
+      <div className='px-2 sm:px-0 md:px-0'>
+        <SectionHeader header={header} url={url} />
+      </div>
       {/* Responsive grid */}
       <ContentDisplayBlock
         content={items}

@@ -9,7 +9,13 @@
  * @param {number} containerSize   - output diameter in px (default 220)
  * @returns {Promise<string>}      - PNG data URL
  */
-export function renderCrop(canvas, imageSrc, offset, zoom, containerSize = 220) {
+export function renderCrop(
+  canvas,
+  imageSrc,
+  offset,
+  zoom,
+  containerSize = 220
+) {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
@@ -24,10 +30,28 @@ export function renderCrop(canvas, imageSrc, offset, zoom, containerSize = 220) 
       ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
       ctx.clip();
 
-      const sw = img.naturalWidth * zoom;
-      const sh = img.naturalHeight * zoom;
+      // Calculate the display scale based on how the image fits in the viewport
+      const aspect = img.naturalWidth / img.naturalHeight;
+      const containerAspect = 1; // square container
+
+      let displayScale;
+      if (aspect > containerAspect) {
+        // Image wider than tall: scale to match height
+        displayScale = size / img.naturalHeight;
+      } else {
+        // Image taller than wide (or square): scale to match width
+        displayScale = size / img.naturalWidth;
+      }
+
+      // Apply zoom to the display scale
+      const finalScale = displayScale * zoom;
+      const sw = img.naturalWidth * finalScale;
+      const sh = img.naturalHeight * finalScale;
+
+      // Center the image and apply offset
       const sx = (size - sw) / 2 + offset.x;
       const sy = (size - sh) / 2 + offset.y;
+
       ctx.drawImage(img, sx, sy, sw, sh);
       ctx.restore();
 

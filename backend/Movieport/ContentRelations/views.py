@@ -3,9 +3,10 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import ContentRelations
-from .serializers import ContentRelationsSerializer
+from .serializers import ContentRelationsSerializer, SaveFavouritesSerializer
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import get_user_model
+from django.db import transaction
 
 User = get_user_model()
 
@@ -124,3 +125,35 @@ class ContentRelationsViewSet(viewsets.ViewSet):
         relation.save()
 
         return Response({"rating": relation.rating}, status=200)
+    
+    @action(detail=False, methods=["post"], permission_classes=[IsAuthenticated])
+    def save_favourites(self, request):
+        serializer = SaveFavouritesSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        favourites = serializer.validated_data["favourites"]
+
+        incoming_ids = []
+
+        for item in favourites:
+            incoming_ids.append(item["tmdb_id"])
+
+            ContentRelations.objects.update_or_create(
+                user=request.user,
+                tmdb_id=item["tmdb_id"],
+                defaults={
+                    "favourited": item["favourited"],
+                    "title": item.get("title"),
+                    "media_type": item.get("media_type"),
+                    "poster_path": item.get("poster_path"),
+                    "release_date": item.get("release_date"),
+                },
+            )
+
+        ContentRelations.objects.filter(
+            user=request.user
+        ).exclude(
+            tmdb_id__in=incoming_ids
+        ).update(favourited=None)
+
+        return Response({"status": "ok"})
