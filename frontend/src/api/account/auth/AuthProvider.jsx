@@ -9,13 +9,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth()
       .then((data) => {
+        console.log('Auth data:', data);
         if (data.isAuthenticated) {
           setUser({
-            id: data.id,
-            username: data.username,
-            content_relations: data.content_relations || [],
-            lists: data.lists || [],
-            liked_list_ids: data.liked_list_ids || [],
+            ...data,
           });
         } else {
           setUser(null);

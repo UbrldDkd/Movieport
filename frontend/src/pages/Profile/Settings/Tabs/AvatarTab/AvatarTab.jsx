@@ -65,6 +65,7 @@ export default function AvatarTab({ avatar }) {
 
   const handleFileChange = (dataUrl) => {
     setUploadedSrc(dataUrl);
+    setCroppedDataUrl(null);
     setCropMode(true);
     setSelected('custom');
     setSuccess('');
@@ -101,6 +102,8 @@ export default function AvatarTab({ avatar }) {
 
   const handleSelectPreset = (id) => {
     setSelected(id);
+    setUploadedSrc(null);
+    setCroppedDataUrl(null);
     setCropMode(false);
     setSuccess('');
     setDirty(true);
@@ -128,7 +131,7 @@ export default function AvatarTab({ avatar }) {
 
       await updateAvatar({
         avatar: isCustom ? null : selected,
-        croppedDataUrl,
+        croppedDataUrl: isCustom ? croppedDataUrl : null,
       });
 
       setOriginalAvatar(isCustom ? 'custom' : selected);

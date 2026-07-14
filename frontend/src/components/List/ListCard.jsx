@@ -1,5 +1,5 @@
 // Icons
-import { GiLockedHeart, GiCaptainHatProfile } from 'react-icons/gi';
+import { GiLockedHeart } from 'react-icons/gi';
 import { FaPen, FaFilm } from 'react-icons/fa6';
 import { FiTv } from 'react-icons/fi';
 
@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 // Components
 import ListCardPosters from '../List/ListCardPosters';
 import { Tooltip } from '../Common/Tooltip';
+import Pfp from '../Common/Pfp';
 
 export default function ListCard({ list, username, posterAmount }) {
   const navigate = useNavigate();
@@ -40,13 +41,24 @@ export default function ListCard({ list, username, posterAmount }) {
             <div className='flex items-center gap-1 flex-shrink-0'>
               <button
                 onClick={() => navigate(`/${list.username}`)}
-                className='w-5 h-5 rounded-full border border-zinc-700 bg-zinc-800 flex items-center justify-center'
+                className='flex-shrink-0'
               >
-                <GiCaptainHatProfile className='text-sm text-zinc-400' />
+                <Pfp
+                  user={
+                    list.user || {
+                      avatar: list.avatar,
+                      avatar_url: list.avatar_url,
+                    }
+                  }
+                  avatar={list.avatar}
+                  avatarUrl={list.avatar_url}
+                  size='xs'
+                  className='border-zinc-700'
+                />
               </button>
               <button
                 onClick={() => navigate(`/${list.username}`)}
-                className='text-text-primary font-semibold truncate max-w-[100px] sm:max-w-[150px]'
+                className='text-text-primary cursor-pointer font-semibold truncate max-w-[100px] sm:max-w-[150px]'
               >
                 {list.username}
               </button>

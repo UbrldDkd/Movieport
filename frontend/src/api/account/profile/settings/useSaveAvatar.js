@@ -12,10 +12,9 @@ export function useUpdateAvatar() {
 
       const formData = new FormData();
 
-      const hasImage = !!croppedDataUrl;
       const hasAvatar = !!avatar && avatar !== 'custom';
+      const hasImage = !!croppedDataUrl && (!avatar || avatar === 'custom');
 
-      // IMAGE WINS ALWAYS
       if (hasImage) {
         const blob = await fetch(croppedDataUrl).then((r) => r.blob());
 
@@ -36,7 +35,7 @@ export function useUpdateAvatar() {
       if (hasAvatarField && hasImageField) {
         throw new Error('Invalid payload: both avatar and avatar_image set');
       }
-      console.log('FormData entries:', entries);
+
       const res = await authApiClient.post(
         '/accounts/profile/update_avatar/',
         formData

@@ -3,10 +3,10 @@ import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Icons
-import { GiCaptainHatProfile, GiShipWreck } from 'react-icons/gi';
+import { GiCaptainHatProfile } from 'react-icons/gi';
 
 // Hooks
-import { useUserToDisplay } from '../hooks/useUserToDisplay.js';
+import { useGetUserByUsername } from '../../../api/account/profile/useGetUserByUsername.js';
 
 // Components
 import ProfileWatched from './Watched/ProfileWatched.jsx';
@@ -15,6 +15,8 @@ import ProfileWatchlist from './Watchlist/ProfileWatchlist.jsx';
 import ProfileLikes from './Likes/ProfileLikes.jsx';
 import ProfileActivity from './Activity/ProfileActivity.jsx';
 import ProfileReviews from './Reviews/ProfileReviews.jsx';
+import ProfileNetwork from './Network/ProfileNetwork.jsx';
+import ProfileNoResults from './ProfileNoResults.jsx';
 import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer.jsx';
 import TabsContainers from '../../../components/WrapperContainers/TabsContainer.jsx';
 
@@ -34,19 +36,24 @@ export default function ProfileBrowse() {
   const { username, subtab } = useParams();
   const navigate = useNavigate();
 
-  const { userToDisplay, isLoading, error } = useUserToDisplay(username);
+  const { data: user, isLoading, error } = useGetUserByUsername(username);
 
   // Only allow tabs defined in navLinks
   const location = useLocation();
   const pathSegments = location.pathname.split('/').filter(Boolean); // removes empty strings
   const activeTabSegment = pathSegments[1] || ''; // 0 = username, 1 = tab
   const activeTab =
-    navLinks.find((item) => activeTabSegment.startsWith(item.to))?.to ||
-    navLinks[0].to;
+    navLinks.find(
+      (item) =>
+        activeTabSegment === item.to ||
+        activeTabSegment.startsWith(`${item.to}/`) ||
+        (item.to === 'following' &&
+          ['following', 'followers', 'network'].includes(activeTabSegment))
+    )?.to || navLinks[0].to;
 
   const handleTabClick = (newTab) => {
-    if (!userToDisplay) return;
-    navigate(`/${userToDisplay.username}/${newTab}/`);
+    if (!user) return;
+    navigate(`/${user.username}/${newTab}/`);
   };
 
   if (isLoading) {
@@ -57,21 +64,8 @@ export default function ProfileBrowse() {
     );
   }
 
-  if (error || !userToDisplay) {
-    return (
-      <div className='min-h-screen bg-zinc-950 text-zinc-200 flex flex-col items-center justify-center gap-4'>
-        <GiShipWreck className='size-30' />
-        <div className='text-zinc-400 font-semibold tracking-wider'>
-          User could not be found
-        </div>
-        <button
-          onClick={() => navigate('/')}
-          className='text-xs font-semibold tracking-wider bg-zinc-900 px-2 py-0.5 text-text-primary hover:text-zinc-200 transition-colors duration-120 rounded-sm'
-        >
-          Go back
-        </button>
-      </div>
-    );
+  if (error || !user) {
+    return <ProfileNoResults message='User could not be found' />;
   }
 
   return (
@@ -96,12 +90,10 @@ export default function ProfileBrowse() {
           </div>
 
           <Link
-            to={`/${userToDisplay.username}/`}
+            to={`/${user.username}/`}
             className='hidden md:flex absolute right-1.5 items-center gap-2'
           >
-            <span className='text-sm font-medium'>
-              {userToDisplay.username}
-            </span>
+            <span className='text-sm font-medium'>{user.username}</span>
             <div className='w-8 h-8 rounded-full border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
               <GiCaptainHatProfile className='text-lg text-zinc-400' />
             </div>
@@ -113,34 +105,41 @@ export default function ProfileBrowse() {
           {activeTab === 'watched' && (
             <ProfileWatched
               username={username}
-              items={userToDisplay.watched}
+              items={user.watched}
               subtab={subtab}
-              isOwner={userToDisplay?.isOwner}
+              isOwner={user?.isOwner}
             />
           )}
           {activeTab === 'activity' && <ProfileActivity />}
           {activeTab === 'reviews' && <ProfileReviews />}
           {activeTab === 'lists' && (
             <ProfileLists
-              lists={userToDisplay.lists}
-              username={userToDisplay.username}
-              isOwner={userToDisplay.isOwner}
+              lists={user.lists}
+              username={user.username}
+              isOwner={user.is_owner}
             />
           )}
           {activeTab === 'watchlist' && (
             <ProfileWatchlist
-              items={userToDisplay.watchlist}
-              username={userToDisplay.username}
-              isOwner={userToDisplay.isOwner}
+              items={user.watchlist}
+              username={user.username}
+              isOwner={user.is_owner}
             />
           )}
           {activeTab === 'likes' && (
             <ProfileLikes
-              items={userToDisplay.likes}
-              username={userToDisplay.username}
+              items={user.likes}
+              username={user.username}
               subtab={subtab}
-              isOwner={userToDisplay.isOwner}
-              likedListIds={userToDisplay.likedListIds}
+              isOwner={user.is_owner}
+              likedListIds={user.likedListIds}
+            />
+          )}
+          {activeTab === 'following' && (
+            <ProfileNetwork
+              username={user.username}
+              subtab={subtab}
+              isOwner={user.is_owner}
             />
           )}
         </TabsContainers>

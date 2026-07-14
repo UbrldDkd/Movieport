@@ -1,10 +1,10 @@
-import { GiCaptainHatProfile } from 'react-icons/gi';
 import { VscHeartFilled } from 'react-icons/vsc';
 
 import { formatNumber } from '../../utils/helpers/formatNumber';
 import { renderStars } from '../../utils/style/ui/renderStars';
 import ContentCard from '../ContentDisplays/ContentCard/ContentCard';
 import { Tooltip } from '../Common/Tooltip';
+import Pfp from '../Common/Pfp';
 
 export default function ReviewCard({ review, includeItemDetails = false }) {
   const item = review.content_relation;
@@ -31,9 +31,13 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
             </div>
           )}
           <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>
-            <div className='w-7 h-7 rounded-full bg-zinc-700 flex items-center justify-center flex-shrink-0'>
-              <GiCaptainHatProfile className='text-zinc-400 text-sm' />
-            </div>
+            <Pfp
+              user={review.user_details || review.user}
+              avatar={review.avatar || review.user?.avatar}
+              avatarUrl={review.avatar_url || review.user?.avatar_url}
+              size='xs'
+              className='border-zinc-700 shrink-0'
+            />
             <span className='text-sm font-semibold text-text-primary'>
               {username}
             </span>
@@ -78,9 +82,13 @@ export default function ReviewCard({ review, includeItemDetails = false }) {
               <span className='text-sm font-semibold text-text-primary'>
                 {username}
               </span>
-              <div className='w-7 h-7 rounded-full bg-zinc-700 flex items-center justify-center'>
-                <GiCaptainHatProfile className='text-zinc-400 text-sm' />
-              </div>
+              <Pfp
+                user={review.user_details || review.user}
+                avatar={review.avatar || review.user?.avatar}
+                avatarUrl={review.avatar_url || review.user?.avatar_url}
+                size='xs'
+                className='border-zinc-700 shrink-0'
+              />
             </div>
           </div>
         )}

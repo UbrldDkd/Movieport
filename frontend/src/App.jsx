@@ -64,7 +64,15 @@ export default function App() {
         <Route path='/:username/lists/' element={<ProfileBrowse />} />
         <Route path='/:username/watchlist/' element={<ProfileBrowse />} />
         <Route path='/:username/likes/:subtab?' element={<ProfileBrowse />} />
-        <Route path='/:username/following/' element={<ProfileBrowse />} />
+        <Route
+          path='/:username/following/:subtab?'
+          element={<ProfileBrowse />}
+        />
+        <Route
+          path='/:username/followers/:subtab?'
+          element={<ProfileBrowse />}
+        />
+        <Route path='/:username/network/:subtab?' element={<ProfileBrowse />} />
         <Route path='/:username/' element={<Profile />} />
 
         {/* Main */}

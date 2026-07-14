@@ -15,6 +15,7 @@ import ListHeader from './ListHeader';
 import ListItemsDisplay from './ListItemsDisplay';
 import ListActions from './ListActions';
 import WatchedPercentage from './WatchedPercentage';
+import ListNoResult from './ListNoResult';
 
 const ITEMS_PER_PAGE = 30;
 
@@ -56,11 +57,7 @@ export default function List() {
   if (loading) return null;
 
   if (!list || error) {
-    return (
-      <div className='min-h-screen w-full bg-zinc-950 text-zinc-200 flex items-center justify-center'>
-        <div className='text-zinc-400 g'>List not found</div>
-      </div>
-    );
+    return <ListNoResult />;
   }
 
   const prevPage = () => setPage((p) => Math.max(1, p - 1));

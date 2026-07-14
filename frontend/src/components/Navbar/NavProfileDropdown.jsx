@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState, useRef } from 'react';
 import { AuthContext } from '../../api/account/auth/AuthContext';
-import { GiCaptainHatProfile } from 'react-icons/gi';
 import LogoutButton from '../../api/account/auth/Modal/LogoutButton';
+import Pfp from '../Common/Pfp';
 
 export default function NavProfileDropdown() {
   const { user } = useContext(AuthContext);
@@ -31,17 +31,9 @@ export default function NavProfileDropdown() {
     <div className='relative'>
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {/* Avatar */}
-        {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt='Profile'
-            className='w-9 h-9 rounded-full object-cover cursor-pointer border border-zinc-700'
-          />
-        ) : (
-          <div className='w-9 h-9 rounded-full cursor-pointer border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
-            <GiCaptainHatProfile className='text-xl text-zinc-400' />
-          </div>
-        )}
+        <div className='cursor-pointer'>
+          <Pfp user={user} size='sm' className='border-zinc-700' />
+        </div>
 
         {/* Dropdown */}
         <div

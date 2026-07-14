@@ -1,6 +1,5 @@
 // Icons
 import { FaPenFancy } from 'react-icons/fa';
-import { GiCaptainHatProfile } from 'react-icons/gi';
 
 // Third-party
 import { Link } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { useToggleFollow } from '../../api/network/useToggleFollow.js';
 // Components
 import { Tooltip } from '../../components/Common/Tooltip.jsx';
 import FollowButton from './Common/FollowButton.jsx'; // New follow button
+import Pfp from '../../components/Common/Pfp';
 
 // Utils animations
 import { fadeInUpVariants } from '../../utils/style/animations/motionVariants.js';
@@ -53,10 +53,10 @@ export default function ProfileCard({ user }) {
       initial='hidden'
       animate='visible'
       transition={{ duration: 0.1, ease: 'easeOut' }}
-      className='px-3 py-2   justify-end rounded-r-full flex  md:flex-row items-center md:justify-between gap-6 bg-bg-secondary'
+      className='px-3 py-2   justify-between  rounded-r-full flex  md:flex-row items-center md:justify-between gap-6 bg-bg-secondary'
     >
       {/* Stats section */}
-      <div className='hidden sm:flex  md:flex-row sm:flex-row flex-col gap-3 sm:gap-0 md:gap-0 items-center  justify-start md:items-center'>
+      <div className=' sm:flex  md:flex-row sm:flex-row flex-col gap-3 sm:gap-0 md:gap-0 items-center  justify-start md:items-center'>
         {stats.map((stat, idx) => (
           <div key={stat.label} className='flex items-center'>
             <Link
@@ -103,9 +103,7 @@ export default function ProfileCard({ user }) {
         </div>
 
         <div className='relative'>
-          <div className='w-23 h-23 rounded-full border border-zinc-800 bg-zinc-800 flex items-center justify-center'>
-            <GiCaptainHatProfile className='text-5xl text-zinc-400' />
-          </div>
+          <Pfp user={user} size='lg' className='border-zinc-800' />
 
           {is_owner && (
             <div className='-mt-6'>

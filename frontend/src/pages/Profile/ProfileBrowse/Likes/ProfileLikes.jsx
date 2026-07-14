@@ -16,6 +16,7 @@ import ProfileLikesFilms from './ProfileLikesFilms';
 import ProfileLikesLists from './ProfileLikesLists';
 import ProfileLikesTvShows from './ProfileLikesTvShows';
 import ContentContainer from '../../../../components/WrapperContainers/ContentContainer';
+import ProfileNoResults from '../ProfileNoResults';
 
 export default function ProfileLikes({
   items,
@@ -29,12 +30,27 @@ export default function ProfileLikes({
 
   const films = items?.filter((i) => i.media_type === 'film');
   const tvShows = items?.filter((i) => i.media_type === 'tv');
+  const hasAnyContent = (items?.length || 0) > 0;
 
   const tabs = [
     { key: 'films', label: 'FILMS' },
     { key: 'tv-shows', label: 'TV-SHOWS' },
     { key: 'lists', label: 'LISTS' },
   ];
+
+  if (!hasAnyContent) {
+    return (
+      <ContentContainer>
+        <ProfileNoResults
+          message={
+            isOwner
+              ? 'No liked content yet'
+              : `${username} has no liked content yet`
+          }
+        />
+      </ContentContainer>
+    );
+  }
 
   return (
     <ContentContainer>

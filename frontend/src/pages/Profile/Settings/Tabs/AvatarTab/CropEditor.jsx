@@ -40,7 +40,7 @@ export function CropEditor({
             clampedZoom(-e.deltaY * 0.002);
           }}
           style={{ width: cropSize, height: cropSize }}
-          className='relative rounded-full overflow-hidden bg-bg-secondary border-2 border-zinc-700 select-none flex-shrink-0'
+          className='relative rounded-full overflow-visible bg-bg-secondary border-2 border-zinc-700 select-none flex-shrink-0'
         >
           <img
             src={imageSrc}
@@ -59,12 +59,13 @@ export function CropEditor({
               userSelect: 'none',
               width: cropSize,
               height: cropSize,
-              objectFit: 'cover',
+              objectFit: 'contain',
+              objectPosition: 'center',
+              backgroundColor: 'rgba(24,24,27,0.7)',
             }}
           />
-          {/* Vignette */}
           <div
-            className='absolute inset-0 rounded-full pointer-events-none'
+            className='absolute inset-0 rounded-full pointer-events-none border border-zinc-600/70'
             style={{ boxShadow: 'inset 0 0 20px 6px rgba(0,0,0,0.45)' }}
           />
         </div>

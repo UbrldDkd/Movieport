@@ -19,6 +19,7 @@ import ContentPageBackdrop from './PosterAndBackdrop/ContentPageBackdrop.jsx';
 import ReviewsSection from '../../components/Sections/Reviews/ReviewsSection.jsx';
 import ListsSection from '../../components/Sections/Lists/ListsSection.jsx';
 import PosterStats from '../../components/ContentDisplays/Common/PosterStats/PosterStats.jsx';
+import ContentNoResults from './NoResults.jsx';
 
 // Utils
 import { Keys } from '../../utils/constants/Keys.js';
@@ -81,6 +82,10 @@ export default function ContentPage() {
   const current = useMemo(() => {
     return user?.content_relations?.find((r) => r.tmdb_id === Number(id)) || {};
   }, [user?.content_relations, id]);
+
+  if (!isLoading && !content) {
+    return <ContentNoResults />;
+  }
 
   return (
     <BackgroundContainer>
