@@ -34,17 +34,20 @@ export default function NetworkProfileCard({ profile }) {
             </Link>
             <div className='mt-1 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wider text-zinc-500'>
               <span className='flex items-center gap-1'>
-                <span>{profile.following} following</span>
+                <span>{profile.following_count} following</span>
               </span>
               <span className='flex items-center gap-1'>
-                <span>{profile.followers} followers</span>
+                <span>
+                  {profile.followers_count}{' '}
+                  {`${profile.followers_count === 1 ? 'follower' : 'followers'}`}
+                </span>
               </span>
             </div>
           </div>
 
           <div className='flex shrink-0 items-center gap-4 text-[10px] font-medium uppercase text-zinc-400'>
             <Tooltip
-              label={`View ${profile.username}'s likes`}
+              label={`${profile.tv_likes_count} ${profile.tv_likes_count === 1 ? 'TV show' : 'TV shows'} and ${profile.film_likes_count} ${profile.film_likes_count === 1 ? 'Film' : 'Films'} liked`}
               position='bottom-full left-1/2 -translate-x-1/2'
             >
               <Link
@@ -52,12 +55,12 @@ export default function NetworkProfileCard({ profile }) {
                 className='flex items-center gap-2 cursor-pointer text-zinc-400 transition-all duration-200 hover:text-zinc-200'
               >
                 <FaHeart size={19} className='text-zinc-500' />
-                <span>{profile.likes}</span>
+                <span>{profile.likes_count}</span>
               </Link>
             </Tooltip>
 
             <Tooltip
-              label={`View ${profile.username}'s lists`}
+              label={`${profile.lists_count} ${profile.lists_count === 1 ? 'list' : 'lists'} `}
               position='bottom-full left-1/2 -translate-x-1/2'
             >
               <Link
@@ -65,12 +68,12 @@ export default function NetworkProfileCard({ profile }) {
                 className='flex items-center gap-2 cursor-pointer text-zinc-400 transition-all duration-200 hover:text-zinc-200'
               >
                 <FaListUl size={19} className='text-zinc-500' />
-                <span>{profile.lists}</span>
+                <span>{profile.lists_count}</span>
               </Link>
             </Tooltip>
 
             <Tooltip
-              label={`View ${profile.username}'s watched`}
+              label={`${profile.film_watched_count} ${profile.film_watched_count === 1 ? 'film' : 'films'} and ${profile.tv_watched_count} ${profile.tv_watched_count === 1 ? 'TV show' : 'TV shows'} watched`}
               position='bottom-full left-1/2 -translate-x-1/2'
             >
               <Link
@@ -78,7 +81,7 @@ export default function NetworkProfileCard({ profile }) {
                 className='flex items-center gap-2 cursor-pointer text-zinc-400 transition-all duration-200 hover:text-zinc-200'
               >
                 <FaEye size={19} className='text-zinc-500' />
-                <span>{profile.watched}</span>
+                <span>{profile.watched_count}</span>
               </Link>
             </Tooltip>
           </div>

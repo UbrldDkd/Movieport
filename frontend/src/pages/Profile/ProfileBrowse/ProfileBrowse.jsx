@@ -19,6 +19,7 @@ import ProfileNetwork from './Network/ProfileNetwork.jsx';
 import ProfileNoResults from './ProfileNoResults.jsx';
 import BackgroundContainer from '../../../components/WrapperContainers/BackgroundContainer.jsx';
 import TabsContainers from '../../../components/WrapperContainers/TabsContainer.jsx';
+import Pfp from '../../../components/Common/Pfp.jsx';
 
 const navLinks = [
   { label: 'Watched', to: 'watched' },
@@ -27,7 +28,7 @@ const navLinks = [
   { label: 'Lists', to: 'lists' },
   { label: 'Watchlist', to: 'watchlist' },
   { label: 'Likes', to: 'likes' },
-  { label: 'Network', to: 'following' },
+  { label: 'Network', to: 'network' },
 ];
 
 import { tabVariants } from '../../../utils/style/animations/motionVariants.js';
@@ -43,16 +44,19 @@ export default function ProfileBrowse() {
   const pathSegments = location.pathname.split('/').filter(Boolean); // removes empty strings
   const activeTabSegment = pathSegments[1] || ''; // 0 = username, 1 = tab
   const activeTab =
-    navLinks.find(
-      (item) =>
-        activeTabSegment === item.to ||
-        activeTabSegment.startsWith(`${item.to}/`) ||
-        (item.to === 'following' &&
-          ['following', 'followers', 'network'].includes(activeTabSegment))
-    )?.to || navLinks[0].to;
+    navLinks.find((item) => {
+      if (item.to === 'network') {
+        return ['following', 'followers'].includes(activeTabSegment);
+      }
+      return activeTabSegment === item.to;
+    })?.to || navLinks[0].to;
 
   const handleTabClick = (newTab) => {
     if (!user) return;
+    if (newTab === 'network') {
+      navigate(`/${user.username}/following/`);
+      return;
+    }
     navigate(`/${user.username}/${newTab}/`);
   };
 
@@ -94,9 +98,7 @@ export default function ProfileBrowse() {
             className='hidden md:flex absolute right-1.5 items-center gap-2'
           >
             <span className='text-sm font-medium'>{user.username}</span>
-            <div className='w-8 h-8 rounded-full border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
-              <GiCaptainHatProfile className='text-lg text-zinc-400' />
-            </div>
+            <Pfp avatar={user.avatar} size='sm' className='border-zinc-700' />
           </Link>
         </nav>
 
@@ -135,10 +137,12 @@ export default function ProfileBrowse() {
               likedListIds={user.likedListIds}
             />
           )}
-          {activeTab === 'following' && (
+          {activeTab === 'network' && (
             <ProfileNetwork
               username={user.username}
-              subtab={subtab}
+              followers={user.followers}
+              following={user.following}
+              subtab={activeTabSegment}
               isOwner={user.is_owner}
             />
           )}

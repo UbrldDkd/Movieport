@@ -1,8 +1,11 @@
 // React
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { GiLockedHeart, GiCaptainHatProfile } from 'react-icons/gi';
+import { GiLockedHeart } from 'react-icons/gi';
 import { FaThLarge, FaList } from 'react-icons/fa';
+
+// Components
+import Pfp from '../../components/Common/Pfp.jsx';
 
 // Utils/Helpers
 import { timeAgo } from '../../utils/helpers/timeAgo';
@@ -14,9 +17,11 @@ export default function ListHeader({ list, username, view, setView }) {
     <div className='min-w-0 opacity-0 animate-fadeIn'>
       {/* User */}
       <div className='flex items-center gap-2 mb-3'>
-        <div className='w-9 h-9 rounded-full cursor-pointer border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
-          <GiCaptainHatProfile className='text-xl text-zinc-400' />
-        </div>
+        <Pfp
+          avatar={list.creator_avatar}
+          size='sm'
+          className='border border-zinc-700'
+        />
         <span className='text-xs text-zinc-400'>List by</span>
         <Link
           to={`/${username}/`}

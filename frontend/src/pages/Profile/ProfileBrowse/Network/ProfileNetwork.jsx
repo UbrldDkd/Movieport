@@ -58,6 +58,8 @@ const mockProfiles = [
 export default function ProfileNetwork({
   username,
   subtab = 'following',
+  followers,
+  following,
   isOwner,
 }) {
   const navigate = useNavigate();
@@ -72,7 +74,8 @@ export default function ProfileNetwork({
     { key: 'followers', label: 'Followers' },
   ];
 
-  const displayedProfiles = mockProfiles;
+  const displayedProfiles =
+    subtab === 'following' ? following || [] : followers || [];
 
   return (
     <ContentContainer>
@@ -81,7 +84,7 @@ export default function ProfileNetwork({
         activeKey={activeTab}
         onChange={(key) => {
           setActiveTab(key);
-          navigate(`/${username}/following/${key}/`);
+          navigate(`/${username}/${key}/`);
         }}
       />
 
@@ -96,17 +99,15 @@ export default function ProfileNetwork({
           className='flex flex-col gap-2'
         >
           {displayedProfiles.length === 0 ? (
-            <ProfileNoResults
-              message={
-                activeTab === 'following'
-                  ? isOwner
-                    ? "You aren't following anyone yet"
-                    : `${username} isn't following anyone yet`
+            <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
+              {isOwner && activeTab === 'following'
+                ? "You haven't followed anyone yet"
+                : !isOwner && activeTab === 'following'
+                  ? `${username} hasn't followed anyone yet`
                   : isOwner
                     ? "You don't have any followers yet"
-                    : `${username} doesn't have any followers yet`
-              }
-            />
+                    : `${username} doesn't have any followers yet`}
+            </div>
           ) : (
             displayedProfiles.map((profile) => (
               <NetworkProfileCard key={profile.id} profile={profile} />

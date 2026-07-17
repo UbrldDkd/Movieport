@@ -30,27 +30,30 @@ export function renderCrop(
       ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
       ctx.clip();
 
-      // Calculate the display scale based on how the image fits in the viewport
       const aspect = img.naturalWidth / img.naturalHeight;
       const containerAspect = 1; // square container
 
       let displayScale;
       if (aspect > containerAspect) {
-        // Image wider than tall: scale to match height
         displayScale = size / img.naturalHeight;
       } else {
-        // Image taller than wide (or square): scale to match width
         displayScale = size / img.naturalWidth;
       }
 
-      // Apply zoom to the display scale
-      const finalScale = displayScale * zoom;
+      const effectiveZoom = Math.max(1, zoom);
+      const finalScale = displayScale * effectiveZoom;
       const sw = img.naturalWidth * finalScale;
       const sh = img.naturalHeight * finalScale;
 
-      // Center the image and apply offset
-      const sx = (size - sw) / 2 + offset.x;
-      const sy = (size - sh) / 2 + offset.y;
+      const maxShiftX = Math.max(0, (sw - size) / 2);
+      const maxShiftY = Math.max(0, (sh - size) / 2);
+      const clampedOffset = {
+        x: Math.min(maxShiftX, Math.max(-maxShiftX, offset.x)),
+        y: Math.min(maxShiftY, Math.max(-maxShiftY, offset.y)),
+      };
+
+      const sx = (size - sw) / 2 + clampedOffset.x;
+      const sy = (size - sh) / 2 + clampedOffset.y;
 
       ctx.drawImage(img, sx, sy, sw, sh);
       ctx.restore();

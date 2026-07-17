@@ -34,8 +34,10 @@ export default function ProfileLists({ lists, username, isOwner }) {
 
         <div className='flex flex-col'>
           {filteredLists?.length === 0 ? (
-            <div className='text-zinc-400 text-sm py-4 text-center'>
-              {isOwner ? 'You have no lists yet' : `${username} has no lists`}
+            <div className='py-12 text-center text-zinc-400 font-medium text-sm'>
+              {isOwner
+                ? "You haven't created any lists yet"
+                : `${username} hasn't created any lists`}
             </div>
           ) : (
             filteredLists?.map((list, idx) => (

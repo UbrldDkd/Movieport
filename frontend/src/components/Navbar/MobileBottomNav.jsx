@@ -9,6 +9,7 @@ import { RiAccountCircleLine } from 'react-icons/ri';
 import { useIsLoggedIn } from '../../utils/helpers/useIsLoggedIn.js';
 import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalContext.js';
 import { AuthContext } from '../../api/account/auth/AuthContext.js';
+import Pfp from '../Common/Pfp.jsx';
 
 const tabs = [
   {
@@ -82,17 +83,7 @@ export default function MobileBottomNav() {
                 isProfileActive ? 'border-red-500' : 'border-zinc-600'
               }`}
             >
-              {user?.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt={user.username}
-                  className='w-full h-full object-cover'
-                />
-              ) : (
-                <div className='w-full h-full rounded-full border border-zinc-700 bg-zinc-800 flex items-center justify-center'>
-                  <GiCaptainHatProfile className='text-lg text-zinc-400' />
-                </div>
-              )}
+              <Pfp user={user} size='sm' className='border-zinc-800' />
             </div>
           ) : (
             <RiAccountCircleLine className='text-2xl text-zinc-500' />

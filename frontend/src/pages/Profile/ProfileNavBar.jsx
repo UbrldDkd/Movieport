@@ -21,7 +21,12 @@ export default function ProfileNavBar({ username }) {
           {navLinks.map((link) => {
             const active =
               pathname === link.to ||
-              (link.to !== '/profile/' && pathname.startsWith(link.to));
+              (link.label === 'Network' &&
+                (pathname.startsWith(`/${username}/following`) ||
+                  pathname.startsWith(`/${username}/followers`))) ||
+              (link.label === 'Likes' &&
+                pathname.startsWith(`/${username}/likes/`)) ||
+              (link.to !== `/${username}/` && pathname.startsWith(link.to));
 
             return (
               <Link

@@ -21,7 +21,7 @@ export default function AvatarTab({ avatar }) {
   const [dirty, setDirty] = useState(false);
 
   const canvasRef = useRef(null);
-  const cropState = useCrop(uploadedSrc);
+  const cropState = useCrop(uploadedSrc, CROP_SIZE);
 
   const { updateAvatar, isLoading, error } = useUpdateAvatar();
 

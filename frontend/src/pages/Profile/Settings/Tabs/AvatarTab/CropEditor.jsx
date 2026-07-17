@@ -4,6 +4,8 @@
  * All crop state (zoom, offset, dragging) is owned by the parent via the
  * `cropState` prop (returned from useCrop) so this component stays pure UI.
  */
+import { useEffect, useState } from 'react';
+
 export function CropEditor({
   imageSrc,
   cropState,
@@ -12,16 +14,49 @@ export function CropEditor({
   onCancel,
   saving,
 }) {
-  const {
-    zoom,
-    setZoom,
-    offset,
-    setOffset,
-    dragging,
-    reset,
-    clampedZoom,
-    handlers,
-  } = cropState;
+  const { zoom, setZoom, offset, dragging, reset, clampedZoom, handlers } =
+    cropState;
+
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!imageSrc) {
+      setImageSize({ width: 0, height: 0 });
+      return;
+    }
+
+    const img = new Image();
+    img.onload = () => {
+      setImageSize({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.src = imageSrc;
+  }, [imageSrc]);
+
+  const aspect =
+    imageSize.width && imageSize.height
+      ? imageSize.width / imageSize.height
+      : 1;
+  const displayScale =
+    imageSize.width && imageSize.height
+      ? aspect > 1
+        ? cropSize / imageSize.height
+        : cropSize / imageSize.width
+      : 1;
+  const effectiveZoom = Math.max(1, zoom);
+  const scaledWidth = imageSize.width
+    ? imageSize.width * displayScale * effectiveZoom
+    : cropSize;
+  const scaledHeight = imageSize.height
+    ? imageSize.height * displayScale * effectiveZoom
+    : cropSize;
+  const maxShiftX = Math.max(0, (scaledWidth - cropSize) / 2);
+  const maxShiftY = Math.max(0, (scaledHeight - cropSize) / 2);
+  const clampedOffset = {
+    x: Math.min(maxShiftX, Math.max(-maxShiftX, offset.x)),
+    y: Math.min(maxShiftY, Math.max(-maxShiftY, offset.y)),
+  };
+  const translateX = (cropSize - scaledWidth) / 2 + clampedOffset.x;
+  const translateY = (cropSize - scaledHeight) / 2 + clampedOffset.y;
 
   return (
     <div className='flex flex-col gap-4'>
@@ -40,7 +75,7 @@ export function CropEditor({
             clampedZoom(-e.deltaY * 0.002);
           }}
           style={{ width: cropSize, height: cropSize }}
-          className='relative rounded-full overflow-visible bg-bg-secondary border-2 border-zinc-700 select-none flex-shrink-0'
+          className='relative rounded-full overflow-hidden bg-bg-secondary border-2 border-zinc-700 select-none flex-shrink-0'
         >
           <img
             src={imageSrc}
@@ -49,16 +84,16 @@ export function CropEditor({
             onMouseDown={handlers.onMouseDown}
             onTouchStart={handlers.onTouchStart}
             style={{
-              transform: `translate(calc(-50% + ${offset.x}px), calc(-50% + ${offset.y}px)) scale(${zoom})`,
+              transform: `translate(${translateX}px, ${translateY}px)`,
               transformOrigin: 'center center',
               position: 'absolute',
-              top: '50%',
-              left: '50%',
+              top: 0,
+              left: 0,
               maxWidth: 'none',
               cursor: dragging ? 'grabbing' : 'grab',
               userSelect: 'none',
-              width: cropSize,
-              height: cropSize,
+              width: scaledWidth,
+              height: scaledHeight,
               objectFit: 'contain',
               objectPosition: 'center',
               backgroundColor: 'rgba(24,24,27,0.7)',
@@ -76,7 +111,7 @@ export function CropEditor({
         <span className='text-zinc-600 text-xs w-4'>−</span>
         <input
           type='range'
-          min='0.5'
+          min='1'
           max='4'
           step='0.01'
           value={zoom}

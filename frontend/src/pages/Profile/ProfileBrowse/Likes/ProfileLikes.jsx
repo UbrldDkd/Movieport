@@ -38,20 +38,6 @@ export default function ProfileLikes({
     { key: 'lists', label: 'LISTS' },
   ];
 
-  if (!hasAnyContent) {
-    return (
-      <ContentContainer>
-        <ProfileNoResults
-          message={
-            isOwner
-              ? 'No liked content yet'
-              : `${username} has no liked content yet`
-          }
-        />
-      </ContentContainer>
-    );
-  }
-
   return (
     <ContentContainer>
       {/* Tabs */}
