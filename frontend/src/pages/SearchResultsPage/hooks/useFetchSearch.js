@@ -27,17 +27,15 @@ export function useFetchSearch({ value, type, currentPage, contentPerPage }) {
         const addTv = type === 'tv' || type === 'both';
         const addFilm = type === 'film' || type === 'both';
 
-        if (addTv) {
-          endpoints.push(
-            `${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage}`,
-            `${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + 1}`
-          );
-        }
+        endpoints.push(
+          `${Url}search/tv?api_key=${API_KEY}&query=${encodeURIComponent(searchTerm)}&page=${startPage}`,
+          `${Url}search/tv?api_key=${API_KEY}&query=${encodeURIComponent(searchTerm)}&page=${startPage + 1}`
+        );
 
         if (addFilm) {
           endpoints.push(
-            `${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage}`,
-            `${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + 1}`
+            `${Url}search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchTerm)}&page=${startPage}`,
+            `${Url}search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchTerm)}&page=${startPage + 1}`
           );
         }
 
