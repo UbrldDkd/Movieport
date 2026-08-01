@@ -10,6 +10,7 @@ import './components.css';
 import { AuthProvider } from './api/account/auth/AuthProvider.jsx';
 import { ListsModalProvider } from './api/lists/Modal/Context/ListsModalProvider.jsx';
 import { AuthModalProvider } from './api/account/auth/Modal/Context/AuthModalProvider.jsx';
+import { ReviewModalProvider } from './api/reviews/Modal/ReviewModalProvider.jsx';
 
 // Components
 import App from './App.jsx';
@@ -19,9 +20,11 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <AuthProvider>
         <ListsModalProvider>
-          <AuthModalProvider>
-            <App />
-          </AuthModalProvider>
+          <ReviewModalProvider>
+            <AuthModalProvider>
+              <App />
+            </AuthModalProvider>
+          </ReviewModalProvider>
         </ListsModalProvider>
       </AuthProvider>
     </BrowserRouter>

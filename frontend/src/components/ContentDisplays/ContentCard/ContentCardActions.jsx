@@ -19,7 +19,7 @@ export default function ContentCardActions({
                  flex items-center gap-2 p-1 bg-zinc-950/80 backdrop-blur-md
                  opacity-0 justify-center group-hover:opacity-100 transition-opacity
                  pointer-events-none z-10 rounded-sm 
-                 ${view == 'xl' ? 'w-[60%] h-[14%] md:w-[50%] md:h-[10%]' : view == 'lg' ? 'w-[65%] h-[15%]' : view == 'md' ? 'w-[90%] h-[21%] ' : 'w-full h-[25%] md:w-[75%] md:h-[15%]'}
+                 ${view == 'xl' ? 'w-[60%] h-[14%] md:w-[42%] md:h-[9%]' : view == 'lg' || 'profileContent' ? 'w-[65%] h-[15%]' : view == 'md' ? 'w-[70%] h-[15%] ' : ' h-[25%] w-[97%] md:h-[18w%]'}
                  `}
     >
       <button

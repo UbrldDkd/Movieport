@@ -320,3 +320,64 @@ class ListsViewSet(viewsets.ViewSet):
             {"liked": liked, "likes_count": lst.likes.count()},
             status=status.HTTP_200_OK
         )
+        
+    @action(
+        detail=False,
+        methods=["get"],
+        permission_classes=[AllowAny],
+        url_path="search_by_title"
+    )
+    def search_by_title(self, request):
+        """
+        Search public lists by title or slug, with pagination.
+        Example:
+        /api/lists/search_by_title?query=top&page=1&per_page=20
+        """
+        query = request.query_params.get("query", "").strip()
+        page = int(request.query_params.get("page", 1))
+        per_page = int(request.query_params.get("per_page", 20))
+
+        if not query:
+            return Response(
+                {"error": "query parameter required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Base queryset
+        lists_qs = (
+            Lists.objects.filter(public=True)
+            .filter(
+                Q(title__icontains=query) |
+                Q(title_slug__icontains=query) |
+                Q(old_slugs__contains=[query])
+            )
+            .select_related("user")
+            .order_by("-created_at")
+        )
+
+        total_results = lists_qs.count()
+        total_pages = max((total_results - 1) // per_page + 1, 1)
+
+        # Pagination slice
+        start = (page - 1) * per_page
+        end = start + per_page
+        lists = lists_qs[start:end]
+
+        serializer = ListsSerializer(lists, many=True, context={"request": request})
+        data = serializer.data
+
+        # Append username + likers_count
+        for idx, lst in enumerate(lists):
+            data[idx]["username"] = lst.user.username
+            data[idx]["likers_count"] = lst.likes.count()
+
+        return Response(
+            {
+                "results": data,
+                "total_results": total_results,
+                "total_pages": total_pages,
+                "current_page": page,
+                "per_page": per_page,
+            },
+            status=status.HTTP_200_OK
+        )

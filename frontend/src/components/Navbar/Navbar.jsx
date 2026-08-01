@@ -7,7 +7,6 @@ import { useAuthModal } from '../../api/account/auth/Modal/Context/AuthModalCont
 // Components
 import Logo from './Logo.jsx';
 import NavButton from './NavButton.jsx';
-import MobileFilterbox from './FilterBox/MobileFilterbox.jsx';
 import SeachInput from './Search/SearchInput.jsx';
 import SearchPreview from './Search/SearchPreview.jsx';
 import NavProfileDropdown from './NavProfileDropdown.jsx';

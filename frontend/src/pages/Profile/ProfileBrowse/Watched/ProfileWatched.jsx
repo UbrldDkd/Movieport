@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Components
 import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
-import Pagination from '../Pagination/Pagination';
+import PaginationPanel from '../../../../components/Common/PaginationPanel';
 import SlidingTabsNavigation from '../../../../components/Common/SlidingTabsNavigation';
 import { tabVariants } from '../../../../utils/style/animations/motionVariants';
 
@@ -63,10 +63,10 @@ export default function ProfileWatched({ username, items, subtab, isOwner }) {
                 />
               </div>
 
-              <Pagination
+              <PaginationPanel
                 currentPage={currentPage}
                 totalPages={totalPages}
-                setCurrentPage={setCurrentPage}
+                handlePageChange={setCurrentPage}
               />
             </>
           ) : (

@@ -9,6 +9,8 @@ import ContentDisplayX from '../../components/ContentDisplays/ContentDisplayX';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
 import Spinner from '../../components/Common/loadingScreens/Spinner';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import BrowseBy from '../../components/BrowseBy/BrowseBy';
 
 export default function Films() {
   const { content, error, isLoading } = useFetchFilms();
@@ -20,8 +22,17 @@ export default function Films() {
     <BackgroundContainer>
       {/* Popular movies section */}
       <PageContainer>
-        <div className='flex-1   mx-auto   overflow-hidden md:max-w-[993px] justify-center lg:px-9.5 md:px-3 w-full'>
-          <SectionHeader header='Popular this week' />
+        <div className='flex  items-center px-20 justify-between'>
+          <BrowseBy mediaType='films' />
+          <div className='items-center flex gap-2 '>
+            <div className='font-semibold text-sm tracking-wider  text-zinc-400 '>
+              FIND A FILM
+            </div>
+            <input className='bg-zinc-950 focus:outline-2 focus:border-zinc-500 tranisition-all duration-150 '></input>
+          </div>
+        </div>
+        <div className='flex-1   mx-auto   overflow-hidden md:max-w-[987px] justify-center lg:px-9.5 md:px-3 w-full'>
+          <SectionHeader header='Popular films this week' />
 
           <ContentDisplayX
             content={content?.popular}

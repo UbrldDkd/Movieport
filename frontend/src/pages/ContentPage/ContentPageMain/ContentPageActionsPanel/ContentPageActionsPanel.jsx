@@ -2,18 +2,22 @@ import { PiEye, PiEyeClosed } from 'react-icons/pi';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { TbClockPlus, TbClockCheck } from 'react-icons/tb';
 import { useToggleContentRelation } from '../../../../api/contentRelations/useToggleContentRelation';
+import { useSetContentRelationRating } from '../../../../api/contentRelations/useSetContentRelationRating';
 import { useListsModal } from '../../../../api/lists/Modal/Context/ListsModalContext';
 import { AuthContext } from '../../../../api/account/auth/AuthContext';
 import { useContext } from 'react';
 import ContentPageActionsRating from './ContentPageActionsRating';
 import { useAuthModal } from '../../../../api/account/auth/Modal/Context/AuthModalContext';
+import { useReviewModal } from '../../../../api/reviews/Modal/ReviewModalContext';
 
 export default function ContentPageActionsPanel({ item, current, isLoading }) {
   const toggleField = useToggleContentRelation();
+  const { setRating } = useSetContentRelationRating();
   const { openModal: openListModal } = useListsModal();
   const { user } = useContext(AuthContext);
   const isLoggedIn = !!user;
   const { openModal: openAuthModal } = useAuthModal();
+  const { openModal: openReviewModal } = useReviewModal();
 
   return (
     <div className='bg-zinc-800 md:min-w-53 rounded-sm h-fit overflow-visible divide-y-2 divide-zinc-900/90 '>
@@ -81,13 +85,19 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
             </div>
           </div>
 
-          <ContentPageActionsRating initialRating={current?.rating || 0} />
+          <ContentPageActionsRating
+            initialRating={current?.rating || 0}
+            onRatingChange={(rating) => setRating(item, rating)}
+          />
 
           <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 hover:text-zinc-200 tracking-wide font-semibold bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
             Show your activity
           </button>
 
-          <button className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 font-semibold tracking-wide hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'>
+          <button
+            onClick={() => openReviewModal(item)}
+            className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+          >
             Review
           </button>
 

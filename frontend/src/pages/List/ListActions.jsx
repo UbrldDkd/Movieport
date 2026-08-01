@@ -46,6 +46,7 @@ export default function ListActions({ username, list }) {
     await toggleLike(listId);
   };
 
+  // TODO: add functionality to the share button
   return (
     <div className='bg-bg-secondary  rounded-sm p-2 flex flex-col gap-2 opacity-0 animate-fadeIn'>
       {/* Likes / Share */}

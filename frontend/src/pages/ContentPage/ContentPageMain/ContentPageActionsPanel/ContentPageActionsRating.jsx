@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { IoIosStar } from 'react-icons/io';
 
@@ -9,6 +9,10 @@ export default function ContentPageActionsRating({
   const [rating, setRating] = useState(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
   const [showClear, setShowClear] = useState(false);
+
+  useEffect(() => {
+    setRating(initialRating);
+  }, [initialRating]);
 
   const activeRating = hoverRating || rating;
 

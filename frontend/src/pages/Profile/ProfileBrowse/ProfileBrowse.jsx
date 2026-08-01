@@ -38,7 +38,7 @@ export default function ProfileBrowse() {
   const navigate = useNavigate();
 
   const { data: user, isLoading, error } = useGetUserByUsername(username);
-
+  console.log('user', user);
   // Only allow tabs defined in navLinks
   const location = useLocation();
   const pathSegments = location.pathname.split('/').filter(Boolean); // removes empty strings
@@ -113,7 +113,13 @@ export default function ProfileBrowse() {
             />
           )}
           {activeTab === 'activity' && <ProfileActivity />}
-          {activeTab === 'reviews' && <ProfileReviews />}
+          {activeTab === 'reviews' && (
+            <ProfileReviews
+              reviews={user.reviews || []}
+              isOwner={user.is_owner}
+              username={user.username}
+            />
+          )}
           {activeTab === 'lists' && (
             <ProfileLists
               lists={user.lists}

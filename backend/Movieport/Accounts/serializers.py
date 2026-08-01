@@ -5,11 +5,13 @@ from Lists.models import Lists
 from Lists.serializers import ListsSerializer
 from ContentRelations.models import ContentRelations
 from ContentRelations.serializers import ContentRelationsSerializer
+from Reviews.serializers import ReviewSerializer
 
 
 User = get_user_model()
 
 class AuthUserSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     followers_count = serializers.SerializerMethodField()
     following_count = serializers.SerializerMethodField()
@@ -37,6 +39,13 @@ class AuthUserSerializer(serializers.ModelSerializer):
             "content_relations",
             "liked_list_ids",
         ]
+
+    def get_avatar(self, obj):
+        if obj.avatar_image:
+            return obj.get_avatar_url()
+        if obj.avatar:
+            return obj.avatar
+        return User.AVATAR_CHOICES[0][0] if User.AVATAR_CHOICES else 'death'
 
     def get_avatar_url(self, obj):
         return obj.get_avatar_url()
@@ -201,9 +210,10 @@ class PublicProfileSerializer(serializers.ModelSerializer):
     favourites = serializers.SerializerMethodField()
 
     liked_list_ids = serializers.SerializerMethodField()
-
+    avatar = serializers.SerializerMethodField()
     followers = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
+    reviews = serializers.SerializerMethodField()
 
     is_owner = serializers.SerializerMethodField()
     is_following = serializers.SerializerMethodField()
@@ -228,14 +238,21 @@ class PublicProfileSerializer(serializers.ModelSerializer):
             "liked_list_ids",
             "followers",
             "following",
+            "reviews",
             "is_owner",
             "is_following",
             "follows_you",
         ]
 
     def get_lists(self, obj):
+        request = self.context.get('request')
+        qs = Lists.objects.filter(user=obj)
+
+        if not request or request.user.id != obj.id:
+            qs = qs.filter(public=True)
+
         return ListsSerializer(
-            Lists.objects.filter(user=obj, public=True),
+            qs,
             many=True,
             context=self.context,
         ).data
@@ -270,25 +287,41 @@ class PublicProfileSerializer(serializers.ModelSerializer):
     def get_liked_list_ids(self, obj):
         return list(obj.liked_lists.values_list("id", flat=True))
 
+    def get_avatar(self, obj):
+        if obj.avatar_image:
+            return obj.get_avatar_url()
+        if obj.avatar:
+            return obj.avatar
+        return User.AVATAR_CHOICES[0][0] if User.AVATAR_CHOICES else 'death'
+
+    def build_user_summary(self, user):
+        return {
+            "id": user.id,
+            "username": user.username,
+            "avatar": self.get_avatar(user),
+            "followers_count": user.followers.count(),
+            "following_count": user.following.count(),
+            "film_likes_count": ContentRelations.objects.filter(user=user, liked=True, media_type='film').count(),
+            "tv_likes_count": ContentRelations.objects.filter(user=user, liked=True, media_type='tv').count(),
+            "lists_count": Lists.objects.filter(user=user).count(),
+            "film_watched_count": ContentRelations.objects.filter(user=user, watched=True, media_type='film').count(),
+            "tv_watched_count": ContentRelations.objects.filter(user=user, watched=True, media_type='tv').count(),
+            "watched_count": ContentRelations.objects.filter(user=user, watched=True).count(),
+            "likes_count": ContentRelations.objects.filter(user=user, liked=True).count(),
+
+        }
+
     def get_followers(self, obj):
-        return [
-            {
-                "id": u.id,
-                "username": u.username,
-                "avatar": u.avatar,
-            }
-            for u in obj.followers.all()
-        ]
+        return [self.build_user_summary(u) for u in obj.followers.all()]
 
     def get_following(self, obj):
-        return [
-            {
-                "id": u.id,
-                "username": u.username,
-                "avatar": u.avatar,
-            }
-            for u in obj.following.all()
-        ]
+        return [self.build_user_summary(u) for u in obj.following.all()]
+
+    def get_reviews(self, obj):
+        return ReviewSerializer(
+            obj.reviews.all().order_by('-created_at'),
+            many=True,
+        ).data
 
     def get_is_owner(self, obj):
         request = self.context["request"]

@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // Icons
 import { IoIosStar } from 'react-icons/io';
@@ -7,17 +7,24 @@ import { IoClose } from 'react-icons/io5';
 
 // API hooks
 import { useToggleContentRelation } from '../../../api/contentRelations/useToggleContentRelation';
+import { useSetContentRelationRating } from '../../../api/contentRelations/useSetContentRelationRating';
 
 // Context
 import { ListsModalContext } from '../../../api/lists/Modal/Context/ListsModalContext';
-
+import { useReviewModal } from '../../../api/reviews/Modal/ReviewModalContext';
 export default function ContentCardTooltip({ item, current, onClose }) {
   const { openModal } = useContext(ListsModalContext);
+  const { openModal: openReviewModal } = useReviewModal();
   const toggleField = useToggleContentRelation();
+  const { setRating: saveRating } = useSetContentRelationRating();
 
   const [rating, setRating] = useState(current?.rating || 0);
   const [hoverRating, setHoverRating] = useState(0);
   const activeRating = hoverRating || rating;
+
+  useEffect(() => {
+    setRating(current?.rating || 0);
+  }, [current?.rating]);
 
   const handleClick = (field) => {
     toggleField(item, field);
@@ -26,7 +33,7 @@ export default function ContentCardTooltip({ item, current, onClose }) {
 
   const handleRate = (value) => {
     setRating(value);
-    // backend logic can be added later
+    saveRating(item, value);
   };
 
   const handleClear = () => handleRate(0);
@@ -100,7 +107,7 @@ export default function ContentCardTooltip({ item, current, onClose }) {
         Add to List
       </button>
       <button
-        onClick={() => openModal({ item })}
+        onClick={() => openReviewModal(item)}
         className='w-full py-1.5 rounded hover:cursor-pointer bg-bg-secondary hover:bg-zinc-600 hover:text-zinc-100 text-xs tracking-wider font-semibold text-text-primary'
       >
         Review

@@ -45,7 +45,9 @@ export default function ListsSection({
       film_count: 18,
       tv_count: 0,
       like_count: '3.1K',
-      username: 'rotten_tomato',
+      user: {
+        username: 'rotten_tomato',
+      },
       posters: [
         `${TMDB}/wdaClThqMd3xMIRbVCdZFW4INkw.jpg`, // Sid & Nancy
         `${TMDB}/2CAL2433ZeIihfX1Hb2139CX0pQ.jpg`, // Control
@@ -62,7 +64,9 @@ export default function ListsSection({
       film_count: 14,
       tv_count: 0,
       like_count: '6.8K',
-      username: 'celluloid_sound',
+      user: {
+        username: 'celluloid_sound',
+      },
       posters: [
         `${TMDB}/gHlnMg3EeCMj0BEbGi2lfGCElAi.jpg`, // Stop Making Sense
         `${TMDB}/hXqgMDxHNPQnk5YbvRG4HlGqy0.jpg`, // The Last Waltz
@@ -79,7 +83,9 @@ export default function ListsSection({
       film_count: 22,
       tv_count: 0,
       like_count: '11.4K',
-      username: 'backstage_pass',
+      user: {
+        username: 'backstage_pass',
+      },
       posters: [
         `${TMDB}/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg`, // Bohemian Rhapsody
         `${TMDB}/rCx1bEvqcaJEXMkWfq1yXo4XHRL.jpg`, // Almost Famous
@@ -95,7 +101,9 @@ export default function ListsSection({
       film_count: 24,
       tv_count: 7,
       like_count: '9.2K',
-      username: '_audiophile',
+      user: {
+        username: '_audiophile',
+      },
       posters: [
         `${TMDB}/wdaClThqMd3xMIRbVCdZFW4INkw.jpg`, // Drive
         `${TMDB}/4c2GqHDeHFl5W2A0oXQMBSjnE7E.jpg`, // Lost in Translation
@@ -112,7 +120,9 @@ export default function ListsSection({
       film_count: 39,
       tv_count: 5,
       like_count: '2.7K',
-      username: 'vhs_forever',
+      user: {
+        username: 'vhs_forever',
+      },
       posters: [
         `${TMDB}/9w0Vh9eRxCZxAH6E0BnOB3LFgCe.jpg`,
         `${TMDB}/8h9YMFn0PrGHWKrxCGxfEkFa0J2.jpg`,
@@ -129,7 +139,9 @@ export default function ListsSection({
       film_count: 0,
       tv_count: 12,
       like_count: '4.5K',
-      username: 'serialwatcher',
+      user: {
+        username: 'serialwatcher',
+      },
       posters: [
         `${TMDB}/4c2GqHDeHFl5W2A0oXQMBSjnE7E.jpg`,
         `${TMDB}/wdaClThqMd3xMIRbVCdZFW4INkw.jpg`,

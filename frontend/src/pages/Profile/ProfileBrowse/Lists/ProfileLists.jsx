@@ -29,7 +29,7 @@ export default function ProfileLists({ lists, username, isOwner }) {
       {/* Lists */}
       <div className='bg-bg-secondary  rounded-sm p-3 w-full text-zinc-200'>
         <h2 className='text-xs font-semibold tracking-widest mb-3'>
-          {isOwner ? 'YOUR LISTS' : 'LISTS'}
+          {isOwner ? 'YOUR LISTS' : `${username.toUpperCase()}'s LISTS`}
         </h2>
 
         <div className='flex flex-col'>
@@ -46,6 +46,7 @@ export default function ProfileLists({ lists, username, isOwner }) {
                   list={list}
                   username={username}
                   posterAmount={isOwner ? 6 : 10}
+                  publicView={false}
                 />
 
                 {idx !== filteredLists.length - 1 && (

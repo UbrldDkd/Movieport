@@ -19,4 +19,6 @@ urlpatterns = [
     # User network endpoints
     path('toggle_follow/<str:username>/', views.toggle_follow, name='toggle_follow'),
     
+    # Search for users
+    path('search_users/', views.search_users, name='search_users')
 ]

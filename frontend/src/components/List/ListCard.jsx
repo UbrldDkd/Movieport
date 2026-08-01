@@ -12,10 +12,15 @@ import ListCardPosters from '../List/ListCardPosters';
 import { Tooltip } from '../Common/Tooltip';
 import Pfp from '../Common/Pfp';
 
-export default function ListCard({ list, username, posterAmount }) {
+export default function ListCard({
+  list,
+  username,
+  posterAmount,
+  publicView = true,
+}) {
   const navigate = useNavigate();
   const items = (list.items || []).slice(0, posterAmount);
-  const linkUrl = `/${username}/list/${list.title_slug}`;
+  const linkUrl = `/${username || list.user.username}/list/${list.title_slug}`;
 
   return (
     <div className='flex flex-col sm:flex-row mb-1 rounded-xl '>
@@ -48,7 +53,8 @@ export default function ListCard({ list, username, posterAmount }) {
                     list.user || {
                       avatar: list.avatar,
                       avatar_url: list.avatar_url,
-                    }
+                    } ||
+                    list.creator_avatar
                   }
                   avatar={list.avatar}
                   avatarUrl={list.avatar_url}
@@ -93,7 +99,7 @@ export default function ListCard({ list, username, posterAmount }) {
             </Tooltip>
           )}
 
-          {list.is_owner && (
+          {list.is_owner && !publicView && (
             <Tooltip label={'Edit list'} position={'-top-7 -left-6'}>
               <Link
                 to={`${linkUrl}/edit/`}

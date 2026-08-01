@@ -10,6 +10,7 @@ export default function ReviewsSection({
   reviews = [],
   isLoading,
   includeItemDetails = false,
+  showProfile = true,
   url,
 }) {
   if (isLoading) {
@@ -92,11 +93,13 @@ export default function ReviewsSection({
       <SectionHeader header={header} />
 
       <div className='space-y-2.5 divide-y sm:fivide-zinc-800 md:divide-zinc-800 '>
-        {displayReviews.slice(0, 3).map((review) => (
+        {displayReviews.map((review) => (
           <ReviewCard
             key={review.id}
             review={review}
             includeItemDetails={includeItemDetails}
+            includeMoreRedirect={false}
+            showProfile={showProfile}
           />
         ))}
       </div>

@@ -98,6 +98,14 @@ class ContentRelationsViewSet(viewsets.ViewSet):
         if rating is None:
             return Response({"error": "rating required"}, status=400)
 
+        try:
+            rating_value = float(rating)
+        except (TypeError, ValueError):
+            return Response({"error": "rating must be a number"}, status=400)
+
+        if rating_value != 0 and (rating_value < 0.5 or rating_value > 5):
+            return Response({"error": "rating must be between 0.5 and 5"}, status=400)
+
         relation, created = ContentRelations.objects.get_or_create(
             user=request.user,
             tmdb_id=tmdb_id,
@@ -120,8 +128,7 @@ class ContentRelationsViewSet(viewsets.ViewSet):
                 relation.media_type = media_type
             relation.save()
 
-        # Set to null if 0, otherwise set the rating
-        relation.rating = None if rating == 0 else rating
+        relation.rating = None if rating_value == 0 else rating_value
         relation.save()
 
         return Response({"rating": relation.rating}, status=200)

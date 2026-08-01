@@ -1,109 +1,142 @@
 import { useEffect, useState } from 'react';
 import { Keys } from '../../../utils/constants/Keys.js';
 
-export function useFetchSearch({ value, currentPage, contentPerPage }) {
+export function useFetchSearch({ value, type, currentPage, contentPerPage }) {
   const [content, setContent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
 
+  const { API1 } = Keys;
+  const { Url, API_KEY, details } = API1;
+  const { movieTitle, tvTitle } = details;
+
   useEffect(() => {
     if (!value) return;
 
-    const fetchSearch = async () => {
+    async function fetchSearch() {
       try {
-        const { API1 } = Keys;
-        const { details, Url, API_KEY } = API1;
-
         setIsLoading(true);
         setError(null);
 
-        const startPage = (currentPage - 1) * 2 + 1; // fetch 2 pages (TV + Movie)
-        const fetchPromises = [];
         const searchTerm = encodeURIComponent(value);
 
-        for (let i = 0; i < 2; i++) {
-          fetchPromises.push(
-            fetch(
-              `${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`
-            )
-          );
-          fetchPromises.push(
-            fetch(
-              `${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + i}`
-            )
+        const endpoints = [];
+        const startPage = (currentPage - 1) * 2 + 1;
+
+        const addTv = type === 'tv' || type === 'both';
+        const addFilm = type === 'film' || type === 'both';
+
+        if (addTv) {
+          endpoints.push(
+            `${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage}`,
+            `${Url}search/tv?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + 1}`
           );
         }
 
-        const responses = await Promise.all(fetchPromises);
-        for (const res of responses) {
-          if (!res.ok) throw new Error('Search results could not be loaded');
+        if (addFilm) {
+          endpoints.push(
+            `${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage}`,
+            `${Url}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${startPage + 1}`
+          );
         }
 
-        const resultsData = await Promise.all(
-          responses.map((res) => res.json())
+        const responses = await Promise.all(endpoints.map((url) => fetch(url)));
+        const jsonData = await Promise.all(responses.map((r) => r.json()));
+
+        let allResults = jsonData.flatMap((d) => d.results || []);
+
+        allResults = allResults.filter(
+          (item, index, arr) => index === arr.findIndex((t) => t.id === item.id)
         );
 
-        // Flatten, remove duplicates, filter invalid entries
-        let allContent = resultsData
-          .flatMap((data) => data.results)
-          .filter(
-            (item, index, arr) =>
-              index === arr.findIndex((t) => t.id === item.id)
-          )
-          .filter(
-            (item) =>
-              (item[details.movieTitle] || item[details.tvTitle]) &&
-              (item[details.id] || item[details.id])
-          );
+        // FIXED: media_type always "film" or "tv"
+        allResults = allResults.map((item) => {
+          const isFilm = item[movieTitle];
+          const isTv = item[tvTitle];
 
-        // Boost exact matches first
-        allContent.sort((a, b) => {
-          const titleA = (
-            a[details.movieTitle] ||
-            a[details.tvTitle] ||
-            ''
-          ).toLowerCase();
-          const titleB = (
-            b[details.movieTitle] ||
-            b[details.tvTitle] ||
-            ''
-          ).toLowerCase();
+          const media_type = isFilm ? 'film' : isTv ? 'tv' : null;
+
+          return {
+            ...item,
+            media_type,
+          };
+        });
+
+        // FIXED: use media_type, not mediaType
+        const detailedResults = await Promise.all(
+          allResults.map(async (item) => {
+            if (!item.media_type) return item;
+
+            // FIXED: film → movie endpoint
+            const endpointType = item.media_type === 'film' ? 'movie' : 'tv';
+
+            const detailsRes = await fetch(
+              `${Url}${endpointType}/${item.id}?api_key=${API_KEY}&append_to_response=alternative_titles,credits`
+            );
+
+            const detailsData = await detailsRes.json();
+
+            if (!detailsData || detailsData.status_code) {
+              return item;
+            }
+
+            if (item.media_type === 'film') {
+              return {
+                ...item,
+                director:
+                  detailsData.credits?.crew?.find((p) => p.job === 'Director')
+                    ?.name || null,
+                alternative_titles:
+                  detailsData.alternative_titles?.titles || [],
+              };
+            }
+
+            if (item.media_type === 'tv') {
+              return {
+                ...item,
+                creator: detailsData.created_by || [],
+                seasons: detailsData.number_of_seasons || 0,
+                alternative_titles:
+                  detailsData.alternative_titles?.results || [],
+              };
+            }
+
+            return item;
+          })
+        );
+
+        detailedResults.sort((a, b) => {
+          const titleA = (a.title || a.name || '').toLowerCase();
+          const titleB = (b.title || b.name || '').toLowerCase();
           const searchLower = value.toLowerCase();
 
           if (titleA === searchLower) return -1;
           if (titleB === searchLower) return 1;
 
-          // If neither exact match, fallback to popularity
-          return (
-            (b[details.popularity] || b[details.popularity] || 0) -
-            (a[details.popularity] || a[details.popularity] || 0)
-          );
+          return (b.popularity || 0) - (a.popularity || 0);
         });
 
-        // Slice to current page limit
-        allContent = allContent.slice(0, contentPerPage);
+        const sliced = detailedResults.slice(0, contentPerPage);
+        setContent(sliced);
 
-        setContent(allContent);
-
-        // Calculate total pages based on first response's total_results
-        if (currentPage === 1 && resultsData[0]?.total_results) {
-          const totalUserPages = Math.ceil(
-            resultsData[0].total_results / contentPerPage
+        const firstPageData = jsonData[0];
+        if (firstPageData?.total_results) {
+          setTotalPages(
+            Math.ceil(firstPageData.total_results / contentPerPage)
           );
-          setTotalPages(totalUserPages);
         }
       } catch (err) {
-        console.error('Error fetching search results:', err);
+        console.error('Search error:', err);
         setError(err);
         setContent([]);
       } finally {
         setIsLoading(false);
       }
-    };
+    }
 
     fetchSearch();
-  }, [value, currentPage, contentPerPage]);
+  }, [value, type, currentPage, contentPerPage]);
 
   return { content, isLoading, error, totalPages };
 }

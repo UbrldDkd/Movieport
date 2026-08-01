@@ -60,6 +60,16 @@ def register_user(request):
 
     return response
 
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def logout_user(request):
+    """
+    Logout user.
+    """
+    response = Response({"message": "Logged out"})
+    response.delete_cookie("access_token")
+    response.delete_cookie("refresh_token")
+    return response
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -84,6 +94,7 @@ def login_user(request):
     return response
 
 
+
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def check_auth(request):
@@ -98,16 +109,6 @@ def check_auth(request):
 
 
 
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def logout_user(request):
-    """
-    Logout user.
-    """
-    response = Response({"message": "Logged out"})
-    response.delete_cookie("access_token")
-    response.delete_cookie("refresh_token")
-    return response
 
 
 @api_view(["GET"])
@@ -299,3 +300,48 @@ def toggle_follow(request, username):
 
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
+    
+    
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def search_users(request):
+    """
+    Search users by username with pagination.
+    Query params:
+        value: search term
+        usersPerPage: number of users per page
+        pageNumber: which page to return
+    """
+
+    value = request.GET.get("value", "").strip()
+    users_per_page = int(request.GET.get("usersPerPage", 20))
+    page_number = int(request.GET.get("pageNumber", 1))
+
+    # Filter users by username (case-insensitive)
+    queryset = User.objects.filter(username__icontains=value).order_by("username")
+
+    total_results = queryset.count()
+    total_pages = max((total_results - 1) // users_per_page + 1, 1)
+
+    # Pagination slice
+    start = (page_number - 1) * users_per_page
+    end = start + users_per_page
+    users_page = queryset[start:end]
+
+    # Serialize only username + avatar + avatar_image
+    data = [
+        {
+            "username": user.username,
+            "avatar": user.avatar,
+            "avatar_image": user.avatar_image.url if user.avatar_image else None,
+        }
+        for user in users_page
+    ]
+
+    return Response({
+        "results": data,
+        "total_results": total_results,
+        "total_pages": total_pages,
+        "current_page": page_number,
+        "users_per_page": users_per_page,
+    })

@@ -1,8 +1,28 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import Lists
 from ContentRelations.serializers import ContentRelationsSerializer
 
+User = get_user_model()
+
+
+class ListUserSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "avatar"]
+
+    def get_avatar(self, obj):
+        if obj.avatar_image:
+            return obj.get_avatar_url()
+        if obj.avatar:
+            return obj.avatar
+        return User.AVATAR_CHOICES[0][0] if User.AVATAR_CHOICES else "death"
+
+
 class ListsSerializer(serializers.ModelSerializer):
+    user = ListUserSerializer(read_only=True)
     item_count = serializers.SerializerMethodField()
     film_count = serializers.SerializerMethodField()
     tv_count = serializers.SerializerMethodField()
@@ -16,8 +36,9 @@ class ListsSerializer(serializers.ModelSerializer):
         model = Lists
         fields = [
             'id', 'title', 'description', 'public', 'created_at', 'updated_at',
-            'item_count', 'film_count', 'tv_count', 'title_slug', 'items', 
-            'watched_percentage', 'liked_by', 'likes_count', 'is_owner'
+            'item_count', 'film_count', 'tv_count', 'title_slug', 'items',
+            'watched_percentage', 'liked_by', 'likes_count', 'is_owner',
+            'user',
         ]
 
     def get_item_count(self, obj):
@@ -25,7 +46,7 @@ class ListsSerializer(serializers.ModelSerializer):
 
     def get_film_count(self, obj):
         return obj.items.filter(media_type='film').count()
-    
+
     def get_tv_count(self, obj):
         return obj.items.filter(media_type='tv').count()
 
@@ -34,13 +55,13 @@ class ListsSerializer(serializers.ModelSerializer):
         if request and request.user.is_authenticated:
             return obj.user == request.user
         return False
-    
+
     def get_watched_percentage(self, obj):
         total = obj.items.count()
         if total == 0:
             return 0
         watched = obj.items.filter(watched=True).count()
         return round((watched / total) * 100, 2)
-    
+
     def get_liked_by(self, obj):
         return [user.username for user in obj.likes.all()]

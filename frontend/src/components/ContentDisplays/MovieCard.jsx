@@ -1,5 +1,4 @@
 import { Keys } from '../../../utils/constants/Keys.js';
-import { GenreMap } from '../../../utils/constants/GenreMap.js';
 import { useState, useRef, useEffect } from 'react';
 
 export default function MovieCard({ content, showFullDate = false }) {
@@ -12,29 +11,23 @@ export default function MovieCard({ content, showFullDate = false }) {
   const { API1 } = Keys;
   const { details, Url } = API1;
 
-  // Handle hover timer and positioning
   useEffect(() => {
     if (isHovered) {
-      // Shorter delay on mobile for better touch experience
-      const delay = window.innerWidth < 768 ? 500 : 750; // 0.5s on mobile, 0.75s on desktop
+      const delay = window.innerWidth < 768 ? 500 : 750;
 
-      // Start timer for showing hover card
       hoverTimerRef.current = setTimeout(() => {
         setShowHoverCard(true);
 
-        // Check positioning when showing
         if (cardRef.current) {
           const rect = cardRef.current.getBoundingClientRect();
           const viewportWidth = window.innerWidth;
           const cardWidth = rect.width;
 
-          // On mobile, prefer showing on right with more space consideration
           const spaceBuffer = window.innerWidth < 768 ? 10 : 20;
           setShowRight(rect.right + cardWidth < viewportWidth - spaceBuffer);
         }
       }, delay);
     } else {
-      // Clear timer and hide hover card immediately when not hovering
       if (hoverTimerRef.current) {
         clearTimeout(hoverTimerRef.current);
         hoverTimerRef.current = null;
@@ -42,21 +35,12 @@ export default function MovieCard({ content, showFullDate = false }) {
       setShowHoverCard(false);
     }
 
-    // Cleanup timer on unmount
     return () => {
       if (hoverTimerRef.current) {
         clearTimeout(hoverTimerRef.current);
       }
     };
   }, [isHovered]);
-
-  // Get genres for this content
-  const genres = content[details.genre]
-    ? content[details.genre]
-        .map((genreId) => GenreMap[genreId])
-        .filter(Boolean)
-        .slice(0, 3)
-    : [];
 
   return (
     <div
@@ -67,7 +51,7 @@ export default function MovieCard({ content, showFullDate = false }) {
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
     >
-      {/* Poster container with fixed aspect ratio and size */}
+      {/* Poster */}
       <div className='aspect-[2/3] w-[110px] md:w-[170px] bg-bg-secondary rounded overflow-hidden select-none cursor-pointer'>
         <img
           src={`https://image.tmdb.org/t/p/original/${content[details.poster]}`}
@@ -117,12 +101,13 @@ export default function MovieCard({ content, showFullDate = false }) {
         <p className='text-zinc-400 select-none cursor-pointer hover:text-zinc-500 transition-colors duration-300 text-xs md:text-sm'>
           {content[details.movieTitle] ? 'Movie' : 'TV Show'}
         </p>
+
         <p className='text-text-primary select-none cursor-pointer text-right pr-1 text-xs md:text-sm'>
-          {Number(content?.[details.rating].toFixed(1))}/10
+          {Number(content?.[details.rating]?.toFixed(1))}/10
         </p>
       </div>
 
-      {/* Hover Details Container */}
+      {/* Hover Details */}
       {showHoverCard && (
         <div
           className={`absolute top-0 z-50 w-[130px] md:w-[183px] h-[185px] md:h-[255px] bg-zinc-950 border border-zinc-900 rounded p-2 md:p-3 shadow-lg flex flex-col overflow-hidden animate-fadeIn ${
@@ -132,29 +117,10 @@ export default function MovieCard({ content, showFullDate = false }) {
             animation: 'fadeIn 0.3s ease-out forwards',
           }}
         >
-          {/* Rating (Desktop only) */}
-          <div className='mb-2 hidden md:block'></div>
-
-          {/* Genres */}
-          {genres.length > 0 && (
-            <div className='mb-2'>
-              <p className='text-zinc-400 text-xs mb-1'>Genres:</p>
-              <div className='flex flex-wrap gap-1'>
-                {genres.map((genre, index) => (
-                  <span
-                    key={index}
-                    className='text-xs bg-zinc-700 px-1 py-0.5 rounded'
-                  >
-                    {genre}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Overview (scrollable if content overflows) */}
-          <div className='flex-1 overflow-hidden min-h-0 '>
+          {/* Overview */}
+          <div className='flex-1 overflow-hidden min-h-0'>
             <p className='text-zinc-400 text-xs mb-1'>Overview:</p>
+
             <div className='text-text-primary text-xs leading-tight overflow-auto pr-1 scrollbar-hide max-h-[5.5rem] md:max-h-[8.5rem]'>
               <p className='whitespace-normal'>
                 {content[details.overview] || 'No overview available.'}

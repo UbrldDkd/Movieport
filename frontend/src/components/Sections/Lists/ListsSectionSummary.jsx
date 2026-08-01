@@ -19,7 +19,9 @@ export default function ListsSectionSummary({
       film_count: 47,
       tv_count: 30,
       like_count: '12K',
-      username: 'scifi_fan',
+      user: {
+        username: 'scifi_fan',
+      },
       items: [
         { id: 101, poster_path: '/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg' },
         { id: 102, poster_path: '/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg' },
@@ -37,7 +39,9 @@ export default function ListsSectionSummary({
       film_count: 23,
       tv_count: 3,
       like_count: '8.5K',
-      username: 'mind_bender',
+      user: {
+        username: 'mind_bender',
+      },
       items: [
         { id: 201, poster_path: '/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg' },
         { id: 202, poster_path: '/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg' },
@@ -55,7 +59,9 @@ export default function ListsSectionSummary({
       film_count: 31,
       tv_count: 25,
       like_count: '5.2K',
-      username: 'film_buffs_unite',
+      user: {
+        username: 'film_buffs_unite',
+      },
       items: [
         { id: 301, poster_path: '/kqjL17yufvn9OVLyXYpvtyrFfak.jpg' },
         { id: 302, poster_path: '/5KCVkau1HEl7ZzfPsKAPM0sMiKc.jpg' },

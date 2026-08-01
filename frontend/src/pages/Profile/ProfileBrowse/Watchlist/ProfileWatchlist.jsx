@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ContentDisplayBlock from '../../../../components/ContentDisplays/ContentDisplayBlock';
-import Pagination from '../Pagination/Pagination';
+import PaginationPanel from '../../../../components/Common/PaginationPanel';
 
 export default function ProfileWatchlist({ items = [], username, isOwner }) {
   const ITEMS_PER_PAGE = 36;
@@ -47,7 +47,7 @@ export default function ProfileWatchlist({ items = [], username, isOwner }) {
         />
 
         {totalPages > 1 && (
-          <Pagination
+          <PaginationPanel
             currentPage={currentPage}
             totalPages={totalPages}
             setCurrentPage={setCurrentPage}
