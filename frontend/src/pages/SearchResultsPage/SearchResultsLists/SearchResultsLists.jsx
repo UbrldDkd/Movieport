@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSearchLists } from './hooks/useSearchLists';
-import PaginationPanel from '../../../components/common/PaginationPanel.jsx';
-import LightHouse from '../../../components/common/loadingScreens/LightHouse.jsx';
+import PaginationPanel from '../../../components/Common/PaginationPanel.jsx';
+import LightHouse from '../../../components/Common/loadingScreens/LightHouse.jsx';
 import SearchNoResults from '../SearchNoResults';
 import ListCard from '../../../components/List/ListCard.jsx';
 

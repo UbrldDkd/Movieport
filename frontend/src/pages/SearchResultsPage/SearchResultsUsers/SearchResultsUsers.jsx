@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 import { useSearchUsers } from './hooks/useSearchUsers';
-import PaginationPanel from '../../../components/common/PaginationPanel.jsx';
-import LightHouse from '../../../components/common/loadingScreens/LightHouse.jsx';
-import Pfp from '../../../components/common/Pfp';
+import PaginationPanel from '../../../components/Common/PaginationPanel.jsx';
+import LightHouse from '../../../components/Common/loadingScreens/LightHouse.jsx';
+import Pfp from '../../../components/Common/Pfp';
 import SearchNoResults from '../SearchNoResults';
 
 import {

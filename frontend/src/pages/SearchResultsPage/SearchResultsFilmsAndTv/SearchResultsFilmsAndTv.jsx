@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { useFetchSearch } from '../hooks/useFetchSearch.js';
 
-import PaginationPanel from '../../../components/common/PaginationPanel.jsx';
-import LightHouse from '../../../components/common/loadingScreens/LightHouse.jsx';
+import PaginationPanel from '../../../components/Common/PaginationPanel.jsx';
+import LightHouse from '../../../components/Common/loadingScreens/LightHouse.jsx';
 
 import SearchResultsContentCard from './SearchResultsContentCard.jsx';
 import SearchNoResults from '../SearchNoResults';
