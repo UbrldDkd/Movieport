@@ -5,7 +5,7 @@ import ContentContainer from '../../components/WrapperContainers/ContentContaine
 import ContentCardPoster from '../../components/ContentDisplays/ContentCard/ContentCardPoster';
 import ContentPageActionsPanel from '../ContentPage/ContentPageMain/ContentPageActionsPanel/ContentPageActionsPanel';
 import SectionHeader from '../../components/Sections/Common/SectionHeader';
-import { Tooltip } from '../../components/common/Tooltip';
+import { Tooltip } from '../../components/Common/Tooltip';
 const mockReview = {
   id: 1,
   user: {
