@@ -19,7 +19,7 @@ export default function useFetchOscarTitles() {
       try {
         // Step 1: Get the "oscar" keyword ID
         const keywordRes = await fetch(
-          `${Url}/search/keyword?api_key=${API_KEY}&query=oscar`,
+          `${Url}search/keyword?api_key=${API_KEY}&query=oscar`,
           { signal: controller.signal }
         );
         if (!keywordRes.ok) throw new Error('Failed to fetch Oscar keyword ID');
