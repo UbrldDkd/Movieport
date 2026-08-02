@@ -3,7 +3,7 @@ import dj_database_url
 import os
 
 # Debug & Hosts
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 
 # Database - Render PostgreSQL
