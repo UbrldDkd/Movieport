@@ -33,7 +33,7 @@ export default function useFetchOscarTitles() {
 
         // Step 2: Fetch movies with this keyword
         const moviesRes = await fetch(
-          `${Url}/discover/movie?api_key=${API_KEY}&with_keywords=${oscarKeywordId}&sort_by=popularity.desc`,
+          `${Url}discover/movie?api_key=${API_KEY}&with_keywords=${oscarKeywordId}&sort_by=popularity.desc`,
           { signal: controller.signal }
         );
         if (!moviesRes.ok) throw new Error('Failed to fetch Oscar movies');
