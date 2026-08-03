@@ -150,12 +150,11 @@ def check_auth(request):
 
 
 
-
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def get_user_by_username(request, username):
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(username__iexact=username)
 
         return Response(
             PublicProfileSerializer(

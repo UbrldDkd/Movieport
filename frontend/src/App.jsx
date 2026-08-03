@@ -31,10 +31,10 @@ import TVShows from './pages/TVShows/TVShows.jsx';
 import ContentPage from './pages/ContentPage/ContentPage.jsx';
 import FilteredResults from './pages/FilteredResults/FilteredResults.jsx';
 
-// Search / Explore
+// Search
 import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage.jsx';
 
-// Static pages
+// Static
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Privacy from './pages/Privacy.jsx';
@@ -43,58 +43,67 @@ import { useIsLoggedIn } from './utils/helpers/useIsLoggedIn.js';
 
 export default function App() {
   const isLoggedIn = useIsLoggedIn();
+
   return (
     <div className='bg-zinc-950 w-full min-h-screen'>
       <Navbar />
       <ScrollToTop />
 
       <Routes>
-        {/* Profile / Lists (specific first) */}
-        <Route path='/:username/list/create/' element={<EditList />} />
-        <Route
-          path='/:username/list/:title_slug/edit/'
-          element={<EditList />}
-        />
-        <Route path='/:username/list/:title_slug/' element={<List />} />
-        <Route path='/:username/film/:title' element={<Review />} />
+        {/* Main */}
+        <Route path='/' element={isLoggedIn ? <Home /> : <Landing />} />
 
         {/* Settings */}
-        <Route path='/settings/' element={<Settings />} />
+        <Route path='/settings' element={<Settings />} />
         <Route path='/settings/:tab' element={<Settings />} />
+
+        {/* Media - put BEFORE username routes */}
+        <Route path='/films' element={<Films />} />
+        <Route
+          path='/films/:filter/*'
+          element={<FilteredResults mediaType='movie' />}
+        />
+
+        <Route path='/tv' element={<TVShows />} />
+
+        {/* Content pages */}
+        <Route path='/:mediaType/:id' element={<ContentPage />} />
+
+        <Route
+          path='/tv/:filter/*'
+          element={<FilteredResults mediaType='tv' />}
+        />
+
+        {/* Lists */}
+        <Route path='/lists' element={<Lists />} />
+
+        {/* Search */}
+        <Route path='/search/:by' element={<SearchResultsPage />} />
+        <Route path='/Search/:for/:by' element={<SearchResultsPage />} />
+
+        {/* Profile lists */}
+        <Route path='/:username/list/create' element={<EditList />} />
+        <Route path='/:username/list/:title_slug/edit' element={<EditList />} />
+        <Route path='/:username/list/:title_slug' element={<List />} />
+        <Route path='/:username/film/:title' element={<Review />} />
 
         {/* Profile tabs */}
         <Route path='/:username/watched/:subtab?' element={<ProfileBrowse />} />
-        <Route path='/:username/activity/' element={<ProfileBrowse />} />
-        <Route path='/:username/reviews/' element={<ProfileBrowse />} />
-        <Route path='/:username/lists/' element={<ProfileBrowse />} />
-        <Route path='/:username/watchlist/' element={<ProfileBrowse />} />
+        <Route path='/:username/activity' element={<ProfileBrowse />} />
+        <Route path='/:username/reviews' element={<ProfileBrowse />} />
+        <Route path='/:username/lists' element={<ProfileBrowse />} />
+        <Route path='/:username/watchlist' element={<ProfileBrowse />} />
         <Route path='/:username/likes/:subtab?' element={<ProfileBrowse />} />
-        <Route path='/:username/following/' element={<ProfileBrowse />} />
-        <Route path='/:username/followers/' element={<ProfileBrowse />} />
-        <Route path='/:username/' element={<Profile />} />
+        <Route path='/:username/following' element={<ProfileBrowse />} />
+        <Route path='/:username/followers' element={<ProfileBrowse />} />
 
-        {/* Main */}
-        <Route path='/' element={isLoggedIn ? <Home /> : <Landing />} />
-        <Route path='/films/' element={<Films />} />
-        <Route
-          path='/films/*'
-          element={<FilteredResults mediaType='movie' />}
-        />
-        <Route path='/tv/' element={<TVShows />} />
-        <Route path='/tv/*' element={<FilteredResults mediaType='tv' />} />
-        <Route path='/lists/' element={<Lists />} />
-
-        {/* Search / Discover */}
-        <Route path='/search/:by/' element={<SearchResultsPage />} />
-        <Route path='/Search/:for/:by' element={<SearchResultsPage />} />
-
-        {/* Content */}
-        <Route path='/:mediaType/:id/' element={<ContentPage />} />
+        {/* Profile */}
+        <Route path='/:username' element={<Profile />} />
 
         {/* Static */}
-        <Route path='/about/' element={<About />} />
-        <Route path='/contact/' element={<Contact />} />
-        <Route path='/privacy/' element={<Privacy />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/privacy' element={<Privacy />} />
       </Routes>
 
       <MobileBottomNav />

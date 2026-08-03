@@ -22,6 +22,7 @@ export default function FavoritePickerModal({
 
   const { content = [], isLoading } = useFetchSearch({
     value: query,
+    type: 'both',
     currentPage: 1,
     contentPerPage: 50,
   });
