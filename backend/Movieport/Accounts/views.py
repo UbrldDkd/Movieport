@@ -55,10 +55,26 @@ def register_user(request):
         status=status.HTTP_201_CREATED,
     )
 
-    response.set_cookie("access_token", str(refresh.access_token), max_age=60 * 30, httponly=True, samesite="Lax", secure=True)
-    response.set_cookie("refresh_token", str(refresh), max_age=60 * 60 * 24 * 7, httponly=True, samesite="Lax", secure=True)
+    response.set_cookie(
+        "access_token",
+        str(refresh.access_token),
+        max_age=60 * 30,
+        httponly=True,
+        secure=True,
+        samesite="None",
+    )
+
+    response.set_cookie(
+        "refresh_token",
+        str(refresh),
+        max_age=60 * 60 * 24 * 7,
+        httponly=True,
+        secure=True,
+        samesite="None",
+    )
 
     return response
+
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -67,8 +83,17 @@ def logout_user(request):
     Logout user.
     """
     response = Response({"message": "Logged out"})
-    response.delete_cookie("access_token")
-    response.delete_cookie("refresh_token")
+
+    response.delete_cookie(
+        "access_token",
+        samesite="None",
+    )
+
+    response.delete_cookie(
+        "refresh_token",
+        samesite="None",
+    )
+
     return response
 
 @api_view(["POST"])
@@ -88,8 +113,23 @@ def login_user(request):
         status=status.HTTP_200_OK,
     )
 
-    response.set_cookie("access_token", str(refresh.access_token), max_age=60 * 30, httponly=True, samesite="Lax", secure=True)
-    response.set_cookie("refresh_token", str(refresh), max_age=60 * 60 * 24 * 7, httponly=True, samesite="Lax", secure=True)
+    response.set_cookie(
+        "access_token",
+        str(refresh.access_token),
+        max_age=60 * 30,
+        httponly=True,
+        secure=True,
+        samesite="None",
+    )
+
+    response.set_cookie(
+        "refresh_token",
+        str(refresh),
+        max_age=60 * 60 * 24 * 7,
+        httponly=True,
+        secure=True,
+        samesite="None",
+    )
 
     return response
 

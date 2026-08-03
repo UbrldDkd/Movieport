@@ -1,11 +1,7 @@
-// Third-party
 import axios from 'axios';
 
-// Config
-import { API_BASE_URL, COOKIE_NAMES } from './apiConfig';
+import { API_BASE_URL } from './apiConfig';
 
-// Helpers
-import { readCookie } from './getCookie';
 import {
   isTokenRefreshInProgress,
   beginTokenRefresh,
@@ -14,11 +10,11 @@ import {
   retryAllWaitingRequestsWithNewToken,
 } from './tokenRefreshQueueManager';
 
+
 export async function refreshAccessToken(originalRequest) {
   if (isTokenRefreshInProgress()) {
     return new Promise((resolve) => {
-      addWaitingRequest((newAccessToken) => {
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+      addWaitingRequest(() => {
         resolve(retryOriginalRequest(originalRequest));
       });
     });
@@ -27,25 +23,20 @@ export async function refreshAccessToken(originalRequest) {
   beginTokenRefresh();
 
   try {
-    const refreshToken = readCookie(COOKIE_NAMES.REFRESH_TOKEN);
-
-    if (!refreshToken) {
-      throw new Error('No refresh token available');
-    }
-
     await axios.post(
       `${API_BASE_URL}/accounts/refresh/`,
-      { refresh: refreshToken },
-      { withCredentials: true }
+      {},
+      {
+        withCredentials: true,
+      }
     );
 
-    const newAccessToken = readCookie(COOKIE_NAMES.ACCESS_TOKEN);
+    retryAllWaitingRequestsWithNewToken();
 
-    retryAllWaitingRequestsWithNewToken(newAccessToken);
     completeTokenRefresh();
 
-    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
     return retryOriginalRequest(originalRequest);
+
   } catch (error) {
     completeTokenRefresh();
     redirectToLoginPage();
@@ -53,9 +44,14 @@ export async function refreshAccessToken(originalRequest) {
   }
 }
 
+
 function retryOriginalRequest(request) {
-  return axios(request);
+  return axios({
+    ...request,
+    withCredentials: true,
+  });
 }
+
 
 function redirectToLoginPage() {
   window.location.href = '/';

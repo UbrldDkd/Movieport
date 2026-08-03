@@ -17,7 +17,7 @@ export function queueRequest(retryRequest) {
   requestsWaitingForToken.push(retryRequest);
 }
 
-export function retryQueuedRequests(newAccessToken) {
-  requestsWaitingForToken.forEach((retry) => retry(newAccessToken));
+export function retryQueuedRequests() {
+  requestsWaitingForToken.forEach((retry) => retry());
   requestsWaitingForToken = [];
 }

@@ -2,8 +2,6 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-console.log('API URL:', import.meta.env.VITE_API_URL);
-
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
@@ -12,33 +10,15 @@ const apiClient = axios.create({
   },
 });
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
-apiClient.interceptors.request.use(
-  (config) => {
-    const access_token = getCookie('access_token');
-    if (access_token) {
-      config.headers.Authorization = `Bearer ${access_token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
 let isRefreshing = false;
 let refreshSubscribers = [];
 
-function subscribeTokenRefresh(cb) {
-  refreshSubscribers.push(cb);
+function subscribeTokenRefresh(callback) {
+  refreshSubscribers.push(callback);
 }
 
-function onRefreshed(token) {
-  refreshSubscribers.forEach((cb) => cb(token));
+function onRefreshed() {
+  refreshSubscribers.forEach((callback) => callback());
   refreshSubscribers = [];
 }
 
@@ -48,36 +28,30 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
       if (isRefreshing) {
         return new Promise((resolve) => {
-          subscribeTokenRefresh((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
+          subscribeTokenRefresh(() => {
             resolve(apiClient(originalRequest));
           });
         });
       }
 
-      originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        const refreshTokenCookie = getCookie('refresh_token');
-        if (!refreshTokenCookie) {
-          throw new Error('No refresh token');
-        }
-
         await axios.post(
           `${API_BASE_URL}/accounts/refresh/`,
+          {},
           {
-            refresh: refreshTokenCookie,
-          },
-          { withCredentials: true }
+            withCredentials: true,
+          }
         );
 
-        const access_token = getCookie('access_token');
-        onRefreshed(access_token);
         isRefreshing = false;
-        originalRequest.headers.Authorization = `Bearer ${access_token}`;
+        onRefreshed();
+
         return apiClient(originalRequest);
       } catch (refreshError) {
         isRefreshing = false;

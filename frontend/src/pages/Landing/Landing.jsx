@@ -67,7 +67,7 @@ export default function Landing() {
             <div className='mt-5 justify-center'>
               <button
                 onClick={() => openModal('register')}
-                className='px-5 py-2 tracking-wide bg-red-950 text-zinc-100 rounded-md font-semibold hover:bg-red-950/80 cursor-pointer transition'
+                className='px-5 py-2 tracking-wider bg-red-950 text-zinc-100 rounded-md font-semibold hover:bg-red-950/80 cursor-pointer transition'
               >
                 Get started
               </button>

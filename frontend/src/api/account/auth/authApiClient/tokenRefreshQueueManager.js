@@ -17,7 +17,7 @@ export function addWaitingRequest(requestRetryFunction) {
   waitingRequests.push(requestRetryFunction);
 }
 
-export function retryAllWaitingRequestsWithNewToken(newAccessToken) {
-  waitingRequests.forEach((retryFunction) => retryFunction(newAccessToken));
+export function retryAllWaitingRequestsWithNewToken() {
+  waitingRequests.forEach((retryFunction) => retryFunction());
   waitingRequests = [];
 }
