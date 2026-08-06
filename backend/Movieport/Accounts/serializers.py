@@ -42,13 +42,25 @@ class AuthUserSerializer(serializers.ModelSerializer):
 
     def get_avatar(self, obj):
         if obj.avatar_image:
-            return obj.get_avatar_url()
+            return self._build_avatar_url(obj)
         if obj.avatar:
             return obj.avatar
         return User.AVATAR_CHOICES[0][0] if User.AVATAR_CHOICES else 'death'
 
     def get_avatar_url(self, obj):
-        return obj.get_avatar_url()
+        return self._build_avatar_url(obj)
+
+    def _build_avatar_url(self, obj):
+        if not obj.avatar_image:
+            return None
+
+        url = obj.avatar_image.url
+        request = self.context.get('request')
+
+        if request and url.startswith('/'):
+            return request.build_absolute_uri(url)
+
+        return url
 
     def get_followers_count(self, obj):
         return obj.followers.count()

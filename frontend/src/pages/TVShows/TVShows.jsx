@@ -49,7 +49,7 @@ export default function TVShows() {
         <div className='  mx-auto flex-1  overflow-hidden md:max-w-[955px] justify-center  w-full'>
           <SectionHeader header='Popular this week' />
           <div className='px-3 sm:px-0 md:px-0'>
-            <ContentDisplayX content={content.popular} view='sm' />
+            <ContentDisplayX content={content.onTheAir} view='sm' />
           </div>
         </div>
       </PageContainer>

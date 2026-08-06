@@ -60,7 +60,7 @@ export default function App() {
         {/* Media - put BEFORE username routes */}
         <Route path='/films' element={<Films />} />
         <Route
-          path='/films/:filter/*'
+          path='/films/:filter/:value/*'
           element={<FilteredResults mediaType='movie' />}
         />
 
@@ -70,7 +70,7 @@ export default function App() {
         <Route path='/:mediaType/:id' element={<ContentPage />} />
 
         <Route
-          path='/tv/:filter/*'
+          path='/tv/:filter/:value/*'
           element={<FilteredResults mediaType='tv' />}
         />
 
@@ -79,7 +79,7 @@ export default function App() {
 
         {/* Search */}
         <Route path='/search/:by' element={<SearchResultsPage />} />
-        <Route path='/Search/:for/:by' element={<SearchResultsPage />} />
+        <Route path='/search/:for/:by' element={<SearchResultsPage />} />
 
         {/* Profile lists */}
         <Route path='/:username/list/create' element={<EditList />} />

@@ -1,11 +1,15 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import csrf_exempt
 import traceback
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from rest_framework.exceptions import ValidationError
 
 from .serializers import (
@@ -31,15 +35,40 @@ User = get_user_model()
 def build_auth_response(user, request):
     return {
         "isAuthenticated": True,
-        **AuthUserSerializer(
-            user,
-            context={"request": request},
-        ).data,
+        **AuthUserSerializer(user, context={"request": request}).data,
     }
+
+
+def get_auth_cookie_options():
+    secure_cookie = not settings.DEBUG
+    return {
+        "httponly": True,
+        "secure": secure_cookie,
+        "samesite": "None" if secure_cookie else "Lax",
+        "path": "/",
+    }
+
+
+def set_auth_cookie(response, name, value, max_age):
+    response.set_cookie(
+        name,
+        value,
+        max_age=max_age,
+        **get_auth_cookie_options(),
+    )
+
+
+def set_auth_cookies(response, refresh, remember=False):
+    access_max_age = 60 * 30
+    refresh_max_age = 60 * 60 * 24 * 30 if remember else 60 * 60 * 24 * 7
+
+    set_auth_cookie(response, "access_token", str(refresh.access_token), access_max_age)
+    set_auth_cookie(response, "refresh_token", str(refresh), refresh_max_age)
 
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
+@csrf_exempt
 def register_user(request):
     """
     Register new user.
@@ -49,55 +78,47 @@ def register_user(request):
     user = serializer.save()
 
     refresh = RefreshToken.for_user(user)
+    remember = request.data.get("remember") is True
 
     response = Response(
         build_auth_response(user, request),
         status=status.HTTP_201_CREATED,
     )
 
-    response.set_cookie(
-        "access_token",
-        str(refresh.access_token),
-        max_age=60 * 30,
-        httponly=True,
-        secure=True,
-        samesite="None",
-    )
-
-    response.set_cookie(
-        "refresh_token",
-        str(refresh),
-        max_age=60 * 60 * 24 * 7,
-        httponly=True,
-        secure=True,
-        samesite="None",
-    )
+    set_auth_cookies(response, refresh, remember=remember)
 
     return response
 
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
+@csrf_exempt
 def logout_user(request):
     """
     Logout user.
     """
+    cookie_options = get_auth_cookie_options()
     response = Response({"message": "Logged out"})
 
     response.delete_cookie(
         "access_token",
-        samesite="None",
+        path=cookie_options["path"],
+        secure=cookie_options["secure"],
+        samesite=cookie_options["samesite"],
     )
-
     response.delete_cookie(
         "refresh_token",
-        samesite="None",
+        path=cookie_options["path"],
+        secure=cookie_options["secure"],
+        samesite=cookie_options["samesite"],
     )
 
     return response
 
+
 @api_view(["POST"])
 @permission_classes([AllowAny])
+@csrf_exempt
 def login_user(request):
     """
     Login user.
@@ -107,32 +128,44 @@ def login_user(request):
     user = serializer.validated_data["user"]
 
     refresh = RefreshToken.for_user(user)
+    remember = request.data.get("remember") is True
 
     response = Response(
         build_auth_response(user, request),
         status=status.HTTP_200_OK,
     )
 
-    response.set_cookie(
-        "access_token",
-        str(refresh.access_token),
-        max_age=60 * 30,
-        httponly=True,
-        secure=True,
-        samesite="None",
-    )
-
-    response.set_cookie(
-        "refresh_token",
-        str(refresh),
-        max_age=60 * 60 * 24 * 7,
-        httponly=True,
-        secure=True,
-        samesite="None",
-    )
+    set_auth_cookies(response, refresh, remember=remember)
 
     return response
 
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+@csrf_exempt
+def refresh_token(request):
+    refresh_token_value = request.COOKIES.get("refresh_token")
+
+    if not refresh_token_value:
+        return Response(
+            {"detail": "Refresh token missing."},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    serializer = TokenRefreshSerializer(data={"refresh": refresh_token_value})
+
+    try:
+        serializer.is_valid(raise_exception=True)
+    except TokenError:
+        return Response(
+            {"detail": "Refresh token invalid or expired."},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    response = Response({"detail": "Token refreshed."}, status=status.HTTP_200_OK)
+    set_auth_cookie(response, "access_token", serializer.validated_data["access"], max_age=60 * 30)
+
+    return response
 
 
 @api_view(["GET"])
@@ -142,9 +175,21 @@ def check_auth(request):
     Check authentication status.
     """
     if request.user.is_authenticated:
-    
         return Response(build_auth_response(request.user, request))
-    
+
+    refresh_token_value = request.COOKIES.get("refresh_token")
+    if refresh_token_value:
+        try:
+            refresh = RefreshToken(refresh_token_value)
+            access = refresh.access_token
+            user = User.objects.get(id=refresh["user_id"])
+
+            response = Response(build_auth_response(user, request), status=status.HTTP_200_OK)
+            set_auth_cookie(response, "access_token", str(access), max_age=60 * 30)
+            return response
+        except (TokenError, User.DoesNotExist):
+            pass
+
     return Response({"isAuthenticated": False})
 
 

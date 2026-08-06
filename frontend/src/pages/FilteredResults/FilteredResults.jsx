@@ -8,6 +8,7 @@ import LightHouse from '../../components/Common/loadingScreens/LightHouse';
 import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplayBlock';
 import PaginationPanel from '../../components/Common/PaginationPanel';
 import NoFilteredResults from './NoFilteredResults';
+import FilteredResultsSelectionPanel from './FilteredResultsSelectionPanel.jsx';
 
 export default function FilteredResults({ mediaType }) {
   const filters = useUrlFilters();
@@ -44,62 +45,85 @@ export default function FilteredResults({ mediaType }) {
   return (
     <BackgroundContainer>
       <PageContainer>
-        <div className='flex items-center justify-between mt-4 mb-2'>
-          <p className='text-sm text-zinc-400'>
-            {content.length > 0 ? `${content.length} results` : 'No results'}
-          </p>
+        <div className='max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6'>
+          <div className='flex-1 min-w-0'>
+            <div className='flex flex-col gap-3'>
+              <div className='flex flex-col gap-2 mb-3'>
+                <p className='text-xs tracking-widest text-text-primary'>
+                  FILTERED RESULTS
+                </p>
+                <p className='text-sm text-zinc-400'>
+                  {content.length > 0
+                    ? `${content.length} results found`
+                    : 'No results available for this filter set.'}
+                </p>
+              </div>
 
-          {totalResults}
+              <div className='flex items-center justify-between mb-4'>
+                <div className='text-sm text-zinc-400'>
+                  {totalResults > 0 ? `${totalResults} total items` : ''}
+                </div>
 
-          <div className='flex gap-1'>
-            <button
-              onClick={() => navigate(getBasePath())}
-              className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
-                !isLarge
-                  ? 'bg-zinc-700 text-zinc-200'
-                  : 'text-zinc-500 hover:text-zinc-300'
-              }`}
-            >
-              Compact
-            </button>
+                <div className='flex gap-1'>
+                  <button
+                    onClick={() => navigate(getBasePath())}
+                    className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
+                      !isLarge
+                        ? 'bg-zinc-700 text-zinc-200'
+                        : 'text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    Compact
+                  </button>
 
-            <button
-              onClick={() => navigate(`${getBasePath()}/size/large`)}
-              className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
-                isLarge
-                  ? 'bg-zinc-700 text-zinc-200'
-                  : 'text-zinc-500 hover:text-zinc-300'
-              }`}
-            >
-              Large
-            </button>
+                  <button
+                    onClick={() => navigate(`${getBasePath()}/size/large`)}
+                    className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
+                      isLarge
+                        ? 'bg-zinc-700 text-zinc-200'
+                        : 'text-zinc-500 hover:text-zinc-300'
+                    }`}
+                  >
+                    Large
+                  </button>
+                </div>
+              </div>
+
+              {error ? (
+                <p className='text-red-400 text-sm py-6'>{error.message}</p>
+              ) : isLoading ? (
+                <LightHouse />
+              ) : content.length === 0 ? (
+                <NoFilteredResults filters={filters} />
+              ) : (
+                <ContentDisplayBlock
+                  content={content}
+                  displayAmount={contentPerPage}
+                  view={view}
+                />
+              )}
+
+              <PaginationPanel
+                currentPage={filters.page}
+                totalPages={totalPages - 1}
+                handlePageChange={(page) => {
+                  if (page === 1) {
+                    navigate(getBasePath());
+                  } else {
+                    navigate(`${getBasePath()}/page/${page}`);
+                  }
+                }}
+              />
+            </div>
+          </div>
+
+          <div className='hidden lg:block lg:w-[320px]'>
+            <FilteredResultsSelectionPanel
+              mediaType={mediaType}
+              filters={filters}
+            />
           </div>
         </div>
-
-        {error ? (
-          <p className='text-red-400 text-sm py-6'>{error.message}</p>
-        ) : isLoading ? (
-          <LightHouse />
-        ) : content.length === 0 ? (
-          <NoFilteredResults filters={filters} />
-        ) : (
-          <ContentDisplayBlock
-            content={content}
-            displayAmount={contentPerPage}
-            view={view}
-          />
-        )}
-        <PaginationPanel
-          currentPage={filters.page}
-          totalPages={totalPages - 1}
-          handlePageChange={(page) => {
-            if (page === 1) {
-              navigate(getBasePath());
-            } else {
-              navigate(`${getBasePath()}/page/${page}`);
-            }
-          }}
-        />
       </PageContainer>
     </BackgroundContainer>
   );

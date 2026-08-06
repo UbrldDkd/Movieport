@@ -42,6 +42,7 @@ export default function LoginForm({ onClose, switchToRegister }) {
           onChange={handleChange}
           className={inputClass}
           required
+          disabled={isLoading}
         />
       </div>
 
@@ -54,6 +55,7 @@ export default function LoginForm({ onClose, switchToRegister }) {
           onChange={handleChange}
           className={inputClass}
           required
+          disabled={isLoading}
         />
       </div>
 

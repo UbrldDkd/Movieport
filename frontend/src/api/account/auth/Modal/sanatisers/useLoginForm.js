@@ -13,10 +13,13 @@ export function useLoginForm({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await loginUser(formData);
+    const data = await loginUser({ ...formData, remember: rememberMe });
     if (data) {
       setFormData({ username: '', password: '' });
       onClose();
+    }
+    if (error) {
+      console.error('Login error:', error);
     }
   };
 
