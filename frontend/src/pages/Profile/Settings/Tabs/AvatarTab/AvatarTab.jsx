@@ -25,8 +25,20 @@ export default function AvatarTab({ avatar }) {
 
   const { updateAvatar, isLoading, error } = useUpdateAvatar();
 
+  const API_BASE_URL =
+    import.meta.env.VITE_API_URL || window?.location?.origin || '';
   const normalize = (src) =>
-    !src ? null : src.startsWith('http') ? src : `http://localhost:8000${src}`;
+    !src
+      ? null
+      : src.startsWith('http')
+        ? src
+        : src.startsWith('/')
+          ? API_BASE_URL
+            ? `${API_BASE_URL}${src}`
+            : src
+          : API_BASE_URL
+            ? `${API_BASE_URL}/${src}`
+            : src;
 
   const isCustom = selected === 'custom' && croppedDataUrl;
 

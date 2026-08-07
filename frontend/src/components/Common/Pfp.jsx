@@ -24,7 +24,8 @@ const SIZE_MAP = {
   },
 };
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || window?.location?.origin || '';
 
 function normalizeSrc(src) {
   if (!src) return null;
@@ -38,10 +39,10 @@ function normalizeSrc(src) {
   }
 
   if (src.startsWith('/')) {
-    return `${API_BASE_URL}${src}`;
+    return API_BASE_URL ? `${API_BASE_URL}${src}` : src;
   }
 
-  return `${API_BASE_URL}/${src}`;
+  return API_BASE_URL ? `${API_BASE_URL}/${src}` : src;
 }
 
 export default function Pfp({
@@ -56,12 +57,12 @@ export default function Pfp({
 }) {
   const resolvedAvatar =
     avatar ??
-    user?.avatar ??
-    user?.avatar_url ??
-    user?.avatarUrl ??
+    avatarUrl ??
     user?.avatar_image ??
     user?.avatarImage ??
-    avatarUrl ??
+    user?.avatar_url ??
+    user?.avatarUrl ??
+    user?.avatar ??
     null;
 
   const presetAvatar =
