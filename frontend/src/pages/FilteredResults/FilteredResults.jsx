@@ -9,6 +9,10 @@ import ContentDisplayBlock from '../../components/ContentDisplays/ContentDisplay
 import PaginationPanel from '../../components/Common/PaginationPanel';
 import NoFilteredResults from './NoFilteredResults';
 import FilteredResultsSelectionPanel from './FilteredResultsSelectionPanel.jsx';
+import DecadeYearSelector from '../../components/FilteredResults/DecadeYearSelector.jsx';
+import { TfiLayoutGrid2Alt } from 'react-icons/tfi';
+import { CgMenuGridR } from 'react-icons/cg';
+import BrowseBy from '../../components/BrowseBy/BrowseBy.jsx';
 
 export default function FilteredResults({ mediaType }) {
   const filters = useUrlFilters();
@@ -45,49 +49,52 @@ export default function FilteredResults({ mediaType }) {
   return (
     <BackgroundContainer>
       <PageContainer>
-        <div className='max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-6'>
+        <div className='max-w-[1600px] w-full mx-auto flex flex-col lg:flex-row gap-6'>
           <div className='flex-1 min-w-0'>
             <div className='flex flex-col gap-3'>
-              <div className='flex flex-col gap-2 mb-3'>
-                <p className='text-xs tracking-widest text-text-primary'>
-                  FILTERED RESULTS
-                </p>
-                <p className='text-sm text-zinc-400'>
-                  {content.length > 0
-                    ? `${content.length} results found`
-                    : 'No results available for this filter set.'}
-                </p>
-              </div>
-
               <div className='flex items-center justify-between mb-4'>
-                <div className='text-sm text-zinc-400'>
-                  {totalResults > 0 ? `${totalResults} total items` : ''}
-                </div>
+                {/* Top section */}
+                <div className='flex  flex-col w-full'>
+                  <div className='flex justify-between  items-center '>
+                    <div className='text-text-primary font-semibold tracking-wider '>
+                      {mediaType === 'films' ? 'Films' : 'TV Shows'}
+                    </div>
+                    <div className='flex gap-1'>
+                      <BrowseBy
+                        mediaType={mediaType}
+                        filters={filters}
+                        style='filteredResults'
+                      />
+                      <button
+                        onClick={() => navigate(getBasePath())}
+                        className={`py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
+                          !isLarge
+                            ? ' text-zinc-200'
+                            : 'text-zinc-500 hover:text-zinc-300 cursor-pointer'
+                        }`}
+                      >
+                        <CgMenuGridR size={20} />
+                      </button>
 
-                <div className='flex gap-1'>
-                  <button
-                    onClick={() => navigate(getBasePath())}
-                    className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
-                      !isLarge
-                        ? 'bg-zinc-700 text-zinc-200'
-                        : 'text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    Compact
-                  </button>
-
-                  <button
-                    onClick={() => navigate(`${getBasePath()}/size/large`)}
-                    className={`px-2 py-1 rounded-sm text-xs font-semibold tracking-wide transition-colors ${
-                      isLarge
-                        ? 'bg-zinc-700 text-zinc-200'
-                        : 'text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    Large
-                  </button>
+                      <button
+                        onClick={() => navigate(`${getBasePath()}/size/large`)}
+                        className={` rounded-sm text-xs font-semibold tracking-wide transition-colors ${
+                          isLarge
+                            ? ' text-zinc-200'
+                            : 'text-zinc-500 hover:text-zinc-300 cursor-pointer'
+                        }`}
+                      >
+                        <TfiLayoutGrid2Alt size={15} />
+                      </button>
+                    </div>
+                  </div>
+                  <div className='mt-1 mb-2.5 border-b border-zinc-600' />
                 </div>
               </div>
+              {(filters.decade ||
+                (Array.isArray(filters.year) && filters.year.length > 0)) && (
+                <DecadeYearSelector mediaType={mediaType} filters={filters} />
+              )}
 
               {error ? (
                 <p className='text-red-400 text-sm py-6'>{error.message}</p>
@@ -115,13 +122,6 @@ export default function FilteredResults({ mediaType }) {
                 }}
               />
             </div>
-          </div>
-
-          <div className='hidden lg:block lg:w-[320px]'>
-            <FilteredResultsSelectionPanel
-              mediaType={mediaType}
-              filters={filters}
-            />
           </div>
         </div>
       </PageContainer>

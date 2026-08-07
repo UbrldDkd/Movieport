@@ -67,7 +67,11 @@ export default function AuthTab() {
           required
         />
 
-        {localError && <div className='text-red-500 text-sm'>{localError}</div>}
+        {localError && (
+          <div className='text-red-800 font-semibold tracking-wide text-sm'>
+            {localError}
+          </div>
+        )}
 
         {error?.current_password && (
           <div className='text-red-800 font-semibold tracking-wide text-sm'>

@@ -1,6 +1,7 @@
 // tabs/GenresTab.jsx
 import { Link } from 'react-router-dom';
 import { GenreMap } from '../../../../../utils/constants/GenreMap';
+import { routeFor } from '../../../../../components/BrowseBy/helpers/buildFiltersPath';
 
 export default function GenresTab({ genres, mediaType, isLoading }) {
   const getGenreIdFromName = (genreName) => {
@@ -44,7 +45,7 @@ export default function GenresTab({ genres, mediaType, isLoading }) {
         return genreId ? (
           <Link
             key={index}
-            to={`/${mediaType}?genres=${genreId}&match=any`}
+            to={`/${routeFor(mediaType)}?genres=${genreId}&match=any`}
             className='px-3 py-1.5 bg-bg-secondary text-text-primary text-xs font-semibold tracking-wide rounded-sm hover:bg-red-900 hover:text-zinc-100 transition-all duration-200'
           >
             {genre}

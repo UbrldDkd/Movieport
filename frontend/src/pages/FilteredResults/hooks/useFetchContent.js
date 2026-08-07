@@ -53,6 +53,7 @@ export function useFetchContent({
           });
 
           fetchUrls.push(url);
+          console.log(`Fetching page ${startPage + i} from URL:`, url);
         }
 
         console.log('TMDB REQUEST URLS:', fetchUrls);

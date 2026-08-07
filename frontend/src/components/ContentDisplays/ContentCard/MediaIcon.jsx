@@ -9,7 +9,7 @@ import { FiTv } from 'react-icons/fi';
 import { Tooltip } from '../../Common/Tooltip';
 
 export default function MediaIcon({ mediaType, className }) {
-  const label = mediaType === 'movie' ? 'Film' : 'Tv-show';
+  const label = mediaType === 'film' ? 'Film' : 'Tv-show';
   return (
     <div className='inline-block relative'>
       <Tooltip

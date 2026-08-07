@@ -10,18 +10,14 @@ import Pfp from '../../components/Common/Pfp.jsx';
 // Utils/Helpers
 import { timeAgo } from '../../utils/helpers/timeAgo';
 
-export default function ListHeader({ list, username, view, setView }) {
+export default function ListHeader({ list, view, setView }) {
   const [hover, setHover] = useState(false);
-
+  const { username } = list.user || {};
   return (
     <div className='min-w-0 opacity-0 animate-fadeIn'>
       {/* User */}
       <div className='flex items-center gap-2 mb-3'>
-        <Pfp
-          avatar={list.creator_avatar}
-          size='sm'
-          className='border border-zinc-700'
-        />
+        <Pfp user={list.user} size='sm' className='border border-zinc-700' />
         <span className='text-xs text-zinc-400'>List by</span>
         <Link
           to={`/${username}/`}

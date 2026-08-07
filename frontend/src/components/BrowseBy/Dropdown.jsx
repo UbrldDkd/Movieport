@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-export default function Dropdown({ label, children }) {
+export default function Dropdown({ label, children, style = '', count = 0 }) {
   const [open, setOpen] = useState(false);
   const hoverTimer = useRef(null);
 
@@ -23,26 +23,34 @@ export default function Dropdown({ label, children }) {
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className={`
+        className={`${style === 'filteredResults' ? ' text-[4px] rounded-t-sm' : 'bg-zinc-950 gap-1  bg-zinc-950 border-x-1 border-y-2 text-xs'}
           flex
           items-center
-          gap-1
+        
           text-xs
           font-semibold
           tracking-widest
           py-1
           px-2
-          border-x-1
-          border-y-2
+        
           transition-colors
           ${
             open
               ? 'bg-zinc-500 text-zinc-200 border-zinc-800 border-b-zinc-500'
-              : 'text-zinc-300/80 bg-zinc-950 border-zinc-800  hover:text-zinc-200 '
+              : 'text-zinc-300/80 border-zinc-800  hover:text-zinc-200 '
           }
         `}
       >
-        {label}
+        <div className='flex items-center '>
+          {count > 0 && (
+            <span
+              className={`text-xs font-semibold  w-5 text-center ${open ? 'text-red-900' : 'text-zinc-500'}`}
+            >
+              {count}
+            </span>
+          )}
+          <span>{label}</span>
+        </div>
 
         <MdOutlineKeyboardArrowDown
           className={`text-xl transition-transform ${open ? 'rotate-180' : ''}`}

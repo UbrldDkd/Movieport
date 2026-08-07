@@ -1,10 +1,13 @@
 import { Keys } from '../../../utils/constants/Keys.js';
 import { translateFilters } from './translateFilter.js';
+import { CountriesMap } from '../../../utils/constants/CountriesMap.js';
+
+const CountryNameToCode = Object.fromEntries(
+  Object.entries(CountriesMap).map(([code, name]) => [name, code])
+);
 
 export function buildDiscoverUrl({ mediaType, filters }) {
   const translated = translateFilters(filters);
-
-  console.log('translated', translated);
 
   const {
     genre = [],
@@ -26,8 +29,12 @@ export function buildDiscoverUrl({ mediaType, filters }) {
     ? `&primary_release_date.gte=${decade.gte}&primary_release_date.lte=${decade.lte}`
     : '';
 
-  const countryQuery = country.length
-    ? `&with_origin_country=${country.join('|')}`
+  const countryCodes = country
+    .map((name) => CountryNameToCode[name] ?? name)
+    .filter(Boolean);
+
+  const countryQuery = countryCodes.length
+    ? `&with_origin_country=${countryCodes.join('|')}`
     : '';
 
   const serviceQuery = service

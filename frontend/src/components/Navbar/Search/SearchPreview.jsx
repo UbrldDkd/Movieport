@@ -14,7 +14,7 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { previewContent: content, isLoading, error } = useFetchPreview(value);
 
-  const mediaType = content?.[0]?.[details.movieTitle] ? 'film' : 'tv';
+  const mediaType = content?.[0]?.[details.movieReleaseDate] ? 'film' : 'tv';
   const displayCount = isMobile ? 4 : 5;
   const items = Array.isArray(content) ? content.slice(0, displayCount) : [];
   const expectedImages = items.filter((i) => i?.[details.poster]).length;
@@ -98,7 +98,10 @@ export default function SearchPreview({ value, setValue, setIsOpen }) {
                   </p>
                   <div className='flex justify-between items-center'>
                     <p className='text-zinc-400 text-xs md:text-sm'>
-                      <MediaIcon mediaType={mediaType} />
+                      <MediaIcon
+                        mediaType={mediaType}
+                        className={mediaType === 'tv' && '-left-6.5 -top-7'}
+                      />
                     </p>
                     <p className='text-xs md:text-sm text-text-primary'>
                       {rating && rating.toFixed(1)}

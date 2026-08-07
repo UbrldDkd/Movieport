@@ -66,7 +66,6 @@ export default function FilteredResultsSelectionPanel({ mediaType, filters }) {
         <div className='font-semibold text-xs tracking-widest text-text-primary mb-3'>
           BROWSE BY
         </div>
-        <FilterBy mediaType={filterMediaType} />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export default function Films() {
     <BackgroundContainer>
       {/* Popular movies section */}
       <PageContainer>
-        <div className='flex  items-center px-20 justify-between'>
+        <div className='flex  pt-4 items-center px-2  lg:px-20 justify-between'>
           <BrowseBy mediaType='films' />
           <div className='items-center flex gap-2 '>
             <div className='font-semibold text-sm tracking-wider  text-zinc-400 '>
