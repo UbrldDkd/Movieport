@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../../../api/publicApiClient';
 
 export function useFetchAllLists() {
   const [data, setData] = useState([]);
@@ -12,9 +12,7 @@ export function useFetchAllLists() {
         setLoading(true);
         setError(null);
 
-        const res = await axios.get('http://127.0.0.1:8000/lists/get_all_public_lists/', {
-          withCredentials: true,
-        });
+        const res = await apiClient.get('/lists/get_all_public_lists/');
 
         setData(res.data);
       } catch (err) {
