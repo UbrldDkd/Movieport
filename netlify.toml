@@ -1,10 +1,4 @@
 [build]
-base = "frontend"
-command = "npm run build"
-publish = "dist"
-
-[[redirects]]
-from = "/api/*"
-to = "https://movieport-xf6b.onrender.com/:splat"
-status = 200
-force = true
+	base = "frontend"
+	command = "npm run build"
+	publish = "dist"
