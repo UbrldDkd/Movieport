@@ -96,7 +96,7 @@ export default function ContentPageActionsPanel({ item, current, isLoading }) {
 
           <button
             onClick={() => openReviewModal(item)}
-            className='w-full py-2 md:py-3 px-3 text-xs md:text-sm text-text-primary/80 hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
+            className='w-full py-2 font-semibold md:py-3 px-3 text-xs md:text-sm text-text-primary/80 hover:text-zinc-200 bg-zinc-800/90 cursor-pointer transition-colors active:bg-zinc-700'
           >
             Review
           </button>

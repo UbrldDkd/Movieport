@@ -40,12 +40,15 @@ def build_auth_response(user, request):
 
 
 def get_auth_cookie_options():
-    secure_cookie = not settings.DEBUG
+    secure_cookie = getattr(settings, "SESSION_COOKIE_SECURE", not settings.DEBUG)
+    samesite = getattr(settings, "SESSION_COOKIE_SAMESITE", "Lax")
+    # Normalize boolean-ish values and ensure proper string for Django's set_cookie
     return {
         "httponly": True,
         "secure": secure_cookie,
-        "samesite": "None" if secure_cookie else "Lax",
+        "samesite": samesite,
         "path": "/",
+        "domain": getattr(settings, "SESSION_COOKIE_DOMAIN", None),
     }
 
 

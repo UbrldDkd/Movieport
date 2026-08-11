@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import apiClient from './httpClient';
 import { API_BASE_URL } from './apiConfig';
 
 import {
@@ -9,7 +9,6 @@ import {
   addWaitingRequest,
   retryAllWaitingRequestsWithNewToken,
 } from './tokenRefreshQueueManager';
-
 
 export async function refreshAccessToken(originalRequest) {
   if (isTokenRefreshInProgress()) {
@@ -23,20 +22,13 @@ export async function refreshAccessToken(originalRequest) {
   beginTokenRefresh();
 
   try {
-    await axios.post(
-      `${API_BASE_URL}/accounts/refresh/`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    await apiClient.post(`/accounts/refresh/`, {});
 
     retryAllWaitingRequestsWithNewToken();
 
     completeTokenRefresh();
 
     return retryOriginalRequest(originalRequest);
-
   } catch (error) {
     completeTokenRefresh();
     redirectToLoginPage();
@@ -44,14 +36,13 @@ export async function refreshAccessToken(originalRequest) {
   }
 }
 
-
 function retryOriginalRequest(request) {
-  return axios({
+  // Use the shared apiClient so baseURL and interceptors are preserved
+  return apiClient({
     ...request,
     withCredentials: true,
   });
 }
-
 
 function redirectToLoginPage() {
   window.location.href = '/';
