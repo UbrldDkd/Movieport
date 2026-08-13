@@ -10,24 +10,10 @@ const SIZES = [
 export function SizePreview({ selected, customDataUrl, username }) {
   const preset = PRESET_AVATARS.find((p) => p.id === selected);
   const isCustom = selected === 'custom';
+
   console.log('customDataUrl', customDataUrl);
 
-  const API_BASE_URL =
-    import.meta.env.VITE_API_URL || window?.location?.origin || '';
-  const normalize = (src) =>
-    !src
-      ? null
-      : src.startsWith('http')
-        ? src
-        : src.startsWith('/')
-          ? API_BASE_URL
-            ? `${API_BASE_URL}${src}`
-            : src
-          : API_BASE_URL
-            ? `${API_BASE_URL}/${src}`
-            : src;
-
-  const avatarSrc = normalize(customDataUrl);
+  const avatarSrc = customDataUrl || null;
 
   return (
     <div>
