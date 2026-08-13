@@ -31,10 +31,8 @@ class ReviewSerializer(serializers.ModelSerializer):
         return {
             "id": obj.user.id,
             "username": obj.user.username,
-            "avatar": obj.user.avatar if not obj.user.avatar_image else None,
-            "avatar_url": (
-                obj.user.avatar_image.url if obj.user.avatar_image else None
-            ),
+            "avatar": obj.user.avatar if not obj.user.get_avatar_url() else None,
+            "avatar_url": obj.user.get_avatar_url(),
         }
 
     def get_content_relation(self, obj):

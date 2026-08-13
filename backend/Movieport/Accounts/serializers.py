@@ -41,7 +41,7 @@ class AuthUserSerializer(serializers.ModelSerializer):
         ]
 
     def get_avatar(self, obj):
-        if obj.avatar_image:
+        if obj.get_avatar_url():
             return self._build_avatar_url(obj)
         if obj.avatar:
             return obj.avatar
@@ -51,10 +51,10 @@ class AuthUserSerializer(serializers.ModelSerializer):
         return self._build_avatar_url(obj)
 
     def _build_avatar_url(self, obj):
-        if not obj.avatar_image:
+        url = obj.get_avatar_url()
+        if not url:
             return None
 
-        url = obj.avatar_image.url
         request = self.context.get('request')
 
         if request and url.startswith('/'):
@@ -116,12 +116,17 @@ class AvatarUpdateSerializer(serializers.ModelSerializer):
 
         # clear both first (hard reset)
         instance.avatar = None
-        if instance.avatar_image:
-            instance.avatar_image.delete(save=False)
+        # If avatar_image was a FileField before, try removing the file.
+        if instance.avatar_image and hasattr(instance.avatar_image, "delete"):
+            try:
+                instance.avatar_image.delete(save=False)
+            except Exception:
+                pass
         instance.avatar_image = None
 
         # apply only one
         if avatar_image:
+            # avatar_image should be a URL string when using Supabase storage
             instance.avatar_image = avatar_image
         elif avatar:
             instance.avatar = avatar

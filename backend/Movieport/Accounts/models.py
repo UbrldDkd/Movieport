@@ -46,8 +46,8 @@ class PortUser(AbstractUser):
         null=True,
     )
 
-    avatar_image = models.ImageField(
-        upload_to="avatars/",
+    avatar_image = models.URLField(
+        max_length=1000,
         blank=True,
         null=True,
     )
@@ -63,7 +63,12 @@ class PortUser(AbstractUser):
 
     def get_avatar_url(self):
         if self.avatar_image:
-            return self.avatar_image.url
+            # support both legacy FileField (has .url) and new URLField (string)
+            try:
+                # FileField / ImageField
+                return self.avatar_image.url
+            except Exception:
+                return self.avatar_image
         if self.avatar:
             return f"/static/avatars/{self.avatar}.png"
         return None

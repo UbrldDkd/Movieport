@@ -229,7 +229,7 @@ def update_avatar(request):
         return Response({
             "message": "Avatar updated",
             "avatar": user.avatar,
-            "avatar_image": user.avatar_image.url if user.avatar_image else None,
+              "avatar_image": user.get_avatar_url(),
         })
 
     return Response(serializer.errors, status=400)
@@ -343,7 +343,7 @@ def get_profile_settings(request):
             },
             "avatar": {
                 "avatar": user.avatar,
-                "avatar_image": user.avatar_image.url if user.avatar_image else None,
+                 "avatar_image": user.get_avatar_url(),
             },
             "notifications": {
                 "notify_on_likes": user.notify_on_likes,
@@ -420,7 +420,7 @@ def search_users(request):
         {
             "username": user.username,
             "avatar": user.avatar,
-            "avatar_image": user.avatar_image.url if user.avatar_image else None,
+            "avatar_image": user.get_avatar_url(),
         }
         for user in users_page
     ]
